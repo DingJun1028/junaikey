@@ -147,15 +147,15 @@ export default function TaggingSystemPage() {
                                 <GitBranch className="w-4 h-4 text-primary/80"/>
                             </div>
                             <div className="text-sm">
-                                <p className="font-medium">
+                                <span className="font-medium">
                                     <span className={cn("font-bold", {
                                         "text-green-600": activity.action === "Generated",
                                         "text-blue-600": activity.action === "Associated",
                                         "text-purple-600": activity.action === "Inferred",
                                         "text-orange-600": activity.action === "Updated",
                                     })}>{activity.action}</span> tag <Badge variant="secondary">{activity.tag}</Badge>
-                                </p>
-                                <p className="text-muted-foreground">on "{activity.source}"</p>
+                                </span>
+                                <span className="block text-muted-foreground">on "{activity.source}"</span>
                             </div>
                         </li>
                     ))}
