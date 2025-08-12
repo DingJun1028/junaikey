@@ -42,6 +42,12 @@ export const mainNav: NavItem[] = [
     label: "Agent Network",
   },
   {
+    title: "Knowledge Hub",
+    href: "/knowledge-hub",
+    icon: BrainCircuit,
+    label: "Knowledge Hub",
+  },
+  {
     title: "Evolution Loop",
     href: "/evolution-loop",
     icon: Infinity,
