@@ -41,6 +41,12 @@ export const mainNav: NavItem[] = [
     icon: Network,
     label: "Agent Network",
   },
+  {
+    title: "Evolution Loop",
+    href: "/evolution-loop",
+    icon: Infinity,
+    label: "Evolution Loop",
+  },
 ];
 
 export type CoreFunction = {
