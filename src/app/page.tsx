@@ -27,7 +27,8 @@ const ConcentricCircle = () => {
     };
     
     if (!isClient) {
-        return null; // or a loading skeleton
+        // Render a loading state or null on the server to avoid hydration mismatch
+        return <div className="w-full h-96 flex items-center justify-center"><p>Loading interactive elements...</p></div>;
     }
 
     const layerInfo = circleData[activeLayer as keyof typeof circleData];
@@ -54,9 +55,13 @@ const ConcentricCircle = () => {
                         ))}
                     </div>
                 </div>
-                <div id="circle-details" className="w-full lg:w-1/2 bg-card p-6 rounded-lg shadow-lg">
-                    <h3 id="layer-title" className="text-2xl font-bold text-primary mb-2">{layerInfo.title}</h3>
-                    <p id="layer-description" className="text-card-foreground">{layerInfo.description}</p>
+                <div id="circle-details" className="w-full lg:w-1/2 bg-card p-6 rounded-lg shadow-lg min-h-[10rem]">
+                    {layerInfo && (
+                        <>
+                            <h3 id="layer-title" className="text-2xl font-bold text-primary mb-2">{layerInfo.title}</h3>
+                            <p id="layer-description" className="text-card-foreground">{layerInfo.description}</p>
+                        </>
+                    )}
                 </div>
             </div>
         </section>
