@@ -1,3 +1,4 @@
+
 import {
   Card,
   CardHeader,
@@ -24,7 +25,7 @@ import {
   BrainCircuit,
   Cpu,
   Webhook,
-  Users,
+  Network,
   Shield,
   Layers3,
   BookCopy,
@@ -36,13 +37,16 @@ import {
   GitCommit,
   Atom,
   Scale,
-  Network,
   DraftingCompass,
   Tags,
   Infinity,
+  Sparkles,
+  Archive,
+  MessageCircleQuestion,
 } from "lucide-react";
 import Link from "next/link";
 import { mainNav } from "@/lib/constants";
+import { Separator } from "@/components/ui/separator";
 
 const principles = [
   {
@@ -238,16 +242,25 @@ export default function KnowledgeHubPage() {
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 h-auto">
+          <TabsList className="grid w-full grid-cols-4 h-auto">
             <TabsTrigger value="overview">
               <Layers3 className="w-4 h-4 mr-2" />
-              系統架構概覽
+              系統架構
             </TabsTrigger>
             <TabsTrigger value="philosophy">
               <Gem className="w-4 h-4 mr-2" />
-              宇宙四大公理
+              宇宙公理
+            </TabsTrigger>
+            <TabsTrigger value="memory_vault">
+                <Archive className="w-4 h-4 mr-2" />
+                記憶金庫
+            </TabsTrigger>
+            <TabsTrigger value="oracle">
+                <MessageCircleQuestion className="w-4 h-4 mr-2" />
+                知識對話
             </TabsTrigger>
           </TabsList>
+
           <TabsContent value="overview" className="mt-4">
             <Card>
               <CardHeader>
@@ -279,6 +292,7 @@ export default function KnowledgeHubPage() {
               </CardContent>
             </Card>
           </TabsContent>
+
           <TabsContent value="philosophy" className="mt-4">
             <Card>
               <CardHeader>
@@ -336,6 +350,38 @@ export default function KnowledgeHubPage() {
               </CardContent>
             </Card>
           </TabsContent>
+
+            <TabsContent value="memory_vault" className="mt-4">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>記憶金庫 (Memory Vault)</CardTitle>
+                        <CardDescription>系統所有事件、互動與決策的永久記錄時間線。</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-muted-foreground">此處將顯示一個可搜索、可過濾的事件時間線... (功能開發中)</p>
+                    </CardContent>
+                </Card>
+            </TabsContent>
+            <TabsContent value="oracle" className="mt-4">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>知識對話 (Oracle)</CardTitle>
+                        <CardDescription>與連接了最新資訊的 AI 進行對話，或使用 AI 生成新卡牌。</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                        <div>
+                            <h3 className="text-lg font-medium mb-2">知識問答</h3>
+                            <p className="text-muted-foreground mb-4">此處將提供一個與 Oracle AI 的對話界面... (功能開發中)</p>
+                        </div>
+                        <Separator />
+                        <div>
+                             <h3 className="text-lg font-medium mb-2">AI 卡牌生成器</h3>
+                            <p className="text-muted-foreground">輸入一個概念，AI 將為您創造一個符合系統世界觀的新卡牌... (功能開發中)</p>
+                        </div>
+                    </CardContent>
+                </Card>
+            </TabsContent>
+
         </Tabs>
       </CardContent>
     </Card>
