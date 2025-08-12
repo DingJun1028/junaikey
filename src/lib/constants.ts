@@ -59,6 +59,12 @@ export const mainNav: NavItem[] = [
     icon: Tags,
     label: "Tagging System",
   },
+   {
+    title: "Security Domain",
+    href: "/security-domain",
+    icon: Shield,
+    label: "Security Domain",
+  },
   {
     title: "Evolution Loop",
     href: "/evolution-loop",
@@ -129,6 +135,7 @@ export const coreFunctions: CoreFunction[] = [
     title: "萬能安全域 (Security Domain)",
     description: "存取控制、加密與威脅防護。",
     icon: Shield,
+    href: "/security-domain",
   },
   {
     title: "萬能元架構 (Meta Architecture)",
