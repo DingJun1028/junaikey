@@ -23,6 +23,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 const recentTags = [
   { id: "T001", name: "AI", count: 125, category: "Core Tech" },

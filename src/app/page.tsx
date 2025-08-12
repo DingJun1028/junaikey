@@ -1,18 +1,13 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Loader2 } from 'lucide-react';
-import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend, RadarController } from 'chart.js';
-import { coreFunctions, type CoreFunction } from '@/lib/constants';
+import { coreFunctions } from '@/lib/constants';
+import type { CoreFunction } from '@/lib/constants';
 import Link from 'next/link';
-
-// Register Chart.js components
-ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend, RadarController);
 
 const ConcentricCircle = () => {
     const [activeLayer, setActiveLayer] = useState(3);
@@ -38,7 +33,7 @@ const ConcentricCircle = () => {
                 {coreFunctions.map((func) => (
                     <Card key={func.title} className="hover:shadow-lg transition-shadow duration-300">
                         <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
-                           <func.icon className="w-8 h-8 text-primary" />
+                           {func.icon && <func.icon className="w-8 h-8 text-primary" />}
                            <CardTitle className="text-lg font-semibold">{func.title}</CardTitle>
                         </CardHeader>
                         <CardContent>
@@ -197,5 +192,3 @@ export default function OmniCodexPage() {
         </div>
     );
 }
-
-    
