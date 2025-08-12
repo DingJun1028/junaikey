@@ -123,4 +123,9 @@ body {
     .circle-3 { width: 60%; height: 60%; background-color: #a5b4fc; border-width: 2px; border-color: #818cf8;}
     .circle-2 { width: 40%; height: 40%; background-color: #818cf8; border-width: 2px; border-color: #6366f1;}
     .circle-1 { width: 20%; height: 20%; background-color: #6366f1; border-width: 2px; border-color: #4f46e5;}
+
+    /* Custom styles for Knowledge Hub Tabs */
+    [data-radix-collection-item][data-state="active"] {
+      @apply bg-primary/10 text-primary shadow-sm;
+    }
 }
