@@ -1,4 +1,5 @@
 import type {Config} from 'tailwindcss';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
 const config = {
   darkMode: ['class'],
@@ -18,7 +19,8 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', 'sans-serif'],
+        sans: ['var(--font-inter)', ...fontFamily.sans],
+        'noto-sans-tc': ['"Noto Sans TC"', ...fontFamily.sans],
       },
       colors: {
         border: 'hsl(var(--border))',
