@@ -18,7 +18,8 @@ import {
   BookUser,
   Home,
   KeyRound,
-  LifeBuoy
+  LifeBuoy,
+  Activity,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 

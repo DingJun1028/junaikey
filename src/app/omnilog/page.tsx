@@ -9,29 +9,22 @@ import {
   CardDescription,
 } from '@/components/ui/card';
 import {
+  ResponsiveContainer,
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  ZAxis,
+  Tooltip,
+  Legend,
   PieChart,
   Pie,
   Cell,
-  ScatterChart,
-  Scatter,
-  ZAxis,
-  ResponsiveContainer,
   CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend
 } from 'recharts';
 import { Users, Bot, Cog, Activity } from 'lucide-react';
 
-const agentData = [
-  { name: 'Level 1', count: 12, color: '#8884d8' },
-  { name: 'Level 2', count: 25, color: '#82ca9d' },
-  { name: 'Level 3', count: 8, color: '#ffc658' },
-  { name: 'Level 4', count: 3, color: '#ff8042' },
-];
-
-const performanceData = [
+const agentPerformanceData = [
   { engagement: 80, accuracy: 92, level: 2 },
   { engagement: 65, accuracy: 88, level: 1 },
   { engagement: 95, accuracy: 98, level: 3 },
@@ -39,15 +32,31 @@ const performanceData = [
   { engagement: 88, accuracy: 95, level: 2 },
   { engagement: 98, accuracy: 99, level: 4 },
   { engagement: 50, accuracy: 75, level: 1 },
+  { engagement: 78, accuracy: 90, level: 2 },
+  { engagement: 91, accuracy: 96, level: 3 },
+  { engagement: 60, accuracy: 82, level: 1 },
 ];
+
+const agentLevelData = [
+  { name: 'Level 1', count: 12, color: '#8884d8' },
+  { name: 'Level 2', count: 25, color: '#82ca9d' },
+  { name: 'Level 3', count: 8, color: '#ffc658' },
+  { name: 'Level 4+', count: 3, color: '#ff8042' },
+];
+
 
 export default function OmniLogPage() {
   return (
     <div className="flex-1 space-y-6">
       <Card>
         <CardHeader>
-            <CardTitle className="text-2xl">全能日誌 (OmniLog)</CardTitle>
-            <CardDescription>Your system's central dashboard, providing a real-time overview of all key metrics.</CardDescription>
+            <div className="flex items-center gap-4">
+               <Activity className="w-8 h-8 text-primary" />
+               <div>
+                <CardTitle className="text-2xl">全能日誌 (OmniLog)</CardTitle>
+                <CardDescription>Your system's central dashboard, providing a real-time overview of all key metrics.</CardDescription>
+               </div>
+            </div>
         </CardHeader>
       </Card>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -98,7 +107,7 @@ export default function OmniLogPage() {
           <CardHeader>
             <CardTitle>Agent Performance Matrix</CardTitle>
             <CardDescription>
-              Distribution of agent engagement and accuracy.
+              Distribution of agent engagement and accuracy, sized by level.
             </CardDescription>
           </CardHeader>
           <CardContent className="pl-2">
@@ -106,18 +115,18 @@ export default function OmniLogPage() {
               <ScatterChart
                 margin={{
                   top: 20,
-                  right: 20,
+                  right: 40,
                   bottom: 20,
                   left: 20,
                 }}
               >
                 <CartesianGrid />
                 <XAxis type="number" dataKey="engagement" name="Engagement" unit="%" />
-                <YAxis type="number" dataKey="accuracy" name="Accuracy" unit="%" />
-                <ZAxis type="number" dataKey="level" range={[100, 500]} name="Level" />
+                <YAxis type="number" dataKey="accuracy" name="Accuracy" unit="%" domain={[70, 100]}/>
+                <ZAxis type="number" dataKey="level" range={[60, 400]} name="Level" />
                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                 <Legend />
-                <Scatter name="Agent Performance" data={performanceData} fill="hsl(var(--primary))" />
+                <Scatter name="Agent Performance" data={agentPerformanceData} fill="hsl(var(--primary))" />
               </ScatterChart>
             </ResponsiveContainer>
           </CardContent>
@@ -133,7 +142,7 @@ export default function OmniLogPage() {
             <ResponsiveContainer width="100%" height={350}>
                 <PieChart>
                   <Pie
-                    data={agentData}
+                    data={agentLevelData}
                     cx="50%"
                     cy="50%"
                     labelLine={false}
@@ -143,7 +152,7 @@ export default function OmniLogPage() {
                     nameKey="name"
                     label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
                   >
-                    {agentData.map((entry, index) => (
+                    {agentLevelData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                   </Pie>
