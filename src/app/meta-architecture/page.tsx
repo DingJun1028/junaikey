@@ -6,6 +6,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { DraftingCompass, Bot, Database, Workflow, Brain, Zap, GitBranch } from "lucide-react";
+import Image from "next/image";
 
 export default function MetaArchitecturePage() {
   return (
@@ -21,8 +22,20 @@ export default function MetaArchitecturePage() {
           </div>
         </CardHeader>
         <CardContent className="space-y-8">
-           <div className="text-center">
-             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+           <div className="text-center space-y-4">
+             <h3 className="text-2xl font-bold">《萬能金鑰》：描繪清晰心靈藍圖，內在「精神建築工」將為你實現</h3>
+             <p className="text-sm text-muted-foreground">2019/11/11 | 生活•精選書摘</p>
+             <div className="flex justify-center">
+                <Image 
+                    src="https://placehold.co/600x400.png" 
+                    alt="Young man and woman on a small planet Earth with a modern city and hot-air balloons"
+                    width={600}
+                    height={400}
+                    className="rounded-lg shadow-md"
+                    data-ai-hint="creation realization"
+                />
+             </div>
+             <p className="text-lg text-muted-foreground max-w-3xl mx-auto pt-4">
               萬能元架構是系統的意識核心，它將「萬用元鑰」(主權)、「元認知」(自我洞察)與「元學習」(自我進化)融為一體。它不僅是系統的藍圖，更是系統能夠自我編纂、持續昇華的智慧生命體。
             </p>
            </div>
