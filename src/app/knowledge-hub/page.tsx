@@ -39,6 +39,7 @@ import {
   Flame,
   BookUser,
   Gem,
+  Cog
 } from "lucide-react";
 import Link from "next/link";
 
@@ -51,18 +52,25 @@ const principles = [
     details: "The Core Engine is the central decision-making and flow control unit."
   },
   {
+    icon: Network,
+    title: "全能代理 (OmniAgents)",
+    href: "/omniagents",
+    description: "任務的自主執行與委派網絡。",
+    details: "The Agent Network processes and executes tasks based on predefined rules and live data."
+  },
+    {
+    icon: Cog,
+    title: "全能流程 (OmniFlow)",
+    href: "/omniflow",
+    description: "系統的自動化核心，用於創建IF...THEN...規則來自動化任務。",
+    details: "The system's automation core. Create 'IF...THEN...' rules to automate tasks."
+  },
+  {
     icon: Webhook,
     title: "萬能符文系統 (Rune System)",
     href: "/rune-system",
     description: "與所有外部服務的 API 整合層。",
     details: "Each Rune is a standardized API connector, enabling communication with external services."
-  },
-  {
-    icon: Network,
-    title: "萬能代理網絡 (Agent Network)",
-    href: "/agent-network",
-    description: "任務的自主執行與委派網絡。",
-    details: "The Agent Network processes and executes tasks based on predefined rules and live data."
   },
   {
     icon: BrainCircuit,

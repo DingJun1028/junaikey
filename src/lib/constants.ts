@@ -37,16 +37,28 @@ export const mainNav: NavItem[] = [
     label: 'Core',
   },
   {
+    title: '全能日誌',
+    href: '/omnilog',
+    icon: LayoutDashboard,
+    label: 'OmniLog',
+  },
+  {
     title: '萬能核心引擎',
     href: '/core-engine',
     icon: Cpu,
     label: 'Core Engine',
   },
   {
-    title: '萬能代理網絡',
-    href: '/agent-network',
+    title: '全能代理',
+    href: '/omniagents',
     icon: Network,
-    label: 'Agent Network',
+    label: 'OmniAgents',
+  },
+  {
+    title: '全能流程',
+    href: '/omniflow',
+    icon: Cog,
+    label: 'OmniFlow',
   },
   {
     title: '知識中樞',
