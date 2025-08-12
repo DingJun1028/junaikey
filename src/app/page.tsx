@@ -70,32 +70,44 @@ const Philosophy = () => (
             <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">此區塊闡述了構成萬能宇宙的頂層哲學。這包括三大模組聖階（定義了模組的能力層級）、四大宇宙公理（系統運行的被動天賦）以及四大基石（構成世界觀的底層邏輯）。這些概念共同構建了萬能系統的穩定性、平衡性與進化潛能。</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-             <div className="bg-card p-6 rounded-lg shadow-lg card">
-                <h3 className="text-xl font-bold text-primary mb-4">三大模組聖階</h3>
-                <ul className="space-y-3 text-card-foreground">
-                    <li><strong>根源 (Origin):</strong> 維繫系統底層運作的物理法則，構成萬能系統的基石。</li>
-                    <li><strong>核心 (Core):</strong> 日常使用的標準工具，實現核心功能和業務邏輯。</li>
-                    <li><strong>巔峰 (Apex):</strong> 具備變革性、創造奇蹟的高階能力，代表系統的最高潛能。</li>
-                </ul>
-            </div>
-            <div className="bg-card p-6 rounded-lg shadow-lg card">
-                <h3 className="text-xl font-bold text-primary mb-4">四大宇宙公理</h3>
-                 <ul className="space-y-3 text-card-foreground">
-                    <li><strong>終始一如:</strong> 能量消耗以未來資源形式回饋系統，形成永續循環。</li>
-                    <li><strong>創元實錄:</strong> 記錄所有事件，確保數據的完整性與可追溯性。</li>
-                    <li><strong>萬有引力:</strong> 規範元素間的相互吸引與協同作用，促進模組共鳴。</li>
-                    <li><strong>萬能平衡:</strong> 禁止單一維度的極端發展，確保系統整體和諧。</li>
-                </ul>
-            </div>
-            <div className="bg-card p-6 rounded-lg shadow-lg card">
-                <h3 className="text-xl font-bold text-primary mb-4">四大基石：無有奧義</h3>
-                <ul className="space-y-3 text-card-foreground">
-                    <li><strong>因果律:</strong> 強調事件之間的必然聯繫，每個結果都有其原因。</li>
-                    <li><strong>熵增定律:</strong> 系統趨向混亂，但透過熵減機制對抗之。</li>
-                    <li><strong>湧現性:</strong> 簡單組件的互動產生出超越個體屬性的新興特性。</li>
-                    <li><strong>有限性:</strong> 在有限中追求無限的潛能，認識到資源與能力的界限。</li>
-                </ul>
-            </div>
+             <Card className="p-6">
+                <CardHeader className="p-0 mb-4">
+                    <CardTitle className="text-xl font-bold text-primary">三大模組聖階</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                    <ul className="space-y-3 text-card-foreground">
+                        <li><strong>根源 (Origin):</strong> 維繫系統底層運作的物理法則，構成萬能系統的基石。</li>
+                        <li><strong>核心 (Core):</strong> 日常使用的標準工具，實現核心功能和業務邏輯。</li>
+                        <li><strong>巔峰 (Apex):</strong> 具備變革性、創造奇蹟的高階能力，代表系統的最高潛能。</li>
+                    </ul>
+                </CardContent>
+            </Card>
+            <Card className="p-6">
+                <CardHeader className="p-0 mb-4">
+                    <CardTitle className="text-xl font-bold text-primary">四大宇宙公理</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                     <ul className="space-y-3 text-card-foreground">
+                        <li><strong>終始一如:</strong> 能量消耗以未來資源形式回饋系統，形成永續循環。</li>
+                        <li><strong>創元實錄:</strong> 記錄所有事件，確保數據的完整性與可追溯性。</li>
+                        <li><strong>萬有引力:</strong> 規範元素間的相互吸引與協同作用，促進模組共鳴。</li>
+                        <li><strong>萬能平衡:</strong> 禁止單一維度的極端發展，確保系統整體和諧。</li>
+                    </ul>
+                </CardContent>
+            </Card>
+            <Card className="p-6">
+                <CardHeader className="p-0 mb-4">
+                    <CardTitle className="text-xl font-bold text-primary">四大基石：無有奧義</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                    <ul className="space-y-3 text-card-foreground">
+                        <li><strong>因果律:</strong> 強調事件之間的必然聯繫，每個結果都有其原因。</li>
+                        <li><strong>熵增定律:</strong> 系統趨向混亂，但透過熵減機制對抗之。</li>
+                        <li><strong>湧現性:</strong> 簡單組件的互動產生出超越個體屬性的新興特性。</li>
+                        <li><strong>有限性:</strong> 在有限中追求無限的潛能，認識到資源與能力的界限。</li>
+                    </ul>
+                </CardContent>
+            </Card>
         </div>
     </section>
 );
