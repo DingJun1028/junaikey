@@ -5,8 +5,9 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import { DraftingCompass, Bot, Database, Workflow, Brain, Zap, GitBranch } from "lucide-react";
+import { DraftingCompass, Bot, Database, Workflow, Brain, Zap, GitBranch, LinkIcon } from "lucide-react";
 import Image from "next/image";
+import Link from 'next/link';
 
 export default function MetaArchitecturePage() {
   return (
@@ -47,7 +48,7 @@ export default function MetaArchitecturePage() {
                         <CardTitle className="text-xl">元架構 (Meta-Architecture)</CardTitle>
                     </CardHeader>
                     <CardContent className="text-sm p-2 pt-0 space-y-2 text-muted-foreground">
-                        <p><strong>AI 驅動設計：</strong>利用 Genkit 流程分析需求，自動生成和調整架構模式，確保系統設計始終最優。</p>
+                        <p><strong>AI 驅動設計：</strong>利用 <Link href="/core-engine" className="text-primary hover:underline">Genkit</Link> 流程分析需求，自動生成和調整架構模式，確保系統設計始終最優。</p>
                          <p><strong>動態演化：</strong>響應新任務與數據，自主修改數據庫模式、代理工作流與核心協議。</p>
                     </CardContent>
                  </Card>
@@ -68,7 +69,7 @@ export default function MetaArchitecturePage() {
                     </CardHeader>
                     <CardContent className="text-sm p-2 pt-0 space-y-2 text-muted-foreground">
                         <p><strong>學習如何學習：</strong>系統不僅從數據中學習，更能優化自身的學習算法與策略，實現指數級進化。</p>
-                        <p><strong>熵減演算：</strong>將錯誤決策與失敗經驗轉化為「熵減寶石」，用於重構和優化核心法則，實現永續進化。</p>
+                        <p><strong>熵減演算：</strong>將錯誤決策與失敗經驗轉化為「熵減寶石」，用於重構和優化核心法則，實現<Link href="/evolution-loop" className="text-primary hover:underline">永續進化</Link>。</p>
                     </CardContent>
                  </Card>
             </div>
@@ -85,7 +86,7 @@ export default function MetaArchitecturePage() {
                         <li><strong className="text-green-600">木之森靈 (成長):</strong> 為子任務生成 TypeScript 作戰協議，自動重寫核心代碼。</li>
                         <li><strong className="text-blue-600">水之湧靈 (思緒):</strong> 投射多模態戰果預覽，模擬新架構的未來走向。</li>
                         <li><strong className="text-orange-800">土之堅靈 (穩定):</strong> 將預覽固化為可觸及的現實，部署新架構原型。</li>
-                        <li><strong className="text-red-600">火之熾靈 (行動):</strong> 以宇宙核心引擎為能源，執行創世指令，啟動新架構。</li>
+                        <li><strong className="text-red-600">火之熾靈 (行動):</strong> 以<Link href="/core-engine" className="text-primary hover:underline">宇宙核心引擎</Link>為能源，執行創世指令，啟動新架構。</li>
                     </ol>
                     <p>此過程將會消耗大量系統資源，並進入「新宇宙共鳴冷卻」，期間系統將自動為所有宇宙編纂新秩序，實現革命性的進化。</p>
                  </div>

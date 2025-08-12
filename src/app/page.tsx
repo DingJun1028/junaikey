@@ -39,7 +39,7 @@ const ConcentricCircle = () => {
                 <h2 className="text-3xl font-bold text-foreground sm:text-4xl">萬象總覽：同心圓聖域系統</h2>
                 <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">本節介紹萬能系統的核心架構——以使用者為中心的「同心圓聖域系統」。此系統將功能與數據劃分為五個相互關聯的層次，從最內部的核心到最外部的擴展，體現了系統的同心演化本質。點擊下方的同心圓，探索每一層的角色與功能。</p>
             </div>
-             <div className="flex flex-col lg:flex-row items-center justify-center gap-8">
+             <div className="flex flex-col lg:flex-row items-center justify-center gap-8 px-4">
                 <div className="w-full lg:w-1/2 flex justify-center">
                     <div className="concentric-circle-container">
                         {[5, 4, 3, 2, 1].map(layer => (
@@ -55,12 +55,12 @@ const ConcentricCircle = () => {
                         ))}
                     </div>
                 </div>
-                <div id="circle-details" className="w-full lg:w-1/2 bg-card p-6 rounded-lg shadow-lg min-h-[10rem]">
+                <div id="circle-details" className="w-full lg:w-1/2 bg-card p-6 rounded-lg shadow-lg min-h-[10rem] flex flex-col justify-center">
                     {layerInfo && (
-                        <>
+                        <div>
                             <h3 id="layer-title" className="text-2xl font-bold text-primary mb-2">{layerInfo.title}</h3>
                             <p id="layer-description" className="text-card-foreground">{layerInfo.description}</p>
-                        </>
+                        </div>
                     )}
                 </div>
             </div>

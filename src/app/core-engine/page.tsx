@@ -5,7 +5,9 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import { Cpu } from "lucide-react";
+import { Cpu, BrainCircuit, Network, Webhook } from "lucide-react";
+import Link from 'next/link';
+import { Button } from "@/components/ui/button";
 
 export default function CoreEnginePage() {
   return (
@@ -31,15 +33,35 @@ export default function CoreEnginePage() {
                     <strong>Intent:</strong> Captures the user's natural language command or goal.
                 </li>
                 <li>
-                    <strong>AI Processing:</strong> Utilizes Genkit flows and the Agent Network to understand the intent, consult the Knowledge Hub, and formulate a plan.
+                    <strong>AI Processing:</strong> Utilizes Genkit flows and the <Link href="/agent-network" className="text-primary hover:underline">Agent Network</Link> to understand the intent, consult the <Link href="/knowledge-hub" className="text-primary hover:underline">Knowledge Hub</Link>, and formulate a plan.
                 </li>
                 <li>
-                    <strong>Automation:</strong> Executes the plan by generating code, calling APIs via the Rune System, or delegating sub-tasks to specialized agents.
+                    <strong>Automation:</strong> Executes the plan by generating code, calling APIs via the <Link href="/rune-system" className="text-primary hover:underline">Rune System</Link>, or delegating sub-tasks to specialized agents.
                 </li>
             </ul>
-            <p>
-              This page will serve as the main interface for initiating tasks and monitoring the Core Engine's processes.
+             <p className="pt-4">
+              This page will serve as the main interface for initiating tasks and monitoring the Core Engine's processes. Below are quick links to the key components it orchestrates.
             </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+                <Link href="/agent-network" passHref>
+                    <Button variant="outline" className="w-full flex items-center justify-center gap-2">
+                        <Network className="w-4 h-4" />
+                        Agent Network
+                    </Button>
+                </Link>
+                <Link href="/knowledge-hub" passHref>
+                    <Button variant="outline" className="w-full flex items-center justify-center gap-2">
+                         <BrainCircuit className="w-4 h-4" />
+                        Knowledge Hub
+                    </Button>
+                </Link>
+                <Link href="/rune-system" passHref>
+                    <Button variant="outline" className="w-full flex items-center justify-center gap-2">
+                        <Webhook className="w-4 h-4" />
+                        Rune System
+                    </Button>
+                </Link>
+            </div>
           </div>
         </CardContent>
       </Card>
