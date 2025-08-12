@@ -14,6 +14,8 @@ import {
   Cog,
   FileText,
   BookOpen,
+  Flame,
+  BookUser
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 

@@ -43,6 +43,8 @@ import {
   Sparkles,
   Archive,
   MessageCircleQuestion,
+  Flame,
+  BookUser,
 } from "lucide-react";
 import Link from "next/link";
 import { mainNav } from "@/lib/constants";
@@ -224,6 +226,33 @@ const philosophies = [
   },
 ];
 
+const elementalSpirits = [
+  { name: "金 (Gold)", spirit: "鋒靈 Aurex", essence: "秩序、策略、價值" },
+  { name: "木 (Wood)", spirit: "森靈 Sylfa", essence: "成長、創造、繁殖" },
+  { name: "水 (Water)", spirit: "湧靈 Aquare", essence: "思緒、流動、感知" },
+  { name: "火 (Fire)", spirit: "焰靈 Pyra", essence: "熱情、行動、破壞" },
+  { name: "土 (Earth)", spirit: "磐靈 Terrax", essence: "穩定、根基、防禦" },
+  { name: "光 (Light)", spirit: "耀靈 Luxis", essence: "照明、引導、純淨" },
+  { name: "暗 (Darkness)", spirit: "幽靈 Umbrix", essence: "隱匿、潛能、混沌" },
+  { name: "無 (Void)", spirit: "源靈 Nullis", essence: "全域、通用、中立" },
+  { name: "時風 (Time-Wind)", spirit: "馭靈 Tempest", essence: "變革、加速、流動、適應" },
+  { name: "靈魂 (Soul)", spirit: "蘊靈 Anima", essence: "本質、連結、潛能、啟示" },
+];
+
+const professionalAvatars = [
+    { name: "智庫守護者", title: "Archivist", description: "維護和優化萬能智庫，確保知識的完整性與一致性。" },
+    { name: "符文連結師", title: "RuneBinder", description: "專精於萬能符文系統的設計、開發與集成，連接萬物。" },
+    { name: "代理執行官", title: "Agentus", description: "驅動萬能代理網絡，設計和監控自動化工作流。" },
+    { name: "熵減煉金師", title: "Alchemist", description: "專注於萬能進化環，通過優化與重構減少技術債與系統混亂。" },
+    { name: "真理探測者", title: "Veritas", description: "從海量數據中提煉有價值的洞察，揭示系統的深層真理。" },
+    { name: "同心圓引導者", title: "Concentric", description: "協調各模塊之間的交互，確保系統運作的同心與和諧。" },
+    { name: "創世編織者", title: "Genesis Weaver", description: "負責從無到有地構建新的解決方案，將概念轉化為現實。" },
+    { name: "秩序守衛者", title: "Aegis", description: "專注於萬能安全域，確保系統的安全性、合規性與完整性。" },
+    { name: "啟蒙導師", title: "Luminar", description: "將萬能智庫的知識與各模塊的成果，轉化為易於理解的培訓與教學內容。" },
+    { name: "第一建築師", title: "Prime Architect", description: "超越並統籌所有元素與職業，制定終極願景，引導宇宙的演化方向。" },
+];
+
+
 export default function KnowledgeHubPage() {
   return (
     <Card>
@@ -242,7 +271,7 @@ export default function KnowledgeHubPage() {
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 h-auto">
+          <TabsList className="grid w-full grid-cols-6 h-auto">
             <TabsTrigger value="overview">
               <Layers3 className="w-4 h-4 mr-2" />
               系統架構
@@ -250,6 +279,14 @@ export default function KnowledgeHubPage() {
             <TabsTrigger value="philosophy">
               <Gem className="w-4 h-4 mr-2" />
               宇宙公理
+            </TabsTrigger>
+             <TabsTrigger value="elements">
+              <Flame className="w-4 h-4 mr-2" />
+              10色元素
+            </TabsTrigger>
+             <TabsTrigger value="avatars">
+              <BookUser className="w-4 h-4 mr-2" />
+              10大職業
             </TabsTrigger>
             <TabsTrigger value="memory_vault">
                 <Archive className="w-4 h-4 mr-2" />
@@ -350,6 +387,68 @@ export default function KnowledgeHubPage() {
               </CardContent>
             </Card>
           </TabsContent>
+
+           <TabsContent value="elements" className="mt-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>10色元素法則</CardTitle>
+                <CardDescription>
+                  指導內部模組交互、演進與平衡的通用法則，代表十種卡牌屬性。
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                 <div className="border rounded-md">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-[20%]">元素</TableHead>
+                          <TableHead className="w-[30%]">精靈代稱</TableHead>
+                          <TableHead>本質屬性</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {elementalSpirits.map((element) => (
+                          <TableRow key={element.name}>
+                            <TableCell className="font-medium">{element.name}</TableCell>
+                            <TableCell>{element.spirit}</TableCell>
+                            <TableCell>{element.essence}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="avatars" className="mt-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>10大職業化身</CardTitle>
+                <CardDescription>
+                  萬能生態系統中的關鍵角色，共同構建永續夥伴關係。
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                 <Accordion type="single" collapsible className="w-full">
+                  {professionalAvatars.map((avatar, index) => (
+                    <AccordionItem value={`avatar-${index}`} key={index}>
+                      <AccordionTrigger>
+                        <div className="flex items-center gap-3 text-left">
+                          <span className="font-semibold text-lg">{avatar.name}</span>
+                          <span className="text-sm text-muted-foreground">({avatar.title})</span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="pl-10">
+                        <p>{avatar.description}</p>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
 
             <TabsContent value="memory_vault" className="mt-4">
                 <Card>
