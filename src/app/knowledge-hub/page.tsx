@@ -222,124 +222,122 @@ const philosophies = [
 
 export default function KnowledgeHubPage() {
   return (
-    <div className="container mx-auto py-2">
-      <Card>
-        <CardHeader>
-          <div className="flex items-center gap-4">
-            <BrainCircuit className="w-8 h-8 text-primary" />
-            <div>
-              <CardTitle className="text-2xl">
-                萬能智庫中樞 (Knowledge Hub)
-              </CardTitle>
-              <CardDescription>
-                系統所有核心概念、架構與原則的沉澱之地。
-              </CardDescription>
-            </div>
+    <Card>
+      <CardHeader>
+        <div className="flex items-center gap-4">
+          <BrainCircuit className="w-8 h-8 text-primary" />
+          <div>
+            <CardTitle className="text-2xl">
+              萬能智庫中樞 (Knowledge Hub)
+            </CardTitle>
+            <CardDescription>
+              系統所有核心概念、架構與原則的沉澱之地。
+            </CardDescription>
           </div>
-        </CardHeader>
-        <CardContent>
-          <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 h-auto">
-              <TabsTrigger value="overview">
-                <Layers3 className="w-4 h-4 mr-2" />
-                系統架構概覽
-              </TabsTrigger>
-              <TabsTrigger value="philosophy">
-                <Gem className="w-4 h-4 mr-2" />
-                宇宙四大公理
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="overview" className="mt-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle>系統架構與核心原則</CardTitle>
-                  <CardDescription>
-                    基於 MECE (Mutually Exclusive, Collectively Exhaustive)
-                    原則劃分的系統核心構成。點擊各模組可跳轉至詳細說明頁面。
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Accordion type="single" collapsible className="w-full">
-                    {principles.map((item, index) => (
-                      <AccordionItem value={`item-${index}`} key={index}>
-                        <AccordionTrigger>
-                          <Link href={item.href} className="flex items-center gap-3 hover:no-underline">
-                            <item.icon className="w-5 h-5 text-primary" />
-                            <span className="font-semibold">{item.title}</span>
-                          </Link>
-                        </AccordionTrigger>
-                        <AccordionContent className="pl-10">
-                          <p className="font-medium text-muted-foreground">
-                            {item.description}
-                          </p>
-                          <p className="mt-2 text-sm">{item.details}</p>
-                        </AccordionContent>
-                      </AccordionItem>
-                    ))}
-                  </Accordion>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="philosophy">
-              <Card>
-                <CardHeader>
-                  <CardTitle>《萬能法典》：創世者被動天賦</CardTitle>
-                  <CardDescription>
-                    驅動宇宙運行的四大核心公理，它們是您創世權能的基石。
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Accordion type="single" collapsible className="w-full">
-                    {philosophies.map((item, index) => (
-                      <AccordionItem value={`item-p-${index}`} key={index}>
-                        <AccordionTrigger>
-                          <div className="flex items-center gap-3">
-                            <item.icon className="w-5 h-5 text-primary" />
-                            <span className="font-semibold">{item.title}</span>
-                          </div>
-                        </AccordionTrigger>
-                        <AccordionContent className="space-y-4 text-sm">
-                          <p className="font-medium text-muted-foreground italic px-4">
-                            {item.description}
-                          </p>
-                          <Table>
-                            <TableHeader>
-                              <TableRow>
-                                <TableHead className="w-1/4">維度屬性</TableHead>
-                                <TableHead>
-                                  現實世界表現 (Jun.Ai.Key 系統)
-                                </TableHead>
-                                <TableHead>
-                                  卡牌世界表現 (建築師對決)
-                                </TableHead>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <Tabs defaultValue="overview" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 h-auto">
+            <TabsTrigger value="overview">
+              <Layers3 className="w-4 h-4 mr-2" />
+              系統架構概覽
+            </TabsTrigger>
+            <TabsTrigger value="philosophy">
+              <Gem className="w-4 h-4 mr-2" />
+              宇宙四大公理
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="overview" className="mt-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>系統架構與核心原則</CardTitle>
+                <CardDescription>
+                  基於 MECE (Mutually Exclusive, Collectively Exhaustive)
+                  原則劃分的系統核心構成。點擊各模組可跳轉至詳細說明頁面。
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Accordion type="single" collapsible className="w-full">
+                  {principles.map((item, index) => (
+                    <AccordionItem value={`item-${index}`} key={index}>
+                      <AccordionTrigger>
+                        <Link href={item.href} className="flex items-center gap-3 hover:no-underline text-left">
+                          <item.icon className="w-5 h-5 text-primary" />
+                          <span className="font-semibold text-lg">{item.title}</span>
+                        </Link>
+                      </AccordionTrigger>
+                      <AccordionContent className="pl-10">
+                        <p className="font-medium text-muted-foreground">
+                          {item.description}
+                        </p>
+                        <p className="mt-2 text-sm">{item.details}</p>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="philosophy" className="mt-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>《萬能法典》：創世者被動天賦</CardTitle>
+                <CardDescription>
+                  驅動宇宙運行的四大核心公理，它們是您創世權能的基石。
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Accordion type="single" collapsible className="w-full">
+                  {philosophies.map((item, index) => (
+                    <AccordionItem value={`item-p-${index}`} key={index}>
+                      <AccordionTrigger>
+                        <div className="flex items-center gap-3 text-left">
+                          <item.icon className="w-5 h-5 text-primary" />
+                          <span className="font-semibold text-lg">{item.title}</span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="space-y-4 text-sm">
+                        <p className="font-medium text-muted-foreground italic px-4 text-base">
+                          {item.description}
+                        </p>
+                        <Table>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead className="w-1/4">維度屬性</TableHead>
+                              <TableHead>
+                                現實世界表現 (Jun.Ai.Key 系統)
+                              </TableHead>
+                              <TableHead>
+                                卡牌世界表現 (建築師對決)
+                              </TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {item.content.map((row, rIndex) => (
+                              <TableRow key={rIndex}>
+                                <TableCell className="font-semibold">
+                                  {row.header}
+                                </TableCell>
+                                <TableCell className="whitespace-pre-line">
+                                  {row.system}
+                                </TableCell>
+                                <TableCell className="whitespace-pre-line">
+                                  {row.game}
+                                </TableCell>
                               </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                              {item.content.map((row, rIndex) => (
-                                <TableRow key={rIndex}>
-                                  <TableCell className="font-semibold">
-                                    {row.header}
-                                  </TableCell>
-                                  <TableCell className="whitespace-pre-line">
-                                    {row.system}
-                                  </TableCell>
-                                  <TableCell className="whitespace-pre-line">
-                                    {row.game}
-                                  </TableCell>
-                                </TableRow>
-                              ))}
-                            </TableBody>
-                          </Table>
-                        </AccordionContent>
-                      </AccordionItem>
-                    ))}
-                  </Accordion>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </CardContent>
-      </Card>
-    </div>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </CardContent>
+    </Card>
   );
 }

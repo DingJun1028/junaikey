@@ -55,13 +55,19 @@ const ConcentricCircle = () => {
                         ))}
                     </div>
                 </div>
-                <div id="circle-details" className="w-full lg:w-1/2 bg-card p-6 rounded-lg shadow-lg min-h-[10rem] flex flex-col justify-center">
-                    {layerInfo && (
-                        <div>
-                            <h3 id="layer-title" className="text-2xl font-bold text-primary mb-2">{layerInfo.title}</h3>
-                            <p id="layer-description" className="text-card-foreground">{layerInfo.description}</p>
-                        </div>
-                    )}
+                <div id="circle-details" className="w-full lg:w-1/2">
+                  <Card className="min-h-[12rem] flex flex-col justify-center">
+                    <CardHeader>
+                      {layerInfo && (
+                          <div>
+                              <CardTitle className="text-2xl text-primary mb-2">{layerInfo.title}</CardTitle>
+                              <CardContent className="p-0">
+                                <p className="text-card-foreground">{layerInfo.description}</p>
+                              </CardContent>
+                          </div>
+                      )}
+                    </CardHeader>
+                  </Card>
                 </div>
             </div>
         </section>
@@ -176,7 +182,7 @@ export default function OmniCodexPage() {
 
     return (
         <div className="w-full">
-            <header className="bg-card/80 backdrop-blur-sm sticky top-0 z-40 shadow-sm border-b mb-4">
+            <header className="bg-card/80 backdrop-blur-sm sticky top-0 z-40 shadow-sm border-b mb-4 -mx-4 -mt-4 sm:-mx-6 sm:-mt-6 lg:-mx-8 lg:-mt-8">
                 <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex-shrink-0">
@@ -214,7 +220,7 @@ export default function OmniCodexPage() {
                 </nav>
             </header>
 
-            <main className="container mx-auto p-4 sm:p-6 lg:p-8">
+            <main>
                 {renderSection()}
             </main>
         </div>
