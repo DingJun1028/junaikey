@@ -3,9 +3,10 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileText, Terminal, Loader2 } from 'lucide-react';
+import { FileText, Terminal, Loader2, Send } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -60,7 +61,8 @@ export default function SanctumPage() {
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorData = await response.json();
+                throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
             }
 
             const result = await response.json();
@@ -73,7 +75,8 @@ export default function SanctumPage() {
                 description: `Failed to execute command: ${error.message}`,
                 variant: "destructive",
             });
-            // remove the command from history on failure to allow retry
+             // Keep the user's failed command in the input to allow for retry/edit
+            setInput(commandText);
             setHistory(prev => prev.slice(0, -1));
         } finally {
             setIsLoading(false);
@@ -136,19 +139,19 @@ export default function SanctumPage() {
                 </div>
             </CardContent>
             <CardContent className="border-t pt-6">
-                <form onSubmit={handleCommand} className="flex gap-2">
-                    <div className="flex items-center">
-                        <Terminal className="h-5 w-5 text-muted-foreground" />
-                    </div>
+                 <form onSubmit={handleCommand} className="flex items-center gap-2">
+                    <Terminal className="h-5 w-5 text-muted-foreground" />
                     <Input
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         placeholder="e.g., 'Analyze this code for potential improvements' or 'Check for security issues'"
                         disabled={isLoading}
                         autoFocus
+                        className="flex-1"
                     />
                     <Button type="submit" disabled={isLoading || !code.trim() || !input.trim()}>
-                        {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Execute"}
+                        {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                        <span className="sr-only">Execute</span>
                     </Button>
                 </form>
             </CardContent>

@@ -45,16 +45,16 @@ export const mainNav: NavItem[] = [
     label: 'OmniLog',
   },
     {
-    title: '萬能代理',
-    href: '/omniagents',
+    title: '萬能代理網絡',
+    href: '/agent-network',
     icon: Network,
-    label: 'OmniAgents',
+    label: 'Agent Network',
   },
   {
-    title: '萬能流程',
-    href: '/omniflow',
-    icon: Cog,
-    label: 'OmniFlow',
+    title: '萬能符文系統',
+    href: '/rune-system',
+    icon: Webhook,
+    label: 'Rune System',
   },
   {
     title: '知識中樞',
