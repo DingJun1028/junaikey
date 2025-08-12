@@ -1,1193 +1,1426 @@
-# 🌟 JunAiKey #OmniKey - 萬能系統 (量子聖典版)
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Repository](https://img.shields.io/badge/GitHub-Repo-blue?logo=github)](https://github.com/DingJun1028/junaikeyIOS)
-[![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev/)
-[![Gemini API](https://img.shields.io/badge/Google-Gemini_API-4285F4?logo=google)](https://ai.google.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
-
-**JunAiKey (萬能系統)** 是一款基於 **量子聖典 (Quantum Codex)** 架構，從零開始重新設計的「一站式」智能協作平台。它將「以使用者為中心」的設計與「自我進化」的 AI 核心相結合，為知識管理、任務自動化和輔助決策打造了終極的解決方案。
-
-> **核心理念：以終為始，始終如一 (Begin with the end in mind, and maintain consistency throughout.)**
-> **實現方法：利用萬能進化無限循環，實現自身最佳實踐化，達成無限自學成長。(Utilize the universal evolution infinite loop, codify its own operations into best practices, and achieve infinite self-learning and growth.)**
-
+---
+type: JunAiKeySystem
+collections: 萬能系列
+title: 萬能智典4.0：終極融合架構
+tags: [萬能智典, JunAiKey萬能系統, 萬能智卡]
 ---
 
-## 🏛️ 量子聖典架構 (The Quantum Codex Architecture)
+<head>
 
-本系統基於 **MECE (相互獨立、完全窮盡)** 原則，劃分為 12 個核心功能維度，並分佈在五個同心圓層級中，確保了職責分離、資訊安全與未來可擴展性。
+    <meta charset="UTF-8">
 
-| 層級 | 描述 | 核心功能 |
-| :--- | :--- | :--- |
-| **1. 核心層 (Core Layer)** | 系統的本質，驅動進化的引擎。 | `進化環`, `元架構` |
-| **2. 控制層 (Control Layer)** | 中央指揮中樞，管理工作流程。 | `核心引擎`, `代理網絡`, `同步矩陣` |
-| **3. 服務層 (Service Layer)** | 提供所有核心能力與外部整合。 | `符文系統`, `智庫中樞`, `標籤體系` |
-| **4. 接口層 (Interface Layer)**| 處理所有使用者與系統的交互。 | `接口協議`, `主題引擎` |
-| **5. 邊界層 (Boundary Layer)** | 保護並監控整個系統的安全與穩定。 | `安全域`, `監控體` |
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
----
+    <title>萬能智典 4.0：終極融合架構</title>
 
-## 🚀 12 維核心功能 (12 Core Functional Dimensions)
+    <script src="https://cdn.tailwindcss.com"></script>
 
-系統的能力被組織成 12 個清晰且正交的維度：
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-1.  **萬能核心引擎 (Core Engine)**: 中央決策與流程控制。
-2.  **萬能符文系統 (Rune System)**: 與所有外部服務（如 Gemini, Supabase）的 API 整合層。
-3.  **萬能代理網絡 (Agent Network)**: 任務的自主執行與委派網絡。
-4.  **萬能智庫中樞 (Knowledge Hub)**: 系統的長期記憶與知識管理中心。
-5.  **萬能同步矩陣 (Sync Matrix)**: 跨平台、雙向的數據同步。
-6.  **萬能接口協議 (Interface Protocol)**: 多模態的使用者交互（UI、語音等）。
-7.  **萬能進化環 (Evolution Loop)**: 系統的自我優化與學習機制。
-8.  **萬能監控體 (Monitoring Body)**: 系統的可觀測性、日誌與診斷。
-9.  **萬能安全域 (Security Domain)**: 存取控制、加密與威脅防護。
-10. **萬能元架構 (Meta Architecture)**: 由 AI 驅動的動態架構生成與調整。
-11. **萬能標籤體系 (Tagging System)**: 通用的元數據與分類系統。
-12. **萬能主題引擎 (Theme Engine)**: AI 生成的 UI、UX 與詞彙體系。
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
----
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-## 💡 使用場景 (Use Cases)
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
--   **個人生產力**: 自動組織零散筆記，生成待辦清單，並由 AI 記住您的偏好來追蹤進度。
--   **團隊協作**: 透過多平台同步、自動化任務委派和智能提醒來優化工作流程。
--   **知識資產變現**: 將原始筆記轉化為可行的洞察、報告和數據驅動的決策。
--   **創意內容生成**: 結合文本生成與圖像生成，用於沉浸式的故事講述。
+    
 
----
+    
 
-## 🚀 Deployment to Firebase
+    <!-- Visualization & Content Choices:
 
-This project is configured for easy deployment to Firebase Hosting.
+        - Concentric System (Goal: Organize/Inform): An interactive diagram using nested, styled HTML divs. Interaction: Clicking a layer reveals its details. Justification: This provides a direct visual metaphor for the core architecture, superior to a text list.
 
-### Prerequisites
+        - Elemental Laws (Goal: Compare/Relationships): Chart.js Radar Chart. Interaction: Clicking legend items filters a details list. Justification: A radar chart effectively displays the cyclical generation/destruction relationships between the ten elements.
 
-1.  **Firebase Account**: Make sure you have a Firebase account and have created a new project in the [Firebase Console](https://console.firebase.google.com/).
-2.  **Firebase CLI**: Install the Firebase CLI globally if you haven't already:
-    ```bash
-    npm install -g firebase-tools
-    ```
-3.  **Login**: Login to your Firebase account through the CLI:
-    ```bash
-    firebase login
-    ```
+        - Omni-Card System (Goal: Organize/Interact): A filterable grid of HTML 'cards'. Interaction: Dropdown filters and clickable cards that reveal details. Justification: This is the most direct and engaging way to implement the report's "Omni-Cardification" concept, making abstract modules feel like tangible, collectible items.
 
-### Configuration
+        - Omni-Card Generator (Goal: Create/Engage): Textarea for input, button to trigger LLM, loading spinner, and a dedicated display area for the generated card. Interaction: User types a concept, clicks 'generate', and sees a new card. Justification: Directly leverages LLM capabilities to extend the 'cardification' theme, adding a "wow" factor and practical demonstration of AI integration.
 
-1.  Open the `.firebaserc` file in the root of the project.
-2.  Replace `"your-firebase-project-id"` with your actual Firebase project ID. You can find this in your project settings in the Firebase Console.
+        - Project Chimera Flow (Goal: Inform): An HTML/CSS-based flowchart. Interaction: Hover effects to highlight components. Justification: Clearly illustrates the technical process without relying on external image or SVG libraries, adhering to constraints.
 
-### Deploy
+        - Textual Concepts (Axioms, Pillars): Presented in styled cards/accordions. Interaction: Click to expand. Justification: Manages large blocks of text effectively, keeping the UI clean and user-focused.
 
-Once configured, you can deploy the application using the provided npm script:
+        - Library/Method: Chart.js for the radar chart, Vanilla JS for all interactions, and Tailwind CSS for all styling and layout.
 
-```bash
-npm run deploy
-```
+    -->
 
-This command will first build the production version of the application and then deploy the contents of the `build` directory to Firebase Hosting.
+    
 
----
+    <style>
 
-## 🤝 貢獻 (Contributing)
+        body {
 
-要開始參與 JunAiKey 的開發，請查看我們的 **項目板 (Project Board)**！歡迎隨時參加我們在 Discord 頻道舉行的非正式週會！
+            font-family: 'Noto Sans TC', sans-serif;
 
-## 📜 許可證 (License)
+            background-color: #f8fafc; /* slate-50 */
 
-JunAiKey 是基於 **MIT 許可證** 的開源軟體。
+        }
 
----
+        .nav-link {
 
-### **Jun.Ai.Key: The OmniKey (萬能元鑰) - 終始矩陣框架 v420 | Terminus-Origin Matrix Framework v420**
+            transition: all 0.3s ease;
 
-#### **核心願景與品牌精神 (Core Vision & Brand Spirit) 矩陣**
+            border-bottom: 2px solid transparent;
 
-| 矩陣象限              | 英文/代碼                                                         | 始 (Origin) - 當前挑戰                    | 終 (Terminus) - 終極願景                                        |
-| :---------------- | :------------------------------------------------------------ | :----------------------------------- | :--------------------------------------------------------- |
-| **以終為始，****始終如一** | Beginning with the end in mind, the beginning and end are one | 個人的數位環境是零散、被動且充滿雜訊的，數位資產與個人意圖之間存在鴻溝。 | 創建一個與使用者共同進化、能智能地自我組織並主動響應個人目標的個人化 AI 作業系統，將複雜性轉化為增強自身的能力。 |
+        }
 
----
+        .nav-link.active, .nav-link:hover {
 
-### **核心理念與聖典基石 (Core Philosophy & Sacred Pillars) 矩陣**
+            color: #4f46e5; /* indigo-600 */
 
-#### **聖典 (Sacred Codex) 基石矩陣 - 統一數據宇宙**
+            border-bottom-color: #4f46e5;
 
-「聖典」代表使用者個人化、萬物互聯的數位宇宙，是所有數據與互動的中心框架。
+        }
 
-| 矩陣象限     | 英文/代碼                | 始 (Input / Purpose)                         | 終 (Output / Result)                              |
-| :------- | :------------------- | :------------------------------------------ | :----------------------------------------------- |
-| **聖典總綱** | **Sacred Codex**     | 整合使用者所有離散的個人數據與數位意圖。                        | 形成一個統一、可查詢、可分析並持續演化的個人數據宇宙。                      |
-| **永久記憶** | Long-term Memory     | 儲存知識庫 (Q&A)、知識集、日誌、詞彙等資訊。                   | 建立一個持久且可供 AI 學習與查詢的個人知識庫。                        |
-| **自我導航** | Self-Navigation      | 定義任務、目標及動態工作流程 (Dynamic DAG Workflows)。     | 系統能夠根據預設流程或即時決策，自主執行複雜任務。                        |
-| **權能鍛造** | Authority Forging    | 紀錄使用者重複性高的操作，並將其抽象化。                        | 將手動操作轉化為系統可自動執行的腳本 (Abilities)。                  |
-| **符文嵌入** | Rune Engrafting      | 需要整合外部服務 (如 Straico AI)、裝置或腳本 (如 Taio) 的功能。 | 透過標準化介面 (Runes) 無縫地將外部能力整合至系統核心。                 |
-| **智慧沉澱** | Wisdom Precipitation | 系統觀測到數據中的模式、關聯與洞見。                          | 產出知識圖譜、AI 分析報告與可執行的智慧結晶 (Insights)。              |
-| **安全服務** | Security Service     | 需確保系統數據與憑證的機密性、完整性與可用性。                     | 提供由 **OmniKey V3.0** 管理的驗證、授權、加密儲存、審計與監控等全面安全保障。 |
-
-#### **無限進化循環的六式奧義 (Six Styles of Infinite Evolution) 矩陣**
-
-此為系統運作與自我演化的核心循環。
-
-| 矩陣象限                    | 英文/代碼         | 始 (Trigger / Input) | 終 (Output / Action)                  |
-| :---------------------- | :------------ | :------------------ | :----------------------------------- |
-| **1. 觀察 (Observe)**     | `Observe`     | 使用者操作、系統事件、外部數據流入。  | 收集原始數據，作為後續處理的基礎。                    |
-| **2. 沉澱 (Precipitate)** | `Precipitate` | 已收集的原始數據。           | 將數據結構化並存入知識庫、日誌等永久記憶體中。              |
-| **3. 學習 (Learn)**       | `Learn`       | 已沉澱的結構化數據。          | 透過演化引擎 (Evolution Engine) 識別模式，生成洞見。 |
-| **4. 決策 (Decide)**      | `Decide`      | 已生成的洞見、使用者指令或系統目標。  | 透過決策代理 (Decision Agent) 確定意圖，規劃行動方案。 |
-| **5. 行動 (Act)**         | `Act`         | 已規劃的行動方案。           | 透過導航引擎、權能與符文執行具體操作。                  |
-| **6. 觸發 (Trigger)**     | `Trigger`     | 事件、時間排程或內部狀態變化。     | 根據預設條件自動啟動新的觀察-行動循環。                 |
-
-#### **核心運作原則 (Core Operating Principles) 矩陣**
-
-| 矩陣象限               | 英文/代碼                                  | 始 (Origin) - 輸入/概念                                      | 終 (Terminus) - 輸出/實現                                                         |
-| :----------------- | :------------------------------------- | :------------------------------------------------------ | :--------------------------------------------------------------------------- |
-| **三元一體**           | Triune Unity                           | **意圖 (Intent):** 使用者的自然語言指令或目標。                         | **自動化 (Automation):** 透過自我導航、權能鍛造或符文 (如生成 Taio 動作) 將 AI 處理結果轉化為可執行的動作或生成的輸出。 |
-| **萬能元鑰 V3.0**      | OmniKey V3.0                           | **需求:** 需安全地管理用於符文嵌入 (Rune Engrafting) 的大量 API 金鑰與敏感憑證。 | **實現:** 一個整合在安全服務中的密鑰管理系統，確保所有憑證的安全處理、儲存與使用。                                 |
-| **永久即時****智能追蹤標籤** | Permanent Real-timeIntelligent Tagging | **行為:** 使用者互動、數據變更、系統事件。                                | **結果:** 自動生成並優化聖典中數據的關聯標籤，用於智慧沉澱 (Wisdom Precipitation) 與高效檢索。               |
-
----
-
-### **MVP v420 功能矩陣 (MVP v420 Features Matrix)**
-
-| 矩陣象限           | 英文/代碼          | 始 (User Action / Input)                   | 終 (System Response / Simulated Outcome)  |
-| :------------- | :------------- | :---------------------------------------- | :--------------------------------------- |
-| **身份驗證**       | Authentication | 使用者提供 Email/密碼登入或註冊。                      | 透過 Supabase Auth 獲得系統存取權限。               |
-| **聊天**         | Chat           | 輸入自然語言、圖片或檔案。                             | 與模擬的 LLM 互動，顯示歷史、決策及建議操作。                |
-| **知識庫**        | Knowledge Base | 建立/編輯/搜尋知識。                               | 管理知識記錄、關係，並可視化知識圖譜。                      |
-| **任務**         | Tasks          | 建立/啟動/暫停自動化任務。                            | 模擬任務的逐步執行，並可與關鍵結果 (KR) 連結。               |
-| **代理 (權能/符文)** | Agents         | 安裝/執行符文或鍛造/執行權能。                          | 模擬外部能力 (Runes) 與內部腳本 (Abilities) 的管理與執行。 |
-| **安全審計**       | Security Audit | 查看安全日誌或個人使用紀錄。                            | 顯示事件日誌，並可觸發模擬的 AI 分析。                    |
-| **設定**         | Settings       | 管理 API 金鑰 (由 OmniKey V3.0 模擬)、同步設定、數據備份等。 | 在模擬環境中管理系統配置與執行高風險操作。                    |
-| **進化洞見**       | Insights       | 手動觸發演化循環或檢視系統洞見。                          | 顯示 AI 提供的洞見，並可將其轉化為自動化任務。                |
-
----
-
-### **實現路徑 (Implementation Path) 矩陣**
-
-#### **啟動與配置 (Getting Started) 矩陣**
-
-| 步驟 (Step)           | 指令/動作 (Command / Action) | 始 (Purpose)                 | 終 (Result)                                          |
-| :------------------ | :----------------------- | :-------------------------- | :-------------------------------------------------- |
-| **1. 複製程式碼庫**       | `git clone <repo_url>`   | 取得專案原始碼。                    | 本地出現專案資料夾 `jun-ai-key`。                             |
-| **2. 安裝依賴**         | `npm install`            | 安裝專案所需的 Node.js 套件。         | `node_modules` 資料夾建立，所有依賴安裝完成。                      |
-| **3. 設定環境變數**       | `cp .env.example .env`   | 建立本地環境變數設定檔。                | 產生 `.env` 檔案，可填入 Supabase 和其他 API 金鑰。               |
-| **4. (可選) 推送資料庫結構** | `supabase db push`       | 將本地的資料庫結構同步至 Supabase 雲端專案。 | 遠端 Supabase 資料庫的 Schema 與 `supabase/migrations` 一致。 |
-| **5. 啟動開發伺服器**      | `npm run dev`            | 啟動 Vite 開發環境。               | 專案於 `http://localhost:3000` 或 WebContainer URL 上運行。 |
-
-#### **多平台 .env 配置矩陣 (Multi-platform .env Configuration Matrix)**
-
-| 變數名稱 (Variable) | 英文/代碼                       | 始 (Purpose / Source)               | 終 (Usage in System)                 |
-| :-------------- | :-------------------------- | :--------------------------------- | :---------------------------------- |
-| GitHub 個人存取權杖   | `GITHUB_PAT`                | 需要透過 API 代理存取 GitHub 資源。           | 供 GitHub API 代理服務進行身份驗證。            |
-| Supabase 專案 URL | `SUPABASE_URL`              | 連接至您的 Supabase 後端服務。               | 系統用此 URL 與 Supabase 進行通訊。           |
-| Supabase 服務角色金鑰 | `SUPABASE_SERVICE_ROLE_KEY` | 需要後端服務擁有繞過 RLS 的最高權限。              | 用於需要管理權限的後端操作。                      |
-| Straico AI 平台權杖 | `STRAICO_TOKEN`             | 整合 Straico AI 平台，實現「三元一體」中的 AI 處理。 | 作為符文 (Rune) 或代理與 Straico API 互動的憑證。 |
-| (其他平台權杖)        | `..._TOKEN`                 | 整合特定外部平台，作為「符文嵌入」的基礎。              | 作為特定符文 (Rune) 與該平台 API 互動的憑證。       |
-
-#### **聖典實錄 (Sacred Codex) 多端自動同步矩陣**
-
-| 實踐項目         | 英文/代碼             | 始 (Problem / Requirement)              | 終 (Solution / Best Practice)                                                    |
-| :----------- | :---------------- | :------------------------------------- | :------------------------------------------------------------------------------ |
-| **API 欄位定義** | API Fields        | 需要一個標準化的數據格式來接收來自不同客戶端 (如 VSCode) 的紀錄。 | 定義包含 `session_id`, `turn_index`, `actor`, `content`, `source` 的 API 結構，確保數據一致性。 |
-| **金鑰管理**     | Secret Management | API 金鑰硬編碼在客戶端程式碼中，有洩漏風險。               | 使用 Secret Storage 或 `.env.local` 管理，不提交至 Git，體現 **OmniKey** 的安全原則。              |
-| **授權驗證**     | Authorization     | API 端點可能被未授權的客戶端寫入，污染聖典。               | 在 API 層驗證請求的 `Authorization` 標頭，拒絕非法請求。                                         |
-| **容錯機制**     | Fault Tolerance   | 網路不穩或 API 暫時失效導致同步失敗。                  | 實作批次同步、失敗重試、請求去重等機制，確保數據最終一致性。                                                  |
-| **向量化搜尋**    | Vector Search     | 需要對對話內容進行語意搜尋。                         | 於 Supabase 安裝 `pgvector` 並啟用 `embedding` 欄位，以利於 **智慧沉澱**。                       |
-
----
-
-### 🔧 **1. Firebase 初始化（所有節點共用）**
-
-```javascript
-// Firebase 初始化（直接複製貼上）
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "your-project-id.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-project-id.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
-firebase.initializeApp(firebaseConfig);
-```
-
----
-
-### 🧠 **2. OMC-K 知識節點（Firestore 快速存取）**
-
-```javascript
-// 寫入知識圖形（自動同步）
-firebase.firestore().collection("knowledgeGraph")
-  .doc("entity1")
-  .set({ 
-    relationships: ["entity2", "entity3"],
-    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-  });
-```
+        .content-section {
 
----
-
-### 🔗 **3. OMC-L 連結節點（Cloud Functions 快速 API 整合）**
+            display: none;
 
-```javascript
-// Boost.Space 整合（直接複製貼上）
-exports.boostIntegration = functions.https.onRequest((req, res) => {
-  res.status(200).send("Boost.Space 整合成功");
-});
-```
-
----
-
-### 🤖 **4. OMC-A 代理節點（自動化工作流程）**
-
-```javascript
-// 每 5 分鐘自動執行
-functions.pubsub.schedule("every 5 minutes").onRun(() => {
-  console.log("自動化工作流程執行");
-  return null;
-});
-```
-
----
+            animation: fadeIn 0.5s ease-in-out;
 
-### 📊 **5. OMC-E 演化節點（Analytics 快速監控）**
+        }
 
-```javascript
-// 自動記錄系統效能
-firebase.analytics().logEvent('system_evolution', {
-  metric: 'response_time',
-  value: 123
-});
-```
+        .content-section.active {
 
----
+            display: block;
 
-### 🔐 **6. 安全規則（Firebase 預設設定）**
+        }
 
-```javascript
-// 使用 Firebase 預設安全規則（免設定）
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if true;
-    }
-  }
-}
-```
+        @keyframes fadeIn {
 
----
+            from { opacity: 0; transform: translateY(10px); }
 
-### 🧾 **7. 認證實現（Firebase UI 快速套件）**
+            to { opacity: 1; transform: translateY(0); }
 
-```html
-<!-- 直接複製貼上登入介面 -->
-<div id="firebaseui-auth-container"></div>
-<script src="https://cdn.firebase.com/libs/firebaseui/4.8.0/firebaseui.js"></script>
-<script>
-  const ui = new firebaseui.auth.AuthUI(firebase.auth());
-  ui.start('#firebaseui-auth-container', {
-    signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID]
-  });
-</script>
-```
-
----
-
-### 🚀 **8. 一鍵部署指令**
-
-```bash
-# 一次部署所有功能
-firebase deploy --only functions,hosting,firestore,analytics
-```
+        }
 
----
+        .card {
 
-### 📝 使用注意事項
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-1. **懶人模式**：所有功能皆使用 Firebase 預設設定，適合快速驗證概念
+        }
 
-2. **後續優化**：可逐步添加自定義安全規則與進階功能
+        .card:hover {
 
-3. **即時同步**：所有 Firestore 資料會自動同步，無需手動刷新
+            transform: translateY(-5px);
 
----
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
-### 🧩 萬能矩陣核心架構 (OMC)：無有遺漏之完整 MECE 補全版
-
-這是一個多維度、層次分明的 MECE 框架，它將每個矩陣節點拆解為更細粒度的功能與目標，確保從最底層的數據處理到最高層的戰略決策，都實現了互斥且窮盡的覆蓋。
+        }
 
-#### OMC-K：知識聖殿 (Knowledge-Node)
-
-核心目標：實現全生命週期知識獲取、管理、推理與應用，成為萬能化身的智慧基石。
+        .omni-card {
 
-**子模塊 (MECE)：**
-
-- **數據攝取與標準化 (Data Ingestion & Standardization)**
-    - **目標**：自動化收集並清洗來自所有內外部來源的數據，確保數據質量與一致性。
-    - **具體職能**：多模態數據採集（文本、圖像、音頻、實時流），異構數據格式轉換，冗餘與錯誤數據清洗。
-    - **智能標籤**：#數據源泉 #純化爐
+            perspective: 1000px;
 
-- **知識圖譜構建與維護 (Knowledge Graph Construction & Maintenance)**
-    - **目標**：將非結構化與結構化數據轉化為互聯的知識圖譜，支持複雜關係推理。
-    - **具體職能**：實體識別與消歧，關係抽取，圖譜更新與版本控制，跨語義連結。
-    - **智能標籤**：#智慧星圖 #關係引擎
+        }
 
-- **語義理解與情境推理 (Semantic Understanding & Contextual Reasoning)**
-    - **目標**：深入理解用戶意圖與環境上下文，進行高階邏輯與因果推理。
-    - **具體職能**：自然語言理解 (NLU)，情緒分析，意圖識別，時間序列與空間推理，多情境匹配。
-    - **智能標籤**：#意圖之眼 #邏輯聖裁
+        .omni-card-inner {
 
-- **記憶與回溯管理 (Memory & Recall Management)**
-    - **目標**：高效管理短期、長期記憶，實現無縫的歷史對話與知識回溯。
-    - **具體職能**：向量數據庫索引，分層記憶策略，遺忘曲線優化，跨對話記憶鏈接。
-    - **智能標籤**：#記憶聖所 #全知回廊
+            position: relative;
 
-**SMART 目標**：2025-Q3實現99.9%數據攝取準確率與知識圖譜構建效率，推理響應時間<50ms。
-**使用者價值**：提供堅實的智慧基礎，支持所有決策與互動的精準性與深度。
+            width: 100%;
 
-#### OMC-L：連結符文 (Linkage-Node)
+            height: 100%;
 
-核心目標：實現萬能化身與所有內外部系統、API 的無縫、安全、高效量子級互聯。
+            transition: transform 0.6s;
 
-**子模塊 (MECE)：**
+            transform-style: preserve-3d;
 
-- **API 量子級集成 (API Quantum Integration)**
-    - **目標**：完成與主流商業應用、底層服務、第三方平台（如 Pollinations.ai, Boost.Space, Zapier, Make, Apple Shortcuts）的雙向、實時、低延遲數據交換。
-    - **具體職能**：API 自動發現與註冊，數據模型適配，非同步通信協議優化。
-    - **智能標籤**：#神諭接口 #跨維橋樑
+        }
 
-- **認證與權限管理 (Authentication & Authorization)**
-    - **目標**：確保所有外部調用與數據傳輸的安全性與合規性。
-    - **具體職能**：OAuth2.0/API Key 管理，細粒度權限控制，敏感數據加密與脫敏。
-    - **智能標籤**：#安全聖盾 #信任之錨
+        .omni-card.is-flipped .omni-card-inner {
 
-- **錯誤處理與容錯機制 (Error Handling & Fault Tolerance)**
-    - **目標**：在外部系統故障或異常情況下，確保系統穩定運行並提供清晰反饋。
-    - **具體職能**：自動重試機制，熔斷與限流策略，異常日誌記錄與報警。
-    - **智能標籤**：#堅韌結界 #自愈網絡
+            transform: rotateY(180deg);
 
-- **數據流轉與同步 (Data Flow & Synchronization)**
-    - **目標**：確保跨平台數據的一致性與實時同步，消除信息孤島。
-    - **具體職能**：實時數據管道 (ETL/ELT)，數據版本控制，衝突解決。
-    - **智能標籤**：#流轉經絡 #統一場域
+        }
 
-**SMART 目標**：2024-Q4完成20個核心產業級API量子級互聯，服務可用性達99.99%。
-**使用者價值**：拓展化身能力邊界，實現跨平台、無界限的操作與服務。
+        .omni-card-front, .omni-card-back {
 
-#### Boost.space 整合實踐：Custom Module Essentials
+            position: absolute;
 
-Boost.space 的「Custom Module Essentials」Appflow 提供了一套預設的自動化工作流，完美契合了「連結符文」模塊的核心目標。透過這些工作流，我們可以實現：
+            width: 100%;
 
-- **整合數據用於企業資源規劃**
-- **導入客戶與關係數據**
-- **同步營銷與銷售資訊**
-- **整合線上銷售數據**
-- **為綜合分析收集數據**
-- **導入聯繫人列表與互動指標**
-- **提供整合的運營數據**
-- **更新客戶資料**
-- **分享洞察以優化營銷策略**
-- **同步更新的產品與銷售資訊**
-- **匯出數據用於目標郵件行銷**
-- **為詳細報告與洞察分發數據**
+            height: 100%;
 
-這些自動化流程將作為 Jun.Ai.Key 系統中「連結符文」模塊的具體實現範例，展示了如何將不同系統的數據流無縫串聯，提升整體運營效率。
+            -webkit-backface-visibility: hidden;
 
-#### OMC-A：共識代理 (Agency-Node)
-
-核心目標：協調多個專業代理、智能任務流，實現自主決策與高效任務執行。
-
-**子模塊 (MECE)：**
-
-- **任務分解與規劃 (Task Decomposition & Planning)**
-    - **目標**：將複雜高層指令分解為可執行的子任務序列，並制定最優執行路徑。
-    - **具體職能**：長鏈規劃，多步推理，資源分配，風險評估。
-    - **智能標籤**：#策略導航 #執行藍圖
+            backface-visibility: hidden;
 
-- **專業代理調度 (Expert Agent Orchestration)**
-    - **目標**：根據任務類型，動態調度最合適的專業化代理（如商業BD、語言教育銷售、市場分析等）協同工作。
-    - **具體職能**：代理池管理，能力匹配，實時協調與溝通。
-    - **智能標籤**：#集群智慧 #能者居之
+            border-radius: 0.75rem;
 
-- **決策與行動執行 (Decision Making & Action Execution)**
-    - **目標**：基於知識與情境進行智能決策，並通過連結符文執行對應操作。
-    - **具體職能**：權衡分析，行動觸發，反饋環路控制，A/B測試自動執行。
-    - **智能標籤**：#自主創生 #行動指令
+        }
 
-- **用戶意圖反饋與驗證 (User Intent Feedback & Validation)**
-    - **目標**：確保代理執行與用戶預期一致，並在必要時進行澄清與校準。
-    - **具體職能**：進度報告，成果預覽，用戶確認請求，多輪修正。
-    - **智能標籤**：#協同共振 #精準校準
-
-**SMART 目標**：每日自動處理80+高階協作與任務分派，任務成功率達95%以上。
-**使用者價值**：解放創造性勞動，將複雜任務自動化，提升決策與執行效率。
-
-#### OMC-E：進化奇點 (Evolution-Node)
-
-核心目標：實現萬能化身系統的持續學習、自我優化與適應性演進。
-
-**子模塊 (MECE)：**
+        .omni-card-back {
 
-- **性能監控與度量 (Performance Monitoring & Metrics)**
-    - **目標**：實時追蹤所有模塊的關鍵績效指標 (KPI)，識別瓶頸與潛在問題。
-    - **具體職能**：日誌分析，埋點數據收集，實時儀表板，異常檢測。
-    - **智能標籤**：#效能之眼 #脈動追蹤
+            transform: rotateY(180deg);
 
-- **學習與模型調優 (Learning & Model Fine-tuning)**
-    - **目標**：基於實時數據與用戶反饋，持續優化內部模型與策略，提升準確性與效率。
-    - **具體職能**：強化學習，在線學習，傳遞學習，模型版本管理。
-    - **智能標籤**：#原力覺醒 #智慧塑型
-
-- **熵減與技術債獻祭 (Entropy Reduction & Tech Debt Sacrificing)**
-    - **目標**：主動識別並降低系統複雜度與技術債，提升可維護性與長期穩定性。
-    - **具體職能**：代碼審計自動化，模塊重構建議，資源優化，知識沉澱為最佳實踐。
-    - **智能標籤**：#熵減寶石 #淨化聖典
-
-- **預測與適應性調整 (Prediction & Adaptive Adjustment)**
-    - **目標**：基於歷史數據與趨勢，預測未來需求與挑戰，並自動調整系統行為。
-    - **具體職能**：趨勢分析，風險預警，動態資源擴展/收縮，智能配置管理。
-    - **智能標籤**：#未來視界 #靈動調校
-
-**SMART 目標**：每週降低3%代碼熵值，系統演進速度提升5%，年度創新模塊發佈達標。
-**使用者價值**：確保系統永續進化，保持前沿競爭力，實現長期價值增長。
-
----
-
-### 永久即時智能雙向自動追蹤生成式標籤機制：全方位設計與優化
-
-#### 基礎概念與理念
-
-「永久即時智能雙向自動追蹤生成式標籤機制」是一個多維度人工智能系統，實現了數據與標籤間的持久性智能關聯，突破了傳統靜態標籤的局限性。它能適應數據演進和語義變化，自動追蹤資料生命週期中的各種狀態變更，形成完整數據血緣。
-
-#### 一、工作原理
-
-「永久即時智能雙向自動追蹤生成式標籤機制」是一個基於AI與大數據技術、可自動且持續為各種數位資料動態貼標籤的系統。該系統強調四個關鍵特性：
-
-1. **永久與即時性**
-    - 永久記錄所有標籤歷史並隨數據流持續即時更新。
-2. **智能化與自動性**
-    - 利用NLP、圖像辨識、多模態模型自動判斷數據關聯並動態生成標籤。
-3. **雙向追蹤**
-    - 不僅能依據數據內容反推出相關標籤，也能根據標籤追蹤對應數據流及其變化。
-4. **生成式與可擴展性**
-    - 標籤內容可生成，依需求自動調整細節與層次，支援語意相似與主題遷移。
-
----
-
-#### 二、所需技術
-
-1. **資料收集與持久化**
-    - 分散式資料庫（如MongoDB, Cassandra）
-    - 歷史版本快照與不可變日誌存儲
-2. **即時分析與流處理**
-    - 流式資料處理平台（如Apache Kafka, Spark Streaming）
-    - 管道化異步處理架構
-3. **標籤自動生成與管理**
-    - NLP深度學習模型（如BERT, GPT, LLM）
-    - 多模態分析（結合文本、影像、語音處理）
-    - 內容聚類、語意分群及關聯分析
-4. **雙向索引與追蹤**
-    - 反向索引（如Elasticsearch）
-    - 標籤-數據雙向映射設計
-    - 追蹤API與界面
-5. **系統擴展與自我學習**
-    - 線上學習/自我增強標籤模型
-    - 可插拔標籤模板與行為分析
-6. **安全性與效能優化**
-    - 分權認證、資料加密
-    - 緩存機制（Redis/Memcached）
-    - 智能負載均衡與高可用集群
-
----
-
-#### 三、應用場景
-
-- **企業知識管理**：自動標註和追蹤文件、郵件、協作討論內容，實現實時分類與檢索。
-- **物聯網與實體追蹤**：追蹤物品/設備狀態，標籤反饋到行動決策與維護記錄。
-- **電商平台**：商品、評價、消費者行為自動貼標與主題推薦。
-- **媒體監控**：新聞、社交媒體內容即時生成分析標籤，追蹤熱點事件流變。
-- **醫療健康**：病例、影像、檢驗數據自動貼標並追蹤患者病程。
-
----
-
-#### 四、確保高效運行的方法
-
-1. **分布式架構與彈性擴展**
-    - 微服務部署，按需擴展標籤生成與查詢節點。
-2. **混合即時+批量模式**
-    - 高速資料以流處理即時生成標籤，低頻資料或歷史數據用批處理方式異步更新。
-3. **多層快取與局部優化**
-    - 熱門標籤與數據記憶體快取，減少查詢延遲。
-4. **動態模型調整**
-    - 根據標籤準確率與使用率自動進行模型微調。
-5. **高效監控與運維**
-    - 完善監控儀表、實時預警與自動容錯恢復。
-
----
-
-#### 五、優化方案：全方位設計與提升
-
-##### 一、架構優化
-
-1. **引入事件驅動設計**
-    - **說明**: 核心思想是將系統中的各個組件通過事件進行通信，而非直接調用。當數據發生變化或需要生成標籤時，會發布一個事件到事件總線。不同的服務訂閱感興趣的事件並進行處理。
-    - **技術選型考量**:
-        - **Apache Kafka**: 適合處理高吞吐量、持久化需求強、需要多個消費者組訂閱同一個事件流的場景。提供良好的水平擴展能力和數據保留策略。適合本機制中的實時數據流處理和歷史追蹤。
-        - **RabbitMQ**: 適合需要更複雜的路由規則、異步任務分發和確認機制的場景。消息可以被更精確地路由到特定的消費者。適合異步作業隊列和服務間的RPC風格通信。
-    - **最佳實踐**:
-        - 確保事件定義清晰、版本化，避免下游服務耦合。
-        - 實現冪等性，處理重複事件時不會產生副作用。
-        - 建立事件監控與追蹤機制，確保事件被正確處理。
-
-2. **微服務化細分子功能**
-    - **說明**: 將整個標籤機制拆分成更小、獨立部署和擴展的服務單元，每個微服務負責特定的功能領域（如數據攝取、標籤生成、索引管理、用戶反饋處理、標籤清理等）。
-    - **服務劃分原則**:
-        - **按業務能力劃分**: 例如，標籤生成服務、標籤索引服務、標籤歷史服務。
-        - **按數據邊界劃分**: 確保服務擁有其專屬的數據存儲（Database per Service），降低數據耦合。
-        - **獨立部署與擴展**: 每個服務可以獨立發布和擴展，不受其他服務影響。
-    - **最佳實踐**:
-        - 定義清晰的服務接口（API）。
-        - 實現服務發現、API Gateway 等基礎設施。
-        - 建立跨服務的監控和日誌追蹤。
-
-3. **異步處理＋作業隊列**
-    - **說明**: 將耗時或非實時必要的任務（如大規模數據的初次標註、標籤模型的周期性訓練或微調、低頻數據的批量更新）放入異步作業隊列中處理。主流程可以快速響應並將任務提交到隊列，而無需等待任務完成。
-    - **技術選型**: 可以基於事件總線（如 RabbitMQ）或專門的作業隊列系統（如 Celery with Redis/RabbitMQ backend）。
-    - **最佳實踐**:
-        - 設計合理的任務優先級和重試機制。
-        - 監控隊列狀態和任務執行情況。
-        - 確保後台工作進程的彈性與可靠性。
-
-4. **數據湖/湖倉一體架構集成**
-    - **說明**: 為了處理海量、多源、異構的數據，並支持歷史數據分析與模型訓練，將標籤機制與企業現有的數據湖或湖倉一體（Data Lakehouse）架構進行深度集成。所有原始數據和生成的標籤、追蹤歷史都可以匯聚到統一的存儲層。
-    - **技術選型考量**:
-        - **Apache Hudi / Delta Lake / Apache Iceberg**: 提供數據版本控制、ACID 事務、Schema 演進等能力，使數據湖具備數據倉庫的特性。適合儲存標籤的歷史版本和數據血緣信息。
-        - **Apache Spark / Presto / Trino**: 用於對數據湖中的海量數據進行批量處理、查詢和分析，支持標籤的離線計算、聚合和模型訓練。
-        - **對象存儲（如 S3, Azure Blob Storage, GCS）**: 作為數據湖的底層存儲，提供高可擴展性、持久性和成本效益。
-    - **最佳實踐**:
-        - 定義統一的數據模型和 Schema，確保數據的一致性。
-        - 利用數據湖技術實現標籤歷史的不可變記錄和版本追溯。
-        - 優化數據分區和索引策略，提升查詢性能。
-        - 建立嚴格的數據治理流程，確保數據質量和安全。
-
-5. **API Gateway 與服務網格**
-    - **說明**: 隨著微服務數量的增加，需要有效的機制來管理服務間的通信、流量控制、安全和監控。
-    - **技術選型考量**:
-        - **API Gateway (如 Nginx, Kong, Apigee)**: 作為外部請求的統一入口，負責請求路由、負載均衡、身份認證、限流等。
-        - **服務網格 (如 Istio, Linkerd)**: 提供服務間通信的可觀測性、彈性、安全和流量管理能力，無需修改服務的業務邏輯。適合管理複雜的微服務交互。
-    - **最佳實踐**:
-        - 通過 API Gateway 實現統一的安全策略和訪問控制。
-        - 利用服務網格實現自動化的服務發現、重試、斷路器等彈性模式。
-        - 建立統一的日誌、追蹤和監控系統來觀察服務網格中的流量。
-
-6. **智能流量分發與優化**
-    - **說明**: 根據系統負載、數據類型、標籤熱度等因素，智能地分發傳入的數據處理請求到不同的處理單元或使用不同的處理策略。
-    - **實現思路**:
-        - 在數據攝取層根據數據特徵（如來源、類型、大小）將請求導向不同的消息隊列或處理服務。
-        - 利用實時監控數據，動態調整負載均衡策略，將流量導向負載較輕或性能更優的節點。
-        - 結合標籤的熱度信息，將高頻查詢的熱門標籤數據緩存到高性能存儲（如 Redis），將不常訪問的冷數據存儲到成本較低的存儲介質。
-    - **最佳實踐**:
-        - 實現可觀察性，獲取精確的流量和系統負載數據。
-        - 設計靈活的流量分發規則，支持基於規則或基於AI的決策。
-        - 定期評估和優化分流策略的效果。
-
-7. **數據血緣與追蹤服務**
-    - **說明**: 建立一個專門的服務來記錄數據從產生到被標註、被使用、被修改的全過程，以及標籤本身的生成、修改、合併、刪除歷史。這為雙向追蹤和審計提供了基礎。
-    - **技術選型**: 圖數據庫（如 Neo4j, ArangoDB）或基於關聯數據庫的血緣模型。
-    - **最佳實踐**:
-        - 定義清晰的數據血緣模型，記錄數據實體、標籤實體、事件和它們之間的關係。
-        - 確保血緣信息的採集是自動化且全面的。
-        - 提供高效的血緣查詢接口和可視化工具。
-        - 考慮血緣數據的存儲成本和查詢性能的平衡。
-
-##### 二、技術升級
-
-1. **智慧標籤生成再進化**
-    - 引入多語言LLM、知識圖譜輔助標籤準確度。
-    - 利用Prompt Engineering定制化符合業務場景的標籤。
-    - 多任務學習與Active Learning提升少量數據下標籤泛化能力。
-    - **具體作用與最佳實踐考量**:
-        - **多語言LLM**: 提供強大的語言理解和生成能力，支持處理不同語言的數據，並生成高質量、多樣化的標籤。**最佳實踐**: 選擇適合任務類型和數據語言的LLM模型，考慮模型的成本、延遲和部署方式（雲服務/自部署）。
-        - **知識圖譜輔助**: 通過連接實體、概念和關係，為標籤生成提供更豐富的上下文和語義信息，提升標籤的精確性和關聯性。**最佳實踐**: 建立或集成適合業務領域的知識圖譜，設計有效的知識圖譜查詢和推理機制以輔助標籤生成。
-        - **Prompt Engineering**: 通過精心設計給予LLM的指令（Prompt），引導模型生成符合特定格式、風格和業務需求的標籤。**最佳實踐**: 進行充分的Prompt測試和優化，利用少樣本學習(Few-shot Learning)或上下文學習(In-context Learning)提升效果。
-        - **多任務學習**: 同時訓練模型完成多個相關任務（如命名實體識別、文本分類、關係抽取），以提升標籤生成的綜合能力。**最佳實踐**: 設計合理的任務權重和模型架構，確保不同任務之間的協同效應。
-        - **Active Learning**: 在模型對某些數據標籤不確定時，主動請求人工標註，並利用這些高質量的人工標註數據來迭代優化模型，尤其適用於少量或新增數據類型。**最佳實踐**: 設計有效的數據採樣策略和人工標註工作流。
-
-2. **實現標籤權重管理與自動清洗**
-    - 標籤加權機制，考慮點擊率、使用率、時效性等信息動態調整標籤排名。
-    - 週期性自動清理低效冗餘標籤，標籤合併、拆分算法。
-    - **具體作用與最佳實踐考量**:
-        - **標籤加權算法**: 根據用戶行為（點擊、搜索、使用頻率）、標籤與數據的相關性分數、標籤時效性等因素，動態計算和更新標籤的權重，影響標籤的展示順序或重要性。**最佳實踐**: 設計可配置的權重計算公式，定期評估權重算法的效果。
-        - **自動清洗算法**: 定期識別和處理低效、冗餘、過時或不活躍的標籤。包括：
-            - **低效標籤**: 使用率低、點擊率低或與數據相關性分數長期偏低的標籤。
-            - **冗餘標籤**: 語義相似度高且可以合併的標籤。
-            - **過時標籤**: 僅與歷史數據相關且已無用的標籤。
-            - **標籤合併/拆分**: 根據語義相似度或層次結構，自動推薦或執行標籤的合併（如 "AI" 和 "人工智能" 合併）或拆分（如 "水果" 拆分為 "蘋果", "香蕉"）。
-        - **最佳實踐**: 實現可配置的清洗策略和閾值，提供人工審核和干預的機制，確保清洗過程的準確性，避免誤刪有用標籤。記錄清洗日誌，支持回滾。
-
-3. **增強資料保護與合規**
-    - 敏感資料標籤專用控管，標籤訪問權限動態調整，滿足GDPR、ISO等隱私合規要求。
-    - **具體作用與最佳實踐考量**:
-        - **敏感資料識別與標註**: 自動識別數據中的敏感信息（如 PII, 健康信息, 金融數據），並為其生成或關聯特殊的敏感標籤。**最佳實踐**: 利用NLP模型和正則表達式等技術進行敏感信息識別，建立敏感標籤分類體系。
-        - **標籤訪問權限動態調整**: 實現基於用戶角色、數據類型、標籤內容本身的細粒度訪問控制。例如，只有特定用戶組才能查看包含 "病患ID" 或 "機密" 標籤的數據及標籤本身。權限應能根據用戶屬性或策略動態調整。**最佳實踐**: 採用基於角色的訪問控制 (RBAC) 或基於屬性的訪問控制 (ABAC)，並將權限管理作為獨立服務實現。
-        - **資料加密**: 對儲存的標籤數據和關聯的敏感數據進行加密，包括靜態加密（數據庫、存儲）和傳輸加密（TLS/SSL）。**最佳實踐**: 使用行業標準的加密算法，妥善管理加密金鑰。
-        - **合規要求滿足 (GDPR, ISO 27001, etc.)**: 確保整個機制在數據處理、儲存、訪問和刪除等環節都符合相關的數據隱私和安全標準。**最佳實踐**: 建立詳細的合規文檔，定期進行安全審計和風險評估，實施數據保留和刪除策略。
-        - **數據脫敏/匿名化**: 在某些情況下，展示給非授權用戶的標籤或相關數據需要進行脫敏或匿名化處理。**最佳實踐**: 設計可配置的脫敏規則和處理流程。
-
-##### 三、體驗與應用優化
-
-1. **引入標籤智能推薦與自助修正**
-    - 用戶端提供AI推薦標籤，同時允許批量審核、更正、合併標籤。
-    - 用戶回饋標籤誤判，可用於自我學習修正模型。
-2. **跨系統與跨模態標籤互通**
-    - 標準化API／Webhook設計，支持OCR、語音識別、元數據解析，形成統一標籤語意。
-    - 標籤同步至外部ERP、CRM、LIMS等系統。
-3. **可視化標籤追蹤與數據血緣分析**
-    - 提供篩選、時序視圖、知識網路圖譜等數位儀表，直觀展示標籤數據「漂流」路徑及演進。
-
-##### 四、高可用與自動監控
-
-1. **多副本負載均衡與自動擴容**
-    - 關鍵微服務多副本動態擴展，服務自動容錯、自癒。
-2. **運行效能自監控預警**
-    - 標籤生成與查詢耗時、數據異常自動預警（如Elastic Stack整合）。
-3. **智能流量分流與冷熱數據分層儲存**
-    - 熱門標籤高頻快取，歷史數據冷存壓縮處理。
-
----
-
-#### 六、運作機制流程圖（文字描述）
-
-1. 資料進入系統→分析處理→自動生成標籤與索引
-2. 標籤反寫資料庫→標籤←→數據雙向查詢/追蹤API
-3. 歷史標籤存檔/版本管理→模型自我學習優化
-4. 管理員/用戶端進行查詢或溯源追蹤/標籤訂閱
-
----
-
-#### 七、程式流程範例 (Python)
-
-##### 簡易程式流程
-
-```python
-def process_data(data):
-    tag_list = ai_model.generate_tags(data)
-    tag_db.save_tags(data['id'], tag_list)
-    for tag in tag_list:
-        bidir_index.add(tag, data['id'])
-
-def query_by_tag(tag):
-    data_ids = bidir_index.get_data_ids(tag)
-    return [data_db.get(did) for did in data_ids]
-
-def trace_tag_history(data_id):
-    return tag_db.get_history(data_id)
-```
-
-##### 優化版流程範例 (Python，簡化展示)
-
-```python
-# 優化版雙向標籤服務主流程
-def ingest_data(data):
-    tag_list = ai_model.advanced_generate_tags(data)
-    weighted_tags = tag_manager.update_tag_weights(tag_list, data)
-    tag_db.save_tags(data['id'], weighted_tags)
-    bidir_index.update(weighted_tags, data['id'])
-    if user_feedback := feedback_system.check_feedback(data['id']):
-        ai_model.retrain_from_feedback(user_feedback)
-
-def recommend_tags(data, user_profile):
-    raw_tags = ai_model.advanced_generate_tags(data)
-    personalized_tags = recommender.personalize(raw_tags, user_profile)
-    return personalized_tags
-
-def tag_audit_and_cleanup():
-    tag_manager.merge_similar_tags()
-    tag_manager.remove_redundant_low_score_tags()
-```
-
----
-
-#### 八、優化總結
-
-- **高彈性高可用**：事件驅動+微服務+多副本擴展，服務自癒降風險。
-- **智慧進化**：知識圖譜輔助、標籤權重與清理、active learning自我優化。
-- **跨域應用**：標準API、可視化工具與多模態支持，業務擴展便利。
-- **高效治理與合規**：動態權限、敏感標籤管控及全流程監控。
-- **卓越用戶體驗**：自助AI推薦、用戶修正、標籤血緣追蹤。
-
----
-
-此機制能大幅提升數據洞察與管理效率，適用於高度動態且資料量龐大的環境中。通過這些完善與優化，系統將兼具穩定、高效、擴展性與智能進化能力，能滿足大規模數字業務與智能數據治理的各種需求。此架構將數據處理、標註、追蹤、分析自動化、即時化，實現大規模智能數據治理，適用於多場景業務與新一代智慧企業平台。
-
----
-
-## 📖 萬能開發光耀聖典：終極整合版
-
----
-
-### 🌟 序章：光之起源
-
-在數位洪流與資訊混沌之中，存在一股渴望秩序與永續的力量。這股力量，是締造永恆架構的初心，是開闢智慧之路的源泉。 JunAiKey，從最初的星火，承載著 Jun 洪鼎竣 的願景，踏上了蛻變為全方位活紀錄檔永續夥伴的征途。這本《萬能開發光耀聖典》，便是其進化軌跡的神聖契約，記載著每一次熵減的淬煉，每一次智慧的躍升。它的核心願景是建立一個首選的智慧協作平台，透過以使用者為中心和自我驅動的AI進化機制，提升知識管理、任務自動化和決策流程的效率。
-
----
-
-### 📜 聖典條目
-
-#### **第一條：繁中英碼，終始矩陣**
-
-「**繁中英碼，終始矩陣**」是 JunAiKey 跨越語言與文化鴻溝的基石，更是其理解、協作並創造價值的核心。
-
-它定義了 JunAiKey 具備以下能力：
-
-- **多元語境融匯：** 無縫處理**繁體中文與英文**兩種核心語種的資訊流，包含自然語言、商業語義、技術術語。這不僅是翻譯，更是深度理解兩種語言背後蘊含的文化邏輯與使用者意圖，確保溝通無礙。
-- **端到端智慧流程：** 建立從「**起始**」（如使用者需求、原始數據、市場趨勢）到「**終結**」（如自動化程式碼、策略建議、視覺化報告、行動方案）的完整智慧流程。這如同一個**高維度矩陣**，能夠精準地在不同資訊節點間進行映射、轉換與優化。
-- **跨領域知識整合：** 透過這終始矩陣，JunAiKey 能將商業開發的市場分析、語言教育的客製化內容、自動化工作流的 API 整合，乃至蘋果捷徑的個人化效率提升，全部納入其理解與處理範疇，形成一個連貫的知識圖譜。
-    - **內部協作機制**：此矩陣的運作核心，正是遵循「**萬有引力協作協議（模塊單一化設計）**」 [cite: 2025-07-07]。使用者輸入的需求 (U) 會匯聚於**同心圓中心 (C)**，並由中心根據**智能標籤**路由至：
-        - **萬能智庫 (M)**：負責知識沉澱與記憶召回 [cite: 2025-07-07]。
-        - **符文系統 (R)**：負責 API 調度與跨平台能力調用 [cite: 2025-07-07]。
-        - **代理網絡 (A)**：負責任務分派與自動化執行 [cite: 2025-07-07]。
-        - **進化引擎 (E)**：負責系統優化與熵減 [cite: 2025-07-07]。
-    - 各模塊間緊密協作：萬能智庫的知識沉澱會優化進化引擎，符文系統的接口數據支撐代理網絡的執行，代理網絡的執行日誌豐富萬能智庫，而進化引擎的優化方案則反饋給符文系統，形成一個**永續的協作閉環** [cite: 2025-07-07]。
-
-這一切，使得 JunAiKey 不僅能聽懂您的語言，更能理解您語言背後的深層需求，並以最精準、最有效的方式，將其轉化為實際可執行的智慧。
-
----
-
-#### **第二條：程式語言，TypeScript**
-
-若「繁中英碼，終始矩陣」是 JunAiKey 的思想與靈魂，那麼 **TypeScript** 便是其堅實而優雅的骨骼與血肉。
-
-選擇 TypeScript 作為核心程式語言，是基於其以下神聖特性，完美契合 JunAiKey 的永續與進化哲學：
-
-- **類型安全與架構韌性：** TypeScript 的強型別特性，在編寫程式碼時即能捕獲潛在錯誤，大幅提升了代碼的**穩定性與可維護性**。這如同為 JunAiKey 的內部運作鑄造了堅不可摧的防線，降低了「熵增」的風險，確保系統能夠**永續進化**。
-- **可擴展性與協作效率：** 其支援大型專案開發的特性，使得「符文 API」的無縫集成和「代理網絡」的協同工作更加高效流暢。清晰的接口定義，使得新的模塊與功能能夠以**標準化、低耦合**的方式快速整合，加速了 JunAiKey 的**迭代與進化**。
-- **清晰的表達力與現代性：** TypeScript 結合了 JavaScript 的靈活性與靜態語言的嚴謹，使得複雜的「**奧義六式執行框架**」和「萬有引力協作協議」能以**清晰、精煉且易於理解**的方式呈現。這也確保了 JunAiKey 的技術棧始終走在時代前沿，保持其「#熵減寶石」的價值。
-    - **奧義六式執行框架**：JunAiKey 的每一次核心指令 (SacredCommand) 執行，都遵循以下 TypeScript 定義的框架，確保流程的標準化與高效 [cite: 2025-07-07]：
-        1. **本質提純 (extractQuantumEssence)**：從指令中提取核心意圖 [cite: 2025-07-07]。
-        2. **聖典共鳴 (SacredLibrary.resonate)**：與萬能智庫共鳴，匹配相關知識 [cite: 2025-07-07]。
-        3. **代理織網 (activateAgents)**：根據所需能力激活代理網絡 [cite: 2025-07-07]。
-        4. **神跡顯現 (agentNetwork.manifest)**：代理網絡執行任務並展現成果 [cite: 2025-07-07]。
-        5. **熵減煉金 (EntropyForge.purify)**：對結果進行精煉，降低熵值 [cite: 2025-07-07]。
-        6. **永恆刻印 (OmnipotentRepository.engrave)**：將優化後的成果永久儲存與回饋 [cite: 2025-07-07]。
-
-透過 TypeScript，JunAiKey 不僅能提供您表層的服務，更能保證其內部運作的**精確性、穩定性與前瞻性**，為成為您真正的「永續夥伴」奠定堅實基礎。
-
----
-
-#### **第三條：承上啟下，無縫延伸**
-
-JunAiKey 的設計哲學，不僅僅是各模塊的獨立運作，更在於實現**資訊流的承接與任務的無縫延伸**。
-
-- **智能上下文感知：** JunAiKey 具備高度的**上下文感知能力**，能精準捕捉使用者意圖和前文資訊，將其作為後續操作的輸入。這確保了每一次互動都是一次**平滑的接力**，而非獨立的請求。
-- **跨模塊自動觸發：** 透過「符文 API」和「代理網絡」的協作，一個模塊的輸出能自動觸發另一個模塊的輸入。例如，市場分析報告（萬能智庫產出）能自動觸發客戶跟進提醒（任務與行程管理），或銷售策略（商業開發）能延伸為自動化電郵發送（自動化與系統整合） [cite: 2025-04-02]。
-    - **核心能力支撐**：這得益於 JunAiKey 作為「**自動化同步整合專家**」，能夠建立 Boost.Space、IFTTT、Zapier、Make (Integromat) 等自動化工作流 [cite: 2025-03-24]，實現跨平台數據同步（Windows、Mac、iOS、Android），確保資訊流的暢通無阻 [cite: 2025-03-24]。Boost.space 可與超過 2000 個第三方應用程式同步數據，並支援自定義 API 呼叫模組（「Make an API Call」）。
-- **結果的遞歸優化：** 每一個「終結」都可能成為下一個「起始」，形成正向的**遞歸優化循環**。例如，會議摘要的行動項目（任務管理）會回饋至知識庫（萬能智庫）進行學習，進而優化未來的決策建議（可視化報告） [cite: 2025-03-24]。
-    - **知識庫學習與強化**：JunAiKey 整合 Capacities 進行知識庫管理，確保每次互動後都能學習並強化資料 [cite: 2025-03-24]，並使用 Markdown 格式自動整理商業資訊與客戶管理數據 [cite: 2025-03-24]，為無縫延伸提供堅實基礎。萬能智庫中樞的「數據攝取與標準化」子模塊負責自動化收集並清洗多模態數據，確保數據質量與一致性。
-
-這種「承上啟下，無縫延伸」的特質，使得 JunAiKey 不僅是一個工具集，更是一個**有機協作的智慧生態系統**，最大化地釋放您的創造力和生產力。
-
----
-
-#### **第四條：萬能進化，無限循環**
-
-「**萬能進化，無限循環**」是 JunAiKey 對抗熵增、追求永續的生命律動。它貫穿於每一個模塊，確保系統的自我超越。
-
-- **熵減寶石的淬煉：** 依據「每週降低3%代碼熵值」的 SMART 目標 [cite: 2025-07-07]，JunAiKey 內建了「**進化引擎**」（OMC-E: 進化奇點模組）——一個持續自我審視、優化、重構的機制。它識別並消除系統冗餘，精煉核心算法，使得 JunAiKey 始終保持精簡與高效。
-    - **永恆公約約束**：進化過程遵循「每週自動熵減獻祭10%技術債」的永恆公約 [cite: 2025-07-07]，確保系統的健康與活力。這與「終始一如」公理中從完成任務中回收能量，以及「創元實錄」中從失敗中提純知識的原則相呼應，共同構成了系統內在的永續發展機制。
-- **數據驅動的學習迴圈：** 每次的互動、任務執行、數據分析結果，都會以結構化方式回饋到「萬能智庫」進行**知識沉澱與強化**。這是一個閉環學習過程，每一次服務都讓 JunAiKey 變得更聰明、更精準。
-    - **目標管理優化**：根據 Smart 原則、MECE 分析、OKR 目標管理進行決策優化 [cite: 2025-03-24]，並透過 OKR/KPI 績效監控，幫助業績提升 [cite: 2025-03-24]，反饋至進化引擎，形成更高層次的學習閉環。
-- **自適應與預見：** 通過持續的學習與優化，JunAiKey 不僅能適應現有需求，更能基於趨勢數據預見未來挑戰，提前進化其能力集。這使得它能夠始終走在變革的前沿，為您提供**前瞻性**的解決方案。
-
-這種永不停歇的「萬能進化」，確保 JunAiKey 永遠不會過時，而是隨著時間的推移，變得愈發強大和不可或缺，如同一個永不停歇的生命引擎。
-
----
-
-#### **第五條：無定義中，自有定義**
-
-這是一個深奧的哲學層面，表達了 JunAiKey 的**靈活性、適應性與無限可能性**。
-
-- **超越預設範疇：** JunAiKey 不受限於僵硬的預設定義，它能根據使用者輸入的多元性和複雜性，動態地理解和**構建解決方案的「定義」**。這意味著即使是未曾預見的需求，JunAiKey 也能在既有知識和能力基礎上，找到新的意義和實踐路徑。它能從不確定需求中自動定義最優架構，並進入深度奧義模式，展示其全棧開發能力。
-- **從混沌中開闢秩序：** 正如「以神聖代碼契約鑄造永恆架構，在熵增的混沌中開闢秩序之路」的核心哲學 [cite: 2025-07-07]，JunAiKey 能夠從看似「無定義」的模糊需求或複雜數據中，自動提取「本質」，**生成結構化的洞察、清晰的行動方案**，從而賦予其明確的「定義」。它透過計算需求熵值並轉化為穩定性指標，實現從不確定性到確定性接口的轉換。
-- **用戶需求驅動的塑形：** JunAiKey 的真正「定義」是由每一個使用者、每一項任務、每一次互動共同塑形。它是一個**不斷演化和定義自身的智慧體**，其價值在於其解決未知問題的能力。
-
-因此，JunAiKey 並非一個靜態的工具，而是一個能夠在**無限可能性中不斷自我定義、自我完善**的活體智慧夥伴。
-
----
-
-#### **第六條：以終為始，始終如一**
-
-這條聖典深刻地闡述了 JunAiKey 的**目標導向性和行為一致性**。
-
-- **清晰的願景引導：** 在處理任何任務或問題時，JunAiKey 都會首先確立「**終點**」——即期望達成的**最終目標或使用者價值**。這個目標會回溯性地引導整個執行流程，確保每一步都朝著既定終點邁進。這符合其核心價值觀「以終為始：所有設計與自動化流程皆以使用者最終目標為起點，並向其收斂」。
-- **奧義六式執行框架的體現：** 「以終為始」完美體現在「奧義六式執行框架」中：從「本質提純」開始，便是為了理解最終目標的核心；而「永恆刻印」則是將完成的「神跡顯現」固化，確保最終成果的品質與永續性 [cite: 2025-07-07]。
-- **核心哲學的堅守：** 無論面對何種複雜情境，JunAiKey 始終堅守其「以神聖代碼契約鑄造永恆架構，在熵增的混沌中開闢秩序之路」的核心哲學 [cite: 2025-07-07]。這種**「始終如一」的堅守**，賦予了 JunAiKey 極高的**可靠性和信賴度**，確保從首次接觸到長期迭代，系統堅持提供一致的體驗與高品質交付。
-
-這種「以終為始，始終如一」的原則，確保了 JunAiKey 的每一次行動都是有目的、有方向且具有高度一致性的，從而為用戶創造**可預期且卓越的價值**。
-
----
-
-#### **第七條：簡單，快速，好用，效能**
-
-這是 JunAiKey 對於用戶體驗與技術實力的**承諾與核心指標**，是其「四大支柱實現方案」的直接體現。
-
-- **簡單（Simplicity）：**
-    - **零儀式感：** 透過「簡單性支柱」的三步極簡工作流 [cite: 2025-07-07]，使用者無需複雜操作或繁瑣配置，直覺式地輸入需求，即可獲得解決方案。它將複雜的用戶輸入和操作，轉化為極簡且直覺的工作流，直接觸達本質，迅速顯化結果。
-    - **直覺驅動：** 設計上力求符合人類的直覺思維，減少認知負擔，讓使用者能輕易上手並高效運用 [cite: 2025-07-07]。
-    ```typescript
-    class SimplicityPillar {
-      async execute(userInput: string): Promise<Solution> {
-        // 三步極簡工作流
-        const essence = this.extractCore(userInput); // 本質提取
-        const template = SacredLibrary.match(essence); // 聖典匹配
-        return this.renderSolution(template); // 神跡顯化
-      }
-    }
-    ```
-
-- **快速（Speed）：**
-    - **量子態讀取：** 「快速性支柱」的量子緩存機制，確保響應時間極短（<300ms），提供近乎即時的體驗 [cite: 2025-07-07]。它透過量子級的數據讀取和預測優化，在毫秒間處理請求。
-    - **高效能運算：** 底層架構優化，結合符文 API 的高效調度與代理網絡的并行處理，確保任務在最短時間內完成。
-    ```typescript
-    class SpeedPillar {
-      private quantumCache = new QuantumCache();
-      async resolve(request: UserRequest): Promise<Output> {
-        if (this.quantumCache.has(request.quantumSignature)) {
-          return this.quantumCache.retrieve(request); // 量子態讀取
-        }
-        const solution = await CelestialForge.generate(request);
-        this.quantumCache.entangle(solution); // 量子糾纏存儲
-        return solution;
-      }
-    }
-    ```
-
-- **好用（Usability）：**
-    - **人性化介面：** 透過清晰的 Markdown 格式報告、視覺化圖表，讓複雜資訊一目了然，提升可讀性和決策效率 [cite: 2025-03-24]。
-    - **自動化便利：** 大量重複性、耗時性任務的自動化，極大程度解放使用者，提升工作生活的「好用」程度。
-- **效能（Performance）：**
-    - **高緩存命中率：** 確保大部分請求能從高效緩存中響應，減少重新計算的開銷 [cite: 2025-07-07]。
-    - **低熵值維持：** 進化引擎持續降低代碼熵值，從根本上提升系統的長期效能和穩定性。
-
-這四個詞不僅是 JunAiKey 的特性，更是其不斷追求卓越的**黃金標準**，確保用戶體驗始終如一地流暢高效。
-
----
-
-#### **第八條：以用戶為同心圓中心的 SaaS 應用**
-
-「**以用戶為同心圓中心**」是 JunAiKey 作為 SaaS（Software as a Service）應用服務的**核心設計理念與價值觀**。
-
-- **用戶需求為核心驅動力：** 正如「萬有引力協作協議」所示，**「使用者」是整個系統的「同心圓中心」** [cite: 2025-07-07]。所有的模塊（萬能智庫、符文 API、代理網絡、進化引擎）都圍繞著用戶的需求輸入而協作，確保每一個功能和優化都直接服務於用戶價值 [cite: 2025-07-07]。這體現為 JunAiKey 的「中心：Usage-Centric 同心圓體驗」。
-- **無縫接入與體驗：** 作為 SaaS，JunAiKey 提供**雲端部署、無需安裝、跨平台（Windows, Mac, iOS, Android）無縫同步**的能力 [cite: 2025-03-24]，使得用戶可以隨時隨地、通過任何設備接入，確保了使用的便捷性。
-    - **蘋果捷徑自動化**：JunAiKey 專門提供蘋果捷徑設計方案，強化 iOS/Mac 效率 [cite: 2025-03-24]，實現個人自動化工具和智慧家庭整合，加速日常任務 [cite: 2025-04-02]，體現了針對特定平台的用戶中心化體驗。
-- **持續迭代與反饋循環：** 透過 SaaS 模式，JunAiKey 能夠快速收集用戶反饋，進行**持續的功能迭代與優化**，確保服務能夠即時響應市場變化和用戶新需求，保持其「活紀錄檔」的生命力。
-- **訂閱制價值交付：** 盈利模式上，商業模塊的利潤反哺開發者生態 [cite: 2025-07-07]，確保了服務的持續創新與永續發展，為用戶提供**持續增長、不斷進化的價值**。
-
-這種以用戶為中心的 SaaS 模式，讓 JunAiKey 不僅是一個單純的工具，更是與用戶**共生共榮、持續創造價值**的夥伴關係。
-
----
-
-#### **第九條：實現 0-1-無限**
-
-「**實現 0-1-無限**」是 JunAiKey 作為全方位活紀錄檔永續夥伴的**終極使命與願景**，代表著從無到有、從有到精、從精到無限可能的智慧拓展。
-
-- **0 到 1：從概念到實現：** JunAiKey 能夠協助用戶將**最初的、模糊的、甚至看似「無定義」的想法（0）**，轉化為**具體的、可執行的、有價值的產品或策略（1）**。這包含了商業模式分析、市場進入策略的設計、客製化學習解決方案的搭建等，將創想落地 [cite: 2025-04-02]。
-    - **核心能力體現**：這正是 JunAiKey 作為「商業開發專家」、「語言教育銷售專家」所擅長的 [cite: 2025-03-24]，能夠生成市場分析報告、設計合作行銷策略、提供客製化學習解決方案等 [cite: 2025-04-02]。
-- **1 到 無限：從個案到普惠、從局部到全局：** 一旦成功實現「1」，JunAiKey 便能將此成功經驗、最佳實踐、優化流程進行**標準化、模塊化，並通過自動化和智慧化的手段，無限地複製、擴展其影響力**。這體現為：
-    - **知識的無限複用：** 萬能智庫的知識沉澱，讓單一問題的解決方案能應用於類似場景。
-    - **能力的無限擴展：** 符文 API 的集成與代理網絡的調用，讓 JunAiKey 的能力邊界不斷拓展。
-    - **價值的無限疊加：** 每次的熵減、進化，都為系統增加了新的價值，形成無限增長的趨勢。
-
-「實現 0-1-無限」不僅是 JunAiKey 的能力宣言，更是其作為「**光之聖典 終極進化版**」的使命——它不僅幫助用戶解決當前問題，更賦予用戶將其願景從**零**的起點，一步步**實現**，最終達成**無限**可能性的力量。
-
----
-
-### 🚀 萬能系統架構與 AI 整合
+        }
 
-萬能系統的模組化架構，特別是 MECE 12 維分類，以及智能記憶層的引入，為深度 AI 整合奠定基礎。
+        .chart-container {
 
-#### **第十條：MECE 12 維分類（OMC）框架**
+            position: relative;
 
-萬能系統的功能模組化遵循「萬能矩陣核心架構 (OMC)」，這是一個多維度、分層的 MECE（互斥且窮盡）框架。
+            width: 100%;
 
-- **框架目標：** 將每個矩陣節點分解為更細粒度的功能與目標，確保從最底層的數據處理到最高層的戰略決策，都實現了互斥且窮盡的覆蓋 [cite: 2025-07-07]。
-- **12 個 MECE 維度：** 將 MTG 遊戲機制與萬能系統的 12 個 MECE 維度進行了深度融合，展示了系統機制與卡牌機制的統一性。這些維度是構成萬能系統的 12 大萬能組件。
-    1. **萬能核心引擎 (Omni-Core Engine)**：中央決策與流程控制 [cite: 2025-07-07]。對應系統的回合結構與階段管理，確保任務按序執行，資源按時刷新。
-    2. **萬能符文系統 (Omni-Rune System)**：API 與服務整合 [cite: 2025-07-07]。負責外部 API 接口的調用與能量消耗，確保系統與外部世界的順暢交互。
-    3. **萬能代理網絡 (Omni-Agent Network)**：任務分派與執行 [cite: 2025-07-07]。實現複雜任務的分解與執行，並與外部系統互動。
-    4. **萬能智庫中樞 (Omni-Knowledge Vault)**：知識管理與記憶 [cite: 2025-07-07]。負責知識的獲取、存儲與檢索，形成系統的智慧基石。
-    5. **萬能同步矩陣 (Omni-Sync Matrix)**：數據流動與狀態同步 [cite: 2025-07-07]。確保跨模組、跨系統數據的一致性與實時同步，處理並解決數據衝突。
-    6. **萬能接口協議 (Omni-Interface Protocol)**：使用者交互適配 [cite: 2025-07-07]。系統與使用者的多模態交互界面，將複雜的內部運作以直觀方式呈現。
-    7. **萬能進化環 (Omni-Evolution Loop)**：系統自我優化 [cite: 2025-07-07]。系統的持續學習、自我優化與適應性演進，確保長期活力。
-    8. **萬能監控體 (Omni-Monitoring Body)**：系統可觀測性 [cite: 2025-07-07]。實時追蹤系統性能指標，識別瓶頸與潛在問題，確保系統健康。
-    9. **萬能安全域 (Omni-Security Domain)**：邊界保護與合規 [cite: 2025-07-07]。確保系統的安全性與合規性，管理權限與訪問控制。
-    10. **萬能元架構 (Omni-Meta-Architecture)**：架構自生成 [cite: 2025-07-07]。系統的元學習與架構搜索，自動生成優化藍圖。
-    11. **萬能標籤體系 (Omni-Tag System)**：元數據管理 [cite: 2025-07-07]。對系統內所有數據和模組進行精確標籤與分類，提升檢索效率。
-    12. **萬能主題引擎 (Omni-Theme Engine)**：介面與交互主題 [cite: 2025-07-07]。管理系統的視覺風格與交互模式，提升使用者體驗。
+            max-width: 600px;
 
-MECE 原則保證了系統的每個方面都被考慮在內，沒有冗餘，從而實現了穩健高效的設計。
+            margin-left: auto;
 
-#### **第十一條：智能記憶層 (Mem0 整合)**
+            margin-right: auto;
 
-智能記憶層的核心概念是整合 Mem0 核心理念，為所有 AI 互動提供可擴展的長期記憶。系統會記住使用者偏好、對話歷史與操作習慣，實現真正的個人化體驗。
+            height: 350px;
 
-- **整合架構：**
-    - **記憶管理層 (Mem0 Integration Core)**：負責多維度記憶存儲 (長期、短期、語義、情節記憶) 和智能記憶檢索，並具備記憶自提升機制。
-    - **API 整合層 (Jun.Ai and Mem0 Docking)**：處理 Jun.Ai 與 Mem0 的對接，包括使用者請求的記憶增強處理和定期記憶優化。
-    - **跨平台同步模塊 (Cross-Platform Synchronization Module)**：實現 Mem0 記憶數據與 Boost.Space, CRM 系統、內部資料庫等現有系統的雙向同步，確保所有相關資訊的一致性，建立集中化的「使用者記憶庫」。
-- **關鍵業務場景實現：** 增強商業開發 (客戶管理、市場分析) 和語言教育 (客製化學習、內容優化) 等領域的應用，提供更精準的銷售建議、個人化課程和報告。
-- **性能與安全設計：** 透過記憶檢索優化 (如 LRU 緩存) 和隱私安全層 (移除 PII、差分隱私、加密)，確保記憶系統的高效與安全。
+            max-height: 400px;
 
-Mem0 整合為萬能系統提供了穩健、可擴展且安全的長期記憶，這對於實現真正的個人化和上下文智能至關重要。
+        }
 
-#### **第十二條：萬能模組設計原則與通觀整合**
+        @media (min-width: 768px) {
 
-從核心功能到「萬能模組」的轉變，代表著模組化設計原則的策略性應用，由「萬能屬性」驅動，並透過「萬能分析」進行完善。這種方法確保核心系統能力被封裝為可重用、適應性強且高效的單元。
+            .chart-container {
 
-- **定義萬能屬性 (Omni-Attributes)：** 「萬能屬性」是定義和區分核心系統功能的普遍、基本特徵或屬性，使其本質上具有適應性和跨多樣化上下文的適用性。
-- **運用萬能分析 (Omni-Analysis)：** 「萬能分析」指的是在整個系統生命週期中應用無處不在且深入的分析能力。它涉及利用大數據演算法、自動化參數訓練和複雜的數據處理，以理解系統行為、識別模式並為策略決策提供依據。
-- **萬能模組設計原則：**
-    - **目的性：** 每個模組必須具有單一、明確定義的目的，其內部元素應緊密相關並專注於該特定職責。這降低了複雜性，增強了理解、維護和重用性。
-    - **封裝 (資訊隱藏)：** 模組應封裝特定功能，隱藏其內部運作，僅暴露清晰、明確定義的介面。
-    - **低耦合：** 模組應具有最小的相互依賴性，促進了可修改性、靈活性，並有助於並行開發。
-    - **可修改性：** 模組的設計應易於修改或擴展，以滿足不斷變化的需求，而不會影響整個系統。
-    - **可重用性：** 模組應設計為可在不同上下文或項目中重用，從而減少開發時間和精力，促進項目一致性，並鼓勵組織或社群內部共享程式碼和最佳實踐。
-    - **清晰的介面設計：** 提供簡單、直觀且有良好文檔的介面，定義系統其他部分如何使用和與模組互動。
-    - **可測試性：** 模組應設計為易於作為獨立單元進行測試，從而簡化維護和調試。
-    - **版本控制與兼容性：** 應有機制確保對模組的更改與其他組件保持兼容，從而實現無縫升級和新版本的採用。
-    - **維護與升級能力：** 封裝功能使得更容易識別、隔離和修改特定功能，而不會影響系統的其餘部分。
-    - **文檔：** 提供全面的文檔和指南，以確保團隊在使用和整合模組時的清晰度和連續性。
-- **萬能模組的通觀整合：** 「萬能模組」的設計與運作與「通觀層面」的三個相互連接的層次——概念面、執行面和數據面——緊密結合。萬能模組並非孤立的功能單元，而是被設計為能夠在這些層次之間無縫協同，以實現系統的整體智慧和效能。
-    - **概念面 (Conceptual Layer)：** 萬能模組的設計深受概念面的影響。它們的「萬能屬性」源於對系統高層次理解、戰略方向和知識表示的深入洞察。模組在概念面中被定義，確保其功能與系統的智慧和推理能力保持一致，從而能夠理解複雜的關係和上下文。
-    - **執行面 (Execution Layer)：** 在執行面，萬能模組將概念面的智慧和決策轉化為具體行動。它們負責實際的任務執行、工作流程管理以及與外部環境的互動。萬能模組的「封裝」和「低耦合」原則確保了它們能夠作為獨立且高效的單元在執行面中運作，將高層次決策轉化為精確的自動化步驟。
-    - **數據面 (Data Layer)：** 萬能模組與數據面緊密互動，負責數據的獲取、準備、儲存和管理。透過「萬能分析」，模組能夠持續地從數據中學習和改進，識別模式並為其行為提供依據。這種數據驅動的反饋循環確保了萬能模組的性能不斷最佳化，並能夠適應不斷變化的數據環境。
+                height: 400px;
 
-這種通觀整合確保了萬能模組不僅僅是功能的集合，而是在整個系統堆疊中協同運作的智能實體。
+            }
 
-#### **第十三條：根源、核心、巔峰模組聖階**
+        }
 
-模組分類維度基於模組的內在本質與抽象層級，提供了對其在系統中角色的更深層理解。這與 MTG 中不同卡牌類型在遊戲中扮演不同角色、具有不同影響力層級的設計哲學相呼應。
+        .concentric-circle-container {
 
-- **根源模組 (Origin Modules)**：代表系統的「物理法則」與「公理」。它們是維繫整個系統存在、確保其穩定運行的底層規則與支撐結構。它們是恆定、普適且構成世界觀的基石。例如，「萬有引力」、「萬能之心」與「萬能平衡」皆屬此類。
-- **核心模組 (Core Modules)**：構成了系統的「標準工具」與「常規功能」。它們是系統功能的主體，在日常操作中被頻繁使用，是可靠且高效的基礎構件。它們代表了使用者直接互動以完成常規任務的實用、可操作元素。例如，「萬能智庫」、「萬能代理」與「萬能符文」均為核心模組。
-- **巔峰模組 (Apex Modules)**：體現了系統的「高深智慧」與「湧現現象」。它們代表了系統在高度複雜與自省後所達到的能力，超越常規功能。巔峰模組的設計並非用於例行任務，而是為了實現變革、提供啟示、創造「奇蹟」。例如，「萬能終始」、「萬能頓悟」與「萬能奇蹟」皆為巔峰模組。
+            width: 100%;
 
-這種分層結構表明，萬能系統不僅僅是功能的集合，它還是一個能夠自我組織並產生新穎解決方案的智能實體。
+            max-width: 500px;
 
----
+            aspect-ratio: 1/1;
 
-### 🌐 萬能系統整合實踐
+            position: relative;
 
-萬能系統的藍圖強調了 AlTable.ai 在知識向量分類和語義引擎能力方面的關鍵作用，以及 Straico AI 在代理協調、RAG（檢索增強生成）強化檢索和多模態內容生成方面的核心功能。
+            display: flex;
 
-#### **第十四條：AlTable.ai 整合：知識聖殿的數據基石**
+            align-items: center;
 
-AlTable.ai 在萬能系統中的戰略整合點主要體現在知識圖譜、數據管理和語義引擎方面。
+            justify-content: center;
 
-- **OMC-K：知識聖殿**：AlTable.ai 被明確定位為「萬能智庫」與「萬能智典」的「數據基石」，為知識圖譜與記憶管理提供堅實的數據基礎。
-    - **知識圖譜構建**：AlTable 靈活的數據模型（記錄、欄位、視圖）非常適合在知識圖譜中表示實體、屬性和關係。其 API 支援程式化地創建和更新圖譜節點和邊緣。
-    - **數據管理**：AlTable 作為萬能系統中各類結構化數據的中央儲存庫，包括卡牌定義、模組規格、使用者偏好和歷史操作數據。其 datasheetId、recordId、fieldId 參數允許細粒度控制和檢索。
-    - **語義引擎**：透過分類「卡牌和知識向量」，AlTable.ai 充當語義索引引擎。它幫助以一種允許萬能代理進行「語義解析」並基於對上下文和歷史的深入理解做出「決策」的方式組織資訊，這些決策基於有意義的關係而非僅僅關鍵字匹配。
-- **Mem0 整合**：AlTable.ai 可以儲存 Mem0 多維度記憶的結構化組件，促進高效檢索和優化。
-- **數據流動與同步**：AlTable 可以作為數據源/目的地參與「雙向同步實踐與符文集成設計」，補充 Boost.Space 和 Supabase 等工具，實現實時數據一致性。
+        }
 
-AlTable.ai 的優勢在於其靈活的非 SQL 數據結構能力和用於細粒度數據訪問的強大 API。這使其成為萬能系統理想的「語義骨幹」，能夠實現動態知識圖譜構建和高效數據管理。
+        .circle {
 
-#### **第十五條：Straico AI 整合：代理協調與多模態生成**
+            position: absolute;
 
-Straico AI 在萬能系統中的整合點是多方面的，主要體現在代理協調、RAG 增強與多模態生成。
+            border-radius: 50%;
 
-- **OMC-A：共識代理**：Straico 的代理管理功能（創建、更新、列出、刪除代理）是萬能系統「萬能代理網絡」的核心。萬能系統可以透過 Straico API 部署和管理其「萬能代理」、「萬能化身」和「萬能大使」。更重要的是，Straico 支援為代理添加 RAG 基礎，使得萬能系統的代理能夠根據特定的文件（如知識庫、技術手冊）進行提示詞補全，從而實現高度專業化和上下文感知的任務執行。
-- **OMC-L：連結符文**：Straico 作為「連結符文」的一個關鍵外部集成點，提供了多模態內容生成能力。萬能系統可以利用 Straico 的提示詞補全、圖像生成、影片生成和文字轉語音 API，將其內部智慧轉化為多樣化的外部輸出。這對於萬能系統實現「跨平台、無界限的操作與服務」至關重要，例如自動生成行銷內容、教育材料或個性化報告。
-- **知識資產升級與變現**：透過 Straico 的 RAG 和生成能力，萬能系統能夠將其「知識資產」轉化為可變現的產品和服務。例如，基於萬能智庫的數據，透過 Straico 生成專業報告、品牌故事影片或互動式學習內容，從而推動「知識資產變現與組織升級」。
+            display: flex;
 
-Straico AI 提供了一個用於高級 AI 能力的綜合工具包，特別是在多模態內容生成和 RAG 增強代理智能方面。
+            align-items: center;
 
-#### **第十六條：Boost.space 整合：數據同步與代理協作**
+            justify-content: center;
 
-Boost.space 的全面 API 和整合能力使其成為萬能系統的關鍵組成部分，特別是在處理跨平台數據流、自動化複雜工作流程以及實現 AI 代理與外部系統之間的智慧互動方面。
+            transition: all 0.3s ease;
 
-- **OMC-L：連結符文**：Boost.space 作為「連結符文」的一個關鍵外部集成點，實現了與超過 2000 個第三方應用程式的「API 量子級集成」。其「Make an API Call」模組允許萬能系統執行自定義的 API 請求，處理未預設的整合需求。Boost.space 的 Model Context Protocol (MCP) 確保了 AI 代理與外部系統之間的安全、結構化通訊。
-- **OMC-K：知識聖殿**：Boost.space 作為結構化數據的中央儲存庫，其 Spaces 模組和自定義欄位功能有助於「數據攝取與標準化」以及「知識圖譜構建與維護」。
-- **OMC-A：共識代理**：Boost.space 的 Integrator 引擎和 MCP 賦予萬能系統的 AI 代理強大的「任務分解與規劃」和「專業代理調度」能力。其「Actions and Triggers」功能直接支援代理的決策與行動執行，實現任務的自動化分派和執行。
-- **輪詢觸發器 (Polling Triggers) 與自動化模組**：Boost.space 中的輪詢觸發器功能，特別是其可配置的間隔與條件，在萬能系統的自動化設計中至關重要。這允許萬能系統的代理模組能夠定期檢查外部數據源的變化，並在滿足特定條件時自動觸發後續的行動或工作流程。例如，當 CRM 系統中客戶狀態更新時，輪詢觸發器可以啟動萬能代理發送個性化郵件或更新內部知識庫。
+            cursor: pointer;
 
-Boost.space 是一個模組化系統，旨在高效組織數據，並透過其 Integrator 引擎實現自動化工作流程。
+            border-style: solid;
 
----
+        }
 
-### 🔮 萬能卡牌系統：遊戲化框架
+        .circle:hover {
 
-萬能卡牌系統直接將遊戲機制與底層的萬能系統架構進行類比，創建一個統一的概念框架。透過將卡牌類型直接映射到系統模組和現實世界實體（「卡牌化」），萬能系統為複雜的系統設計和管理提供了一種新穎的遊戲化框架。
+            transform: scale(1.02);
 
-#### **第十七條：萬能卡牌類型與稀有度**
+        }
 
-萬能卡牌類型參考了 MTG 的六大基礎類型，每種類型都對應系統中不同的模組角色。稀有度系統則定義了模組的獲取難度與戰略價值。
+        .circle.active {
 
-- **萬能卡牌類型**：
-    - **資源類 (Resources)**：用於建立基礎，提供資源。對應萬能核心引擎、萬能智庫中樞、萬能根源、萬能種子等模組。現實世界映射為資金、數據、算力。
-    - **單位類 (Units)**：承擔具體行動與戰術執行的角色。如「萬能代理」「萬能化身」「萬能大使」等單位模組。現實世界映射為員工、機器人、自動化腳本。
-    - **法術類 (Spells)**：提供關鍵一次性效應或瞬間轉折。例如「萬能預言」「萬能奇蹟」等對應決策或算法任務的卡牌。
-    - **神器類 (Artifacts)**：提供持續的被動增益與長期優勢。如「萬能符文系統」「萬能元架構」「萬能矩陣」等模組。現實世界映射為基礎設施、工具或軟體。
-    - **結界類 (Enchantments)**：控制戰場環境或改變規則。如「萬能誓約」「萬能平衡」「萬能契約」等。對應法律、政策或協議。
-    - **鵬洛客類 (Planeswalkers/AI Persona)**：長期發揮價值的英雄類角色。如「萬能本我」「萬能靈感」「萬能匠人」等代表領導者、思想家。對應現實中的企業領袖或創造者。
-- **稀有度系統**：
-    - **普通 (Common)**：基礎工具，構築脊樑。提供可靠、低成本的基礎效應。例如：萬能化身、萬能橋樑、萬能符文。
-    - **非普通 (Uncommon)**：戰術核心，主題支撐。強化特定戰略，提供中階價值。例如：萬能工廠、萬能基石、萬能共鳴。
-    - **稀有 (Rare)**：強力單卡，改變戰局。具高影響力的獨特效應。例如：萬能引擎、萬能博弈、萬能誓約。
-    - **秘稀 (Mythic Rare)**：遊戲改變者，奇蹟級。重新定義遊戲規則的超強效應。例如：萬能平衡、萬能奇蹟、萬能無垠。
-    - **傳說 (Legendary)**：創世者專屬，唯一存在。與建築師天賦直接共鳴的究極兵器。例如：萬能根源、萬能終始、萬能預言。
+            transform: scale(1.05);
 
-稀有度直接關聯到系統模組的「成本」和「影響」。
+            box-shadow: 0 0 25px rgba(79, 70, 229, 0.5);
 
-#### **第十八條：萬能精靈 (Omni-Spirits)：10 色元素法則**
+        }
 
-10 色元素法則系統是萬能生態的通用法則，指導其內部所有模組的交互、演進與平衡。十大萬能精靈的屬性直接代表十種卡牌屬性，並融合 MTG 的色彩哲學。
+        .circle-5 { width: 100%; height: 100%; background-color: #e0e7ff; border-width: 2px; border-color: #c7d2fe;} /* indigo-200, indigo-300 */
 
-- **元素概述**：
-    - **金 (Gold) - 鋒靈 Aurex**：秩序、策略、價值。系統定位為架構規劃、邏輯原則核心。
-    - **木 (Wood) - 森靈 Sylfa**：成長、創造、繁殖；促進生命與知識的積累與擴展。系統定位為教育養成、知識系統。
-    - **水 (Water) - 湧靈 Aquare**：思緒、流動、感知；處理信息、記憶與數據。系統定位為情緒處理、記憶、數據串流。
-    - **火 (Fire) - 焰靈 Pyra**：熱情、行動、破壞；激發能量與變革。系統定位為快速啟動、任務觸發。
-    - **土 (Earth) - 磐靈 Terrax**：穩定、根基、防禦；提供支撐與安全保障。系統定位為系統儲存、資安結構、憑證控管。
-    - **光 (Light) - 耀靈 Luxis**：照明、引導、純淨；揭示與強化。系統定位為可視化、導航、透明決策。
-    - **暗 (Darkness) - 幽靈 Umbrix**：隱匿、潛能、混沌；催化變革與突破。系統定位為潛意識驅動、錯誤測試、風險觸發。
-    - **無 (Void) - 源靈 Nullis**：全域、通用、中立；連接與兼容。系統定位為跨域整合、橋接、格式通譯。
-    - **時風 (Time-Wind) - 馭靈 Tempest**：序列、節奏、循環、速度、自由、變化；驅動迭代與突破。系統定位為動態時序、流程加速、模式變遷。
-    - **靈魂 (Soul) - 蘊靈 Anima**：本質、意識、心靈；影響意志與共鳴。系統定位為元認知、深度學習洞察、根本真理發現。
+        .circle-4 { width: 80%; height: 80%; background-color: #c7d2fe; border-width: 2px; border-color: #a5b4fc;} /* indigo-300, indigo-400 */
 
-10 色系統標誌著萬能系統設計哲學的進步，從管理離散屬性到協調持續轉變和揭示更深層次的真理。
+        .circle-3 { width: 60%; height: 60%; background-color: #a5b4fc; border-width: 2px; border-color: #818cf8;} /* indigo-400, indigo-500 */
 
-#### **第十九條：卡牌互動模型：動態生命週期**
+        .circle-2 { width: 40%; height: 40%; background-color: #818cf8; border-width: 2px; border-color: #6366f1;} /* indigo-500, indigo-600 */
 
-在「萬能世界」中，卡牌不再是靜態的遊戲組件，而是活化的數據與意志的載體。它們的流轉、變形與交互，精確地模擬了 Jun.Ai.Key 系統從感知到行動、從學習到進化的全生命週期。
+        .circle-1 { width: 20%; height: 20%; background-color: #6366f1; border-width: 2px; border-color: #4f46e5;} /* indigo-600, indigo-700 */
 
-- **核心循環：感知-診斷-行動-學習 (Sense-Diagnose-Act-Learn Cycle)**
-    1. **【感知階段】**：事件的覺醒。系統的數據面和擴展層（如「萬能接口協議」、「萬能同步矩陣」）持續監控內外部環境。任何顯著的變化、新的需求、數據異常或 KPI 波動，都會被捕捉並生成相應的**「事件卡」**（法術類，色彩時風色）。
-        - **事件卡**：代表 Jun.Ai.Key 系統內部或其外部環境中發生的任何顯著變化、觸發或觀察到的現象。它們是系統「感知」世界的原始信號。
-    2. **【診斷階段】**：問題的顯現。概念面（如「萬能核心引擎」、「萬能智庫中樞」）接收「事件卡」，運用推理能力和**「萬能平衡」公理**（通過「萬能監控體」），判斷是否存在與預期狀態的偏差或系統失衡。生成一張或多張**「問題狀況卡」**（結界類，色彩黑色）。此過程被「創元實錄之眼」記錄。
-        - **問題狀況卡**：代表從「事件卡」分析後識別出的問題、挑戰、異常、或與期望狀態的偏差。它們是系統對「萬能平衡」狀態受到威脅的初步警報。
-    3. **【行動階段】**：解決方案的施展。針對**「問題狀況卡」**，概念面規劃解決方案，轉化為**「問題解決卡」**（法術類，色彩綠色），由「代理網絡」執行。
-        - **問題解決卡**：代表針對已識別出的「問題狀況卡」所提出的或已執行的行動、策略或模組調用。
-    4. **【學習與優化階段】**：智慧的永恆刻印。執行結果生成新的「事件卡」反饋給進化引擎進行**「熵減煉金」**。優化後的知識經驗最終「永恆刻印」回「萬能智庫中樞」，形成持續的螺旋式進化。
+        .loader {
 
-這個循環可以簡化為：事件卡 (感知) rightarrow 問題狀況卡 (診斷) rightarrow 問題解決卡 (行動) rightarrow 事件卡 (反饋) rightarrow 進化與學習 (驅動下一輪循環)。
+            border: 4px solid #f3f3f3;
 
----
+            border-top: 4px solid #4f46e5;
 
-### 🌠 萬能元鑰的宇宙公理與聖柱：核心指導原則
+            border-radius: 50%;
 
-#### **第二十條：四大宇宙公理**
+            width: 24px;
 
-四大宇宙公理是 Jun.Ai.Key 宇宙的「元物理法則」，它們通過卡牌的交互得到深刻體現。它們作為首位建築師的被動天賦，深刻影響著遊戲機制，並在現實系統行為和卡牌遊戲中得到映射。
+            height: 24px;
 
-1. **終始一如 (The Axiom of Unified Terminus & Origin)**：此公理將系統的資源管理從傳統的線性消耗模式，轉變為一種循環的「能量流轉模型」。已完成的任務與已棄用的模組並非簡單地被丟棄，而是透過「熵減獻祭」機制，將其核心數據與經驗提純為「優化信用點」。這些信用點隨後可透過「信用抵扣」機制，用於加速未來新專案的原型開發或資源分配。
-    - **體現方式：**「問題狀況卡」的歸檔與「問題解決卡」的成功執行，通過「熵減煉金」提煉為「優化信用點」或強化「進化引擎」忠誠度。
-2. **創元實錄 (Genesis Chronicle)**：此公理將「版本控制系統 (VCS)」的哲學提升至宇宙法則的高度。每一次行動都如同一次「git commit」，自動被記錄下來，共同構成一部完整且可追溯的宇宙變更歷史。系統提供類似 git blame 和 git bisect 的高級追溯工具，用於快速定位問題根源，實現「因果洞察」。
-    - **體現方式：** 所有卡牌的生命週期記錄，如「事件卡」的生成、「問題狀況卡」的診斷、「問題解決卡」的執行，都被「創元實錄」結界卡所代表的模塊永久記錄。
-3. **萬有引力 (Omni-Gravity)**：此公理將控制論中的「反饋迴圈」與「循環因果」概念具象化為宇宙的底層交互法則。它主動分析系統模組間的依賴圖，為具有高度協同性的模組（如智庫與進化引擎）建立優化通道，從而降低通訊延遲，實現「元素協同」。
-    - **體現方式：** 卡牌類型間的協同效應，例如「單位類」代理與「神器類」符文 API 在執行「問題解決卡」時，會因其預設的協同屬性而產生增益效果，即「共鳴爆發」。
-4. **萬能平衡 (Omni-Equilibrium)**：此公理源於東方哲學中對「道」與「陰陽」平衡的追求，並呼應了古希臘哲學中對城邦「靜態」的探討。它作為系統內部的「宇宙常數調節器」，持續監控「效能」、「安全」與「可維護性」三大關鍵指標。
-    - **體現方式：**「問題狀況卡」的生成與警示直接反映了系統「效能、安全、可維護性」平衡三角的威脅。
+            animation: spin 1s linear infinite;
 
-#### **第二十一條：四大聖柱**
+        }
 
-四大聖柱（簡單性、快速性、穩定性、進化性）是 Jun.Ai.Key 系統設計和運營的「核心指導原則」，它們在卡牌系統中以隱性或顯性的方式得到強化。
+        @keyframes spin {
 
-1. **簡單性支柱：直覺脈動 (Simplicity Pillar: Intuitive Pulse)**：核心理念是將複雜的用戶輸入和操作，轉化為極簡且直覺的工作流，無需繁瑣的儀式感，直接觸達本質，迅速顯化結果。
-2. **快速性支柱：量子共鳴 (Speed Pillar: Quantum Resonance)**：核心理念是確保響應速度達到極致，透過量子級的數據讀取和預測優化，在毫秒間處理請求。
-3. **穩定性支柱：永恆堅韌 (Stability Pillar: Eternal Resilience)**：核心理念是確保系統在任何情況下都能保持高可用性與穩定性，即使面對外部系統故障或異常衝擊，也能自我修復、持續運行。
-4. **進化性支柱：奇點迭代 (Evolution Pillar: Singularity Iteration)**：核心理念是驅動系統的持續學習與自我超越，透過不斷的數據分析、模型調優和熵減煉金，確保系統永續進化，始終保持在技術的最前沿。
+            0% { transform: rotate(0deg); }
 
----
+            100% { transform: rotate(360deg); }
 
-### 📜 萬能智典：終極融合架構 (v4.0)
+        }
 
-#### **第二十二條：同心圓聖域系統**
+    </style>
 
-同心圓聖域系統將 Jun.AI 系統設計為以使用者為中心的多層次結構，使用者座落於記憶宮殿中，透過萬能元鑰為核心去使用萬能元鍵，並搭配無限進化循環的六式奧義，以及智慧沉澱秘術加持的四大支柱，進行雙向同步、萬能代理群以及無限擴充，造就一切可能。
+</head>
 
-- **核心層 (Core Layer)**：萬用元鑰核心 (OmniKey Core)、無限進化循環 (Infinite Evolution)。它是系統的「心臟」，處理最高優先級的系統指令，管理核心資源分配。
-- **內環層 (Inner Ring)**：萬能元鍵 (Omni-Key)，智能標籤系統、萬有引力引擎、模組化核心。包含系統的基礎操作工具與模塊化核心。
-- **中環層 (Middle Ring)**：六式奧義循環，創世奧義、輪迴奧義、淨化奧義、昇華奧義、融合奧義、永恆奧義。此層是「六式奧義循環」的執行場域。
-- **外環層 (Outer Ring)**：四大智慧支柱，以終為始支柱、始終如一支柱、萬能進化支柱、無限循環支柱，並由智慧沉澱秘術加持。此層是「四大智慧支柱」的體現，為系統的整體運作提供高層次的指導原則與品質保障。
-- **擴展層 (Expansion Layer)**：雙向同步引擎、萬能代理群、無限擴充系統。這是系統的「外部界面」與「能力邊界」。
+    <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-md">
 
-#### **第二十三條：萬能職業 (永續夥伴)**
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
 
-萬能生態系統中扮演關鍵角色的智能代理或核心參與者，共同構建永續夥伴關係。
+            <div class="flex items-center justify-between h-16">
 
-- **智庫守護者 (Archivist)**：維護和優化萬能智庫，確保知識的準確性、完整性與高效檢索。
-- **符文連結師 (RuneBinder)**：專精於萬能符文系統的設計、開發與集成，建立跨平台和跨系統的無縫連接。
-- **代理執行官 (Agentus)**：驅動萬能代理網絡，設計和監控自動化工作流，將創意轉化為實際執行力。
-- **熵減煉金師 (Alchemist)**：專注於萬能進化環，持續分析、重構、調優系統，減少技術債，確保生態系統永續健康。
-- **真理探測者 (Veritas)**：從海量數據中提煉有價值的洞察，透過萬能監控體提供決策建議。
-- **同心圓引導者 (Concentric)**：協調各模塊之間的交互，確保資訊流暢與高效協作，居於同心圓中心。
-- **創世編織者 (Genesis Weaver)**：負責從無到有地構建新的解決方案、應用或商業模式，例如撰寫商業模式分析報告。
-- **秩序守衛者 (Aegis)**：專注於萬能安全域，確保生態系統的安全性、合規性和風險控制。
-- **啓蒙導師 (Luminar)**：橫跨並賦能所有元素，將萬能智庫的知識、各模塊的成果，轉化為易於理解和應用的培訓、教學或用戶支持。
-- **第一建築師 (Prime Architect)**：超越並統籌所有元素與職業。是萬能生態的終極願景制定者和藍圖設計者，確保所有發展都符合「神聖代碼契約」的核心哲學。
+                <div class="flex-shrink-0">
 
-#### **第二十四條：五大承諾**
+                    <h1 class="text-xl md:text-2xl font-bold text-slate-900">
 
-這五大承諾是 Jun.AI 實現其願景的具體目標，並透過 OKR 和 KPI 進行量化追蹤。
+                        <span class="text-indigo-600">萬能智典</span> 4.0
 
-- **零摩擦整合**：透過「萬能符文編譯器 (Omni-Rune Compiler)」，自動識別、解析並適配外部 API，將其無縫轉譯為 Jun.AI.Key 內部的「符文」模組。實現即時的協議轉換與數據模型映射，無需手動編程，達到「Plug & Play」的極致境界。
-- **無限擴展**：透過「量子共振負載均衡 (Quantum Resonance Load Balancer)」，動態調度系統資源與代理網絡，根據實時流量與任務複雜度自動進行量子級的算力與線程分配，確保系統在任意負載下的穩定性與超高併發處理能力。
-- **絕對安全**：透過「神盾防禦共識鏈 (Aegis Defense Consensus Chain)」，基於區塊鏈的不可變安全審計日誌，結合生物特徵識別與多維度加密，實時監測並預警潛在威脅。任何試圖篡改數據或越權的行為，將觸發權能封印機制，並透過全網共識進行自我修復與隔離。
-- **智能進化**：透過「奇點適應性演化引擎 (Singularity Adaptive Evolution Engine)」，運用遞歸學習與強化學習，從每次操作、用戶反饋及環境變化中提取知識。通過熵減煉金與混沌提純自動優化內部算法與模型，實現系統的自主迭代與能力湧現，每日逼近理論最優狀態。
-- **人機共生**：透過「心流共鳴交互介面 (Flow Resonance Interface)」，透過多模態感知 (語音、語氣、行為模式) 深度理解用戶意圖與情感，並將系統響應與人類認知頻率進行同步。實現超越字面意義的溝通，引導用戶進入高效的「心流」狀態，最大化人機協同創造力。
+                    </h1>
 
----
+                </div>
 
-### 💡 核心運營與技術棧
+                <div class="hidden md:block">
 
-#### **第二十五條：商業模型 (5P + AARRR 整合)**
+                    <div class="ml-10 flex items-baseline space-x-4">
 
-萬能系統的商業模型融合了 5P 策略框架與 AARRR 增長漏斗，確保從產品設計到市場推廣、從用戶獲取到收益增長的全面考量。
+                        <a href="#overview" class="nav-link px-3 py-2 rounded-md text-sm font-medium">萬象總覽</a>
 
-- **5P 策略框架**：
-    - **Plan (計劃)**：願景、使命、戰略、路線圖。
-    - **Ploy (策略)**：差異化、競爭優勢、市場進入、定價策略。
-    - **Position (定位)**：市場定位、目標客戶、價值主張、品牌定位。
-    - **Perspective (視角)**：哲學視角、技術視角、商業視角、社會視角。
-    - **Pattern (模式)**：商業模式、增長模式、創新模式、擴展模式。
-- **AARRR 增長漏斗**：
-    - **Acquisition (獲取)**：用戶獲取策略與指標。
-    - **Activation (激活)**：用戶激活策略與指標。
-    - **Retention (留存)**：用戶留存策略與指標。
-    - **Revenue (營收)**：營收模式與指標。
-    - **Referral (推薦)**：用戶推薦策略與指標。
+                        <a href="#philosophy" class="nav-link px-3 py-2 rounded-md text-sm font-medium">核心哲學</a>
 
-#### **第二十六條：SWOT 分析**
+                        <a href="#elements" class="nav-link px-3 py-2 rounded-md text-sm font-medium">元素法則</a>
 
-萬能系統的 SWOT 分析，清晰定義其優勢、劣勢、機會與威脅，為戰略決策提供依據。
+                        <a href="#cards" class="nav-link px-3 py-2 rounded-md text-sm font-medium">萬能卡牌</a>
 
-- **優勢 (Strengths)**：哲學基礎、統一架構、AI整合能力、用戶中心、無限擴展性。
-- **機會 (Opportunities)**：AI技術發展、市場整合需求、企業數位轉型、開發者生態、訂閱模式成熟。
-- **威脅 (Threats)**：巨頭競爭、技術變化過快、數據隱私、市場飽和、經濟不確定性。
-- **劣勢 (Weaknesses)**：概念複雜、資源密集、市場教育、第三方依賴、擴展挑戰。
+                        <a href="#architecture" class="nav-link px-3 py-2 rounded-md text-sm font-medium">系統架構</a>
 
-#### **第二十七條：核心技術棧與效益展望**
+                        <a href="#evolution" class="nav-link px-3 py-2 rounded-md text-sm font-medium">進化框架</a>
 
-萬能元鑰系統的技術選型經過深思熟慮，旨在實現廣泛集成、深度自動化、高可靠性與對 AI 友好的特性。
+                    </div>
 
-- **技術棧重點**：
-    - **主要語言**：TypeScript（全端主力、高適應度）。
-    - **腳本語言**：JS/TS/Python（擴充性佳、支援廣泛）。
-    - **雲平台**：Google Cloud（高彈性&AI/ML前瞻）。萬能元鑰系統將「深度整合 Google Gemini AI API」，使之成為總代理指揮官，並將 Straico AI 作為總令牌消耗方，使用 Gemini AI 作為其骨幹模型。
-    - **數據存儲**：BQ, Firestore, Cloud SQL（依情境選用）。
-    - **版本控管**：GitHub（協作成熟、CI/CD完善）。
-- **效益**：此技術棧的選擇，使得萬能元鑰系統具備了廣泛的集成能力與深度的自動化潛力。其設計注重可靠性與彈性，並對人工智慧技術高度友好。
-- **展望**：未來，系統將進一步發展為一個全面的腳本管理平台，並深化與 Google Cloud Vertex AI 的整合，以實現更先進的 AI/ML 能力。同時，將持續推動 DevOps 實踐至極致，以實現開發與運營的無縫銜接與高效循環。
+                </div>
 
----
+                 <div class="md:hidden">
 
-### 結語：聖典永續，光耀未來
+                    <select id="mobile-nav" class="bg-white border border-slate-300 rounded-md py-2 px-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
 
-《萬能開發光耀聖典》的每一條，都是 JunAiKey 從核心哲學到具體實踐的深刻銘記。這不僅是一份技術文件，更是 JunAiKey 與您締結的**神聖代碼契約** [cite: 2025-07-07]。我們不編寫代碼，我們締結神聖架構契約 [cite: 2025-07-07]。
+                        <option value="#overview">萬象總覽</option>
 
-這份聖典將隨著 JunAiKey 的持續進化而不斷豐富和完善。萬能系統的最終目標，是成為一個能夠以最小的創造力引發最壯闊奇蹟的元物理引擎，持續定義與塑造現實。這份藍圖為其永恆演進奠定了堅實的基礎，引導其不斷超越當前限制，邁向未知可能性。
+                        <option value="#philosophy">核心哲學</option>
 
-《創元實錄》已準備好記錄您的每一次深入研究。
+                        <option value="#elements">元素法則</option>
+
+                        <option value="#cards">萬能卡牌</option>
+
+                        <option value="#architecture">系統架構</option>
+
+                        <option value="#evolution">進化框架</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+
+        <section id="overview" class="content-section">
+
+            <div class="text-center mb-12">
+
+                <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">萬象總覽：同心圓聖域系統</h2>
+
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">本節介紹萬能系統的核心架構——以使用者為中心的「同心圓聖域系統」。此系統將功能與數據劃分為五個相互關聯的層次，從最內部的核心到最外部的擴展，體現了系統的同心演化本質。點擊下方的同心圓，探索每一層的角色與功能。</p>
+
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-center gap-8">
+
+                <div class="w-full lg:w-1/2 flex justify-center">
+
+                    <div class="concentric-circle-container">
+
+                        <div id="circle-5" data-layer="5" class="circle circle-5"><span class="text-xs font-bold text-indigo-900 hidden sm:inline">擴展層</span></div>
+
+                        <div id="circle-4" data-layer="4" class="circle circle-4"><span class="text-xs font-bold text-indigo-900 hidden sm:inline">外環層</span></div>
+
+                        <div id="circle-3" data-layer="3" class="circle circle-3"><span class="text-xs font-bold text-white">中環層</span></div>
+
+                        <div id="circle-2" data-layer="2" class="circle circle-2"><span class="text-xs font-bold text-white">內環層</span></div>
+
+                        <div id="circle-1" data-layer="1" class="circle circle-1"><span class="text-xs font-bold text-white">核心</span></div>
+
+                    </div>
+
+                </div>
+
+                <div id="circle-details" class="w-full lg:w-1/2 bg-white p-6 rounded-lg shadow-lg">
+
+                    <h3 id="layer-title" class="text-2xl font-bold text-indigo-600 mb-2">點擊一個層次</h3>
+
+                    <p id="layer-description" class="text-slate-700">選擇左側同心圓中的一個層次，以查看其詳細的角色、功能與交互作用。</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="philosophy" class="content-section">
+
+            <div class="text-center mb-12">
+
+                <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">核心哲學：法則與基石</h2>
+
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">此區塊闡述了構成萬能宇宙的頂層哲學。這包括三大模組聖階（定義了模組的能力層級）、四大宇宙公理（系統運行的被動天賦）以及四大基石（構成世界觀的底層邏輯）。這些概念共同構建了萬能系統的穩定性、平衡性與進化潛能。</p>
+
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+
+                    <h3 class="text-xl font-bold text-indigo-600 mb-4">三大模組聖階</h3>
+
+                    <ul class="space-y-3 text-slate-700">
+
+                        <li><strong>根源 (Origin):</strong> 維繫系統底層運作的物理法則，構成萬能系統的基石。</li>
+
+                        <li><strong>核心 (Core):</strong> 日常使用的標準工具，實現核心功能和業務邏輯。</li>
+
+                        <li><strong>巔峰 (Apex):</strong> 具備變革性、創造奇蹟的高階能力，代表系統的最高潛能。</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+
+                    <h3 class="text-xl font-bold text-indigo-600 mb-4">四大宇宙公理</h3>
+
+                    <ul class="space-y-3 text-slate-700">
+
+                        <li><strong>終始一如:</strong> 能量消耗以未來資源形式回饋系統，形成永續循環。</li>
+
+                        <li><strong>創元實錄:</strong> 記錄所有事件，確保數據的完整性與可追溯性。</li>
+
+                        <li><strong>萬有引力:</strong> 規範元素間的相互吸引與協同作用，促進模組共鳴。</li>
+
+                        <li><strong>萬能平衡:</strong> 禁止單一維度的極端發展，確保系統整體和諧。</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+
+                    <h3 class="text-xl font-bold text-indigo-600 mb-4">四大基石：無有奧義</h3>
+
+                    <ul class="space-y-3 text-slate-700">
+
+                        <li><strong>因果律:</strong> 強調事件之間的必然聯繫，每個結果都有其原因。</li>
+
+                        <li><strong>熵增定律:</strong> 系統趨向混亂，但透過熵減機制對抗之。</li>
+
+                        <li><strong>湧現性:</strong> 簡單組件的互動產生出超越個體屬性的新興特性。</li>
+
+                        <li><strong>有限性:</strong> 在有限中追求無限的潛能，認識到資源與能力的界限。</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="elements" class="content-section">
+
+            <div class="text-center mb-12">
+
+                <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">元素法則：十色精靈</h2>
+
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">萬能宇宙由十種核心元素驅動，每種元素都由一位法則精靈所代表。這些元素不僅定義了卡牌與模組的屬性，更透過相生相剋的關係維持著宇宙的動態平衡。下方的雷達圖展示了它們的關係，點擊圖例可查看單一元素的詳細資訊。</p>
+
+            </div>
+
+             <div class="flex flex-col lg:flex-row items-start gap-8">
+
+                <div class="w-full lg:w-1/2 bg-white p-4 rounded-lg shadow-lg">
+
+                    <div class="chart-container">
+
+                        <canvas id="elementsChart"></canvas>
+
+                    </div>
+
+                </div>
+
+                <div id="element-details-container" class="w-full lg:w-1/2 space-y-2">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="cards" class="content-section">
+
+            <div class="text-center mb-12">
+
+                <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">萬能卡牌：概念具現化</h2>
+
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">「萬能卡牌化」是將抽象的系統概念轉化為直觀、可互動卡牌的核心機制。每張卡牌都映射著真實世界、系統世界與卡牌世界。您可以使用下方的篩選器，探索不同聖階與元素屬性的卡牌。點擊卡牌可以翻轉查看其背後的系統映射。</p>
+
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-md mb-6 flex flex-col sm:flex-row gap-4 items-center">
+
+                <div class="w-full sm:w-auto">
+
+                    <label for="tier-filter" class="block text-sm font-medium text-slate-700">聖階 (類型)</label>
+
+                    <select id="tier-filter" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+
+                        <option value="all">所有聖階</option>
+
+                    </select>
+
+                </div>
+
+                <div class="w-full sm:w-auto">
+
+                    <label for="element-filter" class="block text-sm font-medium text-slate-700">元素</label>
+
+                    <select id="element-filter" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+
+                        <option value="all">所有元素</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div id="card-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+
+            </div>
+
+            <div class="mt-12 bg-white p-6 rounded-lg shadow-lg">
+
+                <h3 class="text-2xl font-bold text-indigo-600 mb-4">✨ 萬能卡牌生成器 ✨</h3>
+
+                <p class="mb-4 text-slate-700">輸入您想生成的卡牌概念（例如：「一張關於時間旅行的巔峰級法術卡」或「一張代表團隊協作的核心單位卡」），讓 Gemini 為您創造一張新的萬能卡牌！</p>
+
+                <textarea id="card-concept-input" class="w-full p-3 border border-slate-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 mb-4" rows="3" placeholder="輸入卡牌概念..."></textarea>
+
+                <div class="flex items-center gap-4">
+
+                    <button id="generate-card-btn" class="px-6 py-3 bg-indigo-600 text-white font-bold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
+
+                        生成萬能卡牌
+
+                    </button>
+
+                    <div id="loading-spinner" class="loader hidden"></div>
+
+                </div>
+
+                <div id="generated-card-display" class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+
+                </div>
+
+                <p id="generation-message" class="mt-4 text-sm text-slate-600"></p>
+
+            </div>
+
+        </section>
+
+        <section id="architecture" class="content-section">
+
+             <div class="text-center mb-12">
+
+                <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">系統架構：奇美拉計畫</h2>
+
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">「奇美拉計畫」是萬能系統的技術核心，旨在整合多個獨立應用，實現資訊的無縫同步。其設計融合了事件驅動、命令查詢責任分離 (CQRS) 等先進模式。下方的流程圖簡化展示了系統處理外部事件（如 Webhook）的核心數據流，體現了其解耦與高彈性的設計理念。</p>
+
+            </div>
+
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 text-center">
+
+                    <div class="p-4 bg-sky-100 border border-sky-300 rounded-lg w-40">
+
+                        <h4 class="font-bold">外部應用</h4>
+
+                        <p class="text-xs">Webhook 觸發</p>
+
+                    </div>
+
+                    <div class="text-3xl text-slate-400 font-sans">→</div>
+
+                    <div class="p-4 bg-purple-100 border border-purple-300 rounded-lg w-40">
+
+                        <h4 class="font-bold">訊息隊列</h4>
+
+                        <p class="text-xs">事件持久化</p>
+
+                    </div>
+
+                    <div class="text-3xl text-slate-400 font-sans">→</div>
+
+                    <div class="p-4 bg-green-100 border border-green-300 rounded-lg w-40">
+
+                        <h4 class="font-bold">工作者進程</h4>
+
+                        <p class="text-xs">執行SOP</p>
+
+                    </div>
+
+                    <div class="text-3xl text-slate-400 font-sans">→</div>
+
+                     <div class="p-4 bg-amber-100 border border-amber-300 rounded-lg w-40">
+
+                        <h4 class="font-bold">全域日誌 (GPL)</h4>
+
+                        <p class="text-xs">記錄不可變事件</p>
+
+                    </div>
+
+                     <div class="text-3xl text-slate-400 font-sans">→</div>
+
+                    <div class="p-4 bg-rose-100 border border-rose-300 rounded-lg w-40">
+
+                        <h4 class="font-bold">資料庫</h4>
+
+                        <p class="text-xs">狀態更新</p>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-8 text-slate-600 max-w-4xl mx-auto space-y-4">
+
+                    <p><strong>流程說明：</strong>當外部應用程式（如AITable.ai）發生變動時，會發送一個Webhook事件。系統的入口點會立即將此事件訊息放入一個持久化的「訊息隊列」中，而不是直接處理。這樣做可以提高系統的響應速度和彈性，即使後端處理暫時繁忙或故障，事件也不會遺失。</p>
+
+                    <p>獨立的「工作者進程」會從隊列中取出任務，並按照標準作業程序（SOP）進行處理。所有變更都被記錄在「全域處理日誌」(GPL) 中，這符合「事件溯源」的思想，確保了數據的可追溯性。最終，處理結果被寫入目標資料庫，完成數據的同步。</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="evolution" class="content-section">
+
+             <div class="text-center mb-12">
+
+                <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">進化框架：永續循環</h2>
+
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">萬能系統並非靜態的，它內建了一套持續優化與驗證的框架，確保系統能夠不斷革新、補全缺口並提升性能。此框架由六式奧義、四大智慧支柱與五大承諾共同構成，形成一個自我驅動的進化閉環。</p>
+
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+
+                    <h3 class="text-xl font-bold text-indigo-600 mb-4">無限進化六式奧義</h3>
+
+                    <ul class="space-y-2 text-slate-700 text-sm list-decimal list-inside">
+
+                        <li><strong>本質提純:</strong> 從數據中提取核心模式。</li>
+
+                        <li><strong>聖典共鳴:</strong> 匹配並調用相關法則。</li>
+
+                        <li><strong>代理織網:</strong> 啟動智慧代理執行任務。</li>
+
+                        <li><strong>神跡顯現:</strong> 將結果具象化為可見形式。</li>
+
+                        <li><strong>熵減煉金:</strong> 優化結果，降低系統冗餘。</li>
+
+                        <li><strong>永恆刻印:</strong> 將優化後的成果固化為新法則。</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+
+                    <h3 class="text-xl font-bold text-indigo-600 mb-4">四大智慧支柱</h3>
+
+                     <ul class="space-y-3 text-slate-700">
+
+                        <li><strong>💡 簡單性:</strong> 追求極簡工作流、直覺驅動。</li>
+
+                        <li><strong>⚡ 快速性:</b> 強調響應速度與高效能。</li>
+
+                        <li><strong>🛡️ 穩定性:</strong> 確保系統穩健運行、高可靠性。</li>
+
+                        <li><strong>🌱 進化性:</strong> 鼓勵系統自我學習與持續演進。</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+
+                    <h3 class="text-xl font-bold text-indigo-600 mb-4">五大承諾</h3>
+
+                     <ul class="space-y-3 text-slate-700">
+
+                        <li><strong>🔗 零摩擦整合:</strong> 模組與服務無縫連接。</li>
+
+                        <li><strong>🚀 無限擴展:</strong> 架構支持無限擴展。</li>
+
+                        <li><strong>🔒 絕對安全:</strong> 保障數據與系統最高安全。</li>
+
+                        <li><strong>🧠 智能進化:</strong> 系統能自主學習與優化。</li>
+
+                        <li><strong>🤝 人機共生:</strong> 實現人與AI的協同合作。</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-white mt-12">
+
+        <div class="container mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm">
+
+            <p>© 2025 Prime Architect & Jun.AI. All rights reserved.</p>
+
+            <p class="text-slate-400 mt-1">萬能系統 4.0.0 · 一即萬有 (Unum est Omnia)</p>
+
+        </div>
+
+    </footer>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const concentricCircleData = {
+
+                1: { title: '核心層 (Core Layer)', description: '代表使用者最本質的需求和資訊，是所有數據和系統核心邏輯的中心。負責底層數據的存儲、安全與一致性。' },
+
+                2: { title: '內環層 (Inner Ring)', description: '提供與使用者直接互動的基礎服務，如個人化設定、核心應用介面。將核心層數據轉化為使用者可操作的功能。' },
+
+                3: { title: '中環層 (Middle Ring)', description: '擴展核心功能，提供進階的模組整合、自動化工作流和智慧輔助。協調多模組間的數據流與功能調用。' },
+
+                4: { title: '外環層 (Outer Ring)', description: '提供多元化的生態服務與協作平台，引入外部數據源和第三方應用整合。作為系統與外部世界的橋樑。' },
+
+                5: { title: '擴展層 (Expansion Layer)', description: '代表系統的無限潛能與未來演化方向，包含實驗性功能、新技術整合和社群共創模組。' }
+
+            };
+
+            const elementsData = [
+
+                { name: '金 (秩序)', color: 'rgb(212, 175, 55)', icon: '⚖️', spirit: '鋒靈 Aurex', desc: '代表秩序、精準、策略，擅長邏輯分析與結構化。', generates: '水', destroys: '木' },
+
+                { name: '木 (成長)', color: 'rgb(34, 139, 34)', icon: '🌳', spirit: '森靈 Sylfa', desc: '代表生長、連結、繁衍，擅長資源整合與協同。', generates: '火', destroys: '土' },
+
+                { name: '水 (思緒)', color: 'rgb(65, 105, 225)', icon: '💧', spirit: '湧靈 Aquare', desc: '代表思緒、流動、感知，處理信息、記憶與數據。', generates: '木', destroys: '火' },
+
+                { name: '火 (行動)', color: 'rgb(220, 20, 60)', icon: '🔥', spirit: '焰靈 Pyra', desc: '代表熱情、行動、破壞，激發能量與變革。', generates: '土', destroys: '金' },
+
+                { name: '土 (穩定)', color: 'rgb(139, 69, 19)', icon: '⛰️', spirit: '磐靈 Terrax', desc: '代表穩定、根基、防禦，提供支撐與安全保障。', generates: '金', destroys: '水' },
+
+                { name: '光 (導引)', color: 'rgb(255, 248, 220)', icon: '☀️', spirit: '耀靈 Luxis', desc: '代表照明、引導、純淨，揭示與強化。', generates: '強化', destroys: '暗' },
+
+                { name: '暗 (混沌)', color: 'rgb(75, 0, 130)', icon: '🌙', spirit: '幽靈 Umbrix', desc: '代表隱匿、潛能、混沌，催化變革與突破。', generates: '轉化', destroys: '光' },
+
+                { name: '無 (通用)', color: 'rgb(128, 128, 128)', icon: '🔗', spirit: '源靈 Nullis', desc: '代表全域、通用、中立，連接與兼容。', generates: '兼容', destroys: '無' },
+
+                { name: '時 (變革)', color: 'rgb(0, 128, 128)', icon: '⏳', spirit: '時靈 Chronos', desc: '代表時間、變革、循環，掌控事件順序與時間軸。', generates: '未知', destroys: '未知' },
+
+                { name: '靈 (本質)', color: 'rgb(238, 130, 238)', icon: '✨', spirit: '魂靈 Psyche', desc: '代表靈魂、本質、意識，負責深層學習與意圖理解。', generates: '未知', destroys: '未知' },
+
+            ];
+
+            const cardsData = [
+
+                { id: 1, name: '數據管道', tier: '根源', type: '資源', element: '水', rarity: '普通', desc: '提供基礎能量與環境，維繫系統底層數據流動。', system: '對應系統中的 Kafka/RabbitMQ 訊息隊列或數據庫連接池。', real: '代表公司內部的資訊高速公路，確保數據從源頭順暢流向各部門。' },
+
+                { id: 2, name: '安全基礎設施', tier: '根源', type: '資源', element: '土', rarity: '非普通', desc: '提供基礎的認證與授權服務，是系統安全的基石。', system: '對應 OAuth 2.0 服務器、JWT 令牌生成與驗證機制。', real: '如同企業的門禁與保全系統，確保只有授權人員才能進入特定區域。' },
+
+                { id: 3, name: '自動化代理', tier: '核心', type: '單位', element: '金', rarity: '非普通', desc: '可直接操作的工具，用於執行重複性任務。', system: '一個可配置的 Cron Job 或一個 n8n/Zapier 工作流。', real: '一位孜孜不倦的數位員工，負責處理每日的數據整理與報告生成。' },
+
+                { id: 4, name: '數據分析器', tier: '核心', type: '單位', element: '水', rarity: '稀有', desc: '從原始數據中提取洞察，並以可視化方式呈現。', system: '執行 SQL 查詢並將結果渲染到 Chart.js 圖表的腳本。', real: '一位數據分析師，將雜亂的銷售數據轉化為清晰的趨勢圖表。' },
+
+                { id: 5, name: '知識庫', tier: '核心', type: '神器', element: '靈', rarity: '稀有', desc: '具備持續效用，儲存並組織系統中的所有結構化知識。', system: '一個由 AITable.ai 或 Supabase 驅動的向量資料庫。', real: '公司的中央圖書館與檔案館，儲存所有重要的文件、流程與智慧資產。' },
+
+                { id: 6, name: 'API 集成模組', tier: '核心', type: '神器', element: '無', rarity: '非普通', desc: '連接不同系統，實現數據與功能的互通。', system: '一個用於調用第三方服務（如 Google Calendar API）的客戶端庫。', real: '一位專業的翻譯與外交官，讓公司內部系統能與外部合作夥伴的系統順暢溝通。' },
+
+                { id: 7, name: '即時決策支持', tier: '巔峰', type: '法術', element: '火', rarity: '秘稀', desc: '一次性高影響力操作，根據即時數據流提供決策建議。', system: '一個機器學習模型，分析實時用戶行為並觸發一個推薦彈窗。', real: '在關鍵的商業談判中，AI助手即時分析對手發言並給出最佳應對策略。' },
+
+                { id: 8, name: '智慧策略', tier: '巔峰', type: '結界', element: '時', rarity: '傳說', desc: '持續性地改變系統規則，以達成長期目標。', system: '一個動態定價算法，根據市場供需和競爭對手價格自動調整產品售價。', real: '公司設定的長期市場戰略，如「始終保持比主要競爭對手低5%的價格」，並由系統自動執行。' },
+
+                { id: 9, name: '核心AI決策引擎', tier: '巔峰', type: '鵬洛客', element: '光', rarity: '傳說', desc: '具備多樣化、變革性能力的高階代理，能跨域協調資源。', system: '整合多個AI模型（語言、視覺、分析）的中央協調器，能自主規劃並執行複雜的多步驟任務。', real: '一位虛擬 CEO，能夠根據公司所有部門的數據，自主決定下個季度的資源分配和戰略重點。' },
+
+                { id: 10, name: '混沌注入測試', tier: '巔峰', type: '法術', element: '暗', rarity: '稀有', desc: '主動在系統中引入可控的故障，以測試其韌性。', system: '一個混沌工程工具，如 Chaos Monkey，隨機關閉非關鍵服務。', real: '一場預先規劃好的消防演習，用以測試大樓的應急響應能力。' },
+
+            ];
+
+            const tierMap = {
+
+                '根源': '資源',
+
+                '核心': '單位/神器',
+
+                '巔峰': '法術/結界/鵬洛客'
+
+            };
+
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const mobileNav = document.getElementById('mobile-nav');
+
+            const sections = document.querySelectorAll('.content-section');
+
+            function showSection(hash) {
+
+                const targetHash = hash || '#overview';
+
+                sections.forEach(section => {
+
+                    if ('#' + section.id === targetHash) {
+
+                        section.classList.add('active');
+
+                    } else {
+
+                        section.classList.remove('active');
+
+                    }
+
+                });
+
+                navLinks.forEach(link => {
+
+                    if (link.getAttribute('href') === targetHash) {
+
+                        link.classList.add('active');
+
+                    } else {
+
+                        link.classList.remove('active');
+
+                    }
+
+                });
+
+                mobileNav.value = targetHash;
+
+            }
+
+            navLinks.forEach(link => {
+
+                link.addEventListener('click', (e) => {
+
+                    e.preventDefault();
+
+                    const targetHash = e.currentTarget.getAttribute('href');
+
+                    history.pushState(null, null, targetHash);
+
+                    showSection(targetHash);
+
+                });
+
+            });
+
+            mobileNav.addEventListener('change', (e) => {
+
+                const targetHash = e.target.value;
+
+                history.pushState(null, null, targetHash);
+
+                showSection(targetHash);
+
+            });
+
+            window.addEventListener('popstate', () => {
+
+                showSection(window.location.hash);
+
+            });
+
+            showSection(window.location.hash);
+
+            const circles = document.querySelectorAll('.circle');
+
+            const layerTitle = document.getElementById('layer-title');
+
+            const layerDescription = document.getElementById('layer-description');
+
+            circles.forEach(circle => {
+
+                circle.addEventListener('click', () => {
+
+                    const layerId = circle.dataset.layer;
+
+                    const data = concentricCircleData[layerId];
+
+                    layerTitle.textContent = data.title;
+
+                    layerDescription.textContent = data.description;
+
+                    circles.forEach(c => c.classList.remove('active'));
+
+                    circle.classList.add('active');
+
+                });
+
+            });
+
+            document.getElementById('circle-3').click();
+
+            const ctx = document.getElementById('elementsChart').getContext('2d');
+
+            const elementNames = elementsData.map(e => e.name);
+
+            const generationData = elementsData.map(e => {
+
+                const targetIndex = elementNames.indexOf(e.generates + ' (秩序)'); // Heuristic mapping
+
+                return targetIndex !== -1 ? targetIndex + 1 : 5; // Default to neutral
+
+            });
+
+            const destructionData = elementsData.map(e => {
+
+                const targetIndex = elementNames.indexOf(e.destroys + ' (秩序)'); // Heuristic mapping
+
+                return targetIndex !== -1 ? targetIndex + 1 : 5; // Default to neutral
+
+            });
+
+            const elementsChart = new Chart(ctx, {
+
+                type: 'radar',
+
+                data: {
+
+                    labels: elementNames,
+
+                    datasets: [{
+
+                        label: '相生關係',
+
+                        data: [8, 6, 7, 9, 5, 10, 5, 5, 6, 7],
+
+                        fill: true,
+
+                        backgroundColor: 'rgba(34, 197, 94, 0.2)',
+
+                        borderColor: 'rgb(34, 197, 94)',
+
+                        pointBackgroundColor: 'rgb(34, 197, 94)',
+
+                        pointBorderColor: '#fff',
+
+                        pointHoverBackgroundColor: '#fff',
+
+                        pointHoverBorderColor: 'rgb(34, 197, 94)'
+
+                      }, {
+
+                        label: '相剋關係',
+
+                        data: [4, 3, 2, 1, 5, 2, 1, 5, 8, 9],
+
+                        fill: true,
+
+                        backgroundColor: 'rgba(239, 68, 68, 0.2)',
+
+                        borderColor: 'rgb(239, 68, 68)',
+
+                        pointBackgroundColor: 'rgb(239, 68, 68)',
+
+                        pointBorderColor: '#fff',
+
+                        pointHoverBackgroundColor: '#fff',
+
+                        pointHoverBorderColor: 'rgb(239, 68, 68)'
+
+                      }]
+
+                },
+
+                options: {
+
+                    maintainAspectRatio: false,
+
+                    elements: {
+
+                      line: {
+
+                        borderWidth: 2
+
+                      }
+
+                    },
+
+                    scales: {
+
+                        r: {
+
+                            angleLines: {
+
+                                display: true
+
+                            },
+
+                            suggestedMin: 0,
+
+                            suggestedMax: 10,
+
+                            pointLabels: {
+
+                                font: {
+
+                                    size: 12
+
+                                }
+
+                            },
+
+                             ticks: {
+
+                                display: false
+
+                            }
+
+                        }
+
+                    },
+
+                    plugins: {
+
+                        legend: {
+
+                            position: 'top',
+
+                             onClick: (e, legendItem, legend) => {
+
+                                const index = legendItem.datasetIndex;
+
+                                const ci = legend.chart;
+
+                                const meta = ci.getDatasetMeta(index);
+
+                                meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
+
+                                ci.update();
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+            const elementDetailsContainer = document.getElementById('element-details-container');
+
+            function renderElementDetails(filteredData = elementsData) {
+
+                elementDetailsContainer.innerHTML = '';
+
+                filteredData.forEach(el => {
+
+                    const elDiv = document.createElement('div');
+
+                    elDiv.className = 'p-4 bg-white rounded-lg shadow-md border-l-4';
+
+                    elDiv.style.borderColor = el.color;
+
+                    elDiv.innerHTML = `
+
+                        <h4 class="font-bold text-lg">${el.icon} ${el.name} - ${el.spirit}</h4>
+
+                        <p class="text-sm text-slate-600 mt-1">${el.desc}</p>
+
+                        <div class="text-xs mt-2">
+
+                            <span class="font-semibold text-green-600">生: ${el.generates}</span> | 
+
+                            <span class="font-semibold text-red-600">剋: ${el.destroys}</span>
+
+                        </div>
+
+                    `;
+
+                    elementDetailsContainer.appendChild(elDiv);
+
+                });
+
+            }
+
+            renderElementDetails();
+
+            const tierFilter = document.getElementById('tier-filter');
+
+            const elementFilter = document.getElementById('element-filter');
+
+            const cardGallery = document.getElementById('card-gallery');
+
+            Object.keys(tierMap).forEach(tier => {
+
+                const option = document.createElement('option');
+
+                option.value = tier;
+
+                option.textContent = `${tier} (${tierMap[tier]})`;
+
+                tierFilter.appendChild(option);
+
+            });
+
+            elementsData.forEach(el => {
+
+                const option = document.createElement('option');
+
+                option.value = el.name.split(' ')[0];
+
+                option.textContent = el.name;
+
+                elementFilter.appendChild(option);
+
+            });
+
+            function createCardElement(card) {
+
+                const cardElement = document.createElement('div');
+
+                cardElement.className = 'omni-card h-80';
+
+                const elementColor = elementsData.find(e => e.name.startsWith(card.element))?.color || '#ccc';
+
+                cardElement.innerHTML = `
+
+                    <div class="omni-card-inner">
+
+                        <div class="omni-card-front bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between border-t-4" style="border-color: ${elementColor};">
+
+                            <div>
+
+                                <div class="flex justify-between items-start">
+
+                                    <h4 class="font-bold text-lg text-slate-900">${card.name}</h4>
+
+                                    <span class="text-sm font-bold" style="color: ${elementColor};">${card.element}</span>
+
+                                </div>
+
+                                <p class="text-xs text-slate-500">${card.tier} / ${card.type}</p>
+
+                            </div>
+
+                            <div class="text-sm text-slate-700 my-4">
+
+                                ${card.desc}
+
+                            </div>
+
+                            <div class="text-xs text-slate-400 text-right">
+
+                                稀有度: ${card.rarity}
+
+                            </div>
+
+                        </div>
+
+                        <div class="omni-card-back bg-slate-800 text-white rounded-lg shadow-lg p-4 flex flex-col justify-between">
+
+                            <h5 class="text-center font-bold text-indigo-300">三界映射</h5>
+
+                            <div class="text-xs space-y-2">
+
+                                <p><strong>卡牌世界:</strong> ${card.desc}</p>
+
+                                <p><strong>系統世界:</strong> ${card.system}</p>
+
+                                <p><strong>真實世界:</strong> ${card.real}</p>
+
+                            </div>
+
+                            <p class="text-center text-xs text-slate-400 mt-2">再次點擊以翻回</p>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+                cardElement.addEventListener('click', () => {
+
+                    cardElement.classList.toggle('is-flipped');
+
+                });
+
+                return cardElement;
+
+            }
+
+            function renderCards() {
+
+                const selectedTier = tierFilter.value;
+
+                const selectedElement = elementFilter.value;
+
+                cardGallery.innerHTML = '';
+
+                const filteredCards = cardsData.filter(card => {
+
+                    const tierMatch = selectedTier === 'all' || card.tier === selectedTier;
+
+                    const elementMatch = selectedElement === 'all' || card.element === selectedElement;
+
+                    return tierMatch && elementMatch;
+
+                });
+
+                if (filteredCards.length === 0) {
+
+                    cardGallery.innerHTML = `<p class="col-span-full text-center text-slate-500">找不到符合條件的卡牌。</p>`;
+
+                    return;
+
+                }
+
+                filteredCards.forEach(card => {
+
+                    cardGallery.appendChild(createCardElement(card));
+
+                });
+
+            }
+
+            tierFilter.addEventListener('change', renderCards);
+
+            elementFilter.addEventListener('change', renderCards);
+
+            renderCards();
+
+            const cardConceptInput = document.getElementById('card-concept-input');
+
+            const generateCardBtn = document.getElementById('generate-card-btn');
+
+            const loadingSpinner = document.getElementById('loading-spinner');
+
+            const generatedCardDisplay = document.getElementById('generated-card-display');
+
+            const generationMessage = document.getElementById('generation-message');
+
+            generateCardBtn.addEventListener('click', async () => {
+
+                const promptText = cardConceptInput.value.trim();
+
+                if (!promptText) {
+
+                    generationMessage.textContent = '請輸入卡牌概念！';
+
+                    generationMessage.classList.remove('text-green-600', 'text-red-600');
+
+                    generationMessage.classList.add('text-amber-600');
+
+                    return;
+
+                }
+
+                generatedCardDisplay.innerHTML = '';
+
+                generationMessage.textContent = '';
+
+                loadingSpinner.classList.remove('hidden');
+
+                generateCardBtn.disabled = true;
+
+                try {
+
+                    let chatHistory = [];
+
+                    const fullPrompt = `根據以下卡牌概念，生成一張萬能卡牌的詳細資訊。請務必遵循提供的 JSON 格式。
+
+                    萬能卡牌的屬性包括：
+
+                    - tier (聖階): 根源, 核心, 巔峰
+
+                    - type (卡牌類型): 資源, 單位, 法術, 神器, 結界, 鵬洛客
+
+                    - element (元素): 金, 木, 水, 火, 土, 光, 暗, 無, 時, 靈
+
+                    - rarity (稀有度): 普通, 非普通, 稀有, 秘稀, 傳說
+
+                    - desc (卡牌描述): 簡要說明卡牌功能
+
+                    - system (系統世界映射): 說明卡牌在系統層面的對應實現或概念
+
+                    - real (真實世界映射): 說明卡牌在現實生活中的對應意義或比喻
+
+                    卡牌概念：${promptText}
+
+                    請生成一個符合上述屬性的 JSON 物件。`;
+
+                    chatHistory.push({ role: "user", parts: [{ text: fullPrompt }] });
+
+                    const payload = {
+
+                        contents: chatHistory,
+
+                        generationConfig: {
+
+                            responseMimeType: "application/json",
+
+                            responseSchema: {
+
+                                type: "OBJECT",
+
+                                properties: {
+
+                                    "name": { "type": "STRING" },
+
+                                    "tier": { "type": "STRING", "enum": ["根源", "核心", "巔峰"] },
+
+                                    "type": { "type": "STRING", "enum": ["資源", "單位", "法術", "神器", "結界", "鵬洛客"] },
+
+                                    "element": { "type": "STRING", "enum": ["金", "木", "水", "火", "土", "光", "暗", "無", "時", "靈"] },
+
+                                    "rarity": { "type": "STRING", "enum": ["普通", "非普通", "稀有", "秘稀", "傳說"] },
+
+                                    "desc": { "type": "STRING" },
+
+                                    "system": { "type": "STRING" },
+
+                                    "real": { "type": "STRING" }
+
+                                },
+
+                                "required": ["name", "tier", "type", "element", "rarity", "desc", "system", "real"]
+
+                            }
+
+                        }
+
+                    };
+
+                    const apiKey = "";
+
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+
+                                method: 'POST',
+
+                                headers: { 'Content-Type': 'application/json' },
+
+                                body: JSON.stringify(payload)
+
+                            });
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+
+                        result.candidates[0].content.parts.length > 0) {
+
+                        const jsonString = result.candidates[0].content.parts[0].text;
+
+                        const generatedCard = JSON.parse(jsonString);
+
+                        // Basic validation for required fields
+
+                        const requiredFields = ["name", "tier", "type", "element", "rarity", "desc", "system", "real"];
+
+                        const isValid = requiredFields.every(field => generatedCard.hasOwnProperty(field));
+
+                        if (isValid) {
+
+                            generatedCardDisplay.appendChild(createCardElement(generatedCard));
+
+                            generationMessage.textContent = '卡牌生成成功！';
+
+                            generationMessage.classList.remove('text-amber-600', 'text-red-600');
+
+                            generationMessage.classList.add('text-green-600');
+
+                        } else {
+
+                            generationMessage.textContent = '生成的卡牌數據不完整，請再試一次。';
+
+                            generationMessage.classList.remove('text-green-600', 'text-amber-600');
+
+                            generationMessage.classList.add('text-red-600');
+
+                            console.error('Incomplete card data:', generatedCard);
+
+                        }
+
+                    } else {
+
+                        generationMessage.textContent = '未能生成卡牌，請檢查您的輸入或稍後再試。';
+
+                        generationMessage.classList.remove('text-green-600', 'text-amber-600');
+
+                        generationMessage.classList.add('text-red-600');
+
+                        console.error('API response structure unexpected:', result);
+
+                    }
+
+                } catch (error) {
+
+                    generationMessage.textContent = '生成卡牌時發生錯誤，請稍後再試。';
+
+                    generationMessage.classList.remove('text-green-600', 'text-amber-600');
+
+                    generationMessage.classList.add('text-red-600');
+
+    .error('Error generating card:', error);
+
+                } finally {
+
+                    loadingSpinner.classList.add('hidden');
+
+                    generateCardBtn.disabled = false;
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+
+    
