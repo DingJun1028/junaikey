@@ -1,3 +1,4 @@
+
 import {
   Cpu,
   Webhook,
@@ -12,6 +13,7 @@ import {
   Tags,
   Palette,
   LayoutDashboard,
+  MessageSquarePlus,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 

@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -5,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { AppSidebar } from "@/components/layout/sidebar";
 import { AppHeader } from "@/components/layout/header";
+import { SustainablePartnerDialog } from "@/components/sustainable-partner-dialog";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -42,6 +44,7 @@ export default function RootLayout({
             </div>
           </div>
           <Toaster />
+          <SustainablePartnerDialog />
         </ThemeProvider>
       </body>
     </html>
