@@ -47,7 +47,18 @@ function deepMerge(a: any, b: any): any {
     for (const k of Object.keys(b)) out[k] = deepMerge(a[k], b[k]);
     return out;
   }
-  return b ?? a;
+const merged = deepMerge<typeof base>(base, env);
+
+function deepMerge<T>(a: T, b: Partial<T>): T {
+  if (Array.isArray(a) && Array.isArray(b)) return b as T;
+  if (typeof a === "object" && a !== null && typeof b === "object" && b !== null) {
+    const out = { ...(a as Record<string, unknown>) } as Record<string, unknown>;
+    for (const k of Object.keys(b)) {
+      out[k] = deepMerge((a as Record<string, unknown>)[k], (b as Record<string, unknown>)[k]);
+    }
+    return out as T;
+  }
+  return (b !== undefined ? b : a) as T;
 }
 
 function deepMerge(a: Config, b: Config): Config {
