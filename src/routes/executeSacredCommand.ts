@@ -6,7 +6,7 @@ const bodySchema = z.object({
   apiKey: z.string().optional(), // backward compat; we mainly use header guard
   command: z.object({
     endpoint: z.string(),
-    params: z.record(z.any()).optional(),
+    params: z.record(z.unknown()).optional(),
     user: z.string().optional(),
     context: z.string().optional()
   })
