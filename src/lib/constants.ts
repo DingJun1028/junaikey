@@ -30,6 +30,18 @@ export const mainNav: NavItem[] = [
     label: "Omni-Codex",
   },
   {
+    title: "Meta Architecture",
+    href: "/meta-architecture",
+    icon: DraftingCompass,
+    label: "Meta Architecture",
+  },
+  {
+    title: "Knowledge Hub",
+    href: "/knowledge-hub",
+    icon: BrainCircuit,
+    label: "Knowledge Hub",
+  },
+  {
     title: "Core Engine",
     href: "/core-engine",
     icon: Cpu,
@@ -48,12 +60,6 @@ export const mainNav: NavItem[] = [
     label: "Agent Network",
   },
   {
-    title: "Knowledge Hub",
-    href: "/knowledge-hub",
-    icon: BrainCircuit,
-    label: "Knowledge Hub",
-  },
-  {
     title: "Theme Engine",
     href: "/theme-engine",
     icon: Palette,
@@ -65,7 +71,7 @@ export const mainNav: NavItem[] = [
     icon: Tags,
     label: "Tagging System",
   },
-   {
+  {
     title: "Security Domain",
     href: "/security-domain",
     icon: Shield,
@@ -76,12 +82,6 @@ export const mainNav: NavItem[] = [
     href: "/evolution-loop",
     icon: Infinity,
     label: "Evolution Loop",
-  },
-  {
-    title: "Meta Architecture",
-    href: "/meta-architecture",
-    icon: DraftingCompass,
-    label: "Meta Architecture",
   },
 ];
 
