@@ -53,7 +53,7 @@ export function SustainablePartnerDialog() {
     setIsLoading(true);
 
     try {
-      const response = await sustainablePartnerFlow({ prompt: input, history: messages });
+      const response = await sustainablePartnerFlow({ prompt: input, history: messages.map(m => ({role: m.role === 'assistant' ? 'model' : 'user', content: m.content})) });
       const assistantMessage: Message = {
         id: Date.now().toString() + 'b',
         role: 'assistant',
