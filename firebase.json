@@ -5,7 +5,7 @@
     "runtime": "nodejs18"
   },
   "hosting": {
-    "public": "build",
+    "public": ".next",
     "ignore": [
       "firebase.json",
       "**/.*",
