@@ -17,9 +17,9 @@ export default function OmniKeySolutionsPage() {
           <div className="flex items-start gap-4">
             <KeyRound className="w-8 h-8 text-primary flex-shrink-0" />
             <div>
-              <CardTitle className="text-2xl">萬能元鑰方案中心 (Omni-Key Solution Center)</CardTitle>
+              <CardTitle>萬能元鑰方案中心</CardTitle>
               <CardDescription className="mt-1">
-                Explore, configure, and acquire customized solutions for your specific needs.
+                Omni-Key Solution Center: Explore, configure, and acquire customized solutions for your specific needs.
               </CardDescription>
             </div>
           </div>

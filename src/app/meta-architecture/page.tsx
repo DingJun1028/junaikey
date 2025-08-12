@@ -17,8 +17,8 @@ export default function MetaArchitecturePage() {
         <div className="flex items-start gap-4">
           <DraftingCompass className="w-8 h-8 text-primary flex-shrink-0" />
           <div>
-            <CardTitle className="text-2xl">萬能元架構 (Meta Architecture)</CardTitle>
-            <CardDescription className="mt-1">Triune Unity: The ultimate integration of Meta-Key, Meta-Cognition, and Meta-Learning.</CardDescription>
+            <CardTitle>萬能元架構</CardTitle>
+            <CardDescription className="mt-1">Meta Architecture: Triune Unity - The ultimate integration of Meta-Key, Meta-Cognition, and Meta-Learning.</CardDescription>
           </div>
         </div>
       </CardHeader>

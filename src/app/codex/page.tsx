@@ -1,4 +1,6 @@
 
+"use client";
+
 import {
   Card,
   CardHeader,
@@ -40,9 +42,9 @@ export default function CodexPage() {
         <div className="flex items-start gap-4">
           <BookOpen className="w-8 h-8 text-primary flex-shrink-0" />
           <div>
-            <CardTitle className="text-2xl">開發者聖典 (Developer Codex)</CardTitle>
+            <CardTitle>開發者聖典</CardTitle>
             <CardDescription className="mt-1">
-              The core technical documentation for the Triune Unity and Universal Card structure.
+              Developer Codex: The core technical documentation for the Triune Unity and Universal Card structure.
             </CardDescription>
           </div>
         </div>

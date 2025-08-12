@@ -15,8 +15,8 @@ export default function EvolutionLoopPage() {
         <div className="flex items-start gap-4">
           <Infinity className="w-8 h-8 text-primary flex-shrink-0" />
           <div>
-            <CardTitle className="text-2xl">萬能進化環 (Evolution Loop)</CardTitle>
-            <CardDescription className="mt-1">The system's self-optimization, potential-unleashing, and destiny research module.</CardDescription>
+            <CardTitle>萬能進化環</CardTitle>
+            <CardDescription className="mt-1">Evolution Loop: The system's self-optimization, potential-unleashing, and destiny research module.</CardDescription>
           </div>
         </div>
       </CardHeader>

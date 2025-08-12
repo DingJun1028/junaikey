@@ -30,8 +30,8 @@ export default function SecurityDomainPage() {
         <div className="flex items-start gap-4">
           <Shield className="w-8 h-8 text-primary flex-shrink-0" />
           <div>
-            <CardTitle className="text-2xl">萬能安全域 (Security Domain)</CardTitle>
-            <CardDescription className="mt-1">Access control, encryption, and threat protection for the entire system.</CardDescription>
+            <CardTitle>萬能安全域</CardTitle>
+            <CardDescription className="mt-1">Security Domain: Access control, encryption, and threat protection for the entire system.</CardDescription>
           </div>
         </div>
       </CardHeader>

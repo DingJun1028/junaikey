@@ -29,9 +29,9 @@ export default function TroubleshootingPage() {
           <div className="flex items-start gap-4">
             <LifeBuoy className="w-8 h-8 text-primary flex-shrink-0" />
             <div>
-              <CardTitle className="text-2xl">疑難雜症需求中心 (Troubleshooting & Request Center)</CardTitle>
+              <CardTitle>疑難雜症需求中心</CardTitle>
               <CardDescription className="mt-1">
-                Encountered an issue or have a new feature idea? Submit your request here and let the system evolve with you.
+                Troubleshooting & Request Center: Encountered an issue or have a new feature idea? Submit your request here and let the system evolve with you.
               </CardDescription>
             </div>
           </div>

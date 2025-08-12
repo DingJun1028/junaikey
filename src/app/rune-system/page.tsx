@@ -53,9 +53,9 @@ export default function RuneSystemPage() {
         <div className="flex items-start gap-4">
           <Webhook className="w-8 h-8 text-primary flex-shrink-0" />
           <div>
-            <CardTitle className="text-2xl">萬能符文系統 (Rune System)</CardTitle>
+            <CardTitle>萬能符文系統</CardTitle>
             <CardDescription className="mt-1">
-              The integration layer for all external services and APIs.
+              Rune System: The integration layer for all external services and APIs.
             </CardDescription>
           </div>
         </div>

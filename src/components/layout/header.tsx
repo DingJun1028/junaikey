@@ -44,7 +44,10 @@ export function AppHeader() {
                 )}
               >
                 <item.icon className="h-5 w-5" />
-                {item.title}
+                <div className="flex flex-col">
+                  <span>{item.title}</span>
+                  <span className="text-sm text-muted-foreground">{item.label}</span>
+                </div>
               </Link>
             ))}
           </nav>

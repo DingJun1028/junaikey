@@ -16,8 +16,8 @@ export default function CoreEnginePage() {
         <div className="flex items-start gap-4">
           <Cpu className="w-8 h-8 text-primary flex-shrink-0" />
           <div>
-            <CardTitle className="text-2xl">萬能核心引擎 (Core Engine)</CardTitle>
-            <CardDescription className="mt-1">The central nervous system of JunAiKey, responsible for interpreting intent, orchestrating agents, and managing the entire workflow.</CardDescription>
+            <CardTitle>萬能核心引擎</CardTitle>
+            <CardDescription className="mt-1">Core Engine: The central nervous system of JunAiKey, responsible for interpreting intent, orchestrating agents, and managing the entire workflow.</CardDescription>
           </div>
         </div>
       </CardHeader>

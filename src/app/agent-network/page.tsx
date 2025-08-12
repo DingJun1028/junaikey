@@ -35,8 +35,8 @@ export default function AgentNetworkPage() {
           <div className="flex items-center gap-4">
             <Network className="w-8 h-8 text-primary" />
             <div>
-              <CardTitle className="text-2xl">萬能代理網絡 (Agent Network)</CardTitle>
-              <CardDescription>Manage and monitor all AI agents operating within the system.</CardDescription>
+              <CardTitle>萬能代理網絡</CardTitle>
+              <CardDescription>Agent Network: Manage and monitor all AI agents operating within the system.</CardDescription>
             </div>
           </div>
         </CardHeader>

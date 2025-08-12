@@ -28,7 +28,7 @@ export type NavItem = {
   title: string;
   href: string;
   icon: LucideIcon;
-  label?: string;
+  label: string;
 };
 
 export const mainNav: NavItem[] = [
@@ -55,6 +55,12 @@ export const mainNav: NavItem[] = [
     href: '/rune-system',
     icon: Webhook,
     label: 'Rune System',
+  },
+    {
+    title: '萬能核心引擎',
+    href: '/core-engine',
+    icon: Cpu,
+    label: 'Core Engine',
   },
   {
     title: '知識中樞',

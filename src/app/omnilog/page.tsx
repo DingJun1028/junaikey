@@ -52,8 +52,8 @@ export default function OmniLogPage() {
             <div className="flex items-center gap-4">
                <Activity className="w-8 h-8 text-primary" />
                <div>
-                <CardTitle className="text-2xl">全能日誌 (OmniLog)</CardTitle>
-                <CardDescription>Your system's central dashboard, providing a real-time overview of all key metrics.</CardDescription>
+                <CardTitle>全能日誌</CardTitle>
+                <CardDescription>OmniLog: Your system's central dashboard, providing a real-time overview of all key metrics.</CardDescription>
                </div>
             </div>
         </CardHeader>

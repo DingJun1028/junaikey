@@ -43,9 +43,9 @@ export default function TaggingSystemPage() {
           <div className="flex items-start gap-4">
             <Tags className="w-8 h-8 text-primary flex-shrink-0" />
             <div>
-              <CardTitle className="text-2xl">萬能標籤體系 (Tagging System)</CardTitle>
+              <CardTitle>萬能標籤體系</CardTitle>
               <CardDescription className="mt-1">
-                A universal metadata and classification system for intelligent data association and tracking.
+                Tagging System: A universal metadata and classification system for intelligent data association and tracking.
               </CardDescription>
             </div>
           </div>

@@ -90,8 +90,8 @@ export default function SanctumPage() {
                 <div className="flex items-start gap-4">
                 <FileText className="w-8 h-8 text-primary font-sans flex-shrink-0" />
                 <div>
-                    <CardTitle className="text-2xl font-sans">AI 核心終端 (AI Core Sanctum)</CardTitle>
-                    <CardDescription className="font-sans mt-1">A direct conversational interface with the system's AI core. Paste your code and issue commands for analysis.</CardDescription>
+                    <CardTitle>AI 核心終端</CardTitle>
+                    <CardDescription className="font-sans mt-1">AI Core Sanctum: A direct conversational interface with the system's AI core. Paste your code and issue commands for analysis.</CardDescription>
                 </div>
                 </div>
             </CardHeader>

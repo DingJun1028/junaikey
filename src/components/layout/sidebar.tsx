@@ -36,18 +36,23 @@ export function AppSidebar() {
                     <Button
                         asChild
                         variant={pathname === item.href ? "secondary" : "ghost"}
-                        className="w-full justify-start gap-2"
+                        className="w-full justify-start h-auto"
                     >
                         <Link
                           href={item.href}
+                          className="flex items-center gap-2 py-2"
                         >
                           <item.icon className="h-4 w-4" />
-                          {item.title}
+                           <div className="flex flex-col items-start">
+                             <span>{item.title}</span>
+                             <span className="text-xs text-muted-foreground">{item.label}</span>
+                           </div>
                         </Link>
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent side="right">
-                    <p>{item.label || item.title}</p>
+                     <p>{item.title}</p>
+                     <p className="text-muted-foreground">{item.label}</p>
                   </TooltipContent>
                 </Tooltip>
               ))}
