@@ -30,29 +30,23 @@ export type NavItem = {
 };
 
 export const mainNav: NavItem[] = [
-    {
+  {
     title: '宇宙核心',
     href: '/',
     icon: Home,
     label: 'Core',
   },
   {
-    title: '全能日誌',
-    href: '/omnilog',
-    icon: LayoutDashboard,
-    label: 'OmniLog',
+    title: '萬能核心引擎',
+    href: '/core-engine',
+    icon: Cpu,
+    label: 'Core Engine',
   },
   {
-    title: '全能流程',
-    href: '/omniflow',
-    icon: Cog,
-    label: 'OmniFlow',
-  },
-  {
-    title: '全能代理',
-    href: '/omniagents',
+    title: '萬能代理網絡',
+    href: '/agent-network',
     icon: Network,
-    label: 'OmniAgents',
+    label: 'Agent Network',
   },
   {
     title: '知識中樞',
@@ -61,16 +55,10 @@ export const mainNav: NavItem[] = [
     label: 'Knowledge Hub',
   },
   {
-    title: '內容生成器',
-    href: '/content-generator',
-    icon: Rocket,
-    label: 'Content Generator',
-  },
-   {
-    title: '萬能元鑰方案中心',
-    href: '/omni-key-solutions',
-    icon: KeyRound,
-    label: 'Omni-Key Solutions',
+    title: '萬能符文系統',
+    href: '/rune-system',
+    icon: Webhook,
+    label: 'Rune System',
   },
   {
     title: '進化中樞',
@@ -79,6 +67,36 @@ export const mainNav: NavItem[] = [
     label: 'Evolution Nexus',
   },
     {
+    title: '萬能安全域',
+    href: '/security-domain',
+    icon: Shield,
+    label: 'Security Domain',
+  },
+  {
+    title: '萬能元架構',
+    href: '/meta-architecture',
+    icon: DraftingCompass,
+    label: 'Meta Architecture',
+  },
+  {
+    title: '萬能標籤體系',
+    href: '/tagging-system',
+    icon: Tags,
+    label: 'Tagging System',
+  },
+  {
+    title: '萬能主題引擎',
+    href: '/theme-engine',
+    icon: Palette,
+    label: 'Theme Engine',
+  },
+  {
+    title: '內容生成器',
+    href: '/content-generator',
+    icon: Rocket,
+    label: 'Content Generator',
+  },
+  {
     title: 'AI 核心終端',
     href: '/sanctum',
     icon: FileText,
@@ -90,7 +108,13 @@ export const mainNav: NavItem[] = [
     icon: BookOpen,
     label: 'Developer Codex',
   },
-   {
+  {
+    title: '萬能元鑰方案中心',
+    href: '/omni-key-solutions',
+    icon: KeyRound,
+    label: 'Omni-Key Solutions',
+  },
+  {
     title: '疑難雜症需求中心',
     href: '/troubleshooting',
     icon: LifeBuoy,
