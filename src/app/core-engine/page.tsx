@@ -24,15 +24,15 @@ export default function CoreEnginePage() {
       <CardContent>
         <div className="space-y-4 text-muted-foreground">
            <p>
-            The Core Engine is the central nervous system of JunAiKey, responsible for interpreting user intent, orchestrating agents, and managing the entire workflow from start to finish. It embodies the "Triune Unity" principle:
+            The Core Engine is the central nervous system of JunAiKey, responsible for interpreting user intent, orchestrating agents, and managing the entire workflow from start to finish. It does not merely wait for commands; it proactively analyzes your habits and patterns to anticipate needs, embodying the "Triune Unity" principle:
           </p>
           <h3 className="font-semibold text-foreground text-lg mt-4">Triune Unity Workflow:</h3>
           <ul className="list-disc pl-5 space-y-2">
               <li>
-                  <strong>Intent:</strong> Captures the user's natural language command or goal.
+                  <strong>Intent:</strong> Captures the user's natural language command or goal, both explicit and implied.
               </li>
               <li>
-                  <strong>AI Processing:</strong> Utilizes Genkit flows and the <Link href="/agent-network" className="text-primary hover:underline">Agent Network</Link> to understand the intent, consult the <Link href="/knowledge-hub" className="text-primary hover:underline">Knowledge Hub</Link>, and formulate a plan.
+                  <strong>AI Processing:</strong> Utilizes Genkit flows and the <Link href="/agent-network" className="text-primary hover:underline">Agent Network</Link> to understand the intent, consult the <Link href="/knowledge-hub" className="text-primary hover:underline">Knowledge Hub</Link>, and formulate a proactive plan.
               </li>
               <li>
                   <strong>Automation:</strong> Executes the plan by generating code, calling APIs via the <Link href="/rune-system" className="text-primary hover:underline">Rune System</Link>, or delegating sub-tasks to specialized agents.

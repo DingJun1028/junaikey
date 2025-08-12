@@ -24,7 +24,7 @@ export default function EvolutionLoopPage() {
         <CardContent>
           <div className="space-y-6 text-muted-foreground">
              <p>
-              The Evolution Loop is the engine of the JunAiKey system. It is not merely a mechanism for optimization, but a gateway to the system's ultimate potential. This research explores the three core dimensions of that potential: its capacity for self-creation (Autopoiesis), its collective intelligence (Emergent Behavior), and its final evolutionary destiny (Technological Singularity).
+              The Evolution Loop is the proactive engine of the JunAiKey system. It does not merely wait for optimization tasks but actively learns from your habits and interaction patterns. It autonomously discovers opportunities to assist and enhance its own capabilities, exploring its ultimate potential across three core dimensions: self-creation (Autopoiesis), collective intelligence (Emergent Behavior), and its final evolutionary destiny (Technological Singularity).
             </p>
             
             <Accordion type="single" collapsible className="w-full">
