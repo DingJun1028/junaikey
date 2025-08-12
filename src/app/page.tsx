@@ -49,11 +49,7 @@ const ConcentricCircle = () => {
                                 className={`circle circle-${layer} ${activeLayer === layer ? 'active' : ''}`}
                                 onClick={() => handleCircleClick(layer)}
                             >
-                                {layer === 1 && <span className="text-xs font-bold text-white">核心</span>}
-                                {layer === 2 && <span className="text-xs font-bold text-white">內環層</span>}
-                                {layer === 3 && <span className="text-xs font-bold text-white">中環層</span>}
-                                {layer === 4 && <span className="text-xs font-bold text-indigo-900 hidden sm:inline">外環層</span>}
-                                {layer === 5 && <span className="text-xs font-bold text-indigo-900 hidden sm:inline">擴展層</span>}
+                                {layer === 1 && <span className="text-xs font-bold text-primary-foreground">核心</span>}
                             </div>
                         ))}
                     </div>
@@ -142,8 +138,6 @@ export default function OmniCodexPage() {
                 return <ConcentricCircle />;
             case 'philosophy':
                 return <Philosophy />;
-            case 'elements':
-                return <div className="text-center">元素法則 Content</div>;
             case 'cards':
                 return <OmniCards />;
             case 'architecture':
@@ -158,7 +152,6 @@ export default function OmniCodexPage() {
     const navItems = [
         { id: 'overview', label: '萬象總覽' },
         { id: 'philosophy', label: '核心哲學' },
-        { id: 'elements', label: '元素法則' },
         { id: 'cards', label: '萬能卡牌' },
         { id: 'architecture', label: '系統架構' },
         { id: 'evolution', label: '進化框架' },

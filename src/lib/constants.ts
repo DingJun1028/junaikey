@@ -24,10 +24,10 @@ export type NavItem = {
 
 export const mainNav: NavItem[] = [
   {
-    title: "Dashboard",
+    title: "Omni-Codex",
     href: "/",
     icon: LayoutDashboard,
-    label: "Dashboard",
+    label: "Omni-Codex",
   },
   {
     title: "Core Engine",
