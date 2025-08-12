@@ -30,22 +30,16 @@ export const mainNav: NavItem[] = [
     label: "Omni-Codex",
   },
   {
-    title: "Knowledge Hub",
-    href: "/knowledge-hub",
-    icon: BrainCircuit,
-    label: "Knowledge Hub",
-  },
-  {
     title: "Core Engine",
     href: "/core-engine",
     icon: Cpu,
     label: "Core Engine",
   },
   {
-    title: "Theme Engine",
-    href: "/theme-engine",
-    icon: Palette,
-    label: "Theme Engine",
+    title: "Rune System",
+    href: "/rune-system",
+    icon: Webhook,
+    label: "Rune System",
   },
   {
     title: "Agent Network",
@@ -53,11 +47,17 @@ export const mainNav: NavItem[] = [
     icon: Network,
     label: "Agent Network",
   },
-    {
-    title: "Rune System",
-    href: "/rune-system",
-    icon: Webhook,
-    label: "Rune System",
+  {
+    title: "Knowledge Hub",
+    href: "/knowledge-hub",
+    icon: BrainCircuit,
+    label: "Knowledge Hub",
+  },
+  {
+    title: "Theme Engine",
+    href: "/theme-engine",
+    icon: Palette,
+    label: "Theme Engine",
   },
   {
     title: "Tagging System",

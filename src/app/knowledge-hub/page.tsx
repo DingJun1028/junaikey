@@ -248,8 +248,8 @@ export default function KnowledgeHubPage() {
                             <span className="font-semibold">{item.title}</span>
                           </div>
                         </AccordionTrigger>
-                        <AccordionContent className="pl-10 space-y-4">
-                          <p className="font-medium text-muted-foreground italic">
+                        <AccordionContent className="space-y-4 text-sm">
+                          <p className="font-medium text-muted-foreground italic px-4">
                             {item.description}
                           </p>
                           <Table>
