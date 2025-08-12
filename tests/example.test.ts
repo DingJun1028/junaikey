@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { sha256Hex } from "../src/utils/hash.js";
+import { sha256Hex } from "../dist/utils/hash.js";
 
 describe("hash utils", () => {
   it("sha256Hex should be deterministic", () => {

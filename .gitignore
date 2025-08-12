@@ -19,3 +19,6 @@ logs
 
 # Coverage
 coverage
+
+# Generated files (optional - can be committed for convenience)
+# openapi.json

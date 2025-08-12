@@ -7,7 +7,6 @@ import swaggerUi from "@fastify/swagger-ui";
 import { apiKeyGuard } from "./middleware/apiKey.js";
 import { registerExecuteRoutes } from "./routes/executeSacredCommand.js";
 import { registerSystemMetricsRoutes } from "./routes/systemMetrics.js";
-import { registerDocsRoute } from "./routes/docs.js";
 import { config } from "./utils/config.js";
 import { withRequestId } from "./utils/requestId.js";
 
@@ -43,9 +42,6 @@ await app.register(swaggerUi, {
 app.addHook("onRequest", apiKeyGuard);
 registerExecuteRoutes(app);
 registerSystemMetricsRoutes(app);
-
-// Public docs proxy (GET /api/docs handled by swagger-ui) + GET /api/docs.json
-registerDocsRoute(app);
 
 const start = async () => {
   try {
