@@ -1,0 +1,8 @@
+security:
+  allowedOrigins:
+    - "https://your-prod-origin"
+  rateLimit:
+    max: 1000
+    timeWindow: 1 minute
+observability:
+  logLevel: warn

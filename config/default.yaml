@@ -1,0 +1,28 @@
+server:
+  port: ${PORT:8080}
+  requestIdHeader: ${REQUEST_ID_HEADER:X-Request-Id}
+
+security:
+  apiKeyHeader: X-Sacred-Api-Key
+  allowedOrigins:
+    - "*"
+  rateLimit:
+    max: 120
+    timeWindow: 1 minute
+
+observability:
+  logLevel: ${LOG_LEVEL:info}
+  otel:
+    endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4317}
+    serviceName: ${OTEL_SERVICE_NAME:JunAiKey_Omnikey_萬能系統_終焉奇點}
+
+persistence:
+  supabase:
+    url: ${SUPABASE_URL:}
+    anonKey: ${SUPABASE_ANON_KEY:}
+    serviceRoleKey: ${SUPABASE_SERVICE_ROLE_KEY:}
+
+slo:
+  latency:
+    p95: 300
+    p99: 800

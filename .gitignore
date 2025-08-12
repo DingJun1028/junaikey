@@ -1,0 +1,21 @@
+# Node
+node_modules
+dist
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+.DS_Store
+
+# Env
+.env
+.env.local
+
+# Logs
+logs
+*.log
+
+# Docker
+.docker
+
+# Coverage
+coverage
