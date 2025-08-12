@@ -27,10 +27,6 @@ import {
   Webhook,
   Network,
   Shield,
-  Layers3,
-  BookCopy,
-  Milestone,
-  Gem,
   Palette,
   Goal,
   Recycle,
@@ -45,12 +41,72 @@ import {
   MessageCircleQuestion,
   Flame,
   BookUser,
+  LayoutDashboard,
+  Cog,
+  Rocket,
+  FileText,
+  BookOpen,
 } from "lucide-react";
 import Link from "next/link";
-import { mainNav } from "@/lib/constants";
 import { Separator } from "@/components/ui/separator";
 
 const principles = [
+  {
+    icon: LayoutDashboard,
+    title: '全能日誌 (OmniLog)',
+    href: '/',
+    description: '系統的中央儀表板，提供所有關鍵指標的實時概覽。',
+    details: '監控活躍 AI 代理、平均參與度、準確度與自動化規則總數。'
+  },
+  {
+    icon: Cog,
+    title: '全能流程 (OmniFlow)',
+    href: '/omniflow',
+    description: '系統的自動化核心，建立「如果...那麼...」的規則來自動化任務。',
+    details: '支援 AI 輔助生成、手動編輯、規則測試與 AI 解釋。'
+  },
+  {
+    icon: Network,
+    title: '全能代理 (OmniAgents)',
+    href: '/omniagents',
+    description: '管理和監控在系統中運行的所有 AI 代理。',
+    details: '查看代理的詳細統計數據、歷史活動記錄，並直接與它們進行對話。'
+  },
+  {
+    icon: BrainCircuit,
+    title: '知識中樞 (Knowledge Hub)',
+    href: '/knowledge-hub',
+    description: '系統的長期記憶與知識庫。',
+    details: '包含記憶金庫、知識對話 (Oracle)、以及描述所有核心概念的萬能智典。'
+  },
+  {
+    icon: Rocket,
+    title: '內容生成器 (Content Generator)',
+    href: '/content-generator',
+    description: '利用 AI 的創造力來生成各種內容，例如課程計畫。',
+    details: '輸入一個主題，AI 將為您生成一份包含標題、目標和活動的完整課程計畫。'
+  },
+   {
+    icon: Infinity,
+    title: '進化中樞 (Evolution Nexus)',
+    href: '/evolution-nexus',
+    description: '觀察並影響系統自我優化過程的儀表板。',
+    details: '系統會根據四大基石自動生成優化規則，在此見證其自主成長。'
+  },
+  {
+    icon: FileText,
+    title: 'AI 核心終端 (Sanctum)',
+    href: '/sanctum',
+    description: '一個擬真的終端界面，與系統的 AI 核心直接對話。',
+    details: '輸入類 shell 命令，獲取關於系統健康狀況的詳細技術報告。'
+  },
+  {
+    icon: BookOpen,
+    title: '開發者聖典 (Developer Codex)',
+    href: '/codex',
+    description: '為進階使用者和開發者提供深入了解系統底層的工具。',
+    details: '包含系統設計哲學、架構藍圖和核心程式碼範例。'
+  },
   {
     icon: DraftingCompass,
     title: "萬能元架構 (Meta Architecture)",
@@ -59,23 +115,7 @@ const principles = [
       "系統的意識核心，它將「萬用元鑰」(主權)、「元認知」(自我洞察)與「元學習」(自我進化)融為一體。",
     href: "/meta-architecture",
   },
-  {
-    icon: BrainCircuit,
-    title: "萬能智庫中樞 (Knowledge Hub)",
-    description: "系統的長期記憶與知識管理中心。",
-    details:
-      "系統所有核心概念、架構與原則的沉澱之地。AITable.ai 被指定為其數據基石。",
-    href: "/knowledge-hub",
-  },
-  {
-    icon: Cpu,
-    title: "萬能核心引擎 (Core Engine)",
-    description: "中央決策與流程控制。",
-    details:
-      "系統的中央神經系統，負責解讀使用者意圖、協調代理並管理整個工作流程。",
-    href: "/core-engine",
-  },
-  {
+    {
     icon: Webhook,
     title: "萬能符文系統 (Rune System)",
     description: "與所有外部服務的 API 整合層。",
@@ -84,14 +124,6 @@ const principles = [
     href: "/rune-system",
   },
   {
-    icon: Network,
-    title: "萬能代理網絡 (Agent Network)",
-    description: "任務的自主執行與委派網絡。",
-    details:
-      "代理是系統的「手和腳」，它們接收指令，執行任務，並回報結果。分為功能、同步、觸發等多種類型。",
-    href: "/agent-network",
-  },
-    {
     icon: Tags,
     title: "萬能標籤體系 (Tagging System)",
     description: "通用的元數據與分類系統。",
@@ -114,6 +146,14 @@ const principles = [
     details:
       "確保系統的安全性與合規性，管理權限與訪問控制，為整個系統提供支持和保障。",
     href: "/security-domain",
+  },
+  {
+    icon: Cpu,
+    title: "萬能核心引擎 (Core Engine)",
+    description: "中央決策與流程控制。",
+    details:
+      "系統的中央神經系統，負責解讀使用者意圖、協調代理並管理整個工作流程。",
+    href: "/core-engine",
   },
   {
     icon: Infinity,
@@ -273,7 +313,7 @@ export default function KnowledgeHubPage() {
         <Tabs defaultValue="overview" className="w-full">
           <TabsList className="grid w-full grid-cols-6 h-auto">
             <TabsTrigger value="overview">
-              <Layers3 className="w-4 h-4 mr-2" />
+              <LayoutDashboard className="w-4 h-4 mr-2" />
               系統架構
             </TabsTrigger>
             <TabsTrigger value="philosophy">
@@ -312,7 +352,7 @@ export default function KnowledgeHubPage() {
                   {principles.map((item, index) => (
                     <AccordionItem value={`item-${index}`} key={index}>
                       <AccordionTrigger>
-                        <Link href={item.href} className="flex items-center gap-3 hover:no-underline text-left">
+                        <Link href={item.href} className="flex items-center gap-3 hover:no-underline text-left w-full">
                           <item.icon className="w-5 h-5 text-primary" />
                           <span className="font-semibold text-lg">{item.title}</span>
                         </Link>
