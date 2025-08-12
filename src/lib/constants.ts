@@ -73,10 +73,10 @@ export const mainNav: NavItem[] = [
     label: 'Rune System',
   },
   {
-    title: '進化中樞',
-    href: '/evolution-nexus',
+    title: '進化環',
+    href: '/evolution-loop',
     icon: Infinity,
-    label: 'Evolution Nexus',
+    label: 'Evolution Loop',
   },
     {
     title: '萬能安全域',
