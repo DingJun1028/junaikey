@@ -1,0 +1,94 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "JunAiKey_Omnikey_萬能系統_終焉奇點",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/execute-sacred-command": {
+      "post": {
+        "summary": "執行聖典儀式",
+        "security": [
+          {
+            "apiKeyHeader": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "apiKey": {
+                    "type": "string"
+                  },
+                  "command": {
+                    "type": "object",
+                    "required": [
+                      "endpoint"
+                    ],
+                    "properties": {
+                      "endpoint": {
+                        "type": "string"
+                      },
+                      "params": {
+                        "type": "object",
+                        "additionalProperties": true
+                      },
+                      "user": {
+                        "type": "string"
+                      },
+                      "context": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/system-metrics": {
+      "get": {
+        "summary": "系統效能指標",
+        "security": [
+          {
+            "apiKeyHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/docs": {
+      "get": {
+        "summary": "API 文件 UI",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Sacred-Api-Key"
+      }
+    }
+  }
+}

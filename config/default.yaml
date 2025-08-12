@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  requestIdHeader: X-Request-Id
+
+security:
+  apiKeyHeader: X-Sacred-Api-Key
+  allowedOrigins:
+    - "*"
+  rateLimit:
+    max: 120
+    timeWindow: 1 minute
+
+observability:
+  logLevel: info
+  otel:
+    endpoint: http://localhost:4317
+    serviceName: JunAiKey_Omnikey_萬能系統_終焉奇點
+
+persistence:
+  supabase:
+    url: ""
+    anonKey: ""
+    serviceRoleKey: ""
+
+slo:
+  latency:
+    p95: 300
+    p99: 800
