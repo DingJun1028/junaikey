@@ -28,15 +28,15 @@ async function generate(prompt) {
       security.scan(code),
     ]);
 
-    const synthesisPrompt = \`
+    const synthesisPrompt = `
 The linter found the following issues:
-\${JSON.stringify(lintResult, null, 2)}
+${JSON.stringify(lintResult, null, 2)}
 
 The security scanner found the following vulnerabilities:
-\${JSON.stringify(securityResult, null, 2)}
+${JSON.stringify(securityResult, null, 2)}
 
 Based on these findings, provide a comprehensive summary in markdown format.
-\`;
+`;
 
     const result = await model.generateContent([
       systemInstruction,
