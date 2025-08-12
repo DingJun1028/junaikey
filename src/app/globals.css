@@ -72,10 +72,7 @@ body {
 
 @layer components {
     .nav-link {
-        @apply transition-all duration-300 ease-in-out border-b-2 border-transparent;
-    }
-    .nav-link.active, .nav-link:hover {
-        @apply text-indigo-600 border-indigo-600;
+        @apply transition-all duration-300 ease-in-out border-b-2;
     }
     .content-section {
         animation: fadeIn 0.5s ease-in-out;
@@ -110,19 +107,35 @@ body {
         transition: all 0.3s ease;
         cursor: pointer;
         border-style: solid;
+        border-width: 2px;
+        background-color: hsla(var(--primary) / 0.1);
+        border-color: hsla(var(--primary) / 0.2);
     }
+    .dark .circle {
+        background-color: hsla(var(--primary) / 0.05);
+        border-color: hsla(var(--primary) / 0.1);
+    }
+    
     .circle:hover {
         transform: scale(1.02);
+        border-color: hsla(var(--primary) / 0.5);
     }
     .circle.active {
         transform: scale(1.05);
-        box-shadow: 0 0 25px rgba(79, 70, 229, 0.5);
+        box-shadow: 0 0 25px hsla(var(--primary) / 0.3);
+        border-color: hsl(var(--primary));
+        background-color: hsla(var(--primary) / 0.2);
     }
-    .circle-5 { width: 100%; height: 100%; background-color: #e0e7ff; border-width: 2px; border-color: #c7d2fe;}
-    .circle-4 { width: 80%; height: 80%; background-color: #c7d2fe; border-width: 2px; border-color: #a5b4fc;}
-    .circle-3 { width: 60%; height: 60%; background-color: #a5b4fc; border-width: 2px; border-color: #818cf8;}
-    .circle-2 { width: 40%; height: 40%; background-color: #818cf8; border-width: 2px; border-color: #6366f1;}
-    .circle-1 { width: 20%; height: 20%; background-color: #6366f1; border-width: 2px; border-color: #4f46e5;}
+    .circle-5 { width: 100%; height: 100%;}
+    .circle-4 { width: 80%; height: 80%;}
+    .circle-3 { width: 60%; height: 60%;}
+    .circle-2 { width: 40%; height: 40%;}
+    .circle-1 { width: 20%; height: 20%; background-color: hsl(var(--primary)); border-color: hsl(var(--primary)); }
+    .dark .circle-1 {
+         background-color: hsl(var(--primary));
+         border-color: hsl(var(--primary));
+    }
+
 
     /* Custom styles for Knowledge Hub Tabs */
     [data-radix-collection-item][data-state="active"] {
