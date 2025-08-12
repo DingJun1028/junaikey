@@ -1,3 +1,4 @@
+
 'use server';
 
 import {ai} from '@/ai/genkit';
@@ -24,7 +25,7 @@ export async function sustainablePartnerFlow(
   input: SustainablePartnerInput
 ): Promise<string> {
   const {output} = await ai.generate({
-    model: 'googleai/gemini-1.5-flash-preview-0514',
+    model: 'googleai/gemini-1.5-flash',
     history: input.history?.map(msg => ({
       role: msg.role as 'user' | 'model',
       content: [{text: msg.content}],
