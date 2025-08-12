@@ -1,4 +1,3 @@
-
 import {
   Card,
   CardHeader,
@@ -46,6 +45,7 @@ import {
   Rocket,
   FileText,
   BookOpen,
+  Gem,
 } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
@@ -54,7 +54,7 @@ const principles = [
   {
     icon: LayoutDashboard,
     title: '全能日誌 (OmniLog)',
-    href: '/',
+    href: '/omnilog',
     description: '系統的中央儀表板，提供所有關鍵指標的實時概覽。',
     details: '監控活躍 AI 代理、平均參與度、準確度與自動化規則總數。'
   },
@@ -248,7 +248,7 @@ const philosophies = [
         header: "本質體現",
         system:
           "系統的負載均衡與健康監測 。一個內在的、追求可持續發展的「宇宙常數調節器」。",
-        game: "對極端戰術的軟性約束 。一個引導玩家走向更全面、更有韌性策略的「遊戲平衡機制」。",
+        game: "對極端戰術的軟性约束 。一個引導玩家走向更全面、更有韌性策略的「遊戲平衡機制」。",
       },
       {
         header: "核心機制",

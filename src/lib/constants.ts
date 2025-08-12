@@ -15,7 +15,8 @@ import {
   FileText,
   BookOpen,
   Flame,
-  BookUser
+  BookUser,
+  Home
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -27,9 +28,15 @@ export type NavItem = {
 };
 
 export const mainNav: NavItem[] = [
+    {
+    title: '宇宙核心',
+    href: '/',
+    icon: Home,
+    label: 'Core',
+  },
   {
     title: '全能日誌',
-    href: '/',
+    href: '/omnilog',
     icon: LayoutDashboard,
     label: 'OmniLog',
   },

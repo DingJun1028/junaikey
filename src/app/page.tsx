@@ -1,157 +1,117 @@
-"use client";
 
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
 } from '@/components/ui/card';
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  ScatterChart,
-  Scatter,
-  ZAxis,
-} from 'recharts';
-import { Users, Bot, Cog, Activity } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+  BrainCircuit,
+  Cpu,
+  DraftingCompass,
+  Network,
+  Webhook,
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
-const agentData = [
-  { name: 'Level 1', count: 12, color: '#8884d8' },
-  { name: 'Level 2', count: 25, color: '#82ca9d' },
-  { name: 'Level 3', count: 8, color: '#ffc658' },
-  { name: 'Level 4', count: 3, color: '#ff8042' },
+const circles = [
+  {
+    level: 1,
+    name: '核心引擎',
+    description:
+      '系統的中央神經系統，負責解讀使用者意圖、協調代理並管理整個工作流程。',
+    href: '/core-engine',
+    icon: Cpu,
+  },
+  {
+    level: 2,
+    name: '知識中樞',
+    description: '系統的長期記憶與知識庫，沉澱所有核心概念、架構與原則。',
+    href: '/knowledge-hub',
+    icon: BrainCircuit,
+  },
+  {
+    level: 3,
+    name: '代理網絡',
+    description: '任務的自主執行與委派網絡，處理並執行定義好的任務。',
+    href: '/agent-network',
+    icon: Network,
+  },
+  {
+    level: 4,
+    name: '符文系統',
+    description: '與所有外部服務的 API 整合層，讓系統能與外部世界溝通。',
+    href: '/rune-system',
+    icon: Webhook,
+  },
+  {
+    level: 5,
+    name: '元架構',
+    description: '系統的意識核心，將主權、自我洞察與自我進化融為一體。',
+    href: '/meta-architecture',
+    icon: DraftingCompass,
+  },
 ];
 
-const performanceData = [
-  { engagement: 80, accuracy: 92, level: 2 },
-  { engagement: 65, accuracy: 88, level: 1 },
-  { engagement: 95, accuracy: 98, level: 3 },
-  { engagement: 72, accuracy: 85, level: 1 },
-  { engagement: 88, accuracy: 95, level: 2 },
-  { engagement: 98, accuracy: 99, level: 4 },
-  { engagement: 50, accuracy: 75, level: 1 },
-];
+export default function HomePage() {
+  const [activeCircle, setActiveCircle] = useState(circles[0]);
 
-export default function DashboardPage() {
   return (
-    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
-      <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">全能日誌 (OmniLog)</h2>
-      </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">活躍 AI 代理</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">48</div>
-            <p className="text-xs text-muted-foreground">比上月增加 +5</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">平均參與度</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">85.3%</div>
-            <p className="text-xs text-muted-foreground">比上週提升 +2.1%</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">平均準確度</CardTitle>
-            <Bot className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">91.7%</div>
-            <p className="text-xs text-muted-foreground">持續穩定</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">自動化規則</CardTitle>
-            <Cog className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">128</div>
-            <p className="text-xs text-muted-foreground">本週新增 +3</p>
-          </CardContent>
-        </Card>
-      </div>
+    <div className="container mx-auto flex h-full flex-col items-center justify-center p-4">
+      <div className="grid w-full max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="flex flex-col items-center justify-center">
+          <div className="concentric-circle-container">
+            {circles.map(c => (
+              <Link href={c.href} key={c.level} passHref>
+                <div
+                  className={cn(
+                    'circle',
+                    `circle-${c.level}`,
+                    activeCircle.level === c.level && 'active'
+                  )}
+                  onMouseEnter={() => setActiveCircle(c)}
+                >
+                  <div className="text-center group-hover/circle:opacity-0">
+                    <c.icon
+                      className={cn(
+                        'mx-auto h-8 w-8 transition-all',
+                        c.level === 1 ? 'text-primary-foreground' : 'text-primary',
+                        activeCircle.level === c.level && c.level !== 1 && 'scale-125'
+                      )}
+                    />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
-          <CardHeader>
-            <CardTitle>代理表現矩陣</CardTitle>
-            <CardDescription>
-              各代理的參與度與準確度分佈。
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="pl-2">
-            <ResponsiveContainer width="100%" height={350}>
-              <ScatterChart
-                margin={{
-                  top: 20,
-                  right: 20,
-                  bottom: 20,
-                  left: 20,
-                }}
-              >
-                <CartesianGrid />
-                <XAxis type="number" dataKey="engagement" name="參與度" unit="%" />
-                <YAxis type="number" dataKey="accuracy" name="準確度" unit="%" />
-                <ZAxis type="number" dataKey="level" range={[100, 500]} name="等級" />
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                <Legend />
-                <Scatter name="代理表現" data={performanceData} fill="#8884d8" />
-              </ScatterChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-        <Card className="col-span-3">
-          <CardHeader>
-            <CardTitle>代理層級分佈</CardTitle>
-            <CardDescription>
-              各等級 AI 代理的數量分佈。
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={350}>
-                <PieChart>
-                  <Pie
-                    data={agentData}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    outerRadius={120}
-                    fill="#8884d8"
-                    dataKey="count"
-                    nameKey="name"
-                    label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                  >
-                    {agentData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                   <Tooltip />
-                  <Legend />
-                </PieChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+        <div className="flex items-center">
+          <Card className="w-full">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                 <activeCircle.icon className="h-8 w-8 text-primary" />
+                 <CardTitle className="text-2xl">{activeCircle.name}</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className="min-h-[60px] text-base">
+                {activeCircle.description}
+              </CardDescription>
+              <Link href={activeCircle.href}>
+                <Button className="mt-4 w-full">
+                  進入 {activeCircle.name}
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

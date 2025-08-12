@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Rocket, PanelLeft } from "lucide-react";
+import { Home, PanelLeft } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { mainNav } from "@/lib/constants";
@@ -31,7 +31,7 @@ export function AppHeader() {
               href="/"
               className="flex items-center gap-2 text-lg font-semibold mb-4"
             >
-              <Rocket className="h-6 w-6 text-primary" />
+              <Home className="h-6 w-6 text-primary" />
               <span>JunAiKey</span>
             </Link>
             {mainNav.map((item) => (
@@ -52,7 +52,7 @@ export function AppHeader() {
       </Sheet>
       <div className="w-full flex justify-center">
          <Link href="/" className="flex items-center gap-2 font-semibold">
-              <Rocket className="h-6 w-6 text-primary" />
+              <Home className="h-6 w-6 text-primary" />
               <span className="">JunAiKey</span>
         </Link>
       </div>

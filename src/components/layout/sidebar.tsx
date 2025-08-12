@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Rocket } from "lucide-react";
+import { Home } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { mainNav } from "@/lib/constants";
@@ -13,6 +13,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Button } from "../ui/button";
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -22,26 +23,28 @@ export function AppSidebar() {
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
           <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Rocket className="h-6 w-6 text-primary" />
+            <Home className="h-6 w-6 text-primary" />
             <span className="">JunAiKey</span>
           </Link>
         </div>
-        <div className="flex-1">
+        <div className="flex-1 overflow-auto">
           <TooltipProvider>
             <nav className="grid items-start gap-1 px-2 py-4 text-sm font-medium lg:px-4">
               {mainNav.map((item) => (
-                <Tooltip key={item.href}>
+                <Tooltip key={item.href} delayDuration={0}>
                   <TooltipTrigger asChild>
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary",
-                        { "bg-muted text-primary": pathname === item.href }
-                      )}
+                    <Button
+                        asChild
+                        variant={pathname === item.href ? "secondary" : "ghost"}
+                        className="w-full justify-start gap-2"
                     >
-                      <item.icon className="h-4 w-4" />
-                      {item.title}
-                    </Link>
+                        <Link
+                          href={item.href}
+                        >
+                          <item.icon className="h-4 w-4" />
+                          {item.title}
+                        </Link>
+                    </Button>
                   </TooltipTrigger>
                   <TooltipContent side="right">
                     <p>{item.label || item.title}</p>

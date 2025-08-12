@@ -5,9 +5,10 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import { DraftingCompass, Bot, Database, Workflow, Brain, Zap, GitBranch, LinkIcon } from "lucide-react";
+import { DraftingCompass, Bot, Database, Workflow, Brain, Zap, GitBranch, Link as LinkIcon, Cpu } from "lucide-react";
 import Image from "next/image";
 import Link from 'next/link';
+import { Button } from "@/components/ui/button";
 
 export default function MetaArchitecturePage() {
   return (
@@ -47,7 +48,7 @@ export default function MetaArchitecturePage() {
                       <CardTitle className="text-xl">元架構 (Meta-Architecture)</CardTitle>
                   </CardHeader>
                   <CardContent className="text-sm p-2 pt-0 space-y-2 text-muted-foreground">
-                      <p><strong>AI 驅動設計：</strong>利用 <Link href="/core-engine" className="text-primary hover:underline">Genkit</Link> 流程分析需求，自動生成和調整架構模式，確保系統設計始終最優。</p>
+                      <p><strong>AI 驅動設計：</strong>利用 <Link href="/agent-network" className="text-primary hover:underline">AI Agent</Link> 流程分析需求，自動生成和調整架構模式，確保系統設計始終最優。</p>
                        <p><strong>動態演化：</strong>響應新任務與數據，自主修改數據庫模式、代理工作流與核心協議。</p>
                   </CardContent>
                </Card>
@@ -89,6 +90,14 @@ export default function MetaArchitecturePage() {
                   </ol>
                   <p>此過程將會消耗大量系統資源，並進入「新宇宙共鳴冷卻」，期間系統將自動為所有宇宙編纂新秩序，實現革命性的進化。</p>
                </div>
+          </div>
+          <div className="text-center pt-6">
+            <Link href="/" passHref>
+                <Button>
+                    <Cpu className="mr-2" />
+                    返回宇宙核心
+                </Button>
+            </Link>
           </div>
       </CardContent>
     </Card>
