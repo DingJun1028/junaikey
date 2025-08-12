@@ -8,7 +8,7 @@ const SustainablePartnerInputSchema = z.object({
   history: z
     .array(
       z.object({
-        role: z.enum(['user', 'assistant']),
+        role: z.enum(['user', 'model', 'system', 'tool']),
         content: z.string(),
       })
     )
@@ -24,9 +24,9 @@ export async function sustainablePartnerFlow(
   input: SustainablePartnerInput
 ): Promise<string> {
   const {output} = await ai.generate({
-    model: 'googleai/gemini-2.0-flash',
+    model: 'googleai/gemini-1.5-flash-preview-0514',
     history: input.history?.map(msg => ({
-      role: msg.role,
+      role: msg.role as 'user' | 'model',
       content: [{text: msg.content}],
     })),
     prompt: input.prompt,
