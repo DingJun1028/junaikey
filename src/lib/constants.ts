@@ -104,12 +104,6 @@ export const mainNav: NavItem[] = [
     label: 'Omni-Key Solutions',
   },
   {
-    title: '內容生成器',
-    href: '/content-generator',
-    icon: Rocket,
-    label: 'Content Generator',
-  },
-  {
     title: 'AI 核心終端',
     href: '/sanctum',
     icon: FileText,
