@@ -46,9 +46,9 @@ export default function SecurityDomainPage() {
                          </div>
                     </CardHeader>
                     <CardContent className="text-sm p-2 pt-0 space-y-2">
-                        <p className="flex justify-between"><span>核心數據庫:</span> <Badge variant="default">AES-256 Enabled</Badge></p>
-                        <p className="flex justify-between"><span>API 符文憑證:</span> <Badge variant="default">HSM-Protected</Badge></p>
-                         <p className="flex justify-between"><span>通訊線路:</span> <Badge variant="default">TLS 1.3 Active</Badge></p>
+                        <div className="flex justify-between"><span>核心數據庫:</span> <Badge variant="default">AES-256 Enabled</Badge></div>
+                        <div className="flex justify-between"><span>API 符文憑證:</span> <Badge variant="default">HSM-Protected</Badge></div>
+                         <div className="flex justify-between"><span>通訊線路:</span> <Badge variant="default">TLS 1.3 Active</Badge></div>
                     </CardContent>
                  </Card>
                   <Card className="p-4">
@@ -59,9 +59,9 @@ export default function SecurityDomainPage() {
                          </div>
                     </CardHeader>
                     <CardContent className="text-sm p-2 pt-0 space-y-2">
-                        <p className="flex justify-between"><span>防火牆狀態:</span> <Badge variant="default">Active</Badge></p>
+                        <div className="flex justify-between"><span>防火牆狀態:</span> <Badge variant="default">Active</Badge></div>
                         <p className="flex justify-between"><span>上次掃描:</span> <span className="font-mono">2024-07-29 10:00</span></p>
-                         <p className="flex justify-between"><span>偵測到的威脅:</span> <Badge variant="destructive">0</Badge></p>
+                         <div className="flex justify-between"><span>偵測到的威脅:</span> <Badge variant="destructive">0</Badge></div>
                     </CardContent>
                  </Card>
                  <Card className="p-4">
@@ -72,9 +72,9 @@ export default function SecurityDomainPage() {
                          </div>
                     </CardHeader>
                     <CardContent className="text-sm p-2 pt-0 space-y-2">
-                        <p className="flex justify-between"><span>MFA 啟用率:</span> <Badge>100%</Badge></p>
+                        <div className="flex justify-between"><span>MFA 啟用率:</span> <Badge>100%</Badge></div>
                         <p className="flex justify-between"><span>活躍會話:</span> <span className="font-mono">15</span></p>
-                         <p className="flex justify-between"><span>登入失敗 (24h):</span> <Badge variant="secondary">3</Badge></p>
+                         <div className="flex justify-between"><span>登入失敗 (24h):</span> <Badge variant="secondary">3</Badge></div>
                     </CardContent>
                  </Card>
             </div>
