@@ -86,7 +86,7 @@ function entropyRefine(result: { output: string; tags: string[] }) {
   return { ...result, tags, entropyLevel };
 }
 
-async function eternalImprint(purified: any, meta: Record<string, any>) {
+async function eternalImprint(purified: PurifiedResult, meta: Record<string, any>) {
   // Hash and persist; integrate Supabase in real impl
   const payload = { purified, meta, ts: new Date().toISOString(), id: uuid() };
   const commitHash = sha256Hex(JSON.stringify(payload));
