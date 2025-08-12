@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { BrainCircuit, Search, PlusCircle, History, Sparkles } from "lucide-react";
+import { BrainCircuit, Search, PlusCircle, GitBranch, Share2 } from "lucide-react";
 import {
   Table,
   TableHeader,
@@ -64,38 +64,27 @@ export default function KnowledgeHubPage() {
           </div>
         </CardHeader>
         <CardContent>
-            <div className="grid md:grid-cols-3 gap-6 mb-6">
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
                  <Card className="p-4 bg-muted/30">
                     <CardHeader className="p-2 pt-0">
                          <div className="flex items-center gap-3">
-                            <History className="w-6 h-6 text-primary"/>
-                            <CardTitle className="text-lg">Multi-Level Memory</CardTitle>
+                            <GitBranch className="w-6 h-6 text-primary"/>
+                            <CardTitle className="text-lg">Data Lineage</CardTitle>
                          </div>
                     </CardHeader>
                     <CardContent className="text-sm p-2 pt-0 space-y-2 text-muted-foreground">
-                       <p>Seamlessly retains User, Session, and Agent state with adaptive personalization, ensuring context-rich interactions.</p>
+                       <p>Maintains a complete and auditable history of all data transformations and decisions, ensuring full traceability from origin to outcome.</p>
                     </CardContent>
                  </Card>
                   <Card className="p-4 bg-muted/30">
                     <CardHeader className="p-2 pt-0">
                          <div className="flex items-center gap-3">
-                            <Sparkles className="w-6 h-6 text-primary"/>
-                            <CardTitle className="text-lg">Intelligent & Fast</CardTitle>
+                            <Share2 className="w-6 h-6 text-primary"/>
+                            <CardTitle className="text-lg">Knowledge Graph</CardTitle>
                          </div>
                     </CardHeader>
                     <CardContent className="text-sm p-2 pt-0 space-y-2 text-muted-foreground">
-                        <p>With high accuracy and fast responses, the knowledge hub provides low-latency, high-relevance information.</p>
-                    </CardContent>
-                 </Card>
-                 <Card className="p-4 bg-muted/30">
-                    <CardHeader className="p-2 pt-0">
-                         <div className="flex items-center gap-3">
-                            <PlusCircle className="w-6 h-6 text-primary"/>
-                            <CardTitle className="text-lg">Developer-Friendly</CardTitle>
-                         </div>
-                    </CardHeader>
-                    <CardContent className="text-sm p-2 pt-0 space-y-2 text-muted-foreground">
-                        <p>An intuitive API and cross-platform SDKs allow for easy integration and extension of the system's memory capabilities.</p>
+                        <p>Automatically maps relationships between different data points, creating a rich, interconnected graph of system knowledge.</p>
                     </CardContent>
                  </Card>
             </div>
@@ -130,7 +119,7 @@ export default function KnowledgeHubPage() {
                     <TableCell>
                       <Badge variant="outline">{entry.type}</Badge>
                     </TableCell>
-                    <TableCell className="flex gap-1">
+                    <TableCell className="flex flex-wrap gap-1">
                       {entry.tags.map(tag => <Badge key={tag} variant="secondary">{tag}</Badge>)}
                     </TableCell>
                     <TableCell className="text-right">{entry.lastUpdated}</TableCell>
