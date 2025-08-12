@@ -120,16 +120,4 @@ export const mainNav: NavItem[] = [
     icon: BookOpen,
     label: 'Developer Codex',
   },
-  {
-    title: '萬能元鑰方案中心',
-    href: '/omni-key-solutions',
-    icon: KeyRound,
-    label: 'Omni-Key Solutions',
-  },
-  {
-    title: '疑難雜症需求中心',
-    href: '/troubleshooting',
-    icon: LifeBuoy,
-    label: 'Troubleshooting',
-  },
 ];
