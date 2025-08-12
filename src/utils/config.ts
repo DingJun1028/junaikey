@@ -50,4 +50,14 @@ function deepMerge(a: any, b: any): any {
   return b ?? a;
 }
 
-export const config = merged as any;
+function deepMerge(a: Config, b: Config): Config {
+  if (Array.isArray(a) && Array.isArray(b)) return b;
+  if (typeof a === "object" && a !== null && typeof b === "object" && b !== null) {
+    const out: Config = { ...a };
+    for (const k of Object.keys(b)) out[k] = deepMerge(a[k] as Config, b[k] as Config);
+    return out;
+  }
+  return b ?? a;
+}
+
+export const config: Config = merged;
