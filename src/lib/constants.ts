@@ -65,6 +65,12 @@ export const mainNav: NavItem[] = [
     icon: Infinity,
     label: "Evolution Loop",
   },
+  {
+    title: "Meta Architecture",
+    href: "/meta-architecture",
+    icon: DraftingCompass,
+    label: "Meta Architecture",
+  },
 ];
 
 export type CoreFunction = {
@@ -128,6 +134,7 @@ export const coreFunctions: CoreFunction[] = [
     title: "萬能元架構 (Meta Architecture)",
     description: "由 AI 驅動的動態架構生成與調整。",
     icon: DraftingCompass,
+    href: "/meta-architecture",
   },
   {
     title: "萬能標籤體系 (Tagging System)",
