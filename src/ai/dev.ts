@@ -1,5 +1,7 @@
-import { config } from 'dotenv';
+'use server';
+
+import {config} from 'dotenv';
 config();
 
-import '@/ai/flows/delegate-task-to-agent.ts';
-import '@/ai/flows/generate-ui-theme.ts';
+import '@/ai/flows/delegate-task-to-agent';
+import '@/ai/flows/generate-ui-theme';
