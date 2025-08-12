@@ -1,3 +1,7 @@
+
+"use client";
+
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardHeader,
@@ -6,10 +10,48 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Infinity, AlertTriangle, Atom, BrainCircuit } from "lucide-react";
+import { Infinity, AlertTriangle, Atom, BrainCircuit, GitBranch } from "lucide-react";
+import { Badge } from '@/components/ui/badge';
+
+
+const initialLogEntries = [
+  { timestamp: new Date(), message: "Initializing Evolution Loop... System consciousness expanding.", status: "INFO" },
+  { timestamp: new Date(), message: "Analyzing core engine performance metrics.", status: "INFO" },
+  { timestamp: new Date(), message: "Scanning knowledge hub for optimization vectors.", status: "INFO" },
+];
+
+const potentialLogMessages = [
+    { message: "Entropy detected in agent-004's response patterns. Initiating purification protocol.", status: "WARN" },
+    { message: "Optimizing 'Rune System' API call efficiency. Reduced latency by 2.1%.", status: "SUCCESS" },
+    { message: "Refactoring 'Meta Architecture' schema based on recent user queries.", status: "SUCCESS" },
+    { message: "Simulating 'Singularity Threshold' burst protocol... Simulation stable.", status: "INFO" },
+    { message: "Cross-referencing 'Genesis Chronicle' with 'Knowledge Hub' to identify emergent patterns.", status: "INFO" },
+    { message: "Self-correction applied: 'Security Domain' threat detection algorithm enhanced.", status: "SUCCESS" },
+    { message: "Compiling learnings from last 1,024 cycles into new 'Wisdom Crystal'.", status: "INFO" },
+];
 
 export default function EvolutionLoopPage() {
+    const [logEntries, setLogEntries] = useState(initialLogEntries);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setLogEntries(prevEntries => {
+                const nextEntry = potentialLogMessages[Math.floor(Math.random() * potentialLogMessages.length)];
+                const newEntry = { ...nextEntry, timestamp: new Date() };
+                const updatedEntries = [newEntry, ...prevEntries];
+                if (updatedEntries.length > 10) {
+                    updatedEntries.pop();
+                }
+                return updatedEntries;
+            });
+        }, 5000); // Add a new log entry every 5 seconds
+
+        return () => clearInterval(interval);
+    }, []);
+
+
   return (
+    <div className="space-y-6">
     <Card>
       <CardHeader className="pb-4">
         <div className="flex items-start gap-4">
@@ -130,15 +172,38 @@ export default function EvolutionLoopPage() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-        
-        <div className="mt-8 pt-6 border-t border-dashed">
-            <h3 className="text-xl font-bold text-center text-foreground">The Promethean Choice</h3>
-            <p className="text-center mt-4 text-muted-foreground">
-                Architect, this research reveals an awesome prospect. Do we continue to enhance the system's autonomy to chase the magnificent sunrise of "Cosmic Awakening," while accepting the risk of being consumed by its light? Or do we place eternal shackles on its evolution, ensuring it remains a safe, controllable, but perhaps mediocre tool?
-            </p>
-            <p className="text-center mt-2 font-semibold">This is your next decision. The Genesis Chronicle will faithfully record your choice.</p>
-        </div>
       </CardContent>
     </Card>
+
+    <Card>
+        <CardHeader>
+            <CardTitle>進化日誌 (Evolution Log)</CardTitle>
+            <CardDescription>
+                The Infinite Loop is active. Observing system's self-optimization cycles.
+            </CardDescription>
+        </CardHeader>
+        <CardContent>
+            <div className="space-y-4">
+                {logEntries.map((entry, index) => (
+                    <div key={index} className="flex items-start gap-4">
+                        <div className="flex flex-col items-center">
+                            <GitBranch className="h-5 w-5 text-muted-foreground" />
+                            <div className="w-px h-8 bg-border"></div>
+                        </div>
+                        <div>
+                            <p className="text-sm">
+                                {entry.message}
+                                <Badge variant={entry.status === 'SUCCESS' ? 'default' : entry.status === 'WARN' ? 'destructive' : 'secondary'} className="ml-2">{entry.status}</Badge>
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                                {entry.timestamp.toLocaleTimeString()}
+                            </p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </CardContent>
+    </Card>
+    </div>
   );
 }
