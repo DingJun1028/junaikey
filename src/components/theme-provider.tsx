@@ -29,7 +29,6 @@ export function ThemeProvider({
   defaultTheme = "system",
   storageKey = "ui-theme",
   enableSystem = true,
-  disableTransitionOnChange = false,
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = React.useState<Theme>(() => {
@@ -44,17 +43,16 @@ export function ThemeProvider({
 
     root.classList.remove("light", "dark")
 
+    let effectiveTheme = theme;
     if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+      effectiveTheme = window.matchMedia("(prefers-color-scheme: dark)")
         .matches
         ? "dark"
         : "light"
-
-      root.classList.add(systemTheme)
-      return
     }
 
-    root.classList.add(theme)
+    root.classList.add(effectiveTheme);
+    
   }, [theme])
 
   const value = {
@@ -78,5 +76,14 @@ export const useTheme = () => {
   if (context === undefined)
     throw new Error("useTheme must be used within a ThemeProvider")
 
-  return context
+  const { theme, setTheme } = context;
+  
+  const effectiveTheme = React.useMemo(() => {
+    if (typeof window === "undefined" || theme !== 'system') {
+      return theme;
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }, [theme]);
+  
+  return { theme, setTheme, effectiveTheme }
 }

@@ -8,8 +8,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { oneDark, oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { useTheme } from '@/components/theme-provider';
 
 
 export default function SanctumPage() {
@@ -21,6 +22,8 @@ export default function SanctumPage() {
     const [isLoading, setIsLoading] = useState(false);
     const terminalRef = useRef<HTMLDivElement>(null);
     const { toast } = useToast();
+    const { theme } = useTheme();
+
 
     useEffect(() => {
         if (terminalRef.current) {
@@ -120,8 +123,8 @@ export default function SanctumPage() {
                                  <div className="prose prose-sm dark:prose-invert max-w-none">
                                      <SyntaxHighlighter
                                         language="markdown"
-                                        style={vscDarkPlus}
-                                        customStyle={{ margin: 0, padding: '1rem', borderRadius: '0.5rem', backgroundColor: 'hsl(var(--background))' }}
+                                        style={theme === 'dark' ? oneDark : oneLight}
+                                        customStyle={{ margin: 0, padding: '1rem', borderRadius: '0.5rem', backgroundColor: 'transparent' }}
                                         wrapLongLines
                                     >
                                         {item.content}

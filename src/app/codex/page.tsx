@@ -10,7 +10,8 @@ import {
 } from "@/components/ui/card";
 import { BookOpen, Globe, Code, Link as LinkIcon } from "lucide-react";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { oneDark, oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { useTheme } from "@/components/theme-provider";
 
 
 const codeString = `
@@ -36,6 +37,8 @@ interface UniverseContext {
 
 
 export default function CodexPage() {
+  const { theme } = useTheme();
+
   return (
     <Card>
       <CardHeader className="pb-4">
@@ -92,7 +95,7 @@ export default function CodexPage() {
             This is the core TypeScript type definition for a `UniversalCard`. It demonstrates how a card links to the three core layers of the universe: the Catalog, Definitions, and Chapters.
           </p>
           <div className="bg-background rounded-lg overflow-hidden border">
-             <SyntaxHighlighter language="typescript" style={vscDarkPlus} customStyle={{ margin: 0, padding: '1.5rem', backgroundColor: 'hsl(var(--background))' }}>
+             <SyntaxHighlighter language="typescript" style={theme === 'dark' ? oneDark : oneLight} customStyle={{ margin: 0, padding: '1.5rem', backgroundColor: 'transparent' }}>
                 {codeString}
             </SyntaxHighlighter>
           </div>
