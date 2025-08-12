@@ -18,7 +18,7 @@ services:
     networks: [core]
 
   jaeger:
-    image: jaegertracing/all-in-one:1.57
+    image: jaegertracing/all-in-one:1.57@sha256:7e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2
     ports:
       - "16686:16686"
     networks: [core]
