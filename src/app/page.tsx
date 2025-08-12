@@ -80,79 +80,48 @@ export default function HomePage() {
   const [activeCircle, setActiveCircle] = useState(capabilities[0]);
 
   return (
-    <div className="container mx-auto flex h-full w-full flex-col items-center justify-center p-4 overflow-hidden">
-        <div className="relative flex items-center justify-center w-[600px] h-[600px]">
-            {/* Concentric Circles as the sun */}
-            <div 
-                className="absolute w-64 h-64 bg-primary/10 rounded-full animate-pulse"
-                onMouseEnter={() => setActiveCircle(capabilities[0])}
-            >
-                 <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-48 h-48 bg-primary/20 rounded-full">
-                         <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-32 h-32 bg-primary/30 rounded-full flex items-center justify-center">
-                               <Link href={capabilities[0].href} className="text-primary-foreground">
-                                    <Cpu className="w-16 h-16 text-white hover:scale-110 transition-transform" />
-                               </Link>
-                            </div>
+    <div className="container mx-auto flex h-full w-full flex-col items-center justify-center p-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
+           
+            <div className="md:col-span-1 flex items-center justify-center">
+                 <Card className="w-64 text-center bg-card/90 backdrop-blur-md p-4 border-dashed">
+                    <CardHeader className="p-2">
+                        <div className="flex items-center justify-center gap-3">
+                            <activeCircle.icon className="h-7 w-7 text-primary" />
+                            <CardTitle className="text-2xl">{activeCircle.name}</CardTitle>
                         </div>
-                    </div>
-                </div>
+                    </CardHeader>
+                    <CardContent className="p-2">
+                        <CardDescription className="min-h-[60px] text-sm">
+                            {activeCircle.description}
+                        </CardDescription>
+                        <Link href={activeCircle.href} passHref>
+                        <Button className="mt-4 w-full" variant="outline">進入 {activeCircle.name}</Button>
+                        </Link>
+                    </CardContent>
+                </Card>
             </div>
 
-            {/* Orbiting capability cards */}
-            {capabilities.slice(1).map((cap, index) => {
-                const angle = (index / (capabilities.length - 1)) * 2 * Math.PI;
-                const radius = 250;
-                const x = Math.cos(angle) * radius;
-                const y = Math.sin(angle) * radius;
-                
-                return (
-                     <div
-                        key={cap.level}
-                        className="absolute"
-                        style={{
-                            transform: `translate(${x}px, ${y}px)`,
-                        }}
-                    >
-                         <div className="planet-orbit">
-                            <Link href={cap.href} passHref>
-                                <Card 
-                                    className={cn(
-                                        "w-48 h-48 flex flex-col items-center justify-center p-4 text-center cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-110 hover:border-primary",
-                                        "bg-card/80 backdrop-blur-sm"
-                                    )}
-                                    onMouseEnter={() => setActiveCircle(cap)}
-                                >
-                                    <CardHeader className="p-2">
-                                        <cap.icon className="w-10 h-10 mx-auto text-primary" />
-                                    </CardHeader>
-                                    <CardContent className="p-2">
-                                        <CardTitle className="text-lg">{cap.name}</CardTitle>
-                                    </CardContent>
-                                </Card>
-                            </Link>
-                         </div>
-                    </div>
-                );
-            })}
-
-             <Card className="absolute w-64 text-center bg-background/90 backdrop-blur-md p-4 border-dashed">
-                <CardHeader className="p-2">
-                    <div className="flex items-center justify-center gap-3">
-                        <activeCircle.icon className="h-7 w-7 text-primary" />
-                        <CardTitle className="text-2xl">{activeCircle.name}</CardTitle>
-                    </div>
-                </CardHeader>
-                <CardContent className="p-2">
-                    <CardDescription className="min-h-[60px] text-sm">
-                        {activeCircle.description}
-                    </CardDescription>
-                    <Link href={activeCircle.href} passHref>
-                       <Button className="mt-4 w-full" variant="outline">進入 {activeCircle.name}</Button>
+            <div className="md:col-span-2 grid grid-cols-2 lg:grid-cols-3 gap-6">
+                 {capabilities.map((cap) => (
+                    <Link href={cap.href} passHref key={cap.level}>
+                        <Card 
+                            className={cn(
+                                "flex flex-col items-center justify-center p-4 text-center cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 hover:border-primary h-full",
+                                "bg-card/80 backdrop-blur-sm"
+                            )}
+                            onMouseEnter={() => setActiveCircle(cap)}
+                        >
+                            <CardHeader className="p-2">
+                                <cap.icon className="w-8 h-8 mx-auto text-primary" />
+                            </CardHeader>
+                            <CardContent className="p-2">
+                                <CardTitle className="text-base font-semibold">{cap.name}</CardTitle>
+                            </CardContent>
+                        </Card>
                     </Link>
-                </CardContent>
-            </Card>
+                ))}
+            </div>
         </div>
     </div>
   );
