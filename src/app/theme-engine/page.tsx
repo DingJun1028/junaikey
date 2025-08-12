@@ -10,25 +10,25 @@ import { Palette } from "lucide-react";
 
 export default function ThemeEnginePage() {
   return (
-    <div className="container mx-auto py-2">
-      <Card className="max-w-3xl mx-auto">
+    <div className="space-y-6">
+      <Card>
         <CardHeader>
-          <div className="flex items-center gap-4">
-            <Palette className="w-8 h-8 text-primary" />
+          <div className="flex items-start gap-4">
+            <Palette className="w-8 h-8 text-primary flex-shrink-0" />
             <div>
               <CardTitle className="text-2xl">萬能主題引擎 (Theme Engine)</CardTitle>
-              <CardDescription>AI 生成的 UI、UX 與詞彙體系。</CardDescription>
+              <CardDescription className="mt-1">AI-generated UI, UX, and vocabulary system.</CardDescription>
             </div>
           </div>
         </CardHeader>
         <CardContent>
-          <p className="mb-6 text-muted-foreground">
+          <p className="text-muted-foreground">
             Describe your desired UI theme, including concepts, colors, and
-            feelings. Our AI will generate a theme configuration for you.
+            feelings. Our AI will generate a theme configuration for you, including a color palette, font selection, and even a new title and description for the system.
           </p>
-          <ThemeEngineForm />
         </CardContent>
       </Card>
+      <ThemeEngineForm />
     </div>
   );
 }

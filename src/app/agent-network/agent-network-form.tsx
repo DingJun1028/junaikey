@@ -79,59 +79,67 @@ export function AgentNetworkForm() {
   }
 
   return (
-    <div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <FormField
-            control={form.control}
-            name="taskDescription"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Task Description</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="e.g., Summarize the provided text."
-                    rows={3}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="parameters"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Parameters (JSON)</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder='e.g., { "maxLength": 100, "format": "bullet-points" }'
-                    rows={4}
-                    className="font-mono"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" disabled={isLoading}>
-            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {isLoading ? "Delegating..." : "Delegate Task"}
-          </Button>
-        </form>
-      </Form>
+    <div className="space-y-6">
+       <Card>
+          <CardHeader>
+            <CardTitle>Delegate a New Task</CardTitle>
+            <CardDescription>Define the task and its parameters for the agent network to execute.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="taskDescription"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Task Description</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="e.g., Summarize the provided text from the knowledge base."
+                          rows={3}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="parameters"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Parameters (JSON)</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder='e.g., { "maxLength": 100, "format": "bullet-points" }'
+                          rows={4}
+                          className="font-mono"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" disabled={isLoading}>
+                  {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  {isLoading ? "Delegating..." : "Delegate Task"}
+                </Button>
+              </form>
+            </Form>
+          </CardContent>
+      </Card>
       
       {isLoading && (
-         <div className="mt-6 flex justify-center items-center">
+         <div className="flex justify-center items-center p-8">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
          </div>
       )}
 
       {result && (
-        <Card className="mt-6 bg-background">
+        <Card>
           <CardHeader>
             <CardTitle>Agent Response</CardTitle>
             <CardDescription>

@@ -43,59 +43,62 @@ const performanceData = [
 
 export default function OmniLogPage() {
   return (
-    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
-      <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">全能日誌 (OmniLog)</h2>
-      </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="flex-1 space-y-6">
+      <Card>
+        <CardHeader>
+            <CardTitle className="text-2xl">全能日誌 (OmniLog)</CardTitle>
+            <CardDescription>Your system's central dashboard, providing a real-time overview of all key metrics.</CardDescription>
+        </CardHeader>
+      </Card>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">活躍 AI 代理</CardTitle>
+            <CardTitle className="text-sm font-medium">Active AI Agents</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">48</div>
-            <p className="text-xs text-muted-foreground">比上月增加 +5</p>
+            <p className="text-xs text-muted-foreground">+5 from last month</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">平均參與度</CardTitle>
+            <CardTitle className="text-sm font-medium">Average Engagement</CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">85.3%</div>
-            <p className="text-xs text-muted-foreground">比上週提升 +2.1%</p>
+            <p className="text-xs text-muted-foreground">+2.1% from last week</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">平均準確度</CardTitle>
+            <CardTitle className="text-sm font-medium">Average Accuracy</CardTitle>
             <Bot className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">91.7%</div>
-            <p className="text-xs text-muted-foreground">持續穩定</p>
+            <p className="text-xs text-muted-foreground">Stable</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">自動化規則</CardTitle>
+            <CardTitle className="text-sm font-medium">Automation Rules</CardTitle>
             <Cog className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">128</div>
-            <p className="text-xs text-muted-foreground">本週新增 +3</p>
+            <p className="text-xs text-muted-foreground">+3 this week</p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
         <Card className="col-span-4">
           <CardHeader>
-            <CardTitle>代理表現矩陣</CardTitle>
+            <CardTitle>Agent Performance Matrix</CardTitle>
             <CardDescription>
-              各代理的參與度與準確度分佈。
+              Distribution of agent engagement and accuracy.
             </CardDescription>
           </CardHeader>
           <CardContent className="pl-2">
@@ -109,21 +112,21 @@ export default function OmniLogPage() {
                 }}
               >
                 <CartesianGrid />
-                <XAxis type="number" dataKey="engagement" name="參與度" unit="%" />
-                <YAxis type="number" dataKey="accuracy" name="準確度" unit="%" />
-                <ZAxis type="number" dataKey="level" range={[100, 500]} name="等級" />
+                <XAxis type="number" dataKey="engagement" name="Engagement" unit="%" />
+                <YAxis type="number" dataKey="accuracy" name="Accuracy" unit="%" />
+                <ZAxis type="number" dataKey="level" range={[100, 500]} name="Level" />
                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                 <Legend />
-                <Scatter name="代理表現" data={performanceData} fill="hsl(var(--primary))" />
+                <Scatter name="Agent Performance" data={performanceData} fill="hsl(var(--primary))" />
               </ScatterChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
         <Card className="col-span-3">
           <CardHeader>
-            <CardTitle>代理層級分佈</CardTitle>
+            <CardTitle>Agent Level Distribution</CardTitle>
             <CardDescription>
-              各等級 AI 代理的數量分佈。
+              Distribution of AI agents across different levels.
             </CardDescription>
           </CardHeader>
           <CardContent>

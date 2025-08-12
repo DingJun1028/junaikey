@@ -37,37 +37,21 @@ const formSchema = z.object({
 
 const ThemePreview = ({
   theme,
-  isLoading,
 }: {
-  theme: GenerateUiThemeOutput | null;
-  isLoading: boolean;
+  theme: GenerateUiThemeOutput;
 }) => {
   const [style, setStyle] = useState<React.CSSProperties>({});
 
   useEffect(() => {
-    if (theme) {
-      setStyle({
-        '--preview-primary': `hsl(${theme.colors.primary})`,
-        '--preview-background': `hsl(${theme.colors.background})`,
-        '--preview-accent': `hsl(${theme.colors.accent})`,
-      } as React.CSSProperties);
-    }
+    setStyle({
+      '--preview-primary': `hsl(${theme.colors.primary})`,
+      '--preview-background': `hsl(${theme.colors.background})`,
+      '--preview-accent': `hsl(${theme.colors.accent})`,
+    } as React.CSSProperties);
   }, [theme]);
-  
-  if (isLoading) {
-    return (
-      <div className="mt-6 flex justify-center items-center h-64">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  if (!theme) {
-    return null;
-  }
 
   return (
-    <Card className="mt-6 w-full" style={style}>
+    <Card className="w-full" style={style}>
       <CardHeader>
         <CardTitle>{theme.vocabulary.title}</CardTitle>
         <CardDescription>{theme.vocabulary.description}</CardDescription>
@@ -112,7 +96,7 @@ export function ThemeEngineForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      themePrompt: "",
+      themePrompt: "A futuristic theme for a space exploration app, with dark blues, purples, and glowing neon accents.",
     },
   });
 
@@ -122,11 +106,6 @@ export function ThemeEngineForm() {
     try {
       const output = await generateUiTheme(values);
       setResult(output);
-
-      // Optional: Apply theme to root for instant preview
-      // document.documentElement.style.setProperty('--primary', output.colors.primary);
-      // document.documentElement.style.setProperty('--background', output.colors.background);
-      // document.documentElement.style.setProperty('--accent', output.colors.accent);
 
     } catch (error) {
       console.error(error);
@@ -141,47 +120,62 @@ export function ThemeEngineForm() {
   }
 
   return (
-    <div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <FormField
-            control={form.control}
-            name="themePrompt"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Theme Prompt</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="e.g., A theme for a space exploration app, with dark blues, purples, and glowing accents. Modern and futuristic."
-                    rows={4}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" disabled={isLoading}>
-            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {isLoading ? "Generating..." : "Generate Theme"}
-          </Button>
-        </form>
-      </Form>
-
-      <ThemePreview theme={result} isLoading={isLoading} />
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>Generate New Theme</CardTitle>
+          <CardDescription>Provide a prompt and let the AI design a new look and feel for the application.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="themePrompt"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Theme Prompt</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="e.g., A theme for a space exploration app, with dark blues, purples, and glowing accents. Modern and futuristic."
+                        rows={4}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" disabled={isLoading}>
+                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {isLoading ? "Generating..." : "Generate Theme"}
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
       
-      {result && !isLoading && (
-        <Card className="mt-6 bg-background">
-          <CardHeader>
-            <CardTitle>Generated Theme Configuration</CardTitle>
-            <CardDescription>You can copy this into your globals.css file.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <pre className="p-4 bg-muted rounded-md text-sm overflow-x-auto">
-              <code>{JSON.stringify(result, null, 2)}</code>
-            </pre>
-          </CardContent>
-        </Card>
+      {isLoading && (
+         <div className="flex justify-center items-center p-8">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+         </div>
+      )}
+
+      {result && (
+        <div className="space-y-6">
+          <ThemePreview theme={result} />
+          <Card>
+            <CardHeader>
+              <CardTitle>Generated Theme Configuration</CardTitle>
+              <CardDescription>You can copy this into your `src/app/globals.css` file to apply it globally.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <pre className="p-4 bg-muted rounded-md text-sm overflow-x-auto">
+                <code>{`/* In globals.css */\n:root {\n  --background: ${result.colors.background};\n  --primary: ${result.colors.primary};\n  --accent: ${result.colors.accent};\n  /* ... other colors */\n}\n\n/* In layout.tsx or a theme provider */\n/* You'll need to dynamically load the Google Font: ${result.font} */`}</code>
+              </pre>
+            </CardContent>
+          </Card>
+        </div>
       )}
     </div>
   );

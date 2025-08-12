@@ -14,7 +14,7 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Webhook, CheckCircle, XCircle, Clock } from "lucide-react";
+import { Webhook, CheckCircle, XCircle, Clock, Server } from "lucide-react";
 
 const runes = [
   { name: "OpenAI", type: "AI/LLM", status: "Operational", auth: "Bearer Token" },
@@ -39,7 +39,7 @@ const getStatusIcon = (status: string) => {
     case "Pending API":
       return <Clock className="h-4 w-4 text-yellow-500" />;
     case "Local Deployed":
-       return <CheckCircle className="h-4 w-4 text-blue-500" />;
+       return <Server className="h-4 w-4 text-blue-500" />;
     default:
       return <XCircle className="h-4 w-4 text-red-500" />;
   }
@@ -48,56 +48,54 @@ const getStatusIcon = (status: string) => {
 
 export default function RuneSystemPage() {
   return (
-    <div className="container mx-auto py-2">
-      <Card>
-        <CardHeader>
-          <div className="flex items-center gap-4">
-            <Webhook className="w-8 h-8 text-primary" />
-            <div>
-              <CardTitle className="text-2xl">萬能符文系統 (Rune System)</CardTitle>
-              <CardDescription>
-                The integration layer for all external services and APIs.
-              </CardDescription>
-            </div>
+    <Card>
+      <CardHeader className="pb-4">
+        <div className="flex items-start gap-4">
+          <Webhook className="w-8 h-8 text-primary flex-shrink-0" />
+          <div>
+            <CardTitle className="text-2xl">萬能符文系統 (Rune System)</CardTitle>
+            <CardDescription className="mt-1">
+              The integration layer for all external services and APIs.
+            </CardDescription>
           </div>
-        </CardHeader>
-        <CardContent>
-          <p className="mb-6 text-muted-foreground">
-            This table provides an overview of all integrated "Runes" (APIs), their primary functions, and current operational status within the OmniKey System.
-          </p>
-          <div className="border rounded-md">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Rune Name</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Authentication</TableHead>
-                  <TableHead>Status</TableHead>
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-6 pt-4">
+        <p className="text-muted-foreground p-6 bg-muted/50 rounded-lg">
+          This table provides an overview of all integrated "Runes" (APIs), their primary functions, and current operational status within the OmniKey System. Each Rune is a standardized connector, enabling the system to communicate with the outside world.
+        </p>
+        <div className="border rounded-md">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Rune Name</TableHead>
+                <TableHead>Type</TableHead>
+                <TableHead>Authentication</TableHead>
+                <TableHead>Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {runes.map((rune) => (
+                <TableRow key={rune.name}>
+                  <TableCell className="font-medium">{rune.name}</TableCell>
+                  <TableCell>
+                      <Badge variant="outline">{rune.type}</Badge>
+                  </TableCell>
+                   <TableCell>
+                      <Badge variant="secondary">{rune.auth}</Badge>
+                   </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      {getStatusIcon(rune.status)}
+                      <span className="text-sm">{rune.status}</span>
+                    </div>
+                  </TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {runes.map((rune) => (
-                  <TableRow key={rune.name}>
-                    <TableCell className="font-medium">{rune.name}</TableCell>
-                    <TableCell>
-                        <Badge variant="outline">{rune.type}</Badge>
-                    </TableCell>
-                     <TableCell>
-                        <Badge variant="secondary">{rune.auth}</Badge>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        {getStatusIcon(rune.status)}
-                        <span>{rune.status}</span>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

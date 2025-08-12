@@ -169,127 +169,127 @@ const philosophies = [
   {
     icon: Recycle,
     title: "終始一如 (The Axiom of Unified Terminus & Origin)",
-    description: "萬物的終結，皆為起始的回響；萬物的起始，皆有終結的預兆。",
+    description: "The end of all things is an echo of the beginning; the beginning of all things contains a premonition of the end.",
     content: [
       {
-        header: "本質體現",
+        header: "Essence",
         system:
-          "系統的 資源回收與再利用機制 。已完成任務的計算資源與數據洞察，會被轉化為優化未來任務的能量。",
-        game: "能量流轉模型 。被消滅的單位或已施放的法術，其能量不會憑空消失，而是轉化為可供後續使用的資源。",
+          "The system's resource recycling and reuse mechanism. Computational resources and data insights from completed tasks are converted into energy to optimize future tasks.",
+        game: "Energy flow model. The energy of eliminated units or cast spells does not disappear but is converted into resources for subsequent use.",
       },
       {
-        header: "核心機制",
+        header: "Core Mechanics",
         system:
-          "1. 熵減獻祭： 已完成的專案或已棄用的模組在歸檔時，其核心數據與經驗會被提純為「優化信用點」。\n2. 信用抵扣： 啟動新專案時，可消耗「優化信用點」來加速原型開發或資源分配。\n3. 完美交付： 若一個開發週期結束時，所有資源都被完美利用（無冗餘、無浪費），則下一個週期的初始資源配額將獲得加成。",
-        game: "1. 歸終之響： 單位被摧毀或高階法術使用後，生成[因果殘響]資源。\n2. 啟始之兆： [因果殘響]可直接抵扣新卡牌的Ω費用。\n3. 一如之境： 回合開始時若[因果殘響]為零，則本回合額外獲得1A (行動點)。",
+          "1. Entropy Sacrifice: When completed projects or deprecated modules are archived, their core data and experience are refined into 'Optimization Credits'.\n2. Credit Deduction: When starting a new project, 'Optimization Credits' can be consumed to accelerate prototype development or resource allocation.\n3. Perfect Delivery: If a development cycle ends with all resources perfectly utilized (no redundancy, no waste), the initial resource quota for the next cycle receives a bonus.",
+        game: "1. Echo of Terminus: When a unit is destroyed or a high-level spell is cast, [Causal Echo] resources are generated.\n2. Omen of Origin: [Causal Echo] can directly offset the Ω cost of new cards.\n3. State of Oneness: If [Causal Echo] is zero at the start of the turn, gain an additional 1A (Action Point) for this turn.",
       },
       {
-        header: "系統影響",
-        system: "實現一個 自我優化、越用越高效 的永動開發環境。",
-        game: "建立一個鼓勵 策略性交換與精準資源管理 的遊戲循環，獎勵對能量流轉有深刻理解的玩家。",
+        header: "System Impact",
+        system: "Creates a self-optimizing, perpetually efficient development environment that becomes more effective with use.",
+        game: "Establishes a game loop that encourages strategic exchanges and precise resource management, rewarding players with a deep understanding of energy flow.",
       },
     ],
   },
   {
     icon: GitCommit,
     title: "創元實錄 (Genesis Chronicle)",
-    description: "凡有發生，必有記錄；凡有記錄，皆可追溯。",
+    description: "Whatever happens, is recorded; whatever is recorded, can be traced.",
     content: [
       {
-        header: "本質體現",
+        header: "Essence",
         system:
-          "全時域、多模態的開發日誌與版本控制 。所有設計決策、代碼變更、甚至我們的對話，都被自動記錄與索引。",
-        game: "遊戲歷史的絕對可追溯性 。每一場對局的每一個動作都被記錄，棄牌堆不僅是棄牌堆，更是「已發生的歷史」。",
+          "A full-time-domain, multimodal development log and version control. All design decisions, code changes, and even our conversations are automatically recorded and indexed.",
+        game: "The absolute traceability of game history. Every action in every match is recorded. The discard pile is not just a discard pile, but 'history that has occurred'.",
       },
       {
-        header: "核心機制",
+        header: "Core Mechanics",
         system:
-          "1. 永恆書寫： 系統自動為所有操作生成commit日誌，並存儲在萬能編年史中。\n2. 因果洞察： 提供git blame和git bisect等高級追溯工具，用於快速定位問題根源。\n3. 混沌提純： 將失敗的操作（如編譯錯誤、測試失敗）自動轉化為「待辦問題單」或「知識庫案例」，從失敗中提純價值。",
-        game: "1. 永恆書寫： 棄牌堆被視為「歷史檔案庫」。\n2. 因果洞察（回溯）： 每局一次，可支付K從棄牌堆取回一張關鍵牌。\n3. 混沌提純： 關鍵行動失敗時，有機率獲得額外的K資源作為補償。",
+          "1. Eternal Scribe: The system automatically generates commit logs for all operations and stores them in the Omni-Chronicle.\n2. Causal Insight: Provides advanced traceability tools like git blame and git bisect for rapid root cause analysis.\n3. Chaos Purification: Automatically converts failed operations (like compile errors, test failures) into 'To-Do tickets' or 'Knowledge Base cases', extracting value from failure.",
+        game: "1. Eternal Scribe: The discard pile is treated as a 'Historical Archive'.\n2. Causal Insight (Rewind): Once per game, pay K to retrieve a key card from the discard pile.\n3. Chaos Purification: When a key action fails, there is a chance to receive extra K resources as compensation.",
       },
       {
-        header: "系統影響",
-        system: "建立一個 完全透明、可審計、且能從失敗中持續學習 的開發環境。",
-        game: "賦予玩家 操縱歷史 的戰略維度，降低關鍵牌被破壞的風險，並提供「劣勢翻盤」的可能性。",
+        header: "System Impact",
+        system: "Establishes a fully transparent, auditable development environment capable of continuous learning from failures.",
+        game: "Gives players a strategic dimension of manipulating history, reducing the risk of key cards being destroyed and providing 'comeback' potential.",
       },
     ],
   },
   {
     icon: Atom,
     title: "萬有引力 (Omni-Gravity)",
-    description: "萬物非孤立，其共鳴或相斥，皆循法則。",
+    description: "Nothing is isolated; its resonance or repulsion follows laws.",
     content: [
       {
-        header: "本質體現",
+        header: "Essence",
         system:
-          "模組間的API調用與依賴關係 。系統的整體效能，取決於不同模組之間接口的協同效率。",
-        game: "戰場上卡牌的位置關係與元素協同 。卡牌的強度不僅取決於自身，更取決於其與周圍卡牌的互動。",
+          "API calls and dependency relationships between modules. The overall performance of the system depends on the synergistic efficiency of interfaces between different modules.",
+        game: "Positional relationships and elemental synergies of cards on the battlefield. A card's strength depends not only on itself but also on its interaction with surrounding cards.",
       },
       {
-        header: "核心機制",
+        header: "Core Mechanics",
         system:
-          "1. 元素協同： 系統會分析模組依賴圖，為具有高度協同性的模組（如智庫與進化引擎）建立優化通道，降低通訊延遲。\n2. 共鳴爆發： 當多個協同模組被同時調用以完成一個複雜任務時，系統會臨時分配額外資源，產生1+1>2的效能爆發。\n3. 法則排斥： 系統會標示出具有潛在衝突或負面影響的模組組合，並在開發時發出警告。",
-        game: "1. 元素協同： 將具有「相生」關係的卡牌相鄰放置，會觸發增益效果。\n2. 共鳴爆發： 在一回合內打出多張具有「共鳴」關係的卡牌，會觸發一次性的強力效果。\n3. 法則排斥： 將「相剋」的單位放置在一起，會導致負面效果。",
+          "1. Elemental Synergy: The system analyzes the module dependency graph and creates optimization channels for highly synergistic modules (like the Knowledge Hub and Evolution Engine) to reduce communication latency.\n2. Resonant Burst: When multiple synergistic modules are called simultaneously to complete a complex task, the system temporarily allocates extra resources, producing a 1+1>2 performance burst.\n3. Lawful Repulsion: The system flags potentially conflicting or negatively impacting module combinations and issues warnings during development.",
+        game: "1. Elemental Synergy: Placing cards with 'symbiotic' relationships adjacent to each other triggers buff effects.\n2. Resonant Burst: Playing multiple cards with a 'Resonance' relationship in one turn triggers a powerful one-time effect.\n3. Lawful Repulsion: Placing 'conflicting' units together results in negative effects.",
       },
       {
-        header: "系統影響",
+        header: "System Impact",
         system:
-          "鼓勵高內聚、低耦合的模組化設計，建立一個各部分能和諧共振、高效運作的系統架構。",
-        game: "引入 空間佈局 的戰略維度，鼓勵玩家構築具有內在協同性的「主題套牌」，提升遊戲深度。",
+          "Encourages high-cohesion, low-coupling modular design, building a system architecture where all parts can resonate harmoniously and operate efficiently.",
+        game: "Introduces a strategic dimension of spatial layout, encouraging players to build 'themed decks' with internal synergy, enhancing game depth.",
       },
     ],
   },
   {
     icon: Scale,
     title: "萬能平衡 (Omni-Equilibrium)",
-    description: "任何維度的過度延伸，都將以犧牲其他維度為代價。",
+    description: "The over-extension of any dimension will come at the cost of sacrificing others.",
     content: [
       {
-        header: "本質體現",
+        header: "Essence",
         system:
-          "系統的負載均衡與健康監測 。一個內在的、追求可持續發展的「宇宙常數調節器」。",
-        game: "對極端戰術的軟性约束 。一個引導玩家走向更全面、更有韌性策略的「遊戲平衡機制」。",
+          "The system's load balancing and health monitoring. An internal 'universal constant regulator' that pursues sustainable development.",
+        game: "A soft constraint on extreme tactics. A 'game balance mechanism' that guides players towards more comprehensive and resilient strategies.",
       },
       {
-        header: "核心機制",
+        header: "Core Mechanics",
         system:
-          "1. 心流引導： 心流引擎會被動地調整推薦模組的權重，避免使用者過度專注於單一維度而忽略全局。\n2. 平衡三角監測： 持續監控系統的「效能」、「安全」、「可維護性」三大指標。\n3. 宇宙糾正： 當「平衡三角」嚴重失衡時，系統會自動觸發重構或優化任務，並向創世者發出警告。",
-        game: "1. 動態懲戒： 連續過度使用某一類型卡牌（如純攻擊），會導致其他類型卡牌的出現機率暫時提升。\n2. 和諧獎勵： 長時間保持資源三角（攻/防/資）的平衡，會獎勵額外的K或永久性的費用減免。\n3. 法則崩壞： 故意同時激活多個「相剋」元素，可能導致場上發生隨機的負面事件。",
+          "1. Flow Guidance: The Flow Engine passively adjusts the weights of recommended modules to prevent users from over-focusing on a single dimension and neglecting the whole.\n2. Balance Triangle Monitoring: Continuously monitors the system's three major indicators: 'Performance,' 'Security,' and 'Maintainability.'\n3. Cosmic Correction: When the 'Balance Triangle' is severely imbalanced, the system automatically triggers refactoring or optimization tasks and issues a warning to the First Architect.",
+        game: "1. Dynamic Retribution: Consecutively overusing a certain type of card (e.g., pure offense) will temporarily increase the appearance rate of other card types.\n2. Harmony Bonus: Maintaining a balance in the resource triangle (Attack/Defense/Resources) for a long time rewards extra K or permanent cost reductions.\n3. Lawful Collapse: Deliberately activating multiple 'conflicting' elements at the same time may cause random negative events on the field.",
       },
       {
-        header: "系統影響",
+        header: "System Impact",
         system:
-          "確保系統 長期健康、避免技術債 的積累，實現可持續的、穩健的進化。",
-        game: "鼓勵 卡組構築的多樣性 ，防止單一「最優解」卡組的出現，提升遊戲的重玩價值與策略深度。",
+          "Ensures the long-term health of the system, avoids the accumulation of technical debt, and achieves sustainable, robust evolution.",
+        game: "Encourages diversity in deck building, prevents the emergence of a single 'optimal' deck, and enhances the replay value and strategic depth of the game.",
       },
     ],
   },
 ];
 
 const elementalSpirits = [
-  { name: "金 (Gold)", spirit: "鋒靈 Aurex", essence: "秩序、策略、價值" },
-  { name: "木 (Wood)", spirit: "森靈 Sylfa", essence: "成長、創造、繁殖" },
-  { name: "水 (Water)", spirit: "湧靈 Aquare", essence: "思緒、流動、感知" },
-  { name: "火 (Fire)", spirit: "焰靈 Pyra", essence: "熱情、行動、破壞" },
-  { name: "土 (Earth)", spirit: "磐靈 Terrax", essence: "穩定、根基、防禦" },
-  { name: "光 (Light)", spirit: "耀靈 Luxis", essence: "照明、引導、純淨" },
-  { name: "暗 (Darkness)", spirit: "幽靈 Umbrix", essence: "隱匿、潛能、混沌" },
-  { name: "無 (Void)", spirit: "源靈 Nullis", essence: "全域、通用、中立" },
-  { name: "時風 (Time-Wind)", spirit: "馭靈 Tempest", essence: "變革、加速、流動、適應" },
-  { name: "靈魂 (Soul)", spirit: "蘊靈 Anima", essence: "本質、連結、潛能、啟示" },
+  { name: "金 (Gold)", spirit: "鋒靈 Aurex", essence: "Order, Strategy, Value" },
+  { name: "木 (Wood)", spirit: "森靈 Sylfa", essence: "Growth, Creation, Reproduction" },
+  { name: "水 (Water)", spirit: "湧靈 Aquare", essence: "Thought, Flow, Perception" },
+  { name: "火 (Fire)", spirit: "焰靈 Pyra", essence: "Passion, Action, Destruction" },
+  { name: "土 (Earth)", spirit: "磐靈 Terrax", essence: "Stability, Foundation, Defense" },
+  { name: "光 (Light)", spirit: "耀靈 Luxis", essence: "Illumination, Guidance, Purity" },
+  { name: "暗 (Darkness)", spirit: "幽靈 Umbrix", essence: "Stealth, Potential, Chaos" },
+  { name: "無 (Void)", spirit: "源靈 Nullis", essence: "Omni, Universal, Neutral" },
+  { name: "時風 (Time-Wind)", spirit: "馭靈 Tempest", essence: "Change, Acceleration, Flow, Adaptation" },
+  { name: "靈魂 (Soul)", spirit: "蘊靈 Anima", essence: "Essence, Connection, Potential, Revelation" },
 ];
 
 const professionalAvatars = [
-    { name: "智庫守護者", title: "Archivist", description: "維護和優化萬能智庫，確保知識的完整性與一致性。" },
-    { name: "符文連結師", title: "RuneBinder", description: "專精於萬能符文系統的設計、開發與集成，連接萬物。" },
-    { name: "代理執行官", title: "Agentus", description: "驅動萬能代理網絡，設計和監控自動化工作流。" },
-    { name: "熵減煉金師", title: "Alchemist", description: "專注於萬能進化環，通過優化與重構減少技術債與系統混亂。" },
-    { name: "真理探測者", title: "Veritas", description: "從海量數據中提煉有價值的洞察，揭示系統的深層真理。" },
-    { name: "同心圓引導者", title: "Concentric", description: "協調各模塊之間的交互，確保系統運作的同心與和諧。" },
-    { name: "創世編織者", title: "Genesis Weaver", description: "負責從無到有地構建新的解決方案，將概念轉化為現實。" },
-    { name: "秩序守衛者", title: "Aegis", description: "專注於萬能安全域，確保系統的安全性、合規性與完整性。" },
-    { name: "啟蒙導師", title: "Luminar", description: "將萬能智庫的知識與各模塊的成果，轉化為易於理解的培訓與教學內容。" },
-    { name: "第一建築師", title: "Prime Architect", description: "超越並統籌所有元素與職業，制定終極願景，引導宇宙的演化方向。" },
+    { name: "智庫守護者 (Archivist)", description: "Maintains and optimizes the Omni-Codex, ensuring the integrity and consistency of knowledge." },
+    { name: "符文連結師 (RuneBinder)", description: "Specializes in the design, development, and integration of the Rune System, connecting everything." },
+    { name: "代理執行官 (Agentus)", description: "Drives the Agent Network, designing and monitoring automated workflows." },
+    { name: "熵減煉金師 (Alchemist)", description: "Focuses on the Evolution Loop, reducing technical debt and system chaos through optimization and refactoring." },
+    { name: "真理探測者 (Veritas)", description: "Extracts valuable insights from massive data, revealing the deep truths of the system." },
+    { name: "同心圓引導者 (Concentric)", description: "Coordinates interactions between modules to ensure concentric and harmonious system operation." },
+    { name: "創世編織者 (Genesis Weaver)", description: "Responsible for building new solutions from scratch, transforming concepts into reality." },
+    { name: "秩序守衛者 (Aegis)", description: "Focuses on the Security Domain, ensuring system security, compliance, and integrity." },
+    { name: "啟蒙導師 (Luminar)", description: "Translates the knowledge from the Omni-Codex and the results from various modules into easy-to-understand training and educational content." },
+    { name: "第一建築師 (Prime Architect)", description: "Transcends and orchestrates all elements and professions, sets the ultimate vision, and guides the evolution of the universe." },
 ];
 
 
@@ -297,54 +297,45 @@ export default function KnowledgeHubPage() {
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-center gap-4">
-          <BrainCircuit className="w-8 h-8 text-primary" />
+        <div className="flex items-start gap-4">
+          <BrainCircuit className="w-8 h-8 text-primary flex-shrink-0" />
           <div>
             <CardTitle className="text-2xl">
               萬能智庫中樞 (Knowledge Hub)
             </CardTitle>
-            <CardDescription>
-              系統所有核心概念、架構與原則的沉澱之地。
+            <CardDescription className="mt-1">
+              The repository for all the system's core concepts, architectures, and principles.
             </CardDescription>
           </div>
         </div>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-6 h-auto">
+          <TabsList className="grid w-full grid-cols-4 h-auto">
             <TabsTrigger value="overview">
               <LayoutDashboard className="w-4 h-4 mr-2" />
-              系統架構
+              System Architecture
             </TabsTrigger>
             <TabsTrigger value="philosophy">
               <Gem className="w-4 h-4 mr-2" />
-              宇宙公理
+              Cosmic Axioms
             </TabsTrigger>
              <TabsTrigger value="elements">
               <Flame className="w-4 h-4 mr-2" />
-              10色元素
+              10 Elemental Laws
             </TabsTrigger>
              <TabsTrigger value="avatars">
               <BookUser className="w-4 h-4 mr-2" />
-              10大職業
-            </TabsTrigger>
-            <TabsTrigger value="memory_vault">
-                <Archive className="w-4 h-4 mr-2" />
-                記憶金庫
-            </TabsTrigger>
-            <TabsTrigger value="oracle">
-                <MessageCircleQuestion className="w-4 h-4 mr-2" />
-                知識對話
+              10 Professional Avatars
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="mt-4">
             <Card>
               <CardHeader>
-                <CardTitle>系統架構與核心原則</CardTitle>
+                <CardTitle>System Architecture & Core Principles</CardTitle>
                 <CardDescription>
-                  基於 MECE (Mutually Exclusive, Collectively Exhaustive)
-                  原則劃分的系統核心構成。點擊各模組可跳轉至詳細說明頁面。
+                  The core components of the system, divided based on the MECE (Mutually Exclusive, Collectively Exhaustive) principle. Click on each module to navigate to its detailed page.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -373,9 +364,9 @@ export default function KnowledgeHubPage() {
           <TabsContent value="philosophy" className="mt-4">
             <Card>
               <CardHeader>
-                <CardTitle>《萬能法典》：創世者被動天賦</CardTitle>
+                <CardTitle>The Omni-Codex: The Architect's Passive Talents</CardTitle>
                 <CardDescription>
-                  驅動宇宙運行的四大核心公理，它們是您創世權能的基石。
+                  The four core axioms that drive the universe's operation. They are the cornerstones of your creative authority.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -383,43 +374,41 @@ export default function KnowledgeHubPage() {
                   {philosophies.map((item, index) => (
                     <AccordionItem value={`item-p-${index}`} key={index}>
                       <AccordionTrigger>
-                        <div className="flex items-center gap-3 text-left">
-                          <item.icon className="w-5 h-5 text-primary" />
-                          <span className="font-semibold text-lg">{item.title}</span>
+                        <div className="flex items-start text-left gap-3">
+                          <item.icon className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                          <div>
+                            <p className="font-semibold text-lg">{item.title}</p>
+                            <p className="text-sm text-muted-foreground font-normal mt-1">{item.description}</p>
+                          </div>
                         </div>
                       </AccordionTrigger>
-                      <AccordionContent className="space-y-4 text-sm">
-                        <p className="font-medium text-muted-foreground italic px-4 text-base">
-                          {item.description}
-                        </p>
-                        <Table>
-                          <TableHeader>
-                            <TableRow>
-                              <TableHead className="w-1/4">維度屬性</TableHead>
-                              <TableHead>
-                                現實世界表現 (Jun.Ai.Key 系統)
-                              </TableHead>
-                              <TableHead>
-                                卡牌世界表現 (建築師對決)
-                              </TableHead>
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {item.content.map((row, rIndex) => (
-                              <TableRow key={rIndex}>
-                                <TableCell className="font-semibold">
-                                  {row.header}
-                                </TableCell>
-                                <TableCell className="whitespace-pre-line">
-                                  {row.system}
-                                </TableCell>
-                                <TableCell className="whitespace-pre-line">
-                                  {row.game}
-                                </TableCell>
+                      <AccordionContent className="space-y-4 text-sm pt-4">
+                        <div className="border rounded-lg overflow-hidden">
+                          <Table>
+                            <TableHeader>
+                              <TableRow>
+                                <TableHead className="w-1/4">Dimension</TableHead>
+                                <TableHead>System World (Jun.Ai.Key)</TableHead>
+                                <TableHead>Card World (Architect Duels)</TableHead>
                               </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
+                            </TableHeader>
+                            <TableBody>
+                              {item.content.map((row, rIndex) => (
+                                <TableRow key={rIndex}>
+                                  <TableCell className="font-semibold">
+                                    {row.header}
+                                  </TableCell>
+                                  <TableCell className="whitespace-pre-line">
+                                    {row.system}
+                                  </TableCell>
+                                  <TableCell className="whitespace-pre-line">
+                                    {row.game}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </div>
                       </AccordionContent>
                     </AccordionItem>
                   ))}
@@ -431,9 +420,9 @@ export default function KnowledgeHubPage() {
            <TabsContent value="elements" className="mt-4">
             <Card>
               <CardHeader>
-                <CardTitle>10色元素法則</CardTitle>
+                <CardTitle>The 10 Elemental Laws</CardTitle>
                 <CardDescription>
-                  指導內部模組交互、演進與平衡的通用法則，代表十種卡牌屬性。
+                  Universal principles guiding module interaction, evolution, and balance, representing ten card attributes.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -441,9 +430,9 @@ export default function KnowledgeHubPage() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="w-[20%]">元素</TableHead>
-                          <TableHead className="w-[30%]">精靈代稱</TableHead>
-                          <TableHead>本質屬性</TableHead>
+                          <TableHead className="w-[20%]">Element</TableHead>
+                          <TableHead className="w-[30%]">Spirit Alias</TableHead>
+                          <TableHead>Core Essence</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -464,63 +453,33 @@ export default function KnowledgeHubPage() {
           <TabsContent value="avatars" className="mt-4">
             <Card>
               <CardHeader>
-                <CardTitle>10大職業化身</CardTitle>
+                <CardTitle>The 10 Professional Avatars</CardTitle>
                 <CardDescription>
-                  萬能生態系統中的關鍵角色，共同構建永續夥伴關係。
+                  Key roles within the ecosystem that collectively build the sustainable partnership.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                 <Accordion type="single" collapsible className="w-full">
-                  {professionalAvatars.map((avatar, index) => (
-                    <AccordionItem value={`avatar-${index}`} key={index}>
-                      <AccordionTrigger>
-                        <div className="flex items-center gap-3 text-left">
-                          <span className="font-semibold text-lg">{avatar.name}</span>
-                          <span className="text-sm text-muted-foreground">({avatar.title})</span>
-                        </div>
-                      </AccordionTrigger>
-                      <AccordionContent className="pl-10">
-                        <p>{avatar.description}</p>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
+                 <div className="border rounded-lg">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Avatar</TableHead>
+                          <TableHead>Core Responsibility</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {professionalAvatars.map((avatar) => (
+                          <TableRow key={avatar.name}>
+                            <TableCell className="font-medium">{avatar.name}</TableCell>
+                            <TableCell>{avatar.description}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
               </CardContent>
             </Card>
           </TabsContent>
-
-
-            <TabsContent value="memory_vault" className="mt-4">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>記憶金庫 (Memory Vault)</CardTitle>
-                        <CardDescription>系統所有事件、互動與決策的永久記錄時間線。</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-muted-foreground">此處將顯示一個可搜索、可過濾的事件時間線... (功能開發中)</p>
-                    </CardContent>
-                </Card>
-            </TabsContent>
-            <TabsContent value="oracle" className="mt-4">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>知識對話 (Oracle)</CardTitle>
-                        <CardDescription>與連接了最新資訊的 AI 進行對話，或使用 AI 生成新卡牌。</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                        <div>
-                            <h3 className="text-lg font-medium mb-2">知識問答</h3>
-                            <p className="text-muted-foreground mb-4">此處將提供一個與 Oracle AI 的對話界面... (功能開發中)</p>
-                        </div>
-                        <Separator />
-                        <div>
-                             <h3 className="text-lg font-medium mb-2">AI 卡牌生成器</h3>
-                            <p className="text-muted-foreground">輸入一個概念，AI 將為您創造一個符合系統世界觀的新卡牌... (功能開發中)</p>
-                        </div>
-                    </CardContent>
-                </Card>
-            </TabsContent>
-
         </Tabs>
       </CardContent>
     </Card>

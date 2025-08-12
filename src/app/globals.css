@@ -27,7 +27,7 @@ body {
     --border: 220 13% 85%;
     --input: 220 13% 85%;
     --ring: 199 89% 49%;
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     /* For theme preview */
     --preview-primary: hsl(var(--primary));
@@ -82,10 +82,7 @@ body {
         to { opacity: 1; transform: translateY(0); }
     }
     .card {
-        @apply transition-transform duration-300 ease-in-out shadow-md;
-    }
-    .card:hover {
-        @apply -translate-y-1 shadow-lg;
+        @apply transition-shadow duration-300 ease-in-out;
     }
 
     .concentric-circle-container {

@@ -19,10 +19,10 @@ interface EvolutionRule {
 }
 
 const pillars = {
-  simplicity: '簡單性',
-  speed: '快速性',
-  practicality: '實用性',
-  efficiency: '效能性',
+  simplicity: 'Simplicity',
+  speed: 'Speed',
+  practicality: 'Practicality',
+  efficiency: 'Efficiency',
 };
 
 const pillarColors: { [key: string]: string } = {
@@ -37,10 +37,10 @@ const generateRule = (): EvolutionRule => {
   const pillarKeys = Object.keys(pillars);
   const randomPillar = pillarKeys[Math.floor(Math.random() * pillarKeys.length)];
   const reasons = {
-    simplicity: '降低 UI 複雜度，提升直覺性',
-    speed: '優化數據庫查詢，減少響應延遲',
-    practicality: '整合用戶反饋，提升功能實用性',
-    efficiency: '重構後端邏輯，減少資源消耗',
+    simplicity: 'Reduce UI complexity for better intuition.',
+    speed: 'Optimize database queries to reduce response latency.',
+    practicality: 'Integrate user feedback to enhance functionality.',
+    efficiency: 'Refactor backend logic to minimize resource consumption.',
   }
   const rules = {
       simplicity: "Refactor: Consolidate User and Profile settings pages into a single 'Account' view.",
@@ -74,21 +74,21 @@ export default function EvolutionNexusPage() {
 
 
   return (
-    <Card className="max-w-3xl mx-auto">
+    <Card>
       <CardHeader>
-        <div className="flex items-center gap-4">
-          <Infinity className="w-8 h-8 text-primary" />
+        <div className="flex items-start gap-4">
+          <Infinity className="w-8 h-8 text-primary flex-shrink-0" />
           <div>
             <CardTitle className="text-2xl">進化中樞 (Evolution Nexus)</CardTitle>
-            <CardDescription>
-              見證系統自我優化過程的儀表板。
+            <CardDescription className="mt-1">
+              A dashboard to witness the system's self-optimization process.
             </CardDescription>
           </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
-        <p className="text-muted-foreground">
-          系統會根據「四大基石」（簡單、快速、實用、效能）的得分，每 5 分鐘自動生成一條新的優化規則。您可以在此即時見證系統的自主成長與進化。
+        <p className="text-muted-foreground p-6 bg-muted/50 rounded-lg">
+          Based on the scores of the "Four Pillars" (Simplicity, Speed, Practicality, Efficiency), the system automatically generates a new optimization rule every 5 seconds. Here, you can witness the autonomous growth and evolution of the system in real-time.
         </p>
 
         <div className="space-y-4">
@@ -96,7 +96,7 @@ export default function EvolutionNexusPage() {
                  <Card key={rule.id} className={`transition-all duration-500 ease-in-out ${index === 0 ? 'opacity-100 transform-none' : 'opacity-60'}`}>
                     <CardHeader>
                         <CardTitle className="text-lg flex items-center justify-between">
-                            <span>新進化規則已生成</span>
+                            <span>New Evolution Rule Generated</span>
                             <span className="text-sm font-mono text-muted-foreground">{rule.timestamp}</span>
                         </CardTitle>
                         <CardDescription>{rule.reason}</CardDescription>
@@ -107,7 +107,7 @@ export default function EvolutionNexusPage() {
                             <p>{rule.rule}</p>
                         </div>
                         <div className="mt-4 flex items-center gap-2">
-                             <span className="text-sm text-muted-foreground">關聯基石:</span>
+                             <span className="text-sm text-muted-foreground">Associated Pillar:</span>
                              {rule.pillars.map(p => (
                                 <span key={p} className={`px-2 py-1 text-xs font-medium rounded-md ${pillarColors[p]}`}>
                                     {pillars[p as keyof typeof pillars]}

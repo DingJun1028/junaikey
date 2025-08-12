@@ -22,50 +22,59 @@ import { LifeBuoy, Send } from 'lucide-react';
 
 export default function TroubleshootingPage() {
   return (
-    <Card className="max-w-3xl mx-auto">
-      <CardHeader>
-        <div className="flex items-center gap-4">
-          <LifeBuoy className="w-8 h-8 text-primary" />
-          <div>
-            <CardTitle className="text-2xl">疑難雜症需求中心 (Troubleshooting & Request Center)</CardTitle>
-            <CardDescription>
-              遇到問題或有新功能想法？在此提交您的需求，讓系統與您一同進化。
-            </CardDescription>
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <div className="flex items-start gap-4">
+            <LifeBuoy className="w-8 h-8 text-primary flex-shrink-0" />
+            <div>
+              <CardTitle className="text-2xl">疑難雜症需求中心 (Troubleshooting & Request Center)</CardTitle>
+              <CardDescription className="mt-1">
+                Encountered an issue or have a new feature idea? Submit your request here and let the system evolve with you.
+              </CardDescription>
+            </div>
           </div>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <form className="space-y-6">
-            <div className="space-y-2">
-                <Label htmlFor="title">需求標題</Label>
-                <Input id="title" placeholder="例如：希望能整合 Google Calendar" />
-            </div>
-             <div className="space-y-2">
-                <Label htmlFor="type">需求類型</Label>
-                 <Select>
-                    <SelectTrigger id="type">
-                        <SelectValue placeholder="選擇一個類型..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="bug">問題回報 (Bug Report)</SelectItem>
-                        <SelectItem value="feature">新功能建議 (Feature Request)</SelectItem>
-                        <SelectItem value="integration">整合需求 (Integration Request)</SelectItem>
-                         <SelectItem value="other">其他問題</SelectItem>
-                    </SelectContent>
-                </Select>
-            </div>
-            <div className="space-y-2">
-                <Label htmlFor="description">詳細說明</Label>
-                <Textarea id="description" rows={6} placeholder="請盡可能詳細地描述您遇到的問題、您的期望，或您想要的新功能如何運作。" />
-            </div>
-            <div className="flex justify-end">
-                <Button>
-                    <Send className="mr-2" />
-                    提交需求
-                </Button>
-            </div>
-        </form>
-      </CardContent>
-    </Card>
+        </CardHeader>
+      </Card>
+      
+      <Card>
+          <CardHeader>
+            <CardTitle>Submit a New Request</CardTitle>
+            <CardDescription>Provide details about your bug report or feature suggestion.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form className="space-y-6">
+                <div className="space-y-2">
+                    <Label htmlFor="title">Request Title</Label>
+                    <Input id="title" placeholder="e.g., Integration with Google Calendar" />
+                </div>
+                 <div className="space-y-2">
+                    <Label htmlFor="type">Request Type</Label>
+                     <Select>
+                        <SelectTrigger id="type">
+                            <SelectValue placeholder="Select a type..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="bug">Bug Report</SelectItem>
+                            <SelectItem value="feature">Feature Request</SelectItem>
+                            <SelectItem value="integration">Integration Request</SelectItem>
+                             <SelectItem value="other">Other Inquiry</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="description">Detailed Description</Label>
+                    <Textarea id="description" rows={6} placeholder="Please describe the issue, your expectation, or how the new feature should work in as much detail as possible." />
+                </div>
+                <div className="flex justify-end">
+                    <Button>
+                        <Send className="mr-2" />
+                        Submit Request
+                    </Button>
+                </div>
+            </form>
+          </CardContent>
+      </Card>
+    </div>
   );
 }

@@ -4,7 +4,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { FileText, Terminal, Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 export default function SanctumPage() {
     const [history, setHistory] = useState<string[]>(['Welcome to the AI Core Sanctum. Type `help` to see available commands.']);
@@ -58,21 +57,26 @@ Analysis Complete.
         if (terminalRef.current) {
             terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
         }
-    }, [history]);
+    }, [history, isLoading]);
 
     const handleCommand = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (isLoading) return;
         const command = input.trim().toLowerCase();
         const newHistory = [...history, `> ${input}`];
         setInput('');
 
         if (command in commands) {
-            const output = await commands[command]();
-            if(output) newHistory.push(output);
-            setHistory(newHistory);
+            const outputPromise = commands[command]();
+            if (command === 'core-analyze' || command === 'clear') {
+                 setHistory(newHistory);
+            }
+            const output = await outputPromise;
+            if(output) {
+                setHistory(prev => [...prev, output]);
+            }
         } else if(command) {
-            newHistory.push(`Command not found: ${command}. Type 'help' for available commands.`);
-            setHistory(newHistory);
+            setHistory([...newHistory, `Command not found: ${command}. Type 'help' for available commands.`]);
         } else {
              setHistory(newHistory);
         }
@@ -102,22 +106,27 @@ Analysis Complete.
   return (
     <Card className="font-mono">
       <CardHeader>
-        <div className="flex items-center gap-4">
-          <FileText className="w-8 h-8 text-primary font-sans" />
+        <div className="flex items-start gap-4">
+          <FileText className="w-8 h-8 text-primary font-sans flex-shrink-0" />
           <div>
             <CardTitle className="text-2xl font-sans">AI 核心終端 (AI Core Sanctum)</CardTitle>
-            <CardDescription className="font-sans">與系統的 AI 核心直接對話。</CardDescription>
+            <CardDescription className="font-sans mt-1">A direct conversational interface with the system's AI core.</CardDescription>
           </div>
         </div>
       </CardHeader>
       <CardContent>
-        <div className="bg-black text-white rounded-lg p-4 h-96 overflow-y-auto" ref={terminalRef}>
+        <div className="bg-black text-white/90 rounded-lg p-4 h-96 overflow-y-auto" ref={terminalRef}>
             {history.map((line, index) => (
                 <div key={index} className="whitespace-pre-wrap text-sm leading-6">
                     {parseAnsi(line)}
                 </div>
             ))}
-            {isLoading && <Loader2 className="h-5 w-5 animate-spin mt-2" />}
+            {isLoading && (
+                <div className="flex items-center gap-2 mt-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>Analyzing...</span>
+                </div>
+            )}
         </div>
         <form onSubmit={handleCommand} className="mt-4 flex gap-2">
             <div className="flex items-center">
