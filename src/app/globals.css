@@ -85,53 +85,21 @@ body {
         @apply transition-shadow duration-300 ease-in-out;
     }
 
-    .concentric-circle-container {
-        width: 100%;
-        max-width: 500px;
-        aspect-ratio: 1/1;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    /* Orbital animations for the homepage */
+    .planet-orbit {
+      animation: orbit 30s linear infinite;
     }
 
-    .circle {
-        position: absolute;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        border-style: solid;
-        border-width: 2px;
-        background-color: hsla(var(--primary) / 0.1);
-        border-color: hsla(var(--primary) / 0.2);
-    }
-    .dark .circle {
-        background-color: hsla(var(--primary) / 0.05);
-        border-color: hsla(var(--primary) / 0.1);
+    @keyframes orbit {
+      from { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+      to   { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
     }
     
-    .circle:hover {
-        transform: scale(1.02);
-        border-color: hsla(var(--primary) / 0.5);
-    }
-    .circle.active {
-        transform: scale(1.05);
-        box-shadow: 0 0 25px hsla(var(--primary) / 0.3);
-        border-color: hsl(var(--primary));
-        background-color: hsla(var(--primary) / 0.2);
-    }
-    .circle-5 { width: 100%; height: 100%;}
-    .circle-4 { width: 80%; height: 80%;}
-    .circle-3 { width: 60%; height: 60%;}
-    .circle-2 { width: 40%; height: 40%;}
-    .circle-1 { width: 20%; height: 20%; background-color: hsl(var(--primary)); border-color: hsl(var(--primary)); }
-    .dark .circle-1 {
-         background-color: hsl(var(--primary));
-         border-color: hsl(var(--primary));
-    }
+    .planet-orbit:nth-child(1) { animation-duration: 25s; }
+    .planet-orbit:nth-child(2) { animation-duration: 35s; }
+    .planet-orbit:nth-child(3) { animation-duration: 45s; }
+    .planet-orbit:nth-child(4) { animation-duration: 55s; }
+    .planet-orbit:nth-child(5) { animation-duration: 65s; }
 
 
     /* Custom styles for Knowledge Hub Tabs */
