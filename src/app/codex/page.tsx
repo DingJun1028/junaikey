@@ -51,7 +51,10 @@ export default function CodexPage() {
       </CardHeader>
       <CardContent className="space-y-8 pt-4">
         <section>
-          <h2 className="text-xl font-semibold mb-3">三界統合：數據語義對應 (Triune Unity: Data-Semantic Mapping)</h2>
+           <div className="mb-3">
+              <h2 className="text-xl font-semibold">三界統合：數據語義對應</h2>
+              <p className="text-sm text-muted-foreground">Triune Unity: Data-Semantic Mapping</p>
+            </div>
           <p className="text-muted-foreground mb-4">
             To fully integrate the "Physical World (Omni-Universe)," "System World (Omni-System)," and "Card World (Omni-Matrix)," the core lies in mapping data to semantics. Each card is a "meaning-vectorized" data structure, carrying a queryable, editable, and recordable "unit of action."
           </p>
@@ -81,12 +84,15 @@ export default function CodexPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-3">Card Structure Design Example (TypeScript)</h2>
+          <div className="mb-3">
+            <h2 className="text-xl font-semibold">卡牌結構設計範例 (TypeScript)</h2>
+            <p className="text-sm text-muted-foreground">Card Structure Design Example (TypeScript)</p>
+          </div>
           <p className="text-muted-foreground mb-4">
             This is the core TypeScript type definition for a `UniversalCard`. It demonstrates how a card links to the three core layers of the universe: the Catalog, Definitions, and Chapters.
           </p>
           <div className="bg-background rounded-lg overflow-hidden border">
-             <SyntaxHighlighter language="typescript" style={vscDarkPlus} customStyle={{ margin: 0, padding: '1.5rem', backgroundColor: 'hsl(var(--muted))' }}>
+             <SyntaxHighlighter language="typescript" style={vscDarkPlus} customStyle={{ margin: 0, padding: '1.5rem', backgroundColor: 'hsl(var(--background))' }}>
                 {codeString}
             </SyntaxHighlighter>
           </div>
