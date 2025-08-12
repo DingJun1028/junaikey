@@ -1,4 +1,3 @@
-
 import {
   Cpu,
   Webhook,
@@ -51,28 +50,22 @@ export const mainNav: NavItem[] = [
     label: 'Core Engine',
   },
   {
-    title: '全能代理',
-    href: '/omniagents',
+    title: '萬能代理網絡',
+    href: '/agent-network',
     icon: Network,
-    label: 'OmniAgents',
-  },
-  {
-    title: '全能流程',
-    href: '/omniflow',
-    icon: Cog,
-    label: 'OmniFlow',
-  },
-  {
-    title: '知識中樞',
-    href: '/knowledge-hub',
-    icon: BrainCircuit,
-    label: 'Knowledge Hub',
+    label: 'Agent Network',
   },
   {
     title: '萬能符文系統',
     href: '/rune-system',
     icon: Webhook,
     label: 'Rune System',
+  },
+  {
+    title: '知識中樞',
+    href: '/knowledge-hub',
+    icon: BrainCircuit,
+    label: 'Knowledge Hub',
   },
   {
     title: '進化環',

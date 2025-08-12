@@ -53,17 +53,10 @@ const principles = [
   },
   {
     icon: Network,
-    title: "全能代理 (OmniAgents)",
-    href: "/omniagents",
+    title: "萬能代理網絡 (Agent Network)",
+    href: "/agent-network",
     description: "任務的自主執行與委派網絡。",
     details: "The Agent Network processes and executes tasks based on predefined rules and live data."
-  },
-    {
-    icon: Cog,
-    title: "全能流程 (OmniFlow)",
-    href: "/omniflow",
-    description: "系統的自動化核心，用於創建IF...THEN...規則來自動化任務。",
-    details: "The system's automation core. Create 'IF...THEN...' rules to automate tasks."
   },
   {
     icon: Webhook,
@@ -74,7 +67,7 @@ const principles = [
   },
   {
     icon: BrainCircuit,
-    title: "知識中樞 (Knowledge Hub)",
+    title: "萬能智庫中樞 (Knowledge Hub)",
     href: "/knowledge-hub",
     description: "系統的長期記憶與知識庫。",
     details: "Contains the system's core concepts, architectures, and guiding principles."
@@ -113,6 +106,27 @@ const principles = [
     href: "/theme-engine",
     description: "AI 生成的 UI、UX 與詞彙體系。",
     details: "Allows users to generate UI themes, colors, and fonts through natural language."
+  },
+   {
+    icon: GitCommit,
+    title: "萬能同步矩陣 (Sync Matrix)",
+    href: "#",
+    description: "跨平台、雙向的數據同步。",
+    details: "Provides real-time, bidirectional data synchronization across all connected platforms."
+  },
+  {
+    icon: FileText,
+    title: "萬能接口協議 (Interface Protocol)",
+    href: "#",
+    description: "多模態的使用者交互（UI、語音等）。",
+    details: "Defines the protocols for all user and system interactions, supporting multiple modalities."
+  },
+  {
+    icon: Cog,
+    title: "萬能監控體 (Monitoring Body)",
+    href: "#",
+    description: "系統的可觀測性、日誌與診斷。",
+    details: "The observability layer, responsible for logging, monitoring, and diagnostics."
   },
 ];
 
@@ -219,11 +233,11 @@ export default function KnowledgeHubPage() {
           <TabsList className="grid w-full grid-cols-4 h-auto">
             <TabsTrigger value="overview">
               <DraftingCompass className="w-4 h-4 mr-2" />
-              System Architecture
+              12 Core Dimensions
             </TabsTrigger>
             <TabsTrigger value="philosophy">
               <Gem className="w-4 h-4 mr-2" />
-              Cosmic Axioms
+              4 Cosmic Axioms
             </TabsTrigger>
              <TabsTrigger value="elements">
               <Flame className="w-4 h-4 mr-2" />
@@ -238,7 +252,7 @@ export default function KnowledgeHubPage() {
           <TabsContent value="overview" className="mt-4">
             <Card>
               <CardHeader>
-                <CardTitle>System Architecture & Core Principles</CardTitle>
+                <CardTitle>The 12 Core Dimensions (MECE Framework)</CardTitle>
                 <CardDescription>
                   The core components of the system, divided based on the MECE (Mutually Exclusive, Collectively Exhaustive) principle. Click on each module to navigate to its detailed page.
                 </CardDescription>
@@ -269,7 +283,7 @@ export default function KnowledgeHubPage() {
           <TabsContent value="philosophy" className="mt-4">
             <Card>
               <CardHeader>
-                <CardTitle>The Omni-Codex: The Architect's Passive Talents</CardTitle>
+                <CardTitle>The 4 Cosmic Axioms: The Architect's Passive Talents</CardTitle>
                 <CardDescription>
                   The four core axioms that drive the universe's operation. They are the cornerstones of your creative authority.
                 </CardDescription>
