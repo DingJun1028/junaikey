@@ -47,6 +47,12 @@ export const mainNav: NavItem[] = [
     icon: Network,
     label: "Agent Network",
   },
+    {
+    title: "Rune System",
+    href: "/rune-system",
+    icon: Webhook,
+    label: "Rune System",
+  },
   {
     title: "Knowledge Hub",
     href: "/knowledge-hub",
@@ -97,6 +103,7 @@ export const coreFunctions: CoreFunction[] = [
     title: "萬能符文系統 (Rune System)",
     description: "與所有外部服務的 API 整合層。",
     icon: Webhook,
+    href: "/rune-system",
   },
   {
     title: "萬能代理網絡 (Agent Network)",

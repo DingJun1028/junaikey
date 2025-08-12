@@ -28,6 +28,11 @@ body {
     --input: 220 13% 85%;
     --ring: 199 89% 49%;
     --radius: 0.5rem;
+
+    /* For theme preview */
+    --preview-primary: hsl(var(--primary));
+    --preview-background: hsl(var(--background));
+    --preview-accent: hsl(var(--accent));
   }
   .dark {
     --background: 220 13% 10%;
@@ -49,6 +54,10 @@ body {
     --border: 220 13% 22%;
     --input: 220 13% 22%;
     --ring: 199 89% 49%;
+    
+    --preview-primary: hsl(var(--primary));
+    --preview-background: hsl(var(--background));
+    --preview-accent: hsl(var(--accent));
   }
 }
 
