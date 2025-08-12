@@ -16,7 +16,9 @@ import {
   BookOpen,
   Flame,
   BookUser,
-  Home
+  Home,
+  KeyRound,
+  LifeBuoy
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -64,6 +66,12 @@ export const mainNav: NavItem[] = [
     icon: Rocket,
     label: 'Content Generator',
   },
+   {
+    title: '萬能元鑰方案中心',
+    href: '/omni-key-solutions',
+    icon: KeyRound,
+    label: 'Omni-Key Solutions',
+  },
   {
     title: '進化中樞',
     href: '/evolution-nexus',
@@ -81,5 +89,11 @@ export const mainNav: NavItem[] = [
     href: '/codex',
     icon: BookOpen,
     label: 'Developer Codex',
+  },
+   {
+    title: '疑難雜症需求中心',
+    href: '/troubleshooting',
+    icon: LifeBuoy,
+    label: 'Troubleshooting',
   },
 ];
