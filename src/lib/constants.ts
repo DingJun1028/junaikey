@@ -1,3 +1,4 @@
+
 import {
   Cpu,
   Webhook,
@@ -43,23 +44,17 @@ export const mainNav: NavItem[] = [
     icon: LayoutDashboard,
     label: 'OmniLog',
   },
-  {
-    title: '萬能核心引擎',
-    href: '/core-engine',
-    icon: Cpu,
-    label: 'Core Engine',
-  },
-  {
-    title: '萬能代理網絡',
-    href: '/agent-network',
+    {
+    title: '萬能代理',
+    href: '/omniagents',
     icon: Network,
-    label: 'Agent Network',
+    label: 'OmniAgents',
   },
   {
-    title: '萬能符文系統',
-    href: '/rune-system',
-    icon: Webhook,
-    label: 'Rune System',
+    title: '萬能流程',
+    href: '/omniflow',
+    icon: Cog,
+    label: 'OmniFlow',
   },
   {
     title: '知識中樞',
@@ -68,7 +63,7 @@ export const mainNav: NavItem[] = [
     label: 'Knowledge Hub',
   },
   {
-    title: '進化環',
+    title: '進化迴廊',
     href: '/evolution-loop',
     icon: Infinity,
     label: 'Evolution Loop',
@@ -90,12 +85,6 @@ export const mainNav: NavItem[] = [
     href: '/tagging-system',
     icon: Tags,
     label: 'Tagging System',
-  },
-  {
-    title: '萬能主題引擎',
-    href: '/theme-engine',
-    icon: Palette,
-    label: 'Theme Engine',
   },
    {
     title: '萬能元鑰方案中心',
