@@ -59,6 +59,7 @@ export type CoreFunction = {
   title: string;
   description: string;
   icon: LucideIcon;
+  href?: string;
 };
 
 export const coreFunctions: CoreFunction[] = [
@@ -76,11 +77,13 @@ export const coreFunctions: CoreFunction[] = [
     title: "萬能代理網絡 (Agent Network)",
     description: "任務的自主執行與委派網絡。",
     icon: Network,
+    href: "/agent-network",
   },
   {
     title: "萬能智庫中樞 (Knowledge Hub)",
     description: "系統的長期記憶與知識管理中心。",
     icon: BrainCircuit,
+    href: "/knowledge-hub",
   },
   {
     title: "萬能同步矩陣 (Sync Matrix)",
@@ -96,6 +99,7 @@ export const coreFunctions: CoreFunction[] = [
     title: "萬能進化環 (Evolution Loop)",
     description: "系統的自我優化與學習機制。",
     icon: Infinity,
+    href: "/evolution-loop",
   },
   {
     title: "萬能監控體 (Monitoring Body)",
@@ -121,5 +125,6 @@ export const coreFunctions: CoreFunction[] = [
     title: "萬能主題引擎 (Theme Engine)",
     description: "AI 生成的 UI、UX 與詞彙體系。",
     icon: Palette,
+    href: "/theme-engine",
   },
 ];

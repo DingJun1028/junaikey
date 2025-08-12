@@ -1,6 +1,8 @@
+import Link from "next/link";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -17,22 +19,23 @@ export default function DashboardPage() {
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {coreFunctions.map((func) => (
-          <Card
-            key={func.title}
-            className="flex flex-col hover:shadow-lg transition-shadow duration-300"
-          >
-            <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-4">
-              <div className="bg-primary/10 p-3 rounded-full">
-                <func.icon className="h-6 w-6 text-primary" />
-              </div>
-              <CardTitle className="text-base font-semibold leading-tight">{func.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                {func.description}
-              </p>
-            </CardContent>
-          </Card>
+          <Link href={func.href || "#"} key={func.title} className="flex">
+            <Card
+              className="flex flex-col w-full hover:shadow-lg transition-shadow duration-300 hover:border-primary/50"
+            >
+              <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-4">
+                <div className="bg-primary/10 p-3 rounded-lg">
+                  <func.icon className="h-6 w-6 text-primary" />
+                </div>
+                <CardTitle className="text-base font-semibold leading-tight">{func.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <CardDescription className="text-sm">
+                  {func.description}
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
     </div>
