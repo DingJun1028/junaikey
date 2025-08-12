@@ -30,6 +30,12 @@ export const mainNav: NavItem[] = [
     label: "Dashboard",
   },
   {
+    title: "Core Engine",
+    href: "/core-engine",
+    icon: Cpu,
+    label: "Core Engine",
+  },
+  {
     title: "Theme Engine",
     href: "/theme-engine",
     icon: Palette,
@@ -67,6 +73,7 @@ export const coreFunctions: CoreFunction[] = [
     title: "萬能核心引擎 (Core Engine)",
     description: "中央決策與流程控制。",
     icon: Cpu,
+    href: "/core-engine",
   },
   {
     title: "萬能符文系統 (Rune System)",
