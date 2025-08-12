@@ -54,6 +54,12 @@ export const mainNav: NavItem[] = [
     label: "Knowledge Hub",
   },
   {
+    title: "Tagging System",
+    href: "/tagging-system",
+    icon: Tags,
+    label: "Tagging System",
+  },
+  {
     title: "Evolution Loop",
     href: "/evolution-loop",
     icon: Infinity,
@@ -127,6 +133,7 @@ export const coreFunctions: CoreFunction[] = [
     title: "萬能標籤體系 (Tagging System)",
     description: "通用的元數據與分類系統。",
     icon: Tags,
+    href: "/tagging-system",
   },
   {
     title: "萬能主題引擎 (Theme Engine)",
