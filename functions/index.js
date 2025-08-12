@@ -12,14 +12,14 @@ app.use(cors({ origin: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post("/api/generate", async (req, res) => {
-  const { prompt } = req.body;
-  if (!prompt) {
-    return res.status(400).send({ error: "Prompt is required" });
+app.post("/api/execute-sacred-command", async (req, res) => {
+  const { command } = req.body;
+  if (!command) {
+    return res.status(400).send({ error: "Command object is required" });
   }
 
   try {
-    const response = await supervisor.generate(prompt);
+    const response = await supervisor.generate(command);
     res.status(200).send({ response });
   } catch (error) {
     console.error("Error in supervisor agent:", error);

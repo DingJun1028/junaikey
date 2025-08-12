@@ -25,7 +25,10 @@ async function lint(code) {
   const result = await model.generateContent([systemInstruction, prompt]);
   const response = await result.response;
   const text = response.text();
-  return JSON.parse(text);
+  // It's possible the model returns markdown with the JSON. Extract it.
+  const jsonMatch = text.match(/```json\n([\s\S]*?)\n```/);
+  const jsonText = jsonMatch ? jsonMatch[1] : text;
+  return JSON.parse(jsonText);
 }
 
 module.exports = { lint };
