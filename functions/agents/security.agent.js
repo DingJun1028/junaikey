@@ -1,7 +1,8 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const axios = require('axios');
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
+
 
 const systemInstruction = `
 You are a security vulnerability scanner.
@@ -21,14 +22,28 @@ Do not add any text or explanations outside the JSON object.
 `;
 
 async function scan(code) {
-  const prompt = `Scan this code for vulnerabilities:\n\`\`\`\n${code}\n\`\`\``;
-  const result = await model.generateContent([systemInstruction, prompt]);
-  const response = await result.response;
-  const text = response.text();
-  // It's possible the model returns markdown with the JSON. Extract it.
-  const jsonMatch = text.match(/```json\n([\s\S]*?)\n```/);
-  const jsonText = jsonMatch ? jsonMatch[1] : text;
-  return JSON.parse(jsonText);
+  try {
+    const prompt = `Scan this code for vulnerabilities:\n\`\`\`\n${code}\n\`\`\``;
+
+    const response = await axios.post(API_URL, {
+      "contents": [
+        { "parts": [{ "text": systemInstruction }] },
+        { "parts": [{ "text": prompt }] }
+      ],
+      "generationConfig": {
+        "responseMimeType": "application/json",
+      }
+    }, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const responseText = response.data.candidates[0].content.parts[0].text;
+    return JSON.parse(responseText);
+
+  } catch (error) {
+    console.error("Error calling Gemini API for security scanning:", error.response ? error.response.data : error.message);
+    return { vulnerabilities: [{ line: 0, vulnerability: `Error communicating with Security Agent: ${error.message}`, severity: 'critical' }] };
+  }
 }
 
 module.exports = { scan };

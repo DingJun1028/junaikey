@@ -124,7 +124,7 @@ export default function SanctumPage() {
                                      <SyntaxHighlighter
                                         language="markdown"
                                         style={theme === 'dark' ? oneDark : oneLight}
-                                        customStyle={{ margin: 0, padding: '1rem', borderRadius: '0.5rem', backgroundColor: 'transparent' }}
+                                        customStyle={{ margin: 0, padding: '1rem', borderRadius: '0.5rem', backgroundColor: 'hsl(var(--background))' }}
                                         wrapLongLines
                                     >
                                         {item.content}
