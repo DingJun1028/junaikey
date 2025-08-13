@@ -21,6 +21,7 @@ import {
   KeyRound,
   LifeBuoy,
   Activity,
+  Fuel,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 

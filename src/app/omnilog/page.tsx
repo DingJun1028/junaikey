@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -21,7 +22,7 @@ import {
   Cell,
   CartesianGrid,
 } from 'recharts';
-import { Users, Bot, Cog, Activity } from 'lucide-react';
+import { Users, Bot, Cog, Activity, Fuel } from 'lucide-react';
 
 const agentPerformanceData = [
   { engagement: 80, accuracy: 92, level: 2 },
@@ -58,7 +59,7 @@ export default function OmniLogPage() {
             </div>
         </CardHeader>
       </Card>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active AI Agents</CardTitle>
@@ -97,6 +98,16 @@ export default function OmniLogPage() {
           <CardContent>
             <div className="text-2xl font-bold">128</div>
             <p className="text-xs text-muted-foreground">+3 this week</p>
+          </CardContent>
+        </Card>
+         <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Straico Token Usage</CardTitle>
+            <Fuel className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">2.1M</div>
+            <p className="text-xs text-muted-foreground">+15% from last month</p>
           </CardContent>
         </Card>
       </div>
