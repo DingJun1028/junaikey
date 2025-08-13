@@ -1,3 +1,4 @@
+
 import {
   Card,
   CardHeader,
@@ -27,7 +28,7 @@ const runes = [
   { name: "Google Cloud", type: "Cloud/AI", status: "Operational", auth: "OAuth/Service Account" },
   { name: "Boost.space", type: "Automation/iPaaS", status: "Operational", auth: "Bearer Token" },
   { name: "Taskade", type: "Productivity/Tasks", status: "Operational", auth: "Bearer Token" },
-  { name: "Capacities", type: "Productivity/Notes", status: "Pending API", auth: "API Key" },
+  { name: "Capacities", type: "Productivity/Notes", status: "Operational", auth: "API Key" },
   { name: "Mymemoai", type: "Productivity/AI Notes", status: "Pending API", auth: "API Key (TBD)" },
   { name: "InfoFlow", type: "OA/Workflow", status: "Local Deployed", auth: "Token/None" },
   { name: "Scripting App", type: "Local Automation", status: "Local Deployed", auth: "Local Permissions" },
