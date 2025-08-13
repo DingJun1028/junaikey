@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { Webhook, CheckCircle, XCircle, Clock, Server } from "lucide-react";
 
 const runes = [
+  { name: "Perplexity AI", type: "AI/LLM", status: "Operational", auth: "Bearer Token" },
   { name: "OpenAI", type: "AI/LLM", status: "Operational", auth: "Bearer Token" },
   { name: "Notion", type: "Productivity/CMS", status: "Operational", auth: "Bearer Token" },
   { name: "AITable.ai", type: "Database/AI", status: "Operational", auth: "Bearer Token" },
