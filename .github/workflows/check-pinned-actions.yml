@@ -1,0 +1,105 @@
+name: Ensure GitHub Actions are Pinned to SHA
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/*.yml'
+      - '.github/workflows/*.yaml'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  check-pinned-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Check if Actions are pinned to immutable SHAs/digests
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Checking for unpinned GitHub Actions..."
+
+          # Find all workflow files
+          mapfile -t workflow_files < <(find .github/workflows -type f \
+            \( -name "*.yml" -o -name "*.yaml" \))
+
+          unpinned_found=false
+
+          for file in "${workflow_files[@]}"; do
+            echo "Checking $file..."
+
+            # Get all non-comment 'uses:' lines with line numbers
+            mapfile -t uses_lines < <(grep -nE '^[[:space:]]*uses:[[:space:]]*' \
+              "$file" | grep -vE '^[[:space:]]*#')
+
+            file_unpinned=()
+
+            for entry in "${uses_lines[@]}"; do
+              lineno="${entry%%:*}"
+              content="${entry#*:}"
+
+              # Extract the value after 'uses:'
+              value="${content#*uses:}"
+              # Trim leading/trailing whitespace
+              value="$(echo "$value" | sed -E \
+                's/^[[:space:]]+//; s/[[:space:]]+$//')"
+
+              # Skip dynamic expressions and local actions
+              if [[ "$value" =~ ^\$\{\{ ]]; then
+                continue
+              fi
+              if [[ "$value" =~ ^(\.\/|\.\.\/|\/) ]]; then
+                # Local actions are allowed
+                continue
+              fi
+
+              pinned=false
+
+              # Docker-based actions pinned to sha256 digest
+              if [[ "$value" =~ ^docker://.+@sha256:[a-fA-F0-9]{64}([[:space:]]*#.*)?$ ]]; then
+                pinned=true
+              # Standard actions pinned to 40-char commit SHA, allowing trailing comments
+              elif [[ "$value" =~ @([a-f0-9]{40})([[:space:]]*#.*)?$ ]]; then
+                pinned=true
+              fi
+
+              if [[ "$pinned" == "false" ]]; then
+                file_unpinned+=("$lineno:$content")
+                unpinned_found=true
+              fi
+            done
+
+            if (("${#file_unpinned[@]}")); then
+              echo "❌ Unpinned actions found in $file:"
+              for u in "${file_unpinned[@]}"; do
+                echo "$u"
+              done
+            else
+              echo "✅ All actions in $file are properly pinned"
+            fi
+          done
+
+          if [[ "$unpinned_found" == "true" ]]; then
+            echo ""
+            echo "❌ ERROR: Some GitHub Actions are not pinned to immutable references!"
+            echo ""
+            echo "Security Requirement: External GitHub Actions must be pinned to a full 40-character commit SHA, or Docker actions pinned to a sha256 digest."
+            echo "Examples:"
+            echo "  uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7"
+            echo "  uses: docker://ghcr.io/owner/image@sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+            echo ""
+            echo "To fix:"
+            echo "1. Find the immutable reference for the action version you want to use"
+            echo "2. Replace @v1, @v2, @main, etc. with @<full-commit-sha> (or docker @sha256:<digest>)"
+            echo "3. Optionally add a comment with the version tag for reference"
+            exit 1
+          else
+            echo ""
+            echo "✅ SUCCESS: All external GitHub Actions are pinned to immutable references!"
+          fi
