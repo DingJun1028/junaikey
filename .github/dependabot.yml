@@ -1,0 +1,41 @@
+version: 2
+
+updates:
+  # Enable security updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    reviewers:
+      - "DingJun1028"
+    assignees:
+      - "DingJun1028"
+    commit-message:
+      prefix: "security"
+      include: "scope"
+    labels:
+      - "security"
+      - "dependencies"
+    open-pull-requests-limit: 5
+    
+  # Enable security updates for Docker dependencies (if Dockerfile is added later)
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "06:00"
+    reviewers:
+      - "DingJun1028"
+    assignees:
+      - "DingJun1028"
+    commit-message:
+      prefix: "docker"
+      include: "scope"
+    labels:
+      - "security"
+      - "dependencies"
+      - "docker"
+    open-pull-requests-limit: 3

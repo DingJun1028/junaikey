@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JunaiKey - Development Environment</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        h1 { color: #fff; margin-bottom: 30px; }
+        .status { 
+            background: rgba(76, 175, 80, 0.2); 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin: 20px 0;
+            border-left: 4px solid #4caf50;
+        }
+        .endpoint {
+            background: rgba(33, 150, 243, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            border-left: 4px solid #2196f3;
+        }
+        .warning {
+            background: rgba(255, 193, 7, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        a { color: #81c784; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        ul { line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔑 JunaiKey Development Environment</h1>
+        
+        <div class="status">
+            <strong>✅ Service Status:</strong> Running in development mode
+        </div>
+        
+        <h2>Available Endpoints</h2>
+        <div class="endpoint">
+            <strong>Health Check:</strong> <a href="/health">/health</a>
+        </div>
+        <div class="endpoint">
+            <strong>API (placeholder):</strong> <a href="/api/">/api/</a>
+        </div>
+        
+        <h2>Development Setup</h2>
+        <ul>
+            <li><strong>Database:</strong> PostgreSQL running on localhost:5432</li>
+            <li><strong>API Service:</strong> nginx (placeholder) on localhost:8080</li>
+            <li><strong>Migrations:</strong> Flyway-based database migrations</li>
+        </ul>
+        
+        <div class="warning">
+            <strong>⚠️ Development Mode:</strong> This is a placeholder service. Replace the API container in docker-compose.yml with your actual application when ready.
+        </div>
+        
+        <h2>Next Steps</h2>
+        <ul>
+            <li>Replace the API service with your actual application</li>
+            <li>Add your database migrations in the <code>migrations/</code> directory</li>
+            <li>Configure your application to connect to the PostgreSQL database</li>
+            <li>Update the health check endpoint to reflect your application's status</li>
+        </ul>
+    </div>
+</body>
+</html>
