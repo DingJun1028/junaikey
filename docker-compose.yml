@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  # PostgreSQL database with health check
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: junaikey
+      POSTGRES_USER: junaikey
+      POSTGRES_PASSWORD: junaikey_dev_password
+      POSTGRES_HOST_AUTH_METHOD: md5
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U junaikey -d junaikey"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - junaikey-network
+
+  # Database migration service using Flyway
+  db-migrate:
+    image: flyway/flyway:10-alpine
+    command: -url=jdbc:postgresql://db:5432/junaikey -user=junaikey -password=junaikey_dev_password -connectRetries=60 migrate
+    volumes:
+      - ./migrations:/flyway/sql
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+    networks:
+      - junaikey-network
+
+  # API service (placeholder - replace with actual application)
+  api:
+    # Replace this with your actual application image when available
+    # build: .
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=junaikey
+      - DB_USER=junaikey
+      - DB_PASSWORD=junaikey_dev_password
+    volumes:
+      # Placeholder health endpoint - replace with actual application
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/html:/usr/share/nginx/html:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    depends_on:
+      db:
+        condition: service_healthy
+      db-migrate:
+        condition: service_completed_successfully
+    restart: unless-stopped
+    networks:
+      - junaikey-network
+
+  # Redis cache (optional - uncomment if needed)
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   healthcheck:
+  #     test: ["CMD", "redis-cli", "ping"]
+  #     interval: 10s
+  #     timeout: 3s
+  #     retries: 3
+  #   restart: unless-stopped
+  #   networks:
+  #     - junaikey-network
+
+volumes:
+  postgres_data:
+    driver: local
+  # redis_data:
+  #   driver: local
+
+networks:
+  junaikey-network:
+    driver: bridge

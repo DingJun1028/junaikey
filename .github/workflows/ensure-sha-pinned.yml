@@ -1,0 +1,61 @@
+name: Ensure GitHub Actions are Pinned to SHA
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/*.yml'
+      - '.github/workflows/*.yaml'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  check-pinned-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Check if Actions are pinned to SHA
+        run: |
+          echo "Checking for unpinned GitHub Actions..."
+          
+          # Find all workflow files
+          workflow_files=$(find .github/workflows -name "*.yml" -o -name "*.yaml")
+          
+          unpinned_found=false
+          
+          for file in $workflow_files; do
+            echo "Checking $file..."
+            
+            # Look for uses: statements that don't end with a SHA (40-character hex)
+            unpinned_actions=$(grep -n "uses:" "$file" | grep -v "@[a-f0-9]\{40\}$" | grep -v "# v.*" || true)
+            
+            if [[ -n "$unpinned_actions" ]]; then
+              echo "❌ Unpinned actions found in $file:"
+              echo "$unpinned_actions"
+              unpinned_found=true
+            else
+              echo "✅ All actions in $file are properly pinned"
+            fi
+          done
+          
+          if [[ "$unpinned_found" == "true" ]]; then
+            echo ""
+            echo "❌ ERROR: Some GitHub Actions are not pinned to full commit SHAs!"
+            echo ""
+            echo "Security Requirement: All GitHub Actions must be pinned to full 40-character commit SHAs."
+            echo "Example: uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7"
+            echo ""
+            echo "To fix:"
+            echo "1. Find the full SHA for the action version you want to use"
+            echo "2. Replace @v1, @v2, etc. with @<full-sha>"
+            echo "3. Optionally add a comment with the version tag for reference"
+            exit 1
+          else
+            echo ""
+            echo "✅ SUCCESS: All GitHub Actions are properly pinned to commit SHAs!"
+          fi

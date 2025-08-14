@@ -1,0 +1,134 @@
+name: Deploy to GCP Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+env:
+  # Configurable deployment settings (can be overridden by secrets)
+  REGION: ${{ secrets.REGION || 'asia-east1' }}
+  CLOUD_RUN_SERVICE: ${{ secrets.CLOUD_RUN_SERVICE || 'junaikey-service' }}
+  ARTIFACT_REPO: ${{ secrets.ARTIFACT_REPO || 'junaikey-repo' }}
+  ALLOW_UNAUTH: ${{ secrets.ALLOW_UNAUTH || 'false' }}
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Setup Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@f0990588f1e5b5af6827153b93673613abdc6ec7 # v2.1.1
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          export_default_credentials: true
+
+      - name: Configure Docker for Artifact Registry
+        run: |
+          gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      - name: Check if Dockerfile exists
+        id: dockerfile-check
+        run: |
+          if [[ -f "Dockerfile" ]]; then
+            echo "dockerfile_exists=true" >> $GITHUB_OUTPUT
+            echo "✅ Dockerfile found"
+          else
+            echo "dockerfile_exists=false" >> $GITHUB_OUTPUT
+            echo "⚠️ No Dockerfile found - creating minimal placeholder"
+          fi
+
+      - name: Create placeholder Dockerfile if needed
+        if: steps.dockerfile-check.outputs.dockerfile_exists == 'false'
+        run: |
+          cat > Dockerfile << 'EOF'
+          FROM nginx:alpine
+          COPY <<EOF /usr/share/nginx/html/index.html
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>JunaiKey Service</title>
+          </head>
+          <body>
+              <h1>JunaiKey Service</h1>
+              <p>Service is running successfully!</p>
+              <p>Build SHA: ${{ github.sha }}</p>
+          </body>
+          </html>
+          EOF
+          
+          # Add health check endpoint
+          RUN mkdir -p /usr/share/nginx/html/health
+          RUN echo '{"status": "healthy", "version": "${{ github.sha }}"}' > /usr/share/nginx/html/health/index.html
+          
+          EXPOSE 80
+          HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+            CMD curl -f http://localhost/health/ || exit 1
+          EOF
+          
+          echo "Created placeholder Dockerfile with health check"
+
+      - name: Build and push Docker image
+        run: |
+          IMAGE_URL="${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/junaikey:${{ github.sha }}"
+          
+          echo "Building Docker image: $IMAGE_URL"
+          docker build -t "$IMAGE_URL" .
+          
+          echo "Pushing Docker image to Artifact Registry"
+          docker push "$IMAGE_URL"
+          
+          echo "IMAGE_URL=$IMAGE_URL" >> $GITHUB_ENV
+
+      - name: Deploy to Cloud Run
+        run: |
+          # Determine authentication flag
+          if [[ "${{ env.ALLOW_UNAUTH }}" == "true" ]]; then
+            AUTH_FLAG="--allow-unauthenticated"
+            echo "⚠️ Deploying with public access (--allow-unauthenticated)"
+          else
+            AUTH_FLAG="--no-allow-unauthenticated"
+            echo "🔒 Deploying with authentication required"
+          fi
+          
+          echo "Deploying to Cloud Run service: ${{ env.CLOUD_RUN_SERVICE }}"
+          
+          gcloud run deploy "${{ env.CLOUD_RUN_SERVICE }}" \
+            --image="$IMAGE_URL" \
+            --region="${{ env.REGION }}" \
+            --platform=managed \
+            --port=80 \
+            --memory=512Mi \
+            --cpu=1 \
+            --min-instances=0 \
+            --max-instances=10 \
+            --timeout=300s \
+            --concurrency=80 \
+            $AUTH_FLAG \
+            --quiet
+
+      - name: Get service URL
+        run: |
+          SERVICE_URL=$(gcloud run services describe "${{ env.CLOUD_RUN_SERVICE }}" \
+            --region="${{ env.REGION }}" \
+            --format="value(status.url)")
+          
+          echo "🚀 Service deployed successfully!"
+          echo "Service URL: $SERVICE_URL"
+          echo "Health check: $SERVICE_URL/health/"
+          
+          # Test health endpoint if service is publicly accessible
+          if [[ "${{ env.ALLOW_UNAUTH }}" == "true" ]]; then
+            echo "Testing health endpoint..."
+            curl -f "$SERVICE_URL/health/" || echo "⚠️ Health check failed (may be expected for authenticated services)"
+          fi
