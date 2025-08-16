@@ -4,39 +4,54 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
-
-permissions:
-  contents: read
 
 jobs:
-  build-and-test:
+  build-and-test-frontend:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./omni-core
     steps:
       - name: Checkout repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3.11.1
+      - name: Set up Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: omni-core/package-lock.json
 
-      - name: Build the application
-        run: make genesis-weaver-build
-        env:
-          # The Makefile uses this to enable BuildKit, which is good practice.
-          DOCKER_BUILDKIT: 1
+      - name: Install Frontend Dependencies
+        run: npm ci
 
-      - name: Start services
-        run: make agentus-start
+      - name: Lint Frontend
+        run: npm run lint
 
-      - name: Wait for services to be healthy
-        run: |
-          echo "Waiting for services to start..."
-          sleep 15
-          docker-compose ps
+      - name: Build Frontend
+        run: npm run build
 
-      - name: Perform health check
-        run: make sentinel-health
-        env:
-          # Ensure the healthcheck uses the default URL from the Makefile
-          HEALTHCHECK_ENDPOINT: http://localhost:8080/health
+  build-and-test-backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./firebase/functions
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: firebase/functions/package-lock.json
+
+      - name: Install Backend Dependencies
+        run: npm ci
+
+      - name: Lint Backend
+        run: npm run lint
+
+      - name: Build Backend
+        run: npm run build
