@@ -22,8 +22,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    env_file:
-      - .env
+    # The .env file is used for local development. In CI/CD, environment variables
+    # should be injected directly into the environment.
+    # env_file:
+    #   - .env
     ports:
       - "8080:8080"
     depends_on:
