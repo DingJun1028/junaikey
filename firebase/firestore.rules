@@ -1,0 +1,33 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users can only read and write their own data.
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Cards can be read by any authenticated user, but only created by them.
+    // (This is a sample rule, can be adjusted based on game logic)
+    match /cards/{cardId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      // Update/delete logic would depend on ownership, which is not yet defined.
+      // For now, we disallow it.
+      allow update, delete: if false;
+    }
+
+    // Event cards are write-only (append-only log).
+    match /eventCards/{eventId} {
+        allow read: if false; // Or allow only admin access
+        allow write: if request.auth != null; // Any authenticated user can trigger events
+    }
+
+    // Blueprints can be read by anyone, but only written by authenticated users.
+    match /blueprints/{blueprintId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
