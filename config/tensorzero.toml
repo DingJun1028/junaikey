@@ -1,0 +1,15 @@
+# This is a configuration file for the TensorZero Gateway.
+# It defines the functions and model variants the application can use.
+
+# A "function" represents a specific task the LLM will perform.
+[functions.philosophical_guidance]
+type = "chat"
+description = "Provides philosophical guidance based on user input."
+
+# A "variant" is a specific implementation of a function.
+# We can have multiple variants (e.g., using different models or prompts)
+# and use TensorZero to test and route between them.
+[functions.philosophical_guidance.variants.gpt_4o_mini]
+type = "chat_completion"
+model = "openai::gpt-4o-mini"
+description = "Uses OpenAI's gpt-4o-mini for guidance."
