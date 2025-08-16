@@ -20,7 +20,7 @@ fi
 export $(grep -E '^[A-Za-z_][A-Za-z0-9_]*=' "$ENV_FILE" | sed 's/^/export /')
 
 # Validate required variables
-req=(GCP_PROJECT_ID CLOUD_RUN_SERVICE REGION ARTIFACT_REPO)
+req=(GCP_PROJECT_ID CLOUD_RUN_SERVICE REGION ARTIFACT_REPO OPENAI_API_KEY TENSORZERO_CLICKHOUSE_URL)
 for v in "${req[@]}"; do 
     if [ -z "${!v:-}" ]; then 
         echo "❌ Missing required variable $v in .env"
@@ -65,7 +65,15 @@ fi
 
 # Submit Cloud Build with substitutions
 echo "🏗️  Submitting Cloud Build..."
-subs="_CLOUD_RUN_SERVICE=${CLOUD_RUN_SERVICE},_REGION=${REGION},_ARTIFACT_REPO=${ARTIFACT_REPO},_ALLOW_UNAUTH=${ALLOW_UNAUTH:-false}"
+subs="_CLOUD_RUN_SERVICE=${CLOUD_RUN_SERVICE}"
+subs+=",_REGION=${REGION}"
+subs+=",_ARTIFACT_REPO=${ARTIFACT_REPO}"
+subs+=",_ALLOW_UNAUTH=${ALLOW_UNAUTH:-false}"
+# Add application-specific environment variables as substitutions
+subs+=",_OPENAI_API_KEY=${OPENAI_API_KEY}"
+subs+=",_TENSORZERO_CLICKHOUSE_URL=${TENSORZERO_CLICKHOUSE_URL}"
+subs+=",_GCP_PROJECT_ID=${GCP_PROJECT_ID}"
+
 gcloud builds submit "$ROOT_DIR" --config "$ROOT_DIR/cloudbuild.yaml" --substitutions="$subs"
 
 # Clean up temporary service account key file
