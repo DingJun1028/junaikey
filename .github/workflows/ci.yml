@@ -1,0 +1,42 @@
+name: CI - Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3.11.1
+
+      - name: Build the application
+        run: make genesis-weaver-build
+        env:
+          # The Makefile uses this to enable BuildKit, which is good practice.
+          DOCKER_BUILDKIT: 1
+
+      - name: Start services
+        run: make agentus-start
+
+      - name: Wait for services to be healthy
+        run: |
+          echo "Waiting for services to start..."
+          sleep 15
+          docker-compose ps
+
+      - name: Perform health check
+        run: make sentinel-health
+        env:
+          # Ensure the healthcheck uses the default URL from the Makefile
+          HEALTHCHECK_ENDPOINT: http://localhost:8080/health

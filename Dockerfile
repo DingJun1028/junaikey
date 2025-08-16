@@ -1,0 +1,27 @@
+# Use an official Python runtime as a parent image
+FROM python:3.11-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Set the working directory in the container
+WORKDIR /code
+
+# Copy the requirements file into the container at /code
+COPY ./app/requirements.txt /code/requirements.txt
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
+
+# Copy the rest of the application code into the container at /code
+COPY ./app /code/app
+COPY ./scripts /code/scripts
+
+# Expose port 8080 to the outside world
+EXPOSE 8080
+
+# Command to run the application
+# Use 0.0.0.0 to make it accessible from outside the container
+# The default port for Cloud Run is 8080
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
