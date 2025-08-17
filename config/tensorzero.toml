@@ -12,4 +12,3 @@ description = "Provides philosophical guidance based on user input."
 [functions.philosophical_guidance.variants.gpt_4o_mini]
 type = "chat_completion"
 model = "openai::gpt-4o-mini"
-description = "Uses OpenAI's gpt-4o-mini for guidance."

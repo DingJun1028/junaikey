@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   clickhouse:
-    image: clickhouse/clickhouse-server:24.1-alpine
+    image: clickhouse/clickhouse-server:24.5-alpine
     environment:
       - CLICKHOUSE_USER=chuser
       - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1

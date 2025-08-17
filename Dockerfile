@@ -61,6 +61,7 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 # Copy the rest of the application code into the container at /code
 COPY ./app /code/app
 COPY ./scripts /code/scripts
+COPY ./config /code/config
 
 # Expose port 8080 to the outside world
 EXPOSE 8080

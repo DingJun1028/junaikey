@@ -11,7 +11,7 @@ from firebase_admin import credentials, firestore
 # It's good practice to load environment variables at the start.
 load_dotenv()
 
-from tensorzero import AsyncTensorZeroGateway, TensorZeroClient
+from tensorzero import AsyncTensorZeroGateway
 
 # --- Pydantic Models ---
 
