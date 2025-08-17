@@ -57,6 +57,38 @@ The system interacts with the user and internal components through a structured 
 ---
 ## 💡 使用場景 (Use Cases)
 
+---
+
+## ⏳ MVP Development Timeline (Basic)
+
+This is a tentative timeline for the Minimum Viable Product (MVP) development, broken down into phases:
+
+*   **Phase 1: Foundation & Core Interface (Estimated 2-3 Weeks)**
+    *   Set up basic project structure and routing.
+    *   Implement the core Function Interface layout and basic interaction.
+    *   Develop the Theme Switching functionality (light/dark mode).
+*   **Phase 2: Theme Engine Integration & Basic Agent Network (Estimated 3-4 Weeks)**
+    *   Integrate the AI-Powered Theme Engine (basic functionality).
+    *   Develop the basic Agent Network tool with a few initial agent types.
+*   **Phase 3: Refinement & Deployment (Estimated 1-2 Weeks)**
+    *   Refine UI/UX based on testing.
+    *   Implement remaining core features for the MVP.
+    *   Prepare for and execute Firebase deployment.
+
+---
+
+## 🛠️ Technologies and Libraries
+
+This project utilizes the following key technologies and libraries:
+
+-   **React**: Frontend development.
+-   **TypeScript**: Ensures type safety for both frontend and backend code.
+-   **Firebase**: Provides a robust backend including Authentication, Firestore (database), Cloud Functions (backend logic), and Hosting.
+-   **Google Gemini API**: Powers the AI capabilities, particularly for the Theme Engine and potential future AI features.
+-   **Shadcn UI**: Provides accessible and customizable UI components for a faster development process.
+-   **Tailwind CSS**: Used for efficient and utility-first styling.
+-   **Zustand**: A small, fast, and scalable bearbone state-management solution.
+-   **React Router**: Handles navigation and routing within the frontend application.
 -   **個人生產力**: 自動組織零散筆記，生成待辦清單，並由 AI 記住您的偏好來追蹤進度。
 -   **團隊協作**: 透過多平台同步、自動化任務委派和智能提醒來優化工作流程。
 -   **知識資產變現**: 將原始筆記轉化為可行的洞察、報告和數據驅動的決策。

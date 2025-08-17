@@ -74,8 +74,11 @@ export default function SanctumPage() {
         } catch (error: any) {
             console.error("Error executing command:", error);
             toast({
-                title: "Error",
-                description: `Failed to execute command: ${error.message}`,
+                title: "Execution Error",
+                description: 
+                    error instanceof Error && error.message 
+                    ? `Failed to execute command: ${error.message}`
+                    : "An internal error occurred while communicating with the backend.",
                 variant: "destructive",
             });
              // Keep the user's failed command in the input to allow for retry/edit

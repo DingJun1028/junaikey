@@ -176,7 +176,6 @@ export default function AgentNetworkPage() {
           </div>
         </CardContent>
       </Card>
-            </div>
-          )}
+    </div>
   );
 }
