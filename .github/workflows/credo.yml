@@ -38,7 +38,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        otp: ['25.0']
+        otp: ['27.0']
         elixir: ['1.14.0']
     steps:
       - uses: actions/checkout@v4
