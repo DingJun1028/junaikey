@@ -1,0 +1,14 @@
+{
+  "name": "omni-pedia-monorepo",
+  "version": "1.0.0",
+  "description": "Root for the Omni-Pedia project, containing the omni-core frontend and firebase backend.",
+  "main": "index.js",
+  "scripts": {
+    "dev:frontend": "cd omni-core && npm run dev",
+    "dev:backend": "cd firebase/functions && npm run serve",
+    "install:frontend": "cd omni-core && npm install",
+    "install:backend": "cd firebase/functions && npm install"
+  },
+  "author": "",
+  "license": "ISC"
+}

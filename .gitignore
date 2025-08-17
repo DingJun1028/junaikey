@@ -53,3 +53,24 @@ pip-delete-this-directory.txt
 
 # Docker
 .dockerignore
+
+# Project-specific ignores for "Omni-Pedia"
+
+# Dependencies
+/node_modules
+/omni-core/node_modules
+/firebase/functions/node_modules
+/firebase/functions/lib
+
+# Build Artifacts
+/omni-core/dist
+
+# Environment variables
+/firebase/.env
+
+# Firebase
+.firebase/
+*.firebase.json
+*.firebaserc
+firebase-debug.log
+firebase-debug.*.log
