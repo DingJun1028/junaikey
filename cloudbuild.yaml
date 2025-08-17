@@ -1,0 +1,33 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build container image'
+    args: [
+      'build', '-t', '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REPO}/${_CLOUD_RUN_SERVICE}:${BUILD_ID}', '.'
+    ]
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push to Artifact Registry'
+    args: [
+      'push', '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REPO}/${_CLOUD_RUN_SERVICE}:${BUILD_ID}'
+    ]
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Deploy to Cloud Run'
+    entrypoint: 'bash'
+    args:
+      - -lc
+      - |
+        set -euo pipefail
+        FLAG="--no-allow-unauthenticated"
+        if [ "${_ALLOW_UNAUTH}" = "true" ]; then FLAG="--allow-unauthenticated"; fi
+        gcloud run deploy "${_CLOUD_RUN_SERVICE}" \
+          --image "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REPO}/${_CLOUD_RUN_SERVICE}:${BUILD_ID}" \
+          --region "${_REGION}" \
+          ${FLAG}
+
+substitutions:
+  _CLOUD_RUN_SERVICE: ''
+  _REGION: ''
+  _ARTIFACT_REPO: ''
+  _ALLOW_UNAUTH: 'false'
+
+images:
+  - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REPO}/${_CLOUD_RUN_SERVICE}:${BUILD_ID}'
