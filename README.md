@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🌟 JunAiKey #OmniKey - 萬能系統 (量子聖典版)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -148,7 +147,3 @@ This command will:
 ## 📜 許可證 (License)
 
 JunAiKey 是基於 **MIT 許可證** 的開源軟體。
-=======
-# junaikey
-junaikey
->>>>>>> 8352e3d1d83c6c8823a269d5109bccf640e4585c
