@@ -18,9 +18,15 @@ steps:
         set -euo pipefail
         FLAG="--no-allow-unauthenticated"
         if [ "${_ALLOW_UNAUTH}" = "true" ]; then FLAG="--allow-unauthenticated"; fi
+
+        ENV_VARS="OPENAI_API_KEY=$_OPENAI_API_KEY"
+        ENV_VARS+=",TENSORZERO_CLICKHOUSE_URL=$_TENSORZERO_CLICKHOUSE_URL"
+        ENV_VARS+=",GCP_PROJECT_ID=$_GCP_PROJECT_ID"
+
         gcloud run deploy "${_CLOUD_RUN_SERVICE}" \
           --image "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REPO}/${_CLOUD_RUN_SERVICE}:${BUILD_ID}" \
           --region "${_REGION}" \
+          --set-env-vars="^##^${ENV_VARS}" \
           ${FLAG}
 
 substitutions:
@@ -28,6 +34,9 @@ substitutions:
   _REGION: ''
   _ARTIFACT_REPO: ''
   _ALLOW_UNAUTH: 'false'
+  _OPENAI_API_KEY: ''
+  _TENSORZERO_CLICKHOUSE_URL: ''
+  _GCP_PROJECT_ID: ''
 
 images:
   - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REPO}/${_CLOUD_RUN_SERVICE}:${BUILD_ID}'

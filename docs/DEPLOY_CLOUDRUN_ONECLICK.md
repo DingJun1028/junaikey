@@ -14,7 +14,7 @@ gcloud config set project YOUR_PROJECT_ID
 ```
 
 ### 2. Application Code
-**TODO**: Ensure your application includes a `Dockerfile` in the root directory. The deployment process requires a containerized application.
+The repository is structured with a `Dockerfile` in the root and application code in the `app/` directory, ready for containerized deployment.
 
 ### 3. Required APIs
 The deployment script automatically enables these APIs, but you can enable them manually:
@@ -23,14 +23,16 @@ The deployment script automatically enables these APIs, but you can enable them 
 gcloud services enable artifactregistry.googleapis.com
 gcloud services enable run.googleapis.com  
 gcloud services enable cloudbuild.googleapis.com
+gcloud services enable firestore.googleapis.com
 ```
 
 ### 4. Service Account (Optional but Recommended)
 Create a service account with the following roles for automated deployments:
 
-- **Cloud Run Admin** (`roles/run.admin`)
-- **Artifact Registry Admin** (`roles/artifactregistry.admin`) or Writer with proper permissions
-- **Cloud Build Editor** (`roles/cloudbuild.builds.editor`) - if using Cloud Build triggers
+- **Cloud Run Admin** (`roles/run.admin`): For deploying and managing the service.
+- **Artifact Registry Admin** (`roles/artifactregistry.admin`): For pushing Docker images.
+- **Cloud Build Editor** (`roles/cloudbuild.builds.editor`): For running the build process.
+- **Cloud Datastore User** (`roles/datastore.user`): For allowing the application to access Firestore.
 
 ```bash
 # Create service account
@@ -51,6 +53,10 @@ gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
     --member="serviceAccount:junaikey-deployer@YOUR_PROJECT_ID.iam.gserviceaccount.com" \
     --role="roles/cloudbuild.builds.editor"
 
+gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
+    --member="serviceAccount:junaikey-deployer@YOUR_PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/datastore.user"
+
 # Create and download key
 gcloud iam service-accounts keys create key.json \
     --iam-account=junaikey-deployer@YOUR_PROJECT_ID.iam.gserviceaccount.com
@@ -66,11 +72,12 @@ cp .env.example .env
 ```
 
 ### 2. Configure Variables
-Edit `.env` with your specific values:
+Edit `.env` with your specific values. The deployment script requires both infrastructure and application variables.
 
 ```bash
+# --- Infrastructure Variables ---
 # Required
-GCP_PROJECT_ID="your-actual-project-id"        # Replace with your GCP project ID
+GCP_PROJECT_ID="your-actual-project-id"        # Replace with your GCP project ID. Also used by the app.
 GCP_SA_KEY=""                                  # Base64-encoded service account JSON (optional)
 CLOUD_RUN_SERVICE="junaikey-service"           # Cloud Run service name
 REGION="asia-east1"                           # GCP region for deployment
@@ -78,6 +85,12 @@ ARTIFACT_REPO="junaikey-docker-repo"          # Artifact Registry repository nam
 
 # Optional
 ALLOW_UNAUTH="true"                           # Allow unauthenticated access
+
+# --- Application Variables ---
+# Required for the application to function
+OPENAI_API_KEY="sk-..."                        # For TensorZero to access OpenAI models
+TENSORZERO_CLICKHOUSE_URL="http://chuser:chpassword@localhost:8123/tensorzero" # For TensorZero observability
+GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/gcp-service-account-key.json" # For local Firebase auth
 ```
 
 ### 3. Base64 Encode Service Account Key (Optional)
@@ -103,12 +116,12 @@ bash scripts/one-click-cloudrun.sh
 ```
 
 The script will:
-1. ✅ Validate your `.env` configuration
-2. 🔐 Authenticate with Google Cloud (using service account or current auth)
-3. 🔧 Enable required Google Cloud APIs
-4. 📦 Create Artifact Registry repository (if it doesn't exist)
-5. 🏗️ Submit Cloud Build job to build, push, and deploy
-6. 🧹 Clean up temporary files securely
+1. ✅ Validate your `.env` configuration for both infrastructure and application variables.
+2. 🔐 Authenticate with Google Cloud (using service account or current auth).
+3. 🔧 Enable required Google Cloud APIs, including Firestore.
+4. 📦 Create Artifact Registry repository (if it doesn't exist).
+5. 🏗️ Submit Cloud Build job to build, push, and deploy. The script automatically passes application secrets to the Cloud Run service.
+6. 🧹 Clean up temporary files securely.
 
 ### Monitor Progress
 - **Cloud Build Logs**: https://console.cloud.google.com/cloud-build/builds
