@@ -116,5 +116,11 @@ export const mainNav: NavItem[] = [
     href: '/troubleshooting',
     icon: LifeBuoy,
     label: 'Troubleshooting',
+  },
+  {
+    title: '輔助功能指南',
+    href: '/accessibility-copilot',
+    icon: BookUser,
+    label: 'Accessibility',
   }
 ];
