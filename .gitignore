@@ -1,8 +1,8 @@
-<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
+node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -20,9 +20,17 @@
 
 # production
 /build
+build/
+dist/
 
 # misc
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 *.pem
 
 # debug
@@ -39,14 +47,9 @@ yarn-error.log*
 next-env.d.ts
 
 .genkit/*
-.env*
 
-# firebase
-firebase-debug.log
-firestore-debug.log
-=======
 # Environment files (contains secrets)
-.env
+.env*
 
 # Service account keys
 *.key.json
@@ -56,21 +59,12 @@ key.json
 *.tmp
 .tmp/
 
-# Build artifacts
-dist/
-build/
-
 # Logs
 *.log
 
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# firebase
+firebase-debug.log
+firestore-debug.log
 
 # Editor files
 .vscode/
@@ -78,12 +72,6 @@ Thumbs.db
 *.swp
 *.swo
 *~
-
-# Node.js (if applicable)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Python (if applicable)
 __pycache__/
@@ -94,10 +82,8 @@ __pycache__/
 env/
 venv/
 .venv/
-.env
 pip-log.txt
 pip-delete-this-directory.txt
 
 # Docker
 .dockerignore
->>>>>>> 8352e3d1d83c6c8823a269d5109bccf640e4585c
