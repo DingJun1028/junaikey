@@ -11,7 +11,7 @@ from firebase_admin import credentials, firestore
 # It's good practice to load environment variables at the start.
 load_dotenv()
 
-from tensorzero import AsyncTensorZeroGateway, TensorZeroClient
+from tensorzero import AsyncTensorZeroGateway
 
 # --- Pydantic Models ---
 
@@ -20,6 +20,13 @@ class AskRequest(BaseModel):
 
 class AskResponse(BaseModel):
     answer: str = Field(..., description="The philosophical guidance from the AI.", example="The meaning of life is a deeply personal question...")
+    inference_id: str = Field(..., description="The unique ID for this inference call.")
+
+class JulesAnalysisRequest(BaseModel):
+    pass
+
+class JulesAnalysisResponse(BaseModel):
+    analysis: str = Field(..., description="Personalized philosophical analysis from Jules.", example="Based on your affinity for water, you may find solace in stoicism...")
     inference_id: str = Field(..., description="The unique ID for this inference call.")
 
 class UserBase(BaseModel):
@@ -144,6 +151,50 @@ async def get_user(user_id: str):
         return User(userId=doc.id, **doc.to_dict())
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to retrieve user: {e}")
+
+# --- Jules's Personalized Analysis Endpoint ---
+
+@app.post("/api/v1/users/{user_id}/jules-analysis", response_model=JulesAnalysisResponse)
+async def jules_personal_analysis(user_id: str, request: JulesAnalysisRequest):
+    if not db:
+        raise HTTPException(status_code=503, detail="Firestore is not available.")
+    if not tensorzero_client:
+        raise HTTPException(status_code=503, detail="TensorZero Gateway is not available.")
+
+    # 1. Fetch user data from Firestore
+    try:
+        user_doc_ref = db.collection('users').document(user_id)
+        user_doc = user_doc_ref.get()
+        if not user_doc.exists:
+            raise HTTPException(status_code=404, detail="User not found")
+        user_data = user_doc.to_dict()
+    except HTTPException:
+        raise  # Re-raise HTTPException so FastAPI can handle it
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to retrieve user data: {e}")
+
+    # 2. Prepare the prompt for the AI
+    prompt = f"""
+    Analyze the philosophical profile of the following user and provide personalized insights.
+    The user's name is Jules, and he is a philosopher.
+    - Philosophy Level: {user_data.get('philosophyLevel', 'N/A')}
+    - Element Affinities: {user_data.get('elementAffinities', 'N/A')}
+    - Subscription Tier: {user_data.get('subscriptionTier', 'N/A')}
+
+    Based on this data, provide a brief, insightful analysis of their potential philosophical inclinations, strengths, and areas for exploration.
+    Speak as Jules, an AI philosopher guide.
+    """
+
+    # 3. Call the AI service
+    try:
+        response = await tensorzero_client.inference(
+            function_name="jules_analysis",
+            input={"messages": [{"role": "user", "content": prompt}]}
+        )
+        analysis_text = response.content[0].text if response.content and hasattr(response.content[0], 'text') else ""
+        return JulesAnalysisResponse(analysis=analysis_text, inference_id=str(response.inference_id))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"An error occurred with the AI service: {e}")
 
 # --- Firestore Card Endpoints ---
 
