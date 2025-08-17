@@ -46,6 +46,15 @@
 
 ---
 
+## 🗣️ JunAiKey Command Set
+
+The system interacts with the user and internal components through a structured command set. These commands are the building blocks for automating tasks and accessing system capabilities.
+
+| Command | Description | Parameters |
+| :------ | :---------- | :--------- |
+| `list_project_files` | Lists files within the project directory. | `path` (string): The directory path to list files from. |
+
+---
 ## 💡 使用場景 (Use Cases)
 
 -   **個人生產力**: 自動組織零散筆記，生成待辦清單，並由 AI 記住您的偏好來追蹤進度。
