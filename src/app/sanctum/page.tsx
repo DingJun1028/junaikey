@@ -1,4 +1,21 @@
 
+//
+// DEVELOPER / AI NOTE:
+// This file represents an INTERACTIVE USER INTERFACE, not a static data file.
+// It is the front-end for the "AI Core Sanctum".
+//
+// DO NOT ATTEMPT TO "EDIT" THIS FILE TO CHANGE CONTENT.
+//
+// This UI is designed to:
+// 1. Accept code pasted into the text area.
+// 2. Accept a natural language command in the input field.
+// 3. Send this code and command to a backend API for analysis.
+// 4. Display the results of the analysis.
+//
+// Any modifications to the system's knowledge or configuration should be done
+// through the appropriate data blueprints or APIs, not by modifying this UI component.
+//
+
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
