@@ -1,21 +1,26 @@
 {
   "name": "omni-center",
   "version": "1.0.0",
-  "description": "A workspace for managing creative and technical blueprints.",
-  "main": "dist/engine.js",
+  "description": "The MCP backend for the Junaikey Engine.",
+  "main": "dist/mcp-server.js",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node src/engine.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node src/mcp-server.ts",
+    "test": "ts-node src/client.ts"
   },
   "keywords": [
-    "typescript",
-    "blueprints"
+    "mcp",
+    "junaikey"
   ],
   "author": "Jules",
   "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.3",
+    "zod": "^3.23.8"
+  },
   "devDependencies": {
-    "@types/node": "^20.12.12",
+    "@types/node": "^20.12.7",
+    "openapi-types": "^12.1.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
