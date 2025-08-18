@@ -1,7 +1,7 @@
 {
   "name": "@junaikey/agent-sdk",
-  "version": "0.1.0",
-  "description": "A TypeScript SDK for creating and managing Omni-Agents in the JunAiKey Universe.",
+  "version": "6.0.0",
+  "description": "A TypeScript SDK for creating and managing Omni-Agents in the JunAiKey Universe (v6.0).",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
