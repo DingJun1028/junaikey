@@ -12,7 +12,7 @@ const julesAgent = (req: Request, res: Response): void => {
   }
 
   const message: string = req.body.message.toLowerCase();
-  let reply: string;
+  let reply: string | undefined;
 
   if (message.includes('core features')) {
     reply = 'JunAiKey\'s core features include: Function Interface, AI-Powered Theme Engine, Agent Network Tool, Routing, and Theme Switching.';
