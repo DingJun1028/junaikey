@@ -1,14 +1,18 @@
-exports.julesAgent = (req, res) => {
+import { Request, Response } from 'express'; // A common type for these, good enough for typing
+
+const julesAgent = (req: Request, res: Response): void => {
   if (req.method !== 'POST') {
-    return res.status(405).send('Method Not Allowed');
+    res.status(405).send('Method Not Allowed');
+    return;
   }
 
   if (!req.body || !req.body.message) {
-    return res.status(400).send('Bad Request: Missing "message" field in request body');
+    res.status(400).send('Bad Request: Missing "message" field in request body');
+    return;
   }
 
-  const message = req.body.message.toLowerCase();
-  let reply = `Hello! I can help. You asked: ${req.body.message}`;
+  const message: string = req.body.message.toLowerCase();
+  let reply: string;
 
   if (message.includes('core features')) {
     reply = 'JunAiKey\'s core features include: Function Interface, AI-Powered Theme Engine, Agent Network Tool, Routing, and Theme Switching.';
@@ -17,23 +21,21 @@ exports.julesAgent = (req, res) => {
   } else if (message.includes('file')) {
     reply = 'Ah, interested in files, are we? How can I help with files?';
   } else {
-    // Default conversational response for other queries
     const greetings = ["hello", "hi", "hey"];
     const userGreeting = greetings.find(greeting => message.includes(greeting));
 
     if (userGreeting) {
       reply = `Hello there! How can I assist you with JunAiKey today?`;
     } else {
-       reply = `Hmm, I'm not sure how to respond to that. I can tell you about the core features or style guidelines of JunAiKey. You asked: ${req.body.message}`;
+       reply = `Hmm, I'm not sure how to respond to that. I can tell you about the core features or style guidelines of JunAiKey.`;
     }
   }
 
   // Simulate a slight delay for a more "agent-like" feel
   setTimeout(() => {
     res.status(200).json({ reply: reply });
-  }, 500); // 500ms delay
+  }, 500);
 };
 
-
-// Export the function for Firebase
-exports.julesAgent = julesAgent;
+// Export the function for Firebase or Google Cloud Functions
+export { julesAgent };

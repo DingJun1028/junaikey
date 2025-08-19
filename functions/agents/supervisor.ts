@@ -1,20 +1,38 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+import { GoogleGenerativeAI, GenerativeModel } from "@google/generative-ai";
 
-const linter = require("./linter.agent");
-const security = require("./security.agent");
-const perplexity = require("./perplexity.agent");
+// Note: These imports will point to the .ts files once they are converted.
+// TypeScript will resolve the module without the extension.
+import * as linter from './linter.agent';
+import * as security from './security.agent';
+import * as perplexity from './perplexity.agent';
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+// Define types for clarity
+interface Agent {
+  name: string;
+  agent: (code: string) => Promise<any>;
+  description: string;
+}
 
-// Define all available agents that can be orchestrated. This is the "Myriad Avatars" concept.
-const agents = [
+interface Command {
+  user: string;
+  endpoint: string;
+  context: string;
+  params?: {
+    code?: string;
+  };
+}
+
+const genAI: GoogleGenerativeAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
+const model: GenerativeModel = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+// Define all available agents that can be orchestrated.
+const agents: Agent[] = [
   { name: "Linter", agent: linter.lint, description: "Code Linting Agent" },
   { name: "Security", agent: security.scan, description: "Security Scanner Agent" },
   { name: "Perplexity", agent: perplexity.analyze, description: "Perplexity Sonar Agent" },
 ];
 
-const systemInstruction = `
+const systemInstruction: string = `
 You are a supervisor AI.
 Your role is to orchestrate other AI agents (linter, security scanner, perplexity analyzer) to analyze user-provided code.
 
@@ -25,7 +43,7 @@ Your role is to orchestrate other AI agents (linter, security scanner, perplexit
 5.  Format the summary in clear, well-structured markdown. Include the findings from each agent under a separate heading.
 `;
 
-async function generate(command) {
+async function generate(command: Command): Promise<string> {
   try {
     const code = command.params?.code || "";
     if (!code) {
@@ -66,11 +84,11 @@ ${reportContent}
 Based on all these findings, provide a comprehensive summary in well-structured markdown format.
 `;
 
-    const result = await model.generateContent([
+    const genkitResult = await model.generateContent([
       systemInstruction,
       synthesisPrompt,
     ]);
-    const response = await result.response;
+    const response = await genkitResult.response;
     const text = response.text();
     return text;
   } catch (error) {
@@ -79,4 +97,4 @@ Based on all these findings, provide a comprehensive summary in well-structured 
   }
 }
 
-module.exports = { generate };
+export { generate };

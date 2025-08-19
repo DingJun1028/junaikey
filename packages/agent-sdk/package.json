@@ -1,0 +1,25 @@
+{
+  "name": "@junaikey/agent-sdk",
+  "version": "6.0.0",
+  "description": "A TypeScript SDK for creating and managing Omni-Agents in the JunAiKey Universe (v6.0).",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "sdk",
+    "junaikey"
+  ],
+  "author": "Jules Agent",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.0.0",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.1.5",
+    "typescript": "^5.0.0"
+  }
+}

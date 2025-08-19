@@ -1,8 +1,5 @@
 # ====================================================================
-# JunAiKey 智慧總體 主控程序 (MCP) v5.0 (Draft)
-# 昇華自 v4.0：強化可移植性 / 穩健性 / 擴展鉤子 / 符文職業矩陣
-# 十大職業體系：Architect / Alchemist / Genesis Weaver / Agentus
-# Veritas / Aegis / RuneBinder / Luminar / Sentinel / Oracle(預留)
+# JunAiKey 智慧總體 主控程序 (MCP) v5.0
 # ====================================================================
 
 SHELL := /usr/bin/env bash
@@ -13,16 +10,20 @@ MAKEFLAGS += --no-builtin-rules
 
 # ---------------- 基礎變數區 ----------------
 
-PYTHON               ?= python3
-VENV_DIR             ?= .venv
-API_SERVICE          ?= api-service
-DOCKER_COMPOSE       ?= docker compose
-BUILD_PARALLEL       ?= 1
-DOCKER_BUILDKIT      ?= 1
-CI                   ?= 0
-LOG_LINES            ?= 150
+PROJECT_DIR ?= junaikey-system
+REPO_URL ?= https://github.com/DingJun1028/junaikey-omnikey.git
+REPO_BRANCH ?= main
+PYTHON ?= python3
+VENV_DIR ?= .venv
+API_SERVICE ?= api-service
+DOCKER_COMPOSE ?= docker compose
+BUILD_PARALLEL ?= 1
+DOCKER_BUILDKIT ?= 1
+PULL_LATEST ?= 1
+CI ?= 0
+LOG_LINES ?= 150
 HEALTHCHECK_ENDPOINT ?= http://localhost:8080/health
-TIMESTAMP            := $(shell date +'%Y-%m-%d_%H-%M-%S')
+TIMESTAMP := $(shell date +'%Y-%m-%d_%H-%M-%S')
 
 # ---------------- 顏色與格式 ----------------
 
@@ -34,11 +35,11 @@ OK :=
 ERR :=
 else
 NO_COLOR := \033[0m
-BOLD     := \033[1m
-OK       := \033[32m✔\033[0m
-WARN     := \033[33m⚠\033[0m
-ERR      := \033[31m✘\033[0m
-CYAN     := \033[36m
+BOLD := \033[1m
+OK := \033[32m✔\033[0m
+WARN := \033[33m⚠\033[0m
+ERR := \033[31m✘\033[0m
+CYAN := \033[36m
 endif
 
 define banner
@@ -52,8 +53,10 @@ endef
 .PHONY: preflight
 preflight:
 	$(call banner,環境前置檢查 (Preflight))
+	command -v git >/dev/null 2>&1 || (echo "$(ERR) 缺少 git"; exit 1)
 	command -v docker >/dev/null 2>&1 || (echo "$(ERR) 缺少 docker"; exit 1)
 	$(DOCKER_COMPOSE) version >/dev/null 2>&1 || (echo "$(ERR) 缺少 docker compose"; exit 1)
+	@if [ ! -d "$(PROJECT_DIR)" ]; then echo "✦ 初始化：克隆 $(REPO_URL) -> $(PROJECT_DIR)"; git clone -b $(REPO_BRANCH) $(REPO_URL) $(PROJECT_DIR); elif [ "$(PULL_LATEST)" = "1" ]; then echo "✦ 更新：進入 $(PROJECT_DIR) 拉取最新"; cd $(PROJECT_DIR) && git fetch --all --quiet && git pull --rebase --autostash --quiet || true; else echo "✦ 跳過更新 (PULL_LATEST=0)"; fi
 	@echo "$(OK) Preflight 完成"
 
 # ---------------- 核心職業：Architect (總統籌) ----------------
@@ -74,8 +77,8 @@ soft-clean:
 	@echo "✦ 停止容器 (ignore errors)"
 	@$(DOCKER_COMPOSE) down --remove-orphans >/dev/null 2>&1 || true
 	@echo "✦ 移除暫存虛擬環境與編譯遺留"
-	@rm -rf $(VENV_DIR) .pytest_cache dist || true
-	@find . -type d -name '*pycache*' -prune -exec rm -rf {} + 2>/dev/null || true
+	@rm -rf $(VENV_DIR) $(PROJECT_DIR)/.pytest_cache $(PROJECT_DIR)/dist || true
+	@find . -type d -name '**pycache**' -prune -exec rm -rf {} + 2>/dev/null || true
 	@echo "$(OK) Soft Clean 完成"
 
 deep-clean:
@@ -83,7 +86,7 @@ deep-clean:
 	@$(DOCKER_COMPOSE) down -v --remove-orphans || true
 	@docker image prune -f || true
 	@docker builder prune -f || true
-	@rm -rf $(VENV_DIR)
+	@rm -rf $(PROJECT_DIR) $(VENV_DIR)
 	@echo "$(OK) Deep Clean 完成 (鏡像/Volumes 亦已處理)"
 
 clean: soft-clean
@@ -124,7 +127,7 @@ tail: veritas-monitor
 .PHONY: aegis-secure security-audit
 aegis-secure:
 	$(call banner,秩序守衛者 安全域審視)
-	@if $(DOCKER_COMPOSE) exec -T $(API_SERVICE) bash -c "command -v npm >/dev/null && npm run | grep -q security-audit"; then $(DOCKER_COMPOSE) exec -T $(API_SERVICE) npm run security-audit; else echo "$(WARN) 未定義 npm run security-audit，跳過 (可添加)"; fi
+	@if $(DOCKER_COMPOSE) exec -T $(API_SERVICE) bash -c "npm run | grep -q security-audit"; then $(DOCKER_COMPOSE) exec -T $(API_SERVICE) npm run security-audit; else echo "$(WARN) 未定義 npm run security-audit，跳過 (可添加)"; fi
 	@echo "$(OK) 安全檢查流程完成"
 security-audit: aegis-secure
 
@@ -133,7 +136,7 @@ security-audit: aegis-secure
 .PHONY: rune-binder-check-api api-check
 rune-binder-check-api:
 	$(call banner,符文連結師 外部 API 連線檢測)
-	@if $(DOCKER_COMPOSE) ps | grep -q $(API_SERVICE); then if $(DOCKER_COMPOSE) exec -T $(API_SERVICE) test -f /code/scripts/check_api_connections.py; then $(DOCKER_COMPOSE) exec -T $(API_SERVICE) $(PYTHON) /code/scripts/check_api_connections.py; else echo "$(WARN) 未找到 check_api_connections.py，請後續加入實作"; fi; else echo "$(ERR) 服務 $(API_SERVICE) 未啟動"; exit 1; fi
+	@if $(DOCKER_COMPOSE) ps | grep -q $(API_SERVICE); then if $(DOCKER_COMPOSE) exec -T $(API_SERVICE) test -f check_api_connections.py; then $(DOCKER_COMPOSE) exec -T $(API_SERVICE) $(PYTHON) check_api_connections.py; else echo "$(WARN) 未找到 check_api_connections.py，請後續加入實作"; fi; else echo "$(ERR) 服務 $(API_SERVICE) 未啟動"; exit 1; fi
 	@echo "$(OK) 外部 API 連結檢測階段結束"
 api-check: rune-binder-check-api
 
@@ -142,7 +145,7 @@ api-check: rune-binder-check-api
 .PHONY: luminar-document docs
 luminar-document:
 	$(call banner,啓蒙導師 生成啟蒙詩篇)
-	@if $(DOCKER_COMPOSE) exec -T $(API_SERVICE) test -f /code/scripts/generate_docs.py; then $(DOCKER_COMPOSE) exec -T $(API_SERVICE) $(PYTHON) /code/scripts/generate_docs.py; else echo "$(WARN) generate_docs.py 缺失：可建立 scripts/generate_docs.py"; fi
+	@if $(DOCKER_COMPOSE) exec -T $(API_SERVICE) test -f generate_docs.py; then $(DOCKER_COMPOSE) exec -T $(API_SERVICE) $(PYTHON) generate_docs.py; else echo "$(WARN) generate_docs.py 缺失：可建立 scripts/generate_docs.py"; fi
 	@echo "$(OK) 文檔生成階段完成"
 docs: luminar-document
 
@@ -170,20 +173,21 @@ oracle-diagnose:
 help:
 	@echo ""
 	@echo "$(BOLD)JunAiKey MCP 指令矩陣$(NO_COLOR)"
-	@echo "  architect-deploy    : 全流程部署（清理→構建→啟動）"
-	@echo "  alchemist-clean     : Soft Clean（不刪 volumes）"
-	@echo "  deep-clean          : 刪容器+鏡像+Volumes+源碼目錄"
-	@echo "  genesis-weaver-build: 構建/重建鏡像"
-	@echo "  agentus-start       : 啟動代理網絡 (docker compose up -d)"
-	@echo "  veritas-monitor     : 追蹤日誌 (tail=$(LOG_LINES))"
-	@echo "  aegis-secure        : 安全稽核（存在則執行 security-audit）"
-	@echo "  rune-binder-check-api : 外部 API 連線檢查"
-	@echo "  luminar-document    : 文檔生成（generate_docs.py）"
-	@echo "  sentinel-health     : 健康檢測 (HEALTHCHECK_ENDPOINT)"
-	@echo "  oracle-diagnose     : 預留智能診斷節點"
+	@echo " architect-deploy : 全流程部署（清理→構建→啟動）"
+	@echo " alchemist-clean : Soft Clean（不刪 volumes）"
+	@echo " deep-clean : 刪容器+鏡像+Volumes+源碼目錄"
+	@echo " genesis-weaver-build: 構建/重建鏡像"
+	@echo " agentus-start : 啟動代理網絡 (docker compose up -d)"
+	@echo " veritas-monitor : 追蹤日誌 (tail=$(LOG_LINES))"
+	@echo " aegis-secure : 安全稽核（存在則執行 security-audit）"
+	@echo " rune-binder-check-api : 外部 API 連線檢查"
+	@echo " luminar-document : 文檔生成（generate_docs.py）"
+	@echo " sentinel-health : 健康檢測 (HEALTHCHECK_ENDPOINT)"
+	@echo " oracle-diagnose : 預留智能診斷節點"
 	@echo ""
 	@echo "$(BOLD)環境變數可覆蓋：$(NO_COLOR)"
-	@echo "  API_SERVICE, LOG_LINES, HEALTHCHECK_ENDPOINT, BUILD_PARALLEL, DOCKER_BUILDKIT"
+	@echo " PROJECT_DIR, REPO_URL, REPO_BRANCH, API_SERVICE, PULL_LATEST"
+	@echo " LOG_LINES, HEALTHCHECK_ENDPOINT, BUILD_PARALLEL, DOCKER_BUILDKIT"
 	@echo ""
-	@echo "示例： LOG_LINES=50 make veritas-monitor"
+	@echo "示例： PULL_LATEST=0 LOG_LINES=50 make veritas-monitor"
 	@echo ""
