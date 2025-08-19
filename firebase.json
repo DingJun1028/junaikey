@@ -13,6 +13,15 @@
     ],
     "frameworksBackend": {
       "region": "asia-east1"
-    }
+    },
+    "rewrites": [
+      {
+        "source": "/api/**",
+        "function": {
+          "functionId": "api",
+          "region": "asia-east1"
+        }
+      }
+    ]
   }
 }
