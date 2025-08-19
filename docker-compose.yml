@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   clickhouse:
     image: clickhouse/clickhouse-server:24.5-alpine
@@ -21,7 +19,7 @@ services:
   api-service:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.py
     env_file:
       - .env
     ports:
@@ -29,9 +27,6 @@ services:
     depends_on:
       clickhouse:
         condition: service_healthy
-    # The command is already specified in the Dockerfile's CMD instruction.
-    # We can add it here to be explicit if needed.
-    # command: uvicorn app.main:app --host 0.0.0.0 --port 8080
 
 volumes:
   clickhouse_data:
