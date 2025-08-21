@@ -1,0 +1,85 @@
+name: Firebase Preview Deploy
+
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  firebase-preview:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b  # v4.0.3
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build application
+        run: npm run build
+        
+      - name: Install Firebase Functions dependencies
+        run: |
+          if [ -d "functions" ]; then
+            cd functions
+            npm ci
+            cd ..
+          fi
+          
+      - name: Deploy to Firebase Preview Channel
+        uses: FirebaseExtended/action-hosting-deploy@b8eca2c9d284cb4e1b58a0bd56c0c3d0e3e7c4e9  # v0.9.0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
+          
+      - name: Deploy Firebase Functions (if available)
+        run: |
+          if [ -d "functions" ] && [ -f "functions/package.json" ]; then
+            echo "Deploying Firebase Functions..."
+            npx firebase deploy --only functions --project ${{ secrets.FIREBASE_PROJECT_ID }} --token ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          else
+            echo "No Firebase Functions found, skipping functions deployment"
+          fi
+        continue-on-error: true
+        
+      - name: Comment Preview URL
+        uses: actions/github-script@60a0d83039c74a4adc543d1629e9d21eaab0f1c5  # v7.0.1
+        with:
+          script: |
+            const { data: pullRequest } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+            
+            const comment = `🚀 **Firebase Preview Deploy**
+            
+            ✅ Build completed successfully!
+            📱 Preview URL will be available in the Firebase console
+            🔧 Functions deployed (if applicable)
+            
+            **Branch**: \`${pullRequest.head.ref}\`
+            **Commit**: ${pullRequest.head.sha.substring(0, 7)}
+            
+            View your preview in the [Firebase Console](https://console.firebase.google.com/project/${{ secrets.FIREBASE_PROJECT_ID }}/hosting)`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
