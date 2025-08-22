@@ -1,0 +1,25 @@
+# Dependency directories
+node_modules/
+
+# Build output
+lib/
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Firebase cache
+.firebase/
