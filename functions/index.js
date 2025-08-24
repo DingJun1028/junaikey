@@ -15,7 +15,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 admin.initializeApp();
 
-app.post("/api/execute-sacred-command", async (req, res) => {
+// Support BOTH routes so Hosting rewrites and direct calls work:
+// - /execute-sacred-command (when forwarded by Hosting rewrite)
+// - /api/execute-sacred-command (direct calls without rewrite)
+app.post(["/execute-sacred-command", "/api/execute-sacred-command"], async (req, res) => {
   const { command } = req.body;
   if (!command) {
     return res.status(400).send({ error: "Command object is required" });
@@ -32,7 +35,7 @@ app.post("/api/execute-sacred-command", async (req, res) => {
   }
 });
 
-app.post("/api/add-knowledge", async (req, res) => {
+app.post(["/add-knowledge", "/api/add-knowledge"], async (req, res) => {
   const { category, data } = req.body;
 
   if (!category || !data) {
@@ -80,5 +83,6 @@ app.post("/api/add-knowledge", async (req, res) => {
   }
 });
 
-exports.api = functions.https.onRequest(app);
+// Align the function region with Hosting (asia-east1)
+exports.api = functions.region('asia-east1').https.onRequest(app);
 
