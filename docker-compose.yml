@@ -21,7 +21,7 @@ services:
   api-service:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.py
     env_file:
       - .env
     ports:

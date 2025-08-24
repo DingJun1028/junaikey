@@ -1,0 +1,44 @@
+# Node.js 20 image for Next.js (standalone output)
+FROM node:20-alpine AS base
+
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm ci --only=production
+
+# --- Builder ---
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Build the application
+RUN npx next build
+
+# --- Runner ---
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+# Don't run production as root
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+USER nextjs
+
+# Copy package.json and next.config.ts
+COPY --from=builder /app/next.config.ts .
+COPY --from=builder /app/package.json .
+
+# Use Next standalone output traces to reduce image size
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+
+EXPOSE 3000
+
+CMD node server.js
