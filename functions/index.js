@@ -80,5 +80,6 @@ app.post("/api/add-knowledge", async (req, res) => {
   }
 });
 
-exports.api = functions.https.onRequest(app);
+// Pin region to asia-east1 to match Hosting and avoid cross-region routing
+exports.api = functions.region('asia-east1').https.onRequest(app);
 
