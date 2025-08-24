@@ -50,4 +50,4 @@ merged = {
   }
 };
 
-export const config: Config = merged;
+export const config = merged;
