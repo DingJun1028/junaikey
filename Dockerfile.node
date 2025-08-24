@@ -1,0 +1,29 @@
+# Build a standalone Next.js app image suitable for Cloud Run
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+# Install deps
+COPY package*.json ./
+RUN npm ci || npm install
+
+# Build
+COPY . .
+RUN npm run build
+
+# Run minimal production image
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=8080
+
+# Create non-root user
+RUN addgroup -S nodejs && adduser -S nextjs -G nodejs
+
+# Copy the standalone build output
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+
+USER nextjs
+EXPOSE 8080
+CMD ["node", "server.js"]
