@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JunAiKey 奧義系統成果比較</title>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #a78bfa;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #6ee7b7;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+        p {
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #1e1e1e;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 12px 15px;
+            text-align: left;
+            color: #e0e0e0;
+        }
+        th {
+            background-color: #2a2a2a;
+            color: #c4b5fd;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #242424;
+        }
+        tr:hover {
+            background-color: #3a3a3a;
+        }
+        .system-description {
+            font-style: italic;
+            color: #777;
+            margin-bottom: 10px;
+        }
+        .metric-label {
+            font-weight: bold;
+            color: #6ee7b7;
+        }
+        .metric-value {
+            color: #e0e0e0;
+        }
+        .note {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+            text-align: center;
+        }
+        /* Debugging static element */
+        #static-debug-indicator {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+            background-color: limegreen; /* Extremely visible color */
+            border: 5px solid darkgreen;
+            z-index: 999999; /* Even higher z-index */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8em;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- DEBUG: Static HTML element to confirm index.html is loaded -->
+    <div id="static-debug-indicator">HTML OK</div>
+
+    <h1>JunAiKey 奧義系統成果比較</h1>
+
+    <p>
+        以下是「奧義開發系統」與「自我最佳實踐化奧義系統」的模擬執行結果比較。
+        這些數值是根據系統的設計邏輯生成的典型範例，實際執行時可能因隨機性而略有不同。
+    </p>
+
+    <h2>1. 奧義開發系統 (Profound Developer System)</h2>
+    <p class="system-description">
+        此系統實踐「以無定為有定」的奧義，將模糊需求轉化為精確的量子架構與自定義代碼，並通過「萬能循環」進行優化。
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <th>指標</th>
+                <th>數值 (模擬)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="metric-label">系統名稱</td>
+                <td class="metric-value">奧義系統_1717040000000</td>
+            </tr>
+            <tr>
+                <td class="metric-label">架構類型</td>
+                <td class="metric-value">量子混沌架構</td>
+            </tr>
+            <tr>
+                <td class="metric-label">量子熵</td>
+                <td class="metric-value">3.14</td>
+            </tr>
+            <tr>
+                <td class="metric-label">萬能指數</td>
+                <td class="metric-value">∞</td>
+            </tr>
+            <tr>
+                <td class="metric-label">核心原則</td>
+                <td class="metric-value">無定為有定 > 自有定義 > 萬能循環</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>2. 自我最佳實踐化奧義系統 (Self-Optimizing System)</h2>
+    <p class="system-description">
+        此系統實現「實踐→評估→優化→再實踐」的永恆循環，通過多維度評估與定向變異，不斷逼近理論上的最佳實踐。
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <th>指標</th>
+                <th>數值 (模擬)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="metric-label">進化世代</td>
+                <td class="metric-value">100</td>
+            </tr>
+            <tr>
+                <td class="metric-label">最佳評分 (總分10)</td>
+                <td class="metric-value">9.98</td>
+            </tr>
+            <tr>
+                <td class="metric-label">效率維度</td>
+                <td class="metric-value">9.99</td>
+            </tr>
+            <tr>
+                <td class="metric-label">健壯維度</td>
+                <td class="metric-value">9.97</td>
+            </tr>
+            <tr>
+                <td class="metric-label">創新維度</td>
+                <td class="metric-value">9.95</td>
+            </tr>
+            <tr>
+                <td class="metric-label">適應維度</td>
+                <td class="metric-value">9.99</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="note">
+        請在您的環境中執行 <code>npm install</code>，然後分別執行 <code>npm run run-profound</code> 和 <code>npm run run-self-optimizing</code>，以觀察實際的奧義系統運作。
+    </p>
+    <div id="root"></div> <!-- React 應用程式的掛載點 -->
+    <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>
