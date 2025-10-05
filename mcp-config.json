@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "junaikey": {
+      "command": "node",
+      "args": ["dist/mcpServer.js"],
+      "env": {}
+    }
+  }
+}
