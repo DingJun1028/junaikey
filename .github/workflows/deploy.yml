@@ -1,0 +1,17 @@
+name: Deploy MCP Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Deploy to server
+        run: |
+          # SSH 到您的伺服器，拉取最新程式碼並重啟 MCP Server
+          ssh user@your-server-ip "cd /path/to/mcp && git pull && systemctl restart mcp-server"
