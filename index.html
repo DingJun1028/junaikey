@@ -1,12 +1,67 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JunAiKey 奧義系統成果比較</title>
-    ...[content truncated for brevity in this message]...
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JunAiKey萬能元鑰遊戲系統</title>
+  <style>
+    #game-canvas {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      cursor: none;
+      touch-action: none;
+    }
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body>
-    ...[content truncated for brevity in this message]...
+  <canvas id="game-canvas"></canvas>
+  <!-- React root: main.tsx expects <div id="root"> -->
+  <div id="root"></div>
+  <div id="ui-root"></div>
+  
+  <script type="module">
+    import { GameRenderer } from './src/gameplay/GameRenderer.ts';
+    
+    document.addEventListener('DOMContentLoaded', async () => {
+      const canvas = document.getElementById('game-canvas');
+      const gameRenderer = new GameRenderer(canvas);
+      gameRenderer.updateCanvasSize();
+      
+      // 窗口尺寸變化監聽
+      window.addEventListener('resize', () => {
+        gameRenderer.updateCanvasSize();
+      });
+      
+      // 模擬玩家資料
+      const players = [
+        { heroData: { position: { x: 0, y: 0 } } },
+        { heroData: { position: { x: 100, y: 50 } } }
+      ];
+      
+      // 遊戲主循環初始化
+      let lastTimestamp = 0;
+      function gameLoop(timestamp) {
+        const deltaTime = timestamp - lastTimestamp;
+        lastTimestamp = timestamp;
+        
+        // 模擬玩家移動
+        players[0].heroData.position.x += deltaTime * 0.05;
+        players[0].heroData.position.y = Math.sin(timestamp * 0.001) * 50;
+        
+        // 渲染畫面
+        gameRenderer.render(players, deltaTime);
+        
+        requestAnimationFrame(gameLoop);
+      }
+      requestAnimationFrame(gameLoop);
+    });
+  </script>
+  <!-- Mount React app -->
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
