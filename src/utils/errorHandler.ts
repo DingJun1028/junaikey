@@ -27,9 +27,12 @@ export interface ErrorContext {
   resource?: string;
   timestamp: string;
   traceId?: string;
+  // 允許額外自訂欄位（例如 field, service, operation 等），提高靈活性
+  [key: string]: any;
 }
 
-export interface JunAiKeyError extends Error {
+// 改為使用 IJunAiKeyError 介面名稱，避免與類別同名衝突
+export interface IJunAiKeyError extends Error {
   type: ErrorType;
   code: string;
   statusCode?: number;
@@ -38,7 +41,15 @@ export interface JunAiKeyError extends Error {
   details?: Record<string, any>;
 }
 
-export class JunAiKeyError extends Error {
+export class JunAiKeyError extends Error implements IJunAiKeyError {
+  // 屬性宣告與介面一致（retryable 保持可選），避免型別/修飾元不一致錯誤
+  public type: ErrorType;
+  public code: string;
+  public statusCode?: number;
+  public context?: ErrorContext;
+  public retryable?: boolean;
+  public details?: Record<string, any>;
+
   constructor(
     type: ErrorType,
     code: string,

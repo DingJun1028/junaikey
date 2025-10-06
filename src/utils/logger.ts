@@ -16,7 +16,7 @@ export interface LogEntry {
   level: LogLevel;
   category: string;
   message: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, any> | null;
   traceId?: string;
 }
 
@@ -46,7 +46,7 @@ class JunAiKeyLogger {
     level: LogLevel,
     category: string,
     message: string,
-    metadata?: Record<string, any>,
+    metadata?: Record<string, any> | null,
     traceId?: string
   ): LogEntry {
     return {
@@ -54,7 +54,7 @@ class JunAiKeyLogger {
       level,
       category,
       message,
-      metadata,
+      metadata: metadata === undefined ? undefined : metadata,
       traceId: traceId || this.generateTraceId()
     };
   }
@@ -111,42 +111,166 @@ class JunAiKeyLogger {
     }
   }
 
-  debug(category: string, message: string, metadata?: Record<string, any>, traceId?: string): void {
+  // 使用寬鬆的 any[] 參數解析，支援多種呼叫形式
+  debug(...args: any[]): void {
+    // 支援：debug('message') | debug('category', 'message') | debug('category', 'message', metadata)
+    let category = 'General';
+    let message = '';
+    let metadata: Record<string, any> | null | undefined;
+    let traceId: string | undefined;
+
+    if (args.length === 1) {
+      message = args[0];
+    } else if (args.length >= 2) {
+      if (typeof args[1] === 'string') {
+        category = args[0];
+        message = args[1];
+        if (args.length >= 3) {
+          if (typeof args[2] === 'string') traceId = args[2];
+          else metadata = args[2];
+        }
+        if (args.length >= 4) traceId = args[3];
+      } else {
+        message = args[0];
+        metadata = args[1];
+        if (typeof args[2] === 'string') traceId = args[2];
+      }
+    }
+
     const entry = this.createLogEntry(LogLevel.DEBUG, category, message, metadata, traceId);
     this.logEntry(entry);
   }
 
-  info(category: string, message: string, metadata?: Record<string, any>, traceId?: string): void {
+  info(...args: any[]): void {
+    let category = 'General';
+    let message = '';
+    let metadata: Record<string, any> | null | undefined;
+    let traceId: string | undefined;
+
+    if (args.length === 1) {
+      message = args[0];
+    } else if (args.length >= 2) {
+      if (typeof args[1] === 'string') {
+        category = args[0];
+        message = args[1];
+        if (args.length >= 3) {
+          if (typeof args[2] === 'string') traceId = args[2];
+          else metadata = args[2];
+        }
+        if (args.length >= 4) traceId = args[3];
+      } else {
+        message = args[0];
+        metadata = args[1];
+        if (typeof args[2] === 'string') traceId = args[2];
+      }
+    }
+
     const entry = this.createLogEntry(LogLevel.INFO, category, message, metadata, traceId);
     this.logEntry(entry);
   }
 
-  warn(category: string, message: string, metadata?: Record<string, any>, traceId?: string): void {
+  warn(...args: any[]): void {
+    let category = 'General';
+    let message = '';
+    let metadata: Record<string, any> | null | undefined;
+    let traceId: string | undefined;
+
+    if (args.length === 1) {
+      message = args[0];
+    } else if (args.length >= 2) {
+      if (typeof args[1] === 'string') {
+        category = args[0];
+        message = args[1];
+        if (args.length >= 3) {
+          if (typeof args[2] === 'string') traceId = args[2];
+          else metadata = args[2];
+        }
+        if (args.length >= 4) traceId = args[3];
+      } else {
+        message = args[0];
+        metadata = args[1];
+        if (typeof args[2] === 'string') traceId = args[2];
+      }
+    }
+
     const entry = this.createLogEntry(LogLevel.WARN, category, message, metadata, traceId);
     this.logEntry(entry);
   }
 
-  error(category: string, message: string, error?: Error, metadata?: Record<string, any>, traceId?: string): void {
+  error(...args: any[]): void {
+    // 支援多種呼叫： (category, message), (category, message, error), (category, message, error, metadata), (message), (message, metadata)
+    let category = 'General';
+    let message = '';
+    let metadata: Record<string, any> | null | undefined;
+    let traceId: string | undefined;
+    let err: Error | undefined;
+
+    if (args.length === 1) {
+      message = args[0];
+    } else if (args.length >= 2) {
+      category = args[0];
+      message = args[1];
+
+      if (args.length === 3) {
+        if (args[2] instanceof Error) err = args[2];
+        else if (typeof args[2] === 'string') traceId = args[2];
+        else metadata = args[2];
+      }
+
+      if (args.length >= 4) {
+        if (args[2] instanceof Error) {
+          err = args[2];
+          metadata = args[3];
+        } else {
+          metadata = args[2];
+          if (typeof args[3] === 'string') traceId = args[3];
+        }
+      }
+    }
+
     const entry = this.createLogEntry(LogLevel.ERROR, category, message, {
       ...metadata,
-      error: error ? {
-        message: error.message,
-        stack: error.stack,
-        name: error.name
-      } : undefined
+      error: err ? { message: err.message, stack: err.stack, name: err.name } : undefined
     }, traceId);
+
     this.logEntry(entry);
   }
 
-  fatal(category: string, message: string, error?: Error, metadata?: Record<string, any>, traceId?: string): void {
+  fatal(...args: any[]): void {
+    let category = 'General';
+    let message = '';
+    let metadata: Record<string, any> | null | undefined;
+    let traceId: string | undefined;
+    let err: Error | undefined;
+
+    if (args.length === 1) {
+      message = args[0];
+    } else if (args.length >= 2) {
+      category = args[0];
+      message = args[1];
+
+      if (args.length === 3) {
+        if (args[2] instanceof Error) err = args[2];
+        else if (typeof args[2] === 'string') traceId = args[2];
+        else metadata = args[2];
+      }
+
+      if (args.length >= 4) {
+        if (args[2] instanceof Error) {
+          err = args[2];
+          metadata = args[3];
+        } else {
+          metadata = args[2];
+          if (typeof args[3] === 'string') traceId = args[3];
+        }
+      }
+    }
+
     const entry = this.createLogEntry(LogLevel.FATAL, category, message, {
       ...metadata,
-      error: error ? {
-        message: error.message,
-        stack: error.stack,
-        name: error.name
-      } : undefined
+      error: err ? { message: err.message, stack: err.stack, name: err.name } : undefined
     }, traceId);
+
     this.logEntry(entry);
   }
 
@@ -181,17 +305,33 @@ export const logger = new JunAiKeyLogger({
 });
 
 // 快捷方法
-export const debug = (category: string, message: string, metadata?: Record<string, any>) => 
+export const debug = (category: string, message?: string, metadata?: Record<string, any> | null) => 
   logger.debug(category, message, metadata);
 
-export const info = (category: string, message: string, metadata?: Record<string, any>) => 
+export const info = (category: string, message?: string, metadata?: Record<string, any> | null) => 
   logger.info(category, message, metadata);
 
-export const warn = (category: string, message: string, metadata?: Record<string, any>) => 
+export const warn = (category: string, message?: string, metadata?: Record<string, any> | null) => 
   logger.warn(category, message, metadata);
 
-export const error = (category: string, message: string, error?: Error, metadata?: Record<string, any>) => 
-  logger.error(category, message, error, metadata);
+export const error = (category: string, message?: string | Error, metadata?: Record<string, any> | null) => 
+  logger.error(category, typeof message === 'string' ? message : undefined, message instanceof Error ? message : undefined, metadata as any);
 
-export const fatal = (category: string, message: string, error?: Error, metadata?: Record<string, any>) => 
-  logger.fatal(category, message, error, metadata);
+export const fatal = (category: string, message?: string | Error, metadata?: Record<string, any> | null) => 
+  logger.fatal(category, typeof message === 'string' ? message : undefined, message instanceof Error ? message : undefined, metadata as any);
+
+// 將快捷函式註冊為全域函式，並提供型別宣告以解決測試中未匯入的使用情況
+declare global {
+  function debug(category: string, message?: string, metadata?: Record<string, any> | null): void;
+  function info(category: string, message?: string, metadata?: Record<string, any> | null): void;
+  function warn(category: string, message?: string, metadata?: Record<string, any> | null): void;
+  function error(category: string, message?: string | Error, metadata?: Record<string, any> | null): void;
+  function fatal(category: string, message?: string | Error, metadata?: Record<string, any> | null): void;
+}
+
+// 在 runtime 掛載到 globalThis
+;(globalThis as any).debug = debug;
+;(globalThis as any).info = info;
+;(globalThis as any).warn = warn;
+;(globalThis as any).error = error;
+;(globalThis as any).fatal = fatal;

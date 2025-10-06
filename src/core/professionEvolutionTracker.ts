@@ -142,7 +142,9 @@ export class ProfessionEvolutionTracker {
     ];
 
     defaultProfessions.forEach((profession, index) => {
-      const id = `profession_${MainProfession[profession.mainProfession]}_${index + 1}`;
+      // profession.mainProfession 已為字串值，例如 'insight'
+      const mainName = String(profession.mainProfession).toLowerCase();
+      const id = `profession_${mainName}_${index + 1}`;
       this.professions.set(id, { ...profession, id });
     });
 
@@ -519,7 +521,9 @@ export class ProfessionEvolutionTracker {
     for (const requirement of skill.requirements) {
       switch (requirement.type) {
         case 'level':
-          if (profession.progress.level < requirement.value as number) {
+          // 如果 requirement.value 為字串，嘗試轉為數字比較
+          const requiredValueNum = typeof requirement.value === 'string' ? parseInt(requirement.value, 10) : requirement.value as number;
+          if (Number.isFinite(requiredValueNum) && profession.progress.level < requiredValueNum) {
             return {
               success: false,
               message: `需要等級 ${requirement.value} 才能學習此技能`
@@ -528,7 +532,8 @@ export class ProfessionEvolutionTracker {
           break;
         case 'skill':
           const requiredSkill = profession.skills.find(s => s.id === requirement.target);
-          if (!requiredSkill || requiredSkill.level < requirement.value as number) {
+          const requiredSkillValueNum = typeof requirement.value === 'string' ? parseInt(requirement.value, 10) : requirement.value as number;
+          if (!requiredSkill || (Number.isFinite(requiredSkillValueNum) && requiredSkill.level < requiredSkillValueNum)) {
             return {
               success: false,
               message: `需要技能 ${requirement.target} 等級 ${requirement.value}`

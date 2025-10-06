@@ -213,7 +213,9 @@ export class ElementSpiritSystem {
     ];
 
     defaultSpirits.forEach((spirit, index) => {
-      const id = `spirit_${ElementType[spirit.type].toLowerCase()}_${index + 1}`;
+      // spirit.type 已為 ElementType 的字串值 (例如 'order')，直接使用即可
+      const typeName = String(spirit.type).toLowerCase();
+      const id = `spirit_${typeName}_${index + 1}`;
       this.spirits.set(id, { ...spirit, id });
     });
 
