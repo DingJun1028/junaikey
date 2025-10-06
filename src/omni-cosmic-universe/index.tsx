@@ -5,7 +5,7 @@
  * 實現四大宇宙公理與四大聖柱的完美融合
  */
 
-import React, { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer, useRef } from 'react';
 import * as d3 from 'd3';
 
 // === 類型定義：符合四大宇宙公理 ===
@@ -89,7 +89,7 @@ export const CosmicGenerator: React.FC = () => {
   useEffect(() => {
     const cycle = setInterval(() => {
       dispatch({ type: 'EVOLUTION_CYCLE' });
-      setEvolutionCycle(c => c + 1);
+      setEvolutionCycle((c: number) => c + 1);
       updateLifecycleData();
     }, 30000); // 每30秒一次進化循環
     
@@ -98,16 +98,16 @@ export const CosmicGenerator: React.FC = () => {
 
   // 初始化宇宙
   useEffect(() => {
-    generateInitialEvents();
+    generateInitialEvents(dispatch);
     updateLifecycleData();
   }, []);
 
   // 更新生命週期數據
   const updateLifecycleData = () => {
     const data = [
-      ...state.cards.events.map(e => ({ ...e, type: 'event', y: 100 })),
-      ...state.cards.problems.map(p => ({ ...p, type: 'problem', y: 200 })),
-      ...state.cards.solutions.map(s => ({ ...s, type: 'solution', y: 300 }))
+      ...state.cards.events.map((e: any) => ({ ...e, type: 'event', y: 100 })),
+      ...state.cards.problems.map((p: any) => ({ ...p, type: 'problem', y: 200 })),
+      ...state.cards.solutions.map((s: any) => ({ ...s, type: 'solution', y: 300 }))
     ];
     setLifecycleData(data);
   };
@@ -177,7 +177,7 @@ const cosmicReducer = (state: SystemState, action: any): SystemState => {
     
     // 事件轉化為問題 (萬能平衡公理)
     case 'EVENT_TO_PROBLEM':
-      const event = state.cards.events.find(e => e.id === action.eventId);
+      const event = state.cards.events.find((e: EventCard) => e.id === action.eventId);
       if (!event) return state;
       
       const newProblem: ProblemCard = {
@@ -212,7 +212,7 @@ const cosmicReducer = (state: SystemState, action: any): SystemState => {
     // 問題解決方案執行 (熵減煉金)
     case 'SOLVE_PROBLEM':
       const solution: SolutionCard = action.solution;
-      const problem = state.cards.problems.find(p => p.id === action.problemId);
+      const problem = state.cards.problems.find((p: ProblemCard) => p.id === action.problemId);
       
       return {
         ...state,
@@ -225,7 +225,7 @@ const cosmicReducer = (state: SystemState, action: any): SystemState => {
         cards: {
           ...state.cards,
           solutions: [...state.cards.solutions, solution],
-          problems: state.cards.problems.filter(p => p.id !== action.problemId)
+          problems: state.cards.problems.filter((p: ProblemCard) => p.id !== action.problemId)
         }
       };
     
@@ -247,7 +247,7 @@ const cosmicReducer = (state: SystemState, action: any): SystemState => {
 
 // === 視覺化元件 ===
 export const LifecycleFlow: React.FC<{ data: any[] }> = ({ data }) => {
-  const svgRef = useRef<SVGSVGElement>(null);
+  const svgRef = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
     if (!svgRef.current || data.length === 0) return;
@@ -267,7 +267,7 @@ export const LifecycleFlow: React.FC<{ data: any[] }> = ({ data }) => {
 
     // 添加連接線
     const links: any[] = [];
-    data.forEach((d, i) => {
+    data.forEach((d: any, i: number) => {
       if (i < data.length - 1) {
         links.push({
           source: { x: (i / (data.length - 1)) * (width - margin.left - margin.right), y: d.y - margin.top },
@@ -280,10 +280,10 @@ export const LifecycleFlow: React.FC<{ data: any[] }> = ({ data }) => {
       .selectAll("line")
       .data(links)
       .enter().append("line")
-      .attr("x1", d => d.source.x)
-      .attr("y1", d => d.source.y)
-      .attr("x2", d => d.target.x)
-      .attr("y2", d => d.target.y)
+      .attr("x1", (d: any) => d.source.x)
+      .attr("y1", (d: any) => d.source.y)
+      .attr("x2", (d: any) => d.target.x)
+      .attr("y2", (d: any) => d.target.y)
       .attr("stroke", "#4a5568")
       .attr("stroke-width", 2)
       .attr("stroke-dasharray", "5,5");
@@ -292,10 +292,10 @@ export const LifecycleFlow: React.FC<{ data: any[] }> = ({ data }) => {
     const node = g.selectAll("circle")
       .data(data)
       .enter().append("circle")
-      .attr("cx", (d, i) => (i / (data.length - 1)) * (width - margin.left - margin.right))
-      .attr("cy", d => d.y - margin.top)
+      .attr("cx", (d: any, i: number) => (i / (data.length - 1)) * (width - margin.left - margin.right))
+      .attr("cy", (d: any) => d.y - margin.top)
       .attr("r", 8)
-      .attr("fill", d => getColor(d.color))
+      .attr("fill", (d: any) => getColor(d.color))
       .attr("stroke", "#fff")
       .attr("stroke-width", 2);
 
@@ -303,8 +303,8 @@ export const LifecycleFlow: React.FC<{ data: any[] }> = ({ data }) => {
     const label = g.selectAll("text")
       .data(data)
       .enter().append("text")
-      .attr("x", (d, i) => (i / (data.length - 1)) * (width - margin.left - margin.right))
-      .attr("y", d => d.y - margin.top - 15)
+      .attr("x", (d: any, i: number) => (i / (data.length - 1)) * (width - margin.left - margin.right))
+      .attr("y", (d: any) => d.y - margin.top - 15)
       .attr("text-anchor", "middle")
       .style("fill", "#e2e8f0")
       .style("font-size", "12px")
@@ -367,7 +367,7 @@ const ExecutionRing: React.FC<{ problems: ProblemCard[]; solutions: SolutionCard
         <div>
           <h4 className="text-red-400">問題 ({problems.length})</h4>
           <div className="max-h-20 overflow-y-auto">
-            {problems.map(p => (
+            {problems.map((p: ProblemCard) => (
               <div key={p.id} className="text-xs p-1 bg-gray-700 rounded mt-1">
                 {p.name}
               </div>
@@ -377,7 +377,7 @@ const ExecutionRing: React.FC<{ problems: ProblemCard[]; solutions: SolutionCard
         <div>
           <h4 className="text-green-400">解決 ({solutions.length})</h4>
           <div className="max-h-20 overflow-y-auto">
-            {solutions.map(s => (
+            {solutions.map((s: SolutionCard) => (
               <div key={s.id} className="text-xs p-1 bg-gray-700 rounded mt-1">
                 {s.name}
               </div>
@@ -461,7 +461,7 @@ const ExecutionPane: React.FC<{
   const handleSolveProblem = () => {
     if (!problemId || !solutionText) return;
     
-    const problem = state.cards.problems.find(p => p.id === problemId);
+    const problem = state.cards.problems.find(p => p.id === problemId);=== problemId);
     if (!problem) return;
 
     const solution: SolutionCard = {
@@ -504,7 +504,7 @@ const ExecutionPane: React.FC<{
           onChange={(e) => setProblemId(e.target.value)}
         >
           <option value="">選擇問題</option>
-          {state.cards.problems.map(problem => (
+          {state.cards.problems.map(problem => (oblemCard) => (
             <option key={problem.id} value={problem.id}>{problem.name}</option>
           ))}
         </select>
@@ -564,7 +564,7 @@ const CardMatrix: React.FC<{ cards: OmniKeyCard[] }> = ({ cards }) => {
     <div className="card-matrix mt-4">
       <h4 className="font-bold mb-2 text-sm">知識卡牌矩陣</h4>
       <div className="grid grid-cols-1 gap-2">
-        {cards.slice(-3).map(card => (
+        {cards.slice(-3).map(card => (niKeyCard) => (
           <div key={card.id} className={`card ${card.type.toLowerCase()} ${card.rarity.toLowerCase()} bg-gray-700 rounded p-2 text-xs`}>
             <div className="flex justify-between items-center mb-1">
               <span className="font-bold">{card.name}</span>
@@ -747,11 +747,6 @@ function generateInitialEvents(dispatch: React.Dispatch<any>) {
       ...event
     });
   });
-}
-
-// === React Hook 相容性 ===
-function useRef<T>(initialValue: T): { current: T } {
-  return { current: initialValue };
 }
 
 // 導出主組件
