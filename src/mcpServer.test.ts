@@ -93,13 +93,13 @@ describe('JunAiKey MCP Server', () => {
     });
 
     it('should throw an error if arguments are not provided', async () => {
-        const request = {
-            params: {
-              name: 'junaikey_analyze',
-              arguments: undefined,
-            },
-          };
-          await expect(callToolHandler(request)).rejects.toThrow('No arguments provided');
+      const request = {
+        params: {
+          name: 'junaikey_analyze',
+          arguments: undefined,
+        },
+      };
+      await expect(callToolHandler(request)).rejects.toThrow('No arguments provided');
     });
   });
 });
