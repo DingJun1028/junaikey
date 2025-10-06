@@ -4,10 +4,17 @@
  *
  * 實現四大宇宙公理與四大聖柱的完美融合
  */
-import React from 'react';
+type ElementColor = '🔵' | '🔴' | '🟢' | '⚪' | '⚫' | '💫' | '🟡' | '🩶' | '🌪';
+interface LifecycleNode {
+    id?: string;
+    name: string;
+    type: 'event' | 'problem' | 'solution';
+    y: number;
+    color?: ElementColor;
+}
 export declare const CosmicGenerator: React.FC;
 export declare const LifecycleFlow: React.FC<{
-    data: any[];
+    data: LifecycleNode[];
 }>;
 export default CosmicGenerator;
 //# sourceMappingURL=index.d.ts.map

@@ -16,6 +16,21 @@ type BalanceDimension = 'PERFORMANCE' | 'SECURITY' | 'MAINTAINABILITY';
 type Axiom = 'BALANCE' | 'CHRONICLE' | 'GRAVITY' | 'UNIFIED';
 type Pillar = 'SIMPLICITY' | 'SPEED' | 'STABILITY' | 'EVOLUTION';
 
+// D3 生命周期數據節點類型
+interface LifecycleNode {
+  id?: string;
+  name: string;
+  type: 'event' | 'problem' | 'solution';
+  y: number;
+  color?: ElementColor;
+}
+
+// D3 連接線類型
+interface LifecycleLink {
+  source: { x: number; y: number };
+  target: { x: number; y: number };
+}
+
 // 卡牌基礎結構 (萬能元鑰原則)
 interface OmniKeyCard {
   id: string;
@@ -104,10 +119,28 @@ export const CosmicGenerator: React.FC = () => {
 
   // 更新生命週期數據
   const updateLifecycleData = () => {
-    const data = [
-      ...state.cards.events.map((e: any) => ({ ...e, type: 'event', y: 100 })),
-      ...state.cards.problems.map((p: any) => ({ ...p, type: 'problem', y: 200 })),
-      ...state.cards.solutions.map((s: any) => ({ ...s, type: 'solution', y: 300 }))
+    const data: LifecycleNode[] = [
+      ...state.cards.events.map((e: EventCard) => ({ 
+        id: e.id, 
+        name: e.name, 
+        type: 'event' as const, 
+        y: 100,
+        color: e.color 
+      })),
+      ...state.cards.problems.map((p: ProblemCard) => ({ 
+        id: p.id, 
+        name: p.name, 
+        type: 'problem' as const, 
+        y: 200,
+        color: p.color 
+      })),
+      ...state.cards.solutions.map((s: SolutionCard) => ({ 
+        id: s.id, 
+        name: s.name, 
+        type: 'solution' as const, 
+        y: 300,
+        color: s.color 
+      }))
     ];
     setLifecycleData(data);
   };
@@ -246,7 +279,7 @@ const cosmicReducer = (state: SystemState, action: any): SystemState => {
 };
 
 // === 視覺化元件 ===
-export const LifecycleFlow: React.FC<{ data: any[] }> = ({ data }) => {
+export const LifecycleFlow: React.FC<{ data: LifecycleNode[] }> = ({ data }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
@@ -266,8 +299,8 @@ export const LifecycleFlow: React.FC<{ data: any[] }> = ({ data }) => {
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
     // 添加連接線
-    const links: any[] = [];
-    data.forEach((d: any, i: number) => {
+    const links: LifecycleLink[] = [];
+    data.forEach((d: LifecycleNode, i: number) => {
       if (i < data.length - 1) {
         links.push({
           source: { x: (i / (data.length - 1)) * (width - margin.left - margin.right), y: d.y - margin.top },
@@ -280,10 +313,10 @@ export const LifecycleFlow: React.FC<{ data: any[] }> = ({ data }) => {
       .selectAll("line")
       .data(links)
       .enter().append("line")
-      .attr("x1", (d: any) => d.source.x)
-      .attr("y1", (d: any) => d.source.y)
-      .attr("x2", (d: any) => d.target.x)
-      .attr("y2", (d: any) => d.target.y)
+      .attr("x1", (d: LifecycleLink) => d.source.x)
+      .attr("y1", (d: LifecycleLink) => d.source.y)
+      .attr("x2", (d: LifecycleLink) => d.target.x)
+      .attr("y2", (d: LifecycleLink) => d.target.y)
       .attr("stroke", "#4a5568")
       .attr("stroke-width", 2)
       .attr("stroke-dasharray", "5,5");
@@ -292,10 +325,10 @@ export const LifecycleFlow: React.FC<{ data: any[] }> = ({ data }) => {
     const node = g.selectAll("circle")
       .data(data)
       .enter().append("circle")
-      .attr("cx", (d: any, i: number) => (i / (data.length - 1)) * (width - margin.left - margin.right))
-      .attr("cy", (d: any) => d.y - margin.top)
+      .attr("cx", (d: LifecycleNode, i: number) => (i / (data.length - 1)) * (width - margin.left - margin.right))
+      .attr("cy", (d: LifecycleNode) => d.y - margin.top)
       .attr("r", 8)
-      .attr("fill", (d: any) => getColor(d.color))
+      .attr("fill", (d: LifecycleNode) => getColor(d.color || '⚪'))
       .attr("stroke", "#fff")
       .attr("stroke-width", 2);
 
@@ -303,12 +336,12 @@ export const LifecycleFlow: React.FC<{ data: any[] }> = ({ data }) => {
     const label = g.selectAll("text")
       .data(data)
       .enter().append("text")
-      .attr("x", (d: any, i: number) => (i / (data.length - 1)) * (width - margin.left - margin.right))
-      .attr("y", (d: any) => d.y - margin.top - 15)
+      .attr("x", (d: LifecycleNode, i: number) => (i / (data.length - 1)) * (width - margin.left - margin.right))
+      .attr("y", (d: LifecycleNode) => d.y - margin.top - 15)
       .attr("text-anchor", "middle")
       .style("fill", "#e2e8f0")
       .style("font-size", "12px")
-      .text(d => d.name);
+      .text((d: LifecycleNode) => d.name);
   }, [data]);
 
   return (
@@ -461,7 +494,7 @@ const ExecutionPane: React.FC<{
   const handleSolveProblem = () => {
     if (!problemId || !solutionText) return;
     
-    const problem = state.cards.problems.find(p => p.id === problemId);=== problemId);
+    const problem = state.cards.problems.find(p => p.id === problemId);
     if (!problem) return;
 
     const solution: SolutionCard = {
@@ -504,7 +537,7 @@ const ExecutionPane: React.FC<{
           onChange={(e) => setProblemId(e.target.value)}
         >
           <option value="">選擇問題</option>
-          {state.cards.problems.map(problem => (oblemCard) => (
+        {state.cards.problems.map(problem => (
             <option key={problem.id} value={problem.id}>{problem.name}</option>
           ))}
         </select>
@@ -564,7 +597,7 @@ const CardMatrix: React.FC<{ cards: OmniKeyCard[] }> = ({ cards }) => {
     <div className="card-matrix mt-4">
       <h4 className="font-bold mb-2 text-sm">知識卡牌矩陣</h4>
       <div className="grid grid-cols-1 gap-2">
-        {cards.slice(-3).map(card => (niKeyCard) => (
+        {cards.slice(-3).map(card => (
           <div key={card.id} className={`card ${card.type.toLowerCase()} ${card.rarity.toLowerCase()} bg-gray-700 rounded p-2 text-xs`}>
             <div className="flex justify-between items-center mb-1">
               <span className="font-bold">{card.name}</span>
