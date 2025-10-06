@@ -1,0 +1,12 @@
+# 忽略環境文件
+.env
+
+# 忽略編譯後的文件
+*.js
+*.map
+
+# 忽略 node_modules 目錄
+node_modules/
+
+# 忽略 VSCode 工作區文件
+.vscode/
