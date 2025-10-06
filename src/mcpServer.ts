@@ -11,7 +11,7 @@ import {
  */
 
 // Create MCP server instance
-const server = new Server(
+export const server = new Server(
   {
     name: "junaikey-mcp-server",
     version: "1.0.0",
@@ -116,7 +116,10 @@ async function main() {
   console.error("JunAiKey MCP Server running on stdio");
 }
 
-main().catch((error) => {
-  console.error("Server error:", error);
-  process.exit(1);
-});
+// Start the server only when the script is executed directly
+if (require.main === module) {
+  main().catch((error) => {
+    console.error("Server error:", error);
+    process.exit(1);
+  });
+}
