@@ -2,7 +2,7 @@ import { AgentBuilder } from './AgentBuilder';
 import { OpenAIIntegration } from './OpenAIIntegration';
 import { ModelManager } from './ModelManager';
 import { EventBus } from '../core/EventBus';
-import { Logger } from '../utils/logger';
+import { logger } from '../utils/logger';
 
 export interface Agent {
   id: string;
@@ -29,6 +29,7 @@ export interface AgentRunResult {
   error?: string;
   executionTime: number;
   timestamp: Date;
+  agentId?: string;
 }
 
 export interface AgentStats {
@@ -47,8 +48,8 @@ export class AgentManager {
   private agentBuilder: AgentBuilder;
   private modelManager: ModelManager;
   private eventBus: EventBus;
-  private logger: Logger;
-  private isRunning: boolean = false;
+  private logger;
+  private _isRunning: boolean = false;
 
   constructor(config: {
     eventBus: EventBus;
@@ -56,7 +57,7 @@ export class AgentManager {
     enableDebug: boolean;
   }) {
     this.eventBus = config.eventBus;
-    this.logger = new Logger('AgentManager');
+    this.logger = logger;
     this.modelManager = new ModelManager({
       provider: 'openai',
       model: config.defaultModel,
@@ -414,7 +415,7 @@ export class AgentManager {
    * 啟動代理管理器
    */
   public async start(): Promise<void> {
-    this.isRunning = true;
+    this._isRunning = true;
     this.logger.info('Agent Manager started');
     this.eventBus.emit('agent_manager_started', { timestamp: new Date() });
   }
@@ -423,7 +424,7 @@ export class AgentManager {
    * 停止代理管理器
    */
   public async stop(): Promise<void> {
-    this.isRunning = false;
+    this._isRunning = false;
     this.logger.info('Agent Manager stopped');
     this.eventBus.emit('agent_manager_stopped', { timestamp: new Date() });
   }
@@ -432,6 +433,6 @@ export class AgentManager {
    * 檢查管理器狀態
    */
   public isRunning(): boolean {
-    return this.isRunning;
+    return this._isRunning;
   }
 }

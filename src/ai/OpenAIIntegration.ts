@@ -188,14 +188,19 @@ export class OpenAIIntegration {
     model?: string
   ): Promise<ChatResponse> {
     try {
+      const chatCompletionTools: any = tools.map(tool => ({
+        type: 'function',
+        function: tool.function
+      }));
+
       const response = await this.client.chat.completions.create({
         model: model || this.config.model || 'gpt-4',
         messages: [{ role: 'user', content: input }],
-        tools: tools,
+        tools: chatCompletionTools,
       });
 
       return {
-        content: response.choices[0]?.message?.content,
+        content: response.choices[0]?.message?.content || undefined,
         tool_calls: response.choices[0]?.message?.tool_calls,
         finish_reason: response.choices[0]?.finish_reason,
       };

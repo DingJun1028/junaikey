@@ -1,9 +1,7 @@
 /**
- * JunAiKey Main Entry Point
- * Exports MCP server and client functionality
+ * Junaikey TypeScript + Markdown 開發工具鏈
+ * 主要程式入口點
  */
-export { Server } from "@modelcontextprotocol/sdk/server/index.js";
-export { Client } from "@modelcontextprotocol/sdk/client/index.js";
-export * from "./mcpServer.js";
-export * from "./mcpClient.js";
+import { Calculator } from './utils';
+export { Calculator };
 //# sourceMappingURL=index.d.ts.map

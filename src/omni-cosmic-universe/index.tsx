@@ -7,8 +7,6 @@
 
 import { useState, useEffect, useReducer, useRef } from 'react';
 import * as d3 from 'd3';
-import { AITableIntegration } from './AITableIntegration';
-import { AITableUtils } from './AITableIntegration';
 
 // === 類型定義：符合四大宇宙公理 ===
 type CardType = 'EVENT' | 'PROBLEM' | 'SOLUTION' | 'ARTIFACT' | 'UNIT' | 'PLANESWALKER';
@@ -17,21 +15,6 @@ type Rarity = 'COMMON' | 'UNCOMMON' | 'RARE' | 'MYTHIC' | 'LEGENDARY';
 type BalanceDimension = 'PERFORMANCE' | 'SECURITY' | 'MAINTAINABILITY';
 type Axiom = 'BALANCE' | 'CHRONICLE' | 'GRAVITY' | 'UNIFIED';
 type Pillar = 'SIMPLICITY' | 'SPEED' | 'STABILITY' | 'EVOLUTION';
-
-// D3 生命周期數據節點類型
-interface LifecycleNode {
-  id?: string;
-  name: string;
-  type: 'event' | 'problem' | 'solution';
-  y: number;
-  color?: ElementColor;
-}
-
-// D3 連接線類型
-interface LifecycleLink {
-  source: { x: number; y: number };
-  target: { x: number; y: number };
-}
 
 // 卡牌基礎結構 (萬能元鑰原則)
 interface OmniKeyCard {
@@ -121,28 +104,10 @@ export const CosmicGenerator: React.FC = () => {
 
   // 更新生命週期數據
   const updateLifecycleData = () => {
-    const data: LifecycleNode[] = [
-      ...state.cards.events.map((e: EventCard) => ({ 
-        id: e.id, 
-        name: e.name, 
-        type: 'event' as const, 
-        y: 100,
-        color: e.color 
-      })),
-      ...state.cards.problems.map((p: ProblemCard) => ({ 
-        id: p.id, 
-        name: p.name, 
-        type: 'problem' as const, 
-        y: 200,
-        color: p.color 
-      })),
-      ...state.cards.solutions.map((s: SolutionCard) => ({ 
-        id: s.id, 
-        name: s.name, 
-        type: 'solution' as const, 
-        y: 300,
-        color: s.color 
-      }))
+    const data = [
+      ...state.cards.events.map((e: any) => ({ ...e, type: 'event', y: 100 })),
+      ...state.cards.problems.map((p: any) => ({ ...p, type: 'problem', y: 200 })),
+      ...state.cards.solutions.map((s: any) => ({ ...s, type: 'solution', y: 300 }))
     ];
     setLifecycleData(data);
   };
@@ -169,9 +134,6 @@ export const CosmicGenerator: React.FC = () => {
         
         {/* 生命週期區 */}
         <LifecycleFlow data={lifecycleData} />
-        
-        {/* AITable 雙向同步智慧知識庫 */}
-        <AITableIntegration state={state} />
         
         {/* 系統進化數據 */}
         <EvolutionStats state={state} cycle={evolutionCycle} />
@@ -284,7 +246,7 @@ const cosmicReducer = (state: SystemState, action: any): SystemState => {
 };
 
 // === 視覺化元件 ===
-export const LifecycleFlow: React.FC<{ data: LifecycleNode[] }> = ({ data }) => {
+export const LifecycleFlow: React.FC<{ data: any[] }> = ({ data }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
@@ -304,8 +266,8 @@ export const LifecycleFlow: React.FC<{ data: LifecycleNode[] }> = ({ data }) => 
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
     // 添加連接線
-    const links: LifecycleLink[] = [];
-    data.forEach((d: LifecycleNode, i: number) => {
+    const links: any[] = [];
+    data.forEach((d: any, i: number) => {
       if (i < data.length - 1) {
         links.push({
           source: { x: (i / (data.length - 1)) * (width - margin.left - margin.right), y: d.y - margin.top },
@@ -318,10 +280,10 @@ export const LifecycleFlow: React.FC<{ data: LifecycleNode[] }> = ({ data }) => 
       .selectAll("line")
       .data(links)
       .enter().append("line")
-      .attr("x1", (d: LifecycleLink) => d.source.x)
-      .attr("y1", (d: LifecycleLink) => d.source.y)
-      .attr("x2", (d: LifecycleLink) => d.target.x)
-      .attr("y2", (d: LifecycleLink) => d.target.y)
+      .attr("x1", (d: any) => d.source.x)
+      .attr("y1", (d: any) => d.source.y)
+      .attr("x2", (d: any) => d.target.x)
+      .attr("y2", (d: any) => d.target.y)
       .attr("stroke", "#4a5568")
       .attr("stroke-width", 2)
       .attr("stroke-dasharray", "5,5");
@@ -330,10 +292,10 @@ export const LifecycleFlow: React.FC<{ data: LifecycleNode[] }> = ({ data }) => 
     const node = g.selectAll("circle")
       .data(data)
       .enter().append("circle")
-      .attr("cx", (d: LifecycleNode, i: number) => (i / (data.length - 1)) * (width - margin.left - margin.right))
-      .attr("cy", (d: LifecycleNode) => d.y - margin.top)
+      .attr("cx", (d: any, i: number) => (i / (data.length - 1)) * (width - margin.left - margin.right))
+      .attr("cy", (d: any) => d.y - margin.top)
       .attr("r", 8)
-      .attr("fill", (d: LifecycleNode) => getColor(d.color || '⚪'))
+      .attr("fill", (d: any) => getColor(d.color))
       .attr("stroke", "#fff")
       .attr("stroke-width", 2);
 
@@ -341,12 +303,12 @@ export const LifecycleFlow: React.FC<{ data: LifecycleNode[] }> = ({ data }) => 
     const label = g.selectAll("text")
       .data(data)
       .enter().append("text")
-      .attr("x", (d: LifecycleNode, i: number) => (i / (data.length - 1)) * (width - margin.left - margin.right))
-      .attr("y", (d: LifecycleNode) => d.y - margin.top - 15)
+      .attr("x", (d: any, i: number) => (i / (data.length - 1)) * (width - margin.left - margin.right))
+      .attr("y", (d: any) => d.y - margin.top - 15)
       .attr("text-anchor", "middle")
       .style("fill", "#e2e8f0")
       .style("font-size", "12px")
-      .text((d: LifecycleNode) => d.name);
+      .text(d => d.name);
   }, [data]);
 
   return (
@@ -542,7 +504,7 @@ const ExecutionPane: React.FC<{
           onChange={(e) => setProblemId(e.target.value)}
         >
           <option value="">選擇問題</option>
-        {state.cards.problems.map(problem => (
+          {state.cards.problems.map(problem => (
             <option key={problem.id} value={problem.id}>{problem.name}</option>
           ))}
         </select>
@@ -645,63 +607,29 @@ const CosmicHeader: React.FC<{ state: SystemState }> = ({ state }) => (
   </header>
 );
 
-const EvolutionStats: React.FC<{ state: SystemState; cycle: number }> = ({ state, cycle }) => {
-  // 使用 AITableUtils 獲取系統轉換的記錄
-  const systemRecords = AITableUtils.systemStateToRecords(state);
-  
-  return (
-    <div className="evolution-stats bg-gray-800 rounded-lg p-4 mt-6">
-      <h3 className="text-lg font-bold mb-3">進化統計</h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-        <div className="text-center">
-          <div className="text-2xl font-bold text-blue-400">{state.evolution.cycle}</div>
-          <div>進化週期</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-green-400">{state.evolution.loyalty.toFixed(1)}</div>
-          <div>忠誠度</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-yellow-400">{state.entropy.toFixed(1)}</div>
-          <div>系統熵值</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-purple-400">{state.cards.solutions.length}</div>
-          <div>已解決問題</div>
-        </div>
+const EvolutionStats: React.FC<{ state: SystemState; cycle: number }> = ({ state, cycle }) => (
+  <div className="evolution-stats bg-gray-800 rounded-lg p-4 mt-6">
+    <h3 className="text-lg font-bold mb-3">進化統計</h3>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+      <div className="text-center">
+        <div className="text-2xl font-bold text-blue-400">{state.evolution.cycle}</div>
+        <div>進化週期</div>
       </div>
-      
-      {/* AITable 知識庫統計 */}
-      <div className="mt-4 pt-4 border-t border-gray-700">
-        <h4 className="font-bold mb-3 text-emerald-400">智慧知識庫統計</h4>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-          <div className="text-center">
-            <div className="text-2xl font-bold text-emerald-400">{systemRecords.length}</div>
-            <div>知識記錄</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-blue-400">
-              {systemRecords.filter(r => r.source === 'junai').length}
-            </div>
-            <div>Jun.AI 生成</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-purple-400">
-              {new Set(systemRecords.map(r => r.category)).size}
-            </div>
-            <div>知識類別</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-yellow-400">
-              {(systemRecords.reduce((sum, r) => sum + r.confidence, 0) / systemRecords.length * 100).toFixed(0)}%
-            </div>
-            <div>平均信心度</div>
-          </div>
-        </div>
+      <div className="text-center">
+        <div className="text-2xl font-bold text-green-400">{state.evolution.loyalty.toFixed(1)}</div>
+        <div>忠誠度</div>
+      </div>
+      <div className="text-center">
+        <div className="text-2xl font-bold text-yellow-400">{state.entropy.toFixed(1)}</div>
+        <div>系統熵值</div>
+      </div>
+      <div className="text-center">
+        <div className="text-2xl font-bold text-purple-400">{state.cards.solutions.length}</div>
+        <div>已解決問題</div>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 // === 輔助函數 ===
 function calculateSeverity(event: EventCard): number {

@@ -47,7 +47,7 @@ export interface AgentBuilderConfig {
  * 整合 AgentKit 功能，提供視覺化介面和程式碼生成
  */
 export class AgentBuilder {
-  private workflow: AgentWorkflow;
+  private workflow!: AgentWorkflow;
   private config: AgentBuilderConfig;
   private modelManager: ModelManager;
   private eventBus: EventBus;
@@ -361,4 +361,49 @@ module.exports = agent;
 
         if (result.success) {
           evaluationResults.passedTests++;
+        } else {
+          evaluationResults.failedTests++;
         }
+
+        evaluationResults.averageResponseTime += responseTime;
+      }
+
+      // 計算平均響應時間和成功率
+      evaluationResults.averageResponseTime = 
+        evaluationResults.averageResponseTime / evaluationResults.totalTests;
+      evaluationResults.successRate = 
+        evaluationResults.passedTests / evaluationResults.totalTests;
+
+      this.log('Agent evaluation completed', evaluationResults);
+      this.eventBus.emit('agent_evaluated', evaluationResults);
+
+      return evaluationResults;
+    } catch (error) {
+      console.error('Failed to evaluate agent:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * 運行單個測試
+   */
+  private async runTest(test: any): Promise<any> {
+    // 模擬測試運行
+    await new Promise(resolve => setTimeout(resolve, Math.random() * 1000 + 500));
+    
+    return {
+      success: Math.random() > 0.2, // 80% 成功率
+      responseTime: Math.random() * 2000 + 1000,
+      result: test
+    };
+  }
+
+  /**
+   * 日誌記錄
+   */
+  private log(message: string, data?: any): void {
+    if (this.debugEnabled) {
+      console.log(`[AgentBuilder] ${message}`, data || '');
+    }
+  }
+}

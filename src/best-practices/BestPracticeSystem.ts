@@ -1,5 +1,5 @@
 import { EventBus } from '../core/EventBus';
-import { Logger } from '../utils/logger';
+import { logger } from '../utils/logger';
 import { OpenAIIntegration } from '../ai/OpenAIIntegration';
 import { ModelManager } from '../ai/ModelManager';
 
@@ -71,7 +71,7 @@ export class BestPracticeSystem {
   private openai: OpenAIIntegration;
   private modelManager: ModelManager;
   private bestPractices: Map<string, BestPractice> = new Map();
-  private isRunning: boolean = false;
+  private _isRunning: boolean = false;
 
   constructor(config: BestPracticeConfig) {
     this.config = config;
@@ -328,7 +328,7 @@ class Component {
    * 啟動最佳實踐系統
    */
   public async start(): Promise<void> {
-    this.isRunning = true;
+    this._isRunning = true;
     this.logger.info('Best Practice System started');
     this.eventBus.emit('best_practice_system_started', { timestamp: new Date() });
   }
@@ -337,7 +337,7 @@ class Component {
    * 停止最佳實踐系統
    */
   public async stop(): Promise<void> {
-    this.isRunning = false;
+    this._isRunning = false;
     this.logger.info('Best Practice System stopped');
     this.eventBus.emit('best_practice_system_stopped', { timestamp: new Date() });
   }
@@ -629,7 +629,7 @@ Provide your analysis in JSON format:
       autoCheckEnabled: this.config.enableAutoCheck,
       autoFixEnabled: this.config.enableAutoFix,
       aiEnabled: this.config.aiEnabled,
-      isRunning: this.isRunning
+      isRunning: this._isRunning
     };
   }
 
@@ -637,6 +637,6 @@ Provide your analysis in JSON format:
    * 檢查系統是否運行中
    */
   public isBestPracticeSystemRunning(): boolean {
-    return this.isRunning;
+    return this._isRunning;
   }
 }

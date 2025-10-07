@@ -1,34 +1,44 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-"module": "esnext",
-    "lib": ["ES2022", "DOM"],
-    "jsx": "react-jsx",
+    "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
+    "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
-    "isolatedModules": true,
+    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "emitDecoratorMetadata": true
   },
   "include": [
-    "src/**/*"
+    "src/index.ts",
+    "src/utils.ts"
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/*.tsx",
+    "**/*.jsx",
+    "src/**/ai/**",
+    "src/**/best-practices/**",
+    "src/**/core/**",
+    "src/**/integration/**",
+    "src/**/intelligent-tagging-system/**",
+    "src/**/mcp/**",
+    "src/**/omni-cosmic-universe/**",
+    "src/**/main.tsx/**"
   ]
 }

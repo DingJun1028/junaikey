@@ -1,3 +1,5 @@
+![JunAiKey 六向同步收藏系統 Banner](./assets/junaikey-omnikey-banner.svg#gh-light-mode-only)
+
 # 🌟 JunAiKey - 萬能元鑰系統 (Omni-Key System)
 
 <div align="center">
@@ -352,3 +354,215 @@ graph TD
 ---
 
 *🌟 在這場終始之役中，您不是孤喅的戰士。JunAiKey 將是您忠實的盟友，讓我們一起在熵增的混沌中，開闢秩序之路！*
+
+# 🌟 JunAiKey ❤️ 君愛心鑰
+
+## 《OmniKey 六向同步收藏系統》 🚀
+
+整合你的所有設計收藏，
+自動同步至 **Capacities / Notion / Boost.space / Supabase / AITable / Upnote**，
+實現「一次提交，六方同步」的永續知識循環架構。
+
+---
+
+## 🧭 系統總覽
+
+| 功能模組                                   | 說明                                  |
+| -------------------------------------- | ----------------------------------- |
+| 🧩 `junaikey_favorites_sync.ts`        | 六向同步主模組，處理 API 並行推送                 |
+| 🔁 `junaikey_favorites_sync_runner.ts` | 批次執行器，自動讀取 `/data/favorites/*.json` |
+| 📦 `data/favorites/*.json`             | 收藏設計索引資料                            |
+| ⚙️ `junaikey-favorites-sync.yml`       | GitHub Actions 自動化工作流程              |
+| 📘 `package.json`                      | 腳本管理與執行命令                           |
+| 🔧 `tsconfig.json`                     | TypeScript 編譯設定                     |
+
+---
+
+## 🧩 支援平台與同步方向
+
+| 平台              | 角色    | 同步方向 | 功能摘要                |
+| --------------- | ----- | ---- | ------------------- |
+| **Capacities**  | 筆記倉庫  | ↔    | 自動建立收藏筆記、附帶 YAML 標頭 |
+| **Notion**      | 資料庫核心 | ↔    | 顯示收藏版本、狀態、作者        |
+| **Boost.space** | 自動化中心 | →    | Webhook 觸發六向同步事件    |
+| **Supabase**    | 資料湖   | ↔    | 儲存歷史快照與同步狀態         |
+| **AITable**     | 結構表   | ↔    | 視覺化收藏清單與屬性對照        |
+| **Upnote**      | 靜態收藏  | ←    | 生成筆記版本存檔與瀏覽用副本      |
+
+---
+
+## ⚙️ 環境需求
+
+* Node.js 20+
+* TypeScript 5.5+
+* GitHub Actions（自動化部署）
+* 各平台 API Token（見下方）
+
+---
+
+## 🔐 GitHub Secrets 設定指南
+
+在你的 GitHub Repo 中：
+進入 → **Settings → Secrets and variables → Actions → New repository secret**
+
+新增以下變數：
+
+| Secret 名稱             | 用途                       |
+| --------------------- | ------------------------ |
+| `CAPACITIES_TOKEN`    | Capacities API token     |
+| `NOTION_TOKEN`        | Notion integration token |
+| `NOTION_DB_FAVORITES` | Notion 資料庫 ID            |
+| `BOOST_WEBHOOK_URL`   | Boost.space webhook URL  |
+| `SUPABASE_REST_URL`   | Supabase REST endpoint   |
+| `SUPABASE_KEY`        | Supabase API key         |
+| `AITABLE_API_URL`     | AITable API base URL     |
+| `AITABLE_TOKEN`       | AITable API key          |
+| `AITABLE_TABLE_ID`    | AITable 表格 ID            |
+| `UPNOTE_SYNC_URL`     | Upnote 自動上傳 endpoint     |
+| `UPNOTE_TOKEN`        | Upnote API key/token     |
+
+---
+
+## 📁 專案結構
+
+```
+junaikey/
+├── .github/
+│   └── workflows/
+│       └── junaikey-favorites-sync.yml
+├── scripts/
+│   ├── junaikey_favorites_sync.ts          # 六向同步主模組
+│   └── junaikey_favorites_sync_runner.ts   # 批次執行器
+├── data/
+│   └── favorites/
+│       └── junai_omni_crystal_v6.6.json
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+---
+
+## 🚀 快速啟動
+
+### 🧩 1️⃣ 安裝依賴
+
+```bash
+npm install
+```
+
+### ⚙️ 2️⃣ 手動執行同步（本地測試）
+
+```bash
+npm run sync
+```
+
+### 🪄 3️⃣ 自動化（GitHub Actions）
+
+每次推送（commit）修改：
+
+```
+/data/favorites/*.json
+/scripts/junaikey_favorites_sync.ts
+```
+
+都會自動觸發 **六向同步流程**。
+
+你也可以在 GitHub Actions 頁面 → **Run workflow** 手動執行。
+
+---
+
+## 🧠 Favorite JSON 結構範例
+
+```json
+{
+  "id": "JAIK-FAV-0066",
+  "name": "JunAiKey Omni Crystal – iOS 最佳實踐版（萬能全展開・雙曜符號修正版）",
+  "version": "v6.6-Favorite",
+  "category": "Omni Crystal 系列",
+  "symbol_set": ["心", "符", "雙"],
+  "entry_word": "萬能",
+  "features": [
+    "彈跳+橡皮筋落地動畫",
+    "光暈喚醒特效",
+    "三核心切換系統（心／符／雙）",
+    "Straico 永憶智慧知識庫同步",
+    "iOS Safari 拖曳觸控優化"
+  ],
+  "platform": ["iOS", "Stay", "Tampermonkey"],
+  "status": "active",
+  "created_at": "2025-10-07T19:00:00+08:00",
+  "updated_at": "2025-10-07T19:00:00+08:00",
+  "tags": ["#iOS版", "#萬能球體", "#心符雙", "#最終設計", "#永憶同步"],
+  "designer": "Jun",
+  "source_code": "// (完整 UserScript 代碼略)"
+}
+```
+
+---
+
+## 🔄 同步流程圖
+
+```
+           ┌──────────┐
+           │  GitHub  │
+           └────┬─────┘
+                │ push/dispatch
+                ▼
+         ┌───────────────┐
+         │ GitHub Action │
+         └────┬─────┬────┘
+              │     │
+    ┌─────────┘     └─────────┐
+    ▼                         ▼
+六向同步模組              批次執行器
+(scripts/)               (runner.ts)
+    │                         │
+    └─────▶ 各平台 API 同步 ◀──┘
+      ↳ Capacities / Notion / Boost.space / Supabase / AITable / Upnote
+```
+
+---
+
+## 🧩 自動化特色
+
+* ⚡ **並行 API 同步** — 6 平台同時更新，毫秒級延遲控制
+* 🧱 **模組化架構** — 每平台獨立模組，方便擴展與維護
+* 🔁 **雙向狀態記錄** — Supabase 保留每次同步結果
+* 🪶 **TypeScript 型別保護** — 完整欄位驗證與錯誤追蹤
+* 🪄 **全自動觸發** — 只需 push 收藏資料，GitHub 即自動完成同步
+
+---
+
+## 🧬 下一步建議
+
+1. 🔔 **整合 GitHub → Boost.space Webhook**
+
+   * 在 Boost.space 監控 Supabase `junaikey_favorites` 表變動
+   * 自動回推至 Notion 或 Capacities 更新紀錄
+
+2. 📊 **建立 Supabase Dashboard**
+
+   * 顯示同步狀態、錯誤率、延遲時間
+
+3. 🧠 **整合 Straico AI**
+
+   * 自動生成收藏摘要與 AI 標籤
+   * 將結果同步回 Notion「AI Insight」欄位
+
+---
+
+## 🪞 作者資訊
+
+**Project:** [JunAiKey ❤️ 君愛心鑰 – OmniKey System](https://junaikey.com)
+**Author:** Jun
+**Version:** 6.6-Favorite
+**License:** MIT
+**Created:** 2025-10-07
+**Maintained by:** Straico AI Integration Framework
+
+---
+
+是否要我幫你自動生成
+👉 `README.md` 對應的 **封面設計（banner 圖）**？
+可以包含「JunAiKey ❤️ 六向同步收藏系統」Logo、6 個平台 icon、以及「OmniKey v6.6」標語（為 GitHub 專案頁設計）。

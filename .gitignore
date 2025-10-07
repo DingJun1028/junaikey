@@ -1,12 +1,24 @@
-# 忽略環境文件
-.env
-
-# 忽略編譯後的文件
-*.js
-*.map
-
-# 忽略 node_modules 目錄
+# Node
 node_modules/
 
-# 忽略 VSCode 工作區文件
+# Build output
+dist/
+coverage/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# VS Code
 .vscode/
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db

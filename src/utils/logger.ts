@@ -330,8 +330,10 @@ declare global {
 }
 
 // 在 runtime 掛載到 globalThis
-;(globalThis as any).debug = debug;
-;(globalThis as any).info = info;
-;(globalThis as any).warn = warn;
-;(globalThis as any).error = error;
-;(globalThis as any).fatal = fatal;
+if (typeof globalThis !== 'undefined') {
+  (globalThis as any).debug = debug;
+  (globalThis as any).info = info;
+  (globalThis as any).warn = warn;
+  (globalThis as any).error = error;
+  (globalThis as any).fatal = fatal;
+}

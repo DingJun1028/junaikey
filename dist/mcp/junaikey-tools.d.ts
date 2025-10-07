@@ -26,6 +26,7 @@ export declare class JunAiKeyTools {
     private elementSpiritSystem;
     private avatarSynergyEngine;
     private professionEvolutionTracker;
+    private aiTableService;
     private tools;
     constructor();
     /**

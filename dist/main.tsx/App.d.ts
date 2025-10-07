@@ -1,3 +1,3 @@
-declare function App(): import("react/jsx-runtime").JSX.Element;
+declare function App(): any;
 export default App;
 //# sourceMappingURL=App.d.ts.map

@@ -1,5 +1,5 @@
 import { OpenAIIntegration } from './OpenAIIntegration';
-import { IAIModel, AIResponse, ModelInfo, TrainingData } from '../intelligent-tagging-system/index';
+import { logger } from '../utils/logger';
 
 export interface ModelProvider {
   name: string;
@@ -17,9 +17,9 @@ export interface ModelConfig {
 /**
  * AI 模型管理器 - 統一管理多種 AI 模型提供者
  */
-export class ModelManager implements IAIModel {
-  private models: Map<string, IAIModel> = new Map();
-  private defaultModel: string;
+export class ModelManager {
+  private models: Map<string, any> = new Map();
+  private defaultModel!: string;
   private providers: Map<string, ModelProvider> = new Map();
   private config: ModelConfig;
 
@@ -27,6 +27,7 @@ export class ModelManager implements IAIModel {
     this.config = config;
     this.initializeProviders();
     this.initializeModels();
+    logger.info('ModelManager initialized', { config });
   }
 
   /**
@@ -84,14 +85,14 @@ export class ModelManager implements IAIModel {
   /**
    * 註冊模型
    */
-  public registerModel(name: string, model: IAIModel): void {
+  public registerModel(name: string, model: any): void {
     this.models.set(name, model);
   }
 
   /**
    * 獲取模型
    */
-  public getModel(name: string): IAIModel | null {
+  public getModel(name: string): any | null {
     return this.models.get(name) || null;
   }
 
@@ -109,7 +110,7 @@ export class ModelManager implements IAIModel {
   /**
    * 獲取默認模型
    */
-  public getDefaultModel(): IAIModel | null {
+  public getDefaultModel(): any | null {
     return this.models.get(this.defaultModel) || null;
   }
 
@@ -163,16 +164,16 @@ export class ModelManager implements IAIModel {
   }
 
   /**
-   * 生成回應（實現 IAIModel 介面）
+   * 生成回應
    */
-  public async generate(prompt: string): Promise<AIResponse> {
+  public async generate(prompt: string): Promise<any> {
     const model = this.getDefaultModel();
     if (!model) {
       throw new Error('No default model available');
     }
 
     try {
-      const response = await model.generate(prompt);
+      const response = await model.generateText(prompt);
       return {
         content: response.content || '',
         confidence: 0.8,
@@ -180,47 +181,9 @@ export class ModelManager implements IAIModel {
         model: this.defaultModel
       };
     } catch (error) {
-      console.error(`Error generating response with model ${this.defaultModel}:`, error);
+      logger.error(`Error generating response with model ${this.defaultModel}:`, error);
       throw error;
     }
-  }
-
-  /**
-   * 模型微調（實現 IAIModel 介面）
-   */
-  public async fineTune(data: TrainingData[]): Promise<void> {
-    const model = this.getDefaultModel();
-    if (!model) {
-      throw new Error('No default model available for fine-tuning');
-    }
-
-    try {
-      await model.fineTune(data);
-    } catch (error) {
-      console.error(`Error fine-tuning model ${this.defaultModel}:`, error);
-      throw error;
-    }
-  }
-
-  /**
-   * 獲取模型信息（實現 IAIModel 介面）
-   */
-  public getModelInfo(): ModelInfo {
-    return {
-      name: this.defaultModel,
-      provider: this.defaultModel.split('-')[0],
-      version: '1.0.0',
-      capabilities: ['text-generation', 'conversation', 'analysis'],
-      supportedFormats: ['text', 'image', 'file']
-    };
-  }
-
-  /**
-   * 重新加載所有模型
-   */
-  public async reloadModels(): Promise<void> {
-    this.models.clear();
-    this.initializeModels();
   }
 
   /**
@@ -230,16 +193,16 @@ export class ModelManager implements IAIModel {
     try {
       switch (provider) {
         case 'openai':
-          const openaiModel = new OpenAIIntegration({ apiKey });
-          await openaiModel.getModels();
+          const openaiModel = new OpenAIIntegration({ apiKey, model: 'gpt-3.5-turbo' });
+          await openaiModel.generateText('Test');
           return true;
         
         default:
-          console.warn(`Provider ${provider} validation not implemented`);
+          logger.warn(`Provider ${provider} validation not implemented`);
           return false;
       }
     } catch (error) {
-      console.error(`API key validation failed for ${provider}:`, error);
+      logger.error(`API key validation failed for ${provider}:`, error);
       return false;
     }
   }
