@@ -5,12 +5,14 @@
 
 module.exports = {
   // 測試環境
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   
   // 測試檔案模式
   testMatch: [
     '**/__tests__/**/*.ts',
-    '**/?(*.)+(spec|test).ts'
+    '**/?(*.)+(spec|test).ts',
+    '**/*.test.tsx',
+    '**/*.spec.tsx'
   ],
   
   // 排除的檔案
@@ -33,6 +35,7 @@ module.exports = {
   // 轉譯器設定
   transform: {
     '^.+\\.ts$': 'ts-jest',
+    '^.+\\.tsx$': 'ts-jest',
   },
   
   // 轉譯排除

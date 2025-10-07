@@ -6,6 +6,7 @@
 import { ElementSpiritSystem } from '../core/elementSpiritSystem';
 import { AvatarSynergyEngine } from '../core/avatarSynergyEngine';
 import { ProfessionEvolutionTracker } from '../core/professionEvolutionTracker';
+import { AITableService } from '../omni-cosmic-universe/AITableService';
 import { logger, info, debug, error } from '../utils/logger';
 
 export interface JunAiKeyTool {
@@ -31,12 +32,16 @@ export class JunAiKeyTools {
   private elementSpiritSystem: ElementSpiritSystem;
   private avatarSynergyEngine: AvatarSynergyEngine;
   private professionEvolutionTracker: ProfessionEvolutionTracker;
+  private aiTableService: AITableService;
   private tools: Map<string, JunAiKeyTool> = new Map();
 
   constructor() {
     this.elementSpiritSystem = new ElementSpiritSystem();
     this.avatarSynergyEngine = new AvatarSynergyEngine();
     this.professionEvolutionTracker = new ProfessionEvolutionTracker();
+  this.aiTableService = new AITableService({
+    encryptionKey: process.env.AI_TABLE_ENCRYPTION_KEY
+  });
     
     this.initializeTools();
     info('JunAiKeyTools', 'Initialized JunAiKey MCP Tools');
@@ -46,6 +51,43 @@ export class JunAiKeyTools {
    * 初始化所有工具
    */
   private initializeTools(): void {
+    // AI Table 工具組
+    this.registerTool({
+      name: 'create_ai_table',
+      description: '建立智能數據表',
+      parameters: {
+        type: 'object',
+        properties: {
+          tableName: { type: 'string' },
+          schema: { 
+            type: 'object',
+            additionalProperties: {
+              type: 'object',
+              properties: {
+                dataType: { type: 'string' }
+              }
+            }
+          }
+        },
+        required: ['tableName', 'schema']
+      },
+      execute: async (params) => this.aiTableService.createTable(params)
+    });
+
+    this.registerTool({
+      name: 'query_ai_table',
+      description: '查詢數據表紀錄',
+      parameters: {
+        type: 'object',
+        properties: {
+          tableId: { type: 'string' },
+          queryConditions: { type: 'object' }
+        },
+        required: ['tableId']
+      },
+      execute: async (params) => this.aiTableService.queryTable(params)
+    });
+
     // 元素精靈系統工具
     this.registerTool({
       name: 'awaken_spirit',

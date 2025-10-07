@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "commonjs",
+"module": "esnext",
     "lib": ["ES2022", "DOM"],
     "jsx": "react-jsx",
     "outDir": "./dist",

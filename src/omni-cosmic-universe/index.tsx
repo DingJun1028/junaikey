@@ -7,6 +7,8 @@
 
 import { useState, useEffect, useReducer, useRef } from 'react';
 import * as d3 from 'd3';
+import { AITableIntegration } from './AITableIntegration';
+import { AITableUtils } from './AITableIntegration';
 
 // === 類型定義：符合四大宇宙公理 ===
 type CardType = 'EVENT' | 'PROBLEM' | 'SOLUTION' | 'ARTIFACT' | 'UNIT' | 'PLANESWALKER';
@@ -167,6 +169,9 @@ export const CosmicGenerator: React.FC = () => {
         
         {/* 生命週期區 */}
         <LifecycleFlow data={lifecycleData} />
+        
+        {/* AITable 雙向同步智慧知識庫 */}
+        <AITableIntegration state={state} />
         
         {/* 系統進化數據 */}
         <EvolutionStats state={state} cycle={evolutionCycle} />
@@ -640,29 +645,63 @@ const CosmicHeader: React.FC<{ state: SystemState }> = ({ state }) => (
   </header>
 );
 
-const EvolutionStats: React.FC<{ state: SystemState; cycle: number }> = ({ state, cycle }) => (
-  <div className="evolution-stats bg-gray-800 rounded-lg p-4 mt-6">
-    <h3 className="text-lg font-bold mb-3">進化統計</h3>
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-      <div className="text-center">
-        <div className="text-2xl font-bold text-blue-400">{state.evolution.cycle}</div>
-        <div>進化週期</div>
+const EvolutionStats: React.FC<{ state: SystemState; cycle: number }> = ({ state, cycle }) => {
+  // 使用 AITableUtils 獲取系統轉換的記錄
+  const systemRecords = AITableUtils.systemStateToRecords(state);
+  
+  return (
+    <div className="evolution-stats bg-gray-800 rounded-lg p-4 mt-6">
+      <h3 className="text-lg font-bold mb-3">進化統計</h3>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+        <div className="text-center">
+          <div className="text-2xl font-bold text-blue-400">{state.evolution.cycle}</div>
+          <div>進化週期</div>
+        </div>
+        <div className="text-center">
+          <div className="text-2xl font-bold text-green-400">{state.evolution.loyalty.toFixed(1)}</div>
+          <div>忠誠度</div>
+        </div>
+        <div className="text-center">
+          <div className="text-2xl font-bold text-yellow-400">{state.entropy.toFixed(1)}</div>
+          <div>系統熵值</div>
+        </div>
+        <div className="text-center">
+          <div className="text-2xl font-bold text-purple-400">{state.cards.solutions.length}</div>
+          <div>已解決問題</div>
+        </div>
       </div>
-      <div className="text-center">
-        <div className="text-2xl font-bold text-green-400">{state.evolution.loyalty.toFixed(1)}</div>
-        <div>忠誠度</div>
-      </div>
-      <div className="text-center">
-        <div className="text-2xl font-bold text-yellow-400">{state.entropy.toFixed(1)}</div>
-        <div>系統熵值</div>
-      </div>
-      <div className="text-center">
-        <div className="text-2xl font-bold text-purple-400">{state.cards.solutions.length}</div>
-        <div>已解決問題</div>
+      
+      {/* AITable 知識庫統計 */}
+      <div className="mt-4 pt-4 border-t border-gray-700">
+        <h4 className="font-bold mb-3 text-emerald-400">智慧知識庫統計</h4>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-emerald-400">{systemRecords.length}</div>
+            <div>知識記錄</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-400">
+              {systemRecords.filter(r => r.source === 'junai').length}
+            </div>
+            <div>Jun.AI 生成</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-purple-400">
+              {new Set(systemRecords.map(r => r.category)).size}
+            </div>
+            <div>知識類別</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-yellow-400">
+              {(systemRecords.reduce((sum, r) => sum + r.confidence, 0) / systemRecords.length * 100).toFixed(0)}%
+            </div>
+            <div>平均信心度</div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 // === 輔助函數 ===
 function calculateSeverity(event: EventCard): number {
