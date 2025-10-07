@@ -3,7 +3,7 @@
  * 提供全局錯誤監控、報告和處理功能
  */
 
-import { logger, LogLevel } from './logger';
+import { logger } from './logger';
 
 export enum ErrorType {
   VALIDATION = 'VALIDATION',

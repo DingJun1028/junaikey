@@ -4,6 +4,7 @@
  */
 
 import { logger, LogLevel } from './logger';
+import { performance } from 'perf_hooks';
 
 export interface PerformanceMetric {
   name: string;
@@ -25,12 +26,13 @@ export interface PerformanceConfig {
   thresholds: {
     [metric: string]: PerformanceThreshold;
   };
-  sampleRate: number;
+  sampleRate: number; // 0..1
 }
 
 export class PerformanceMonitor {
   private metrics: PerformanceMetric[] = [];
-  private activeTimers: Map<string, number> = new Map();
+  private maxMetricsSize: number = 1000; // Maximum number of metrics to retain
+  private activeTimers: Map<string, { startTime: number; tags?: string[]; name?: string; metadata?: Record<string, any> }> = new Map();
   private config: PerformanceConfig;
   private alertCallbacks: Array<(metric: PerformanceMetric) => void> = [];
 
@@ -40,9 +42,9 @@ export class PerformanceMonitor {
       enableMetricsCollection: true,
       enableAlerting: true,
       thresholds: {
-        'response_time': { warning: 1000, critical: 5000 },
-        'memory_usage': { warning: 85, critical: 95 },
-        'cpu_usage': { warning: 80, critical: 90 },
+        response_time: { warning: 1000, critical: 5000 },
+        memory_usage: { warning: 85, critical: 95 },
+        cpu_usage: { warning: 80, critical: 90 }
       },
       sampleRate: 1,
       ...config
@@ -51,9 +53,10 @@ export class PerformanceMonitor {
 
   // 開始計時
   startTimer(name: string, tags?: string[], metadata?: Record<string, any>): string {
-    const timerId = `${name}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    this.activeTimers.set(timerId, performance.now());
-    
+    const timerId = `${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+    // 正確儲存完整的 timer 資訊
+    this.activeTimers.set(timerId, { startTime: performance.now(), tags, name, metadata });
+
     if (this.config.enableConsoleLogging) {
       logger.debug('PerformanceMonitor', `Timer started: ${name}`, { timerId, tags, metadata });
     }
@@ -63,8 +66,9 @@ export class PerformanceMonitor {
 
   // 結束計時並記錄指標
   endTimer(timerId: string, metadata?: Record<string, any>): PerformanceMetric | null {
-    const startTime = this.activeTimers.get(timerId);
-    
+    const timerData = this.activeTimers.get(timerId);
+    const startTime = timerData?.startTime;
+
     if (!startTime) {
       logger.warn('PerformanceMonitor', `Timer not found: ${timerId}`);
       return null;
@@ -72,26 +76,34 @@ export class PerformanceMonitor {
 
     const endTime = performance.now();
     const duration = endTime - startTime;
-    
+
+    const metricName = timerData?.name || metadata?.originalName || 'unknown';
+
     const metric: PerformanceMetric = {
-      name: timerId.split('_')[0],
+      name: metricName,
       duration,
       timestamp: new Date().toISOString(),
-      metadata: { ...metadata, timerId },
-      tags: timerId.split('_').slice(1)
+      tags: timerData?.tags || [],
+      metadata: { ...(timerData?.metadata || {}), ...(metadata || {}) }
     };
 
     this.activeTimers.delete(timerId);
 
     // 檢查是否需要記錄（基於取樣率）
-    if (Math.random() <= this.config.sampleRate) {
-      this.recordMetric(metric);
+    try {
+      const sampleThreshold = Math.max(0, Math.min(1, this.config.sampleRate));
+      if (Math.random() <= sampleThreshold) {
+        this.recordMetric(metric);
+      }
+    } catch (err) {
+      // 若 sampleRate 或記錄發生錯誤，不應阻斷主流程
+      logger.warn('PerformanceMonitor', 'Sampling or recording metric failed', err as Error);
     }
 
     if (this.config.enableConsoleLogging) {
       logger.info('PerformanceMonitor', `Timer completed: ${metric.name}`, {
         duration: `${duration.toFixed(2)}ms`,
-        ...metadata
+        ...metric.metadata
       });
     }
 
@@ -106,6 +118,11 @@ export class PerformanceMonitor {
 
     this.metrics.push(metric);
 
+    // Ensure the metrics array does not exceed the maximum size
+    while (this.metrics.length > this.maxMetricsSize) {
+      this.metrics.shift(); // 移除最舊的指標
+    }
+
     // 檢查是否需要觸發警報
     if (this.config.enableAlerting) {
       this.checkThresholds(metric);
@@ -115,7 +132,7 @@ export class PerformanceMonitor {
   // 檢查效能閾值
   private checkThresholds(metric: PerformanceMetric): void {
     const threshold = this.config.thresholds[metric.name];
-    
+
     if (!threshold) {
       return;
     }
@@ -130,16 +147,18 @@ export class PerformanceMonitor {
   // 觸發警報
   private triggerAlert(metric: PerformanceMetric, level: 'warning' | 'critical'): void {
     const alertLevel = level === 'critical' ? LogLevel.ERROR : LogLevel.WARN;
-    
+
     if (alertLevel === LogLevel.ERROR) {
-      logger.error('PerformanceMonitor', 
-        `Performance ${level.toUpperCase()} alert: ${metric.name} exceeded threshold`, 
-        undefined, 
+      logger.error(
+        'PerformanceMonitor',
+        `Performance ${level.toUpperCase()} alert: ${metric.name} exceeded threshold`,
+        undefined,
         { metric, threshold: this.config.thresholds[metric.name] }
       );
     } else {
-      logger.warn('PerformanceMonitor', 
-        `Performance ${level.toUpperCase()} alert: ${metric.name} exceeded threshold`, 
+      logger.warn(
+        'PerformanceMonitor',
+        `Performance ${level.toUpperCase()} alert: ${metric.name} exceeded threshold`,
         { metric, threshold: this.config.thresholds[metric.name] }
       );
     }
@@ -173,7 +192,7 @@ export class PerformanceMonitor {
     }
 
     if (filter?.tags) {
-      filteredMetrics = filteredMetrics.filter(metric => 
+      filteredMetrics = filteredMetrics.filter(metric =>
         metric.tags?.some(tag => filter.tags!.includes(tag))
       );
     }
@@ -199,13 +218,13 @@ export class PerformanceMonitor {
     p99: number;
   } | null {
     const metrics = this.getMetrics({ name: metricName });
-    
+
     if (metrics.length === 0) {
       return null;
     }
 
     const durations = metrics.map(m => m.duration).sort((a, b) => a - b);
-    
+
     return {
       count: durations.length,
       average: durations.reduce((sum, duration) => sum + duration, 0) / durations.length,
@@ -228,11 +247,11 @@ export class PerformanceMonitor {
     total: number;
     percentage: number;
   } | null {
-    if (typeof process !== 'undefined' && process.memoryUsage) {
-      const memoryUsage = process.memoryUsage();
-      const total = memoryUsage.heapTotal;
-      const used = memoryUsage.heapUsed;
-      const percentage = (used / total) * 100;
+    if (typeof process !== 'undefined' && (process as any).memoryUsage) {
+      const memoryUsage = (process as any).memoryUsage();
+      const total = memoryUsage.heapTotal || 0;
+      const used = memoryUsage.heapUsed || 0;
+      const percentage = total > 0 ? (used / total) * 100 : 0;
 
       return {
         used: Math.round(used / 1024 / 1024), // MB
@@ -246,16 +265,18 @@ export class PerformanceMonitor {
 
   // 取得 CPU 使用率（簡化版本）
   async getCPUUsage(): Promise<number | null> {
-    // 這是一個簡化的實現，實際的 CPU 使用率監控可能需要更複雜的邏輯
     try {
       const startUsage = process.cpuUsage();
-      
+
       // 等待一小段時間
       await new Promise(resolve => setTimeout(resolve, 100));
-      
+
       const endUsage = process.cpuUsage(startUsage);
-      const usagePercentage = (endUsage.user + endUsage.system) / 100000; // 轉換為百分比
-      
+      // user + system microseconds over sample interval
+      const MICROSECONDS_IN_ONE_SECOND = 1_000_000; // microseconds in one second
+      const elapsedSeconds = 0.1; // sample duration in seconds (100ms)
+      const usagePercentage = ((endUsage.user + endUsage.system) / MICROSECONDS_IN_ONE_SECOND) / elapsedSeconds * 100;
+
       return Math.min(100, Math.max(0, usagePercentage));
     } catch (error) {
       logger.error('PerformanceMonitor', 'Failed to get CPU usage', error as Error);
@@ -267,10 +288,8 @@ export class PerformanceMonitor {
   cleanup(olderThanDays: number = 7): void {
     const cutoffDate = new Date();
     cutoffDate.setDate(cutoffDate.getDate() - olderThanDays);
-    
-    this.metrics = this.metrics.filter(metric => 
-      new Date(metric.timestamp) > cutoffDate
-    );
+
+    this.metrics = this.metrics.filter(metric => new Date(metric.timestamp) > cutoffDate);
 
     logger.info('PerformanceMonitor', `Cleaned up metrics older than ${olderThanDays} days`);
   }
@@ -308,7 +327,7 @@ export function monitorPerformance(name?: string, tags?: string[]) {
     descriptor.value = async function (...args: any[]) {
       const metricName = name || `${target.constructor.name}.${propertyKey}`;
       const timerId = performanceMonitor.startTimer(metricName, tags);
-      
+
       try {
         const result = await originalMethod.apply(this, args);
         performanceMonitor.endTimer(timerId);
@@ -329,40 +348,40 @@ export function monitorClassPerformance() {
     return class extends constructor {
       constructor(...args: any[]) {
         super(...args);
-        
+
         // 監控類別的所有方法
         const prototype = constructor.prototype;
-        const propertyNames = Object.getOwnPropertyNames(prototype)
-          .filter(name => name !== 'constructor' && typeof prototype[name] === 'function');
+        const propertyNames = Object.getOwnPropertyNames(prototype).filter(
+          name => name !== 'constructor' && typeof prototype[name] === 'function'
+        );
 
         propertyNames.forEach(propertyName => {
           const originalMethod = prototype[propertyName];
           if (typeof originalMethod === 'function') {
-            performanceMonitor.startTimer(`${constructor.name}.${propertyName}`);
-            
             prototype[propertyName] = async function (...args: any[]) {
+              const timerId = performanceMonitor.startTimer(`${constructor.name}.${propertyName}`);
               try {
                 const result = await originalMethod.apply(this, args);
-                performanceMonitor.endTimer(`${constructor.name}.${propertyName}`);
+                performanceMonitor.endTimer(timerId);
                 return result;
               } catch (error) {
-                performanceMonitor.endTimer(`${constructor.name}.${propertyName}`, { error: true });
+                performanceMonitor.endTimer(timerId, { error: true });
                 throw error;
               }
             };
           }
         });
       }
-    };
+    } as any;
   };
 }
 
 // 快捷方法
-export const startTimer = (name: string, tags?: string[], metadata?: Record<string, any>) => 
+export const startTimer = (name: string, tags?: string[], metadata?: Record<string, any>) =>
   performanceMonitor.startTimer(name, tags, metadata);
 
-export const endTimer = (timerId: string, metadata?: Record<string, any>) => 
+export const endTimer = (timerId: string, metadata?: Record<string, any>) =>
   performanceMonitor.endTimer(timerId, metadata);
 
-export const recordMetric = (metric: PerformanceMetric) => 
+export const recordMetric = (metric: PerformanceMetric) =>
   performanceMonitor.recordMetric(metric);
