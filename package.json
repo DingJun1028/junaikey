@@ -36,5 +36,9 @@
     "development"
   ],
   "author": "Junaikey",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.19.1",
+    "openai": "^6.2.0"
+  }
 }

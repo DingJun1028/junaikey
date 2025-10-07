@@ -8,15 +8,18 @@ export interface OpenAIConfig {
 
 export interface ChatMessage {
   role: 'system' | 'user' | 'assistant';
-  content: string;
+  content?: string | null;
 }
 
-export interface FunctionTool {
+// 定義符合 OpenAI API 格式的工具介面
+export interface OpenAIFunctionTool {
   type: 'function';
-  name: string;
-  description: string;
-  parameters: any;
-  strict?: boolean;
+  function: {
+    name: string;
+    description?: string;
+    parameters: any;
+    strict?: boolean;
+  };
 }
 
 export interface WebSearchTool {
@@ -36,7 +39,7 @@ export interface MCPTool {
   require_approval: 'never' | 'always' | 'auto';
 }
 
-export type Tool = FunctionTool | WebSearchTool | FileSearchTool | MCPTool;
+export type Tool = OpenAIFunctionTool | WebSearchTool | FileSearchTool | MCPTool;
 
 export interface ChatOptions {
   model?: string;
@@ -46,7 +49,7 @@ export interface ChatOptions {
 }
 
 export interface ChatResponse {
-  content?: string;
+  content?: string | null;
   tool_calls?: any[];
   finish_reason?: string;
 }
@@ -76,17 +79,20 @@ export class OpenAIIntegration {
     try {
       const response = await this.client.chat.completions.create({
         model: options.model || this.config.model || 'gpt-4',
-        messages: messages,
-        tools: options.tools,
+        messages: messages.map(msg => ({
+          role: msg.role,
+          content: msg.content || undefined
+        })) as any,
+        tools: options.tools?.map(tool => this.convertToolToOpenAIFormat(tool)),
         stream: options.stream,
       });
 
       if (options.stream) {
-        return this.handleStreamResponse(response);
+        return this.handleStreamResponse(response as any);
       }
 
       return {
-        content: response.choices[0]?.message?.content,
+        content: response.choices[0]?.message?.content || undefined,
         tool_calls: response.choices[0]?.message?.tool_calls,
         finish_reason: response.choices[0]?.finish_reason,
       };
@@ -112,14 +118,20 @@ export class OpenAIIntegration {
             role: 'user',
             content: [
               { type: 'text', text: question },
-              { type: 'image_url', image_url: { url: imageUrl } },
+              { 
+                type: 'image_url', 
+                image_url: { 
+                  url: imageUrl,
+                  detail: 'auto'
+                } 
+              },
             ],
           },
         ],
       });
 
       return {
-        content: response.choices[0]?.message?.content,
+        content: response.choices[0]?.message?.content || undefined,
         finish_reason: response.choices[0]?.finish_reason,
       };
     } catch (error) {
@@ -144,14 +156,17 @@ export class OpenAIIntegration {
             role: 'user',
             content: [
               { type: 'text', text: question },
-              { type: 'file_url', file_url: { url: fileUrl } },
+              { 
+                type: 'text', 
+                text: `文件連結: ${fileUrl}`,
+              },
             ],
           },
         ],
       });
 
       return {
-        content: response.choices[0]?.message?.content,
+        content: response.choices[0]?.message?.content || undefined,
         finish_reason: response.choices[0]?.finish_reason,
       };
     } catch (error) {
@@ -168,9 +183,13 @@ export class OpenAIIntegration {
     purpose: string = 'assistants'
   ): Promise<any> {
     try {
+      // 動態引入 fs 模組
+      const fs = await import('fs');
+      const fileStream = fs.createReadStream(filePath);
+      
       const file = await this.client.files.create({
-        file: filePath,
-        purpose: purpose,
+        file: fileStream,
+        purpose: purpose as any,
       });
       return file;
     } catch (error) {
@@ -188,14 +207,11 @@ export class OpenAIIntegration {
     model?: string
   ): Promise<ChatResponse> {
     try {
-      const chatCompletionTools: any = tools.map(tool => ({
-        type: 'function',
-        function: tool.function
-      }));
+      const chatCompletionTools = tools.map(tool => this.convertToolToOpenAIFormat(tool));
 
       const response = await this.client.chat.completions.create({
         model: model || this.config.model || 'gpt-4',
-        messages: [{ role: 'user', content: input }],
+        messages: [{ role: 'user', content: input }] as any,
         tools: chatCompletionTools,
       });
 
@@ -211,6 +227,38 @@ export class OpenAIIntegration {
   }
 
   /**
+   * 將工具轉換為 OpenAI 格式
+   */
+  private convertToolToOpenAIFormat(tool: Tool): OpenAIFunctionTool {
+    if (tool.type === 'function') {
+      return tool;
+    }
+    
+    // 將其他類型的工具轉換為 function 格式
+    return {
+      type: 'function',
+      function: {
+        name: `${tool.type}_tool`,
+        description: `Tool for ${tool.type} operations`,
+        parameters: {
+          type: 'object',
+          properties: {
+            action: {
+              type: 'string',
+              enum: [tool.type]
+            },
+            input: {
+              type: 'object',
+              description: 'Input for the tool'
+            }
+          },
+          required: ['action']
+        }
+      }
+    };
+  }
+
+  /**
    * 流式響應處理
    */
   private async handleStreamResponse(
@@ -219,19 +267,19 @@ export class OpenAIIntegration {
     let content = '';
     const tool_calls: any[] = [];
 
-    for await (const event of response) {
-      if (event.choices[0]?.delta?.content) {
-        content += event.choices[0].delta.content;
+    for await (const chunk of response) {
+      if (chunk.choices[0]?.delta?.content) {
+        content += chunk.choices[0].delta.content;
       }
-      if (event.choices[0]?.delta?.tool_calls) {
-        tool_calls.push(...event.choices[0].delta.tool_calls);
+      if (chunk.choices[0]?.delta?.tool_calls) {
+        tool_calls.push(...chunk.choices[0].delta.tool_calls);
       }
     }
 
     return {
-      content,
+      content: content || undefined,
       tool_calls,
-      finish_reason: response.choices[0]?.finish_reason,
+      finish_reason: undefined, // 流式響應的 finish_reason 通常在最後一個 chunk 中
     };
   }
 
