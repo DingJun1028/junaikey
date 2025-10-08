@@ -91,10 +91,11 @@ export class OpenAIIntegration {
         return this.handleStreamResponse(response as any);
       }
 
+      const responseTyped = response as any;
       return {
-        content: response.choices[0]?.message?.content || undefined,
-        tool_calls: response.choices[0]?.message?.tool_calls,
-        finish_reason: response.choices[0]?.finish_reason,
+        content: responseTyped.choices[0]?.message?.content || undefined,
+        tool_calls: responseTyped.choices[0]?.message?.tool_calls,
+        finish_reason: responseTyped.choices[0]?.finish_reason,
       };
     } catch (error) {
       console.error('OpenAI API Error:', error);
@@ -130,9 +131,10 @@ export class OpenAIIntegration {
         ],
       });
 
+      const responseTyped = response as any;
       return {
-        content: response.choices[0]?.message?.content || undefined,
-        finish_reason: response.choices[0]?.finish_reason,
+        content: responseTyped.choices[0]?.message?.content || undefined,
+        finish_reason: responseTyped.choices[0]?.finish_reason,
       };
     } catch (error) {
       console.error('Image Analysis Error:', error);
@@ -165,9 +167,10 @@ export class OpenAIIntegration {
         ],
       });
 
+      const responseTyped = response as any;
       return {
-        content: response.choices[0]?.message?.content || undefined,
-        finish_reason: response.choices[0]?.finish_reason,
+        content: responseTyped.choices[0]?.message?.content || undefined,
+        finish_reason: responseTyped.choices[0]?.finish_reason,
       };
     } catch (error) {
       console.error('File Analysis Error:', error);
@@ -215,10 +218,11 @@ export class OpenAIIntegration {
         tools: chatCompletionTools,
       });
 
+      const responseTyped = response as any;
       return {
-        content: response.choices[0]?.message?.content || undefined,
-        tool_calls: response.choices[0]?.message?.tool_calls,
-        finish_reason: response.choices[0]?.finish_reason,
+        content: responseTyped.choices[0]?.message?.content || undefined,
+        tool_calls: responseTyped.choices[0]?.message?.tool_calls,
+        finish_reason: responseTyped.choices[0]?.finish_reason,
       };
     } catch (error) {
       console.error('Tool Usage Error:', error);
@@ -267,12 +271,25 @@ export class OpenAIIntegration {
     let content = '';
     const tool_calls: any[] = [];
 
-    for await (const chunk of response) {
-      if (chunk.choices[0]?.delta?.content) {
-        content += chunk.choices[0].delta.content;
+    // 檢查是否為流式響應
+    if (response[Symbol.iterator]) {
+      // 流式響應
+      for await (const chunk of response) {
+        if (chunk.choices?.[0]?.delta?.content) {
+          content += chunk.choices[0].delta.content;
+        }
+        if (chunk.choices?.[0]?.delta?.tool_calls) {
+          tool_calls.push(...chunk.choices[0].delta.tool_calls);
+        }
       }
-      if (chunk.choices[0]?.delta?.tool_calls) {
-        tool_calls.push(...chunk.choices[0].delta.tool_calls);
+    } else {
+      // 非流式響應
+      const responseTyped = response as any;
+      if (responseTyped.choices?.[0]?.message?.content) {
+        content = responseTyped.choices[0].message.content;
+      }
+      if (responseTyped.choices?.[0]?.message?.tool_calls) {
+        tool_calls.push(...responseTyped.choices[0].message.tool_calls);
       }
     }
 

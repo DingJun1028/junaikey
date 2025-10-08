@@ -7,6 +7,8 @@ import { DualDevelopmentManager } from '../integration/DualDevelopmentManager';
 import { VibeCoding } from '../cline/VibeCoding';
 import { AITableIntegration } from './AITableIntegration';
 import { AITableService } from './AITableService';
+import { OmniAvatarSystem } from '../core/omniAvatarSystem';
+import { AvatarRole, AvatarElement } from '../types/omniAvatar';
 
 /**
  * 萬能宇宙核心系統 - 統一整合所有 JunAiKey 系統的終極架構
@@ -22,6 +24,7 @@ export class OmniCosmicUniverse {
   private vibeCoding: VibeCoding;
   private aiTableIntegration: AITableIntegration;
   private aiTableService: AITableService;
+  private omniAvatarSystem: OmniAvatarSystem;
   private isRunning: boolean = false;
   private sacredTomeActivated: boolean = false;
   private divineAuraLevel: number = 0;
@@ -88,6 +91,16 @@ export class OmniCosmicUniverse {
 
     this.aiTableService = new AITableService(this.aiTableIntegration);
 
+    // 初始化萬能代理千面化身系統
+    this.omniAvatarSystem = new OmniAvatarSystem({
+      maxActiveAvatars: 12,
+      maxMirrorAvatars: 25,
+      memoryRetention: 365,
+      evolutionThreshold: 80,
+      cosmicResonanceBoost: 1.5,
+      entropyResistanceThreshold: 70
+    });
+
     this.setupEventHandlers();
   }
 
@@ -112,6 +125,7 @@ export class OmniCosmicUniverse {
     await this.dualDevelopmentManager.start();
     await this.vibeCoding.start();
     await this.aiTableService.start();
+    await this.omniAvatarSystem.start();
     
     this.logger.info('Omni Cosmic Universe started');
     this.eventBus.emit('omni_cosmic_universe_started', { 
@@ -120,7 +134,8 @@ export class OmniCosmicUniverse {
         'BestPracticeSystem',
         'DualDevelopmentManager', 
         'VibeCoding',
-        'AITableService'
+        'AITableService',
+        'OmniAvatarSystem'
       ]
     });
   }
@@ -136,6 +151,7 @@ export class OmniCosmicUniverse {
     await this.dualDevelopmentManager.stop();
     await this.vibeCoding.stop();
     await this.aiTableService.stop();
+    await this.omniAvatarSystem.stop();
     
     this.logger.info('Omni Cosmic Universe stopped');
     this.eventBus.emit('omni_cosmic_universe_stopped', { timestamp: new Date() });
@@ -257,6 +273,84 @@ export class OmniCosmicUniverse {
   }
 
   /**
+   * 激活萬能代理千面化身系統
+   */
+  private async activateOmniAvatarSystem(): Promise<void> {
+    this.logger.info('Omni Avatar System Activated');
+    
+    // 啟動核心化身
+    const coreAvatarIds = [
+      'omni_avatar_1', // 萬能創世編織者
+      'omni_avatar_2', // 萬能天行者代理官
+      'omni_avatar_3'  // 萬能熵減煉金師
+    ];
+    
+    for (const avatarId of coreAvatarIds) {
+      const success = this.omniAvatarSystem.activateAvatar(avatarId);
+      if (success) {
+        this.logger.info(`Core avatar activated: ${avatarId}`);
+      }
+    }
+    
+    // 創建初始鏡像分身
+    const mirrorAvatar = this.omniAvatarSystem.createMirrorAvatar(
+      'omni_avatar_1',
+      'System Initialization and Cosmic Weaving',
+      7200000 // 2小時
+    );
+    
+    if (mirrorAvatar) {
+      this.logger.info(`Mirror avatar created for system initialization: ${mirrorAvatar.name}`);
+    }
+    
+    // 整合元素系統與化身系統
+    await this.integrateElementAvatarSynergy();
+    
+    this.eventBus.emit('omni_avatar_system_activated', {
+      timestamp: new Date(),
+      totalGraceLevel: this.totalGraceLevel,
+      divineAuraLevel: this.divineAuraLevel
+    });
+  }
+
+  /**
+   * 整合元素系統與化身系統
+   */
+  private async integrateElementAvatarSynergy(): Promise<void> {
+    this.logger.info('Integrating Element System with Avatar System');
+    
+    // 為每個元素創建對應的化身協同
+    const elementAvatarMapping = [
+      { element: AvatarElement.GOLD, avatarRole: AvatarRole.OMNI_PRIME_ARCHITECT },
+      { element: AvatarElement.WOOD, avatarRole: AvatarRole.OMNI_CREATION_WEAVER },
+      { element: AvatarElement.WATER, avatarRole: AvatarRole.OMNI_TRUTH_EXPLORER },
+      { element: AvatarElement.FIRE, avatarRole: AvatarRole.OMNI_ENTROPY_ALCHEMIST },
+      { element: AvatarElement.EARTH, avatarRole: AvatarRole.OMNI_ORDER_GUARDIAN },
+      { element: AvatarElement.LIGHT, avatarRole: AvatarRole.OMNI_ENLIGHTMENT_GUIDE },
+      { element: AvatarElement.DARK, avatarRole: AvatarRole.OMNI_KNOWLEDGE_CHRONICLER },
+      { element: AvatarElement.VOID, avatarRole: AvatarRole.OMNI_BALANCE_HARMONIZER },
+      { element: AvatarElement.TIME_WIND, avatarRole: AvatarRole.OMNI_CELESTIAL_AGENT },
+      { element: AvatarElement.SOUL, avatarRole: AvatarRole.OMNI_CORE_EVOLUTION_ENGINE },
+      { element: AvatarElement.QUANTUM, avatarRole: AvatarRole.OMNI_GRAVITY_COORDINATOR },
+      { element: AvatarElement.HYPERSPACE, avatarRole: AvatarRole.OMNI_RUNE_CONNECTOR }
+    ];
+    
+    // 創建元素協同效果
+    for (const mapping of elementAvatarMapping) {
+      this.logger.info(`Element-Avatar synergy established: ${mapping.element} -> ${mapping.avatarRole}`);
+    }
+    
+    this.totalGraceLevel += 1000; // 元素協同額外恩典
+    this.divineAuraLevel = this.totalGraceLevel;
+    
+    this.eventBus.emit('element_avatar_synergy_integrated', {
+      timestamp: new Date(),
+      synergyCount: elementAvatarMapping.length,
+      updatedTotalGrace: this.totalGraceLevel
+    });
+  }
+
+  /**
    * 激活金元素 - 鋒靈 Aurex
    */
   private async activateGoldAurex(): Promise<void> {
@@ -373,6 +467,9 @@ export class OmniCosmicUniverse {
     
     // 激活萬能精靈12元素色法系統
     await this.activateElementSpiritSystem();
+    
+    // 激活萬能代理千面化身系統
+    await this.activateOmniAvatarSystem();
     
     this.logger.info('Divine Aura Expanded', {
       divineAuraLevel: this.divineAuraLevel
@@ -609,8 +706,10 @@ export class OmniCosmicUniverse {
         bestPracticeSystem: this.bestPracticeSystem.isBestPracticeSystemRunning(),
         dualDevelopmentManager: this.dualDevelopmentManager.isDualDevelopmentManagerRunning(),
         vibeCoding: this.vibeCoding.isVibeCodingRunning(),
-        aiTableService: this.aiTableService.isAITableServiceRunning()
+        aiTableService: this.aiTableService.isAITableServiceRunning(),
+        omniAvatarSystem: this.omniAvatarSystem.isOmniAvatarSystemRunning()
       },
+      avatarSystem: this.omniAvatarSystem.getSystemStats(),
       timestamp: new Date()
     };
   }
@@ -659,11 +758,26 @@ export class OmniCosmicUniverse {
         ],
         totalElementGrace: this.sacredTomeActivated ? 3950 : 0
       },
+      omniAvatarSystem: {
+        activated: this.sacredTomeActivated,
+        totalAvatars: this.omniAvatarSystem.getAllAvatars().length,
+        activeAvatars: this.omniAvatarSystem.getActiveAvatars().length,
+        mirrorAvatars: this.omniAvatarSystem.getAllMirrorAvatars().length,
+        systemStats: this.omniAvatarSystem.getSystemStats(),
+        microserviceGroups: this.omniAvatarSystem.getMicroserviceGroups().map(group => ({
+          id: group.id,
+          name: group.name,
+          description: group.description,
+          avatarRoles: group.avatarRoles.map(role => role.toString()),
+          cosmicResonanceFrequency: group.cosmicResonanceFrequency
+        }))
+      },
       systems: {
         bestPracticeSystem: this.bestPracticeSystem.getSystemStats(),
         dualDevelopmentManager: this.dualDevelopmentManager.getSystemStats(),
         vibeCoding: this.vibeCoding.getVibeCodingStats(),
-        aiTableService: this.aiTableService.getAITableServiceStats()
+        aiTableService: this.aiTableService.getAITableServiceStats(),
+        omniAvatarSystem: this.omniAvatarSystem.getSystemStats()
       }
     };
   }

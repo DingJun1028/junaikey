@@ -3,8 +3,8 @@
  * 測試日誌記錄、級別控制、格式化等功能
  */
 
-import { logger, LogLevel, LogEntry, LoggerConfig } from './logger';
-import { testUtils } from '../test/setup';
+import { logger, LogLevel } from './logger';
+// test setup 在 jest 全域執行環境中執行，若需要 testHelpers 可在此引入
 
 describe('JunAiKey Logger', () => {
   let originalConfig: LoggerConfig;

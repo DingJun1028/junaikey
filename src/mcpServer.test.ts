@@ -1,4 +1,5 @@
-import { server } from './mcpServer';
+// server 由 mocked module 在 beforeAll 時動態 require
+// import { server } from './mcpServer';
 import { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types';
 
 // Mock the transport layer

@@ -24,6 +24,7 @@ export interface PerformanceConfig {
 }
 export declare class PerformanceMonitor {
     private metrics;
+    private maxMetricsSize;
     private activeTimers;
     private config;
     private alertCallbacks;
@@ -62,11 +63,7 @@ export declare class PerformanceMonitor {
 }
 export declare const performanceMonitor: PerformanceMonitor;
 export declare function monitorPerformance(name?: string, tags?: string[]): (target: any, propertyKey: string, descriptor: PropertyDescriptor) => PropertyDescriptor;
-export declare function monitorClassPerformance(): <T extends new (...args: any[]) => any>(constructor: T) => {
-    new (...args: any[]): {
-        [x: string]: any;
-    };
-} & T;
+export declare function monitorClassPerformance(): <T extends new (...args: any[]) => any>(constructor: T) => any;
 export declare const startTimer: (name: string, tags?: string[], metadata?: Record<string, any>) => string;
 export declare const endTimer: (timerId: string, metadata?: Record<string, any>) => PerformanceMetric | null;
 export declare const recordMetric: (metric: PerformanceMetric) => void;

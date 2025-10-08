@@ -73,7 +73,8 @@ afterAll(() => {
   
   // 如果有測試失敗，退出碼為 1
   if (failedTests > 0) {
-    process.exit(1);
+    console.log(`\n🚨 Test Summary: ${testCount} tests run, ${failedTests} tests failed`);
+    // 不直接退出，讓 Jest 處理退出碼
   }
 });
 
