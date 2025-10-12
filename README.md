@@ -124,11 +124,50 @@ cd junaikey
 npm install
 
 # 3. 設置環境變數
-cp .env.example .env.local
-# 編輯 .env.local，填入您的 API 金鑰
+# 複製範例環境變數檔案
+cp .env.example .env
+
+# 編輯 .env 檔案，填入您的配置
+# 基本設置只需配置 PORT（可選，預設為 3000）
+# 若需使用完整功能，請參考 .env.example 中的詳細說明
 
 # 4. 啟動開發服務器
 npm run dev
+
+# 5. 驗證服務器運行
+# 在瀏覽器中訪問 http://localhost:3000
+# 或檢查健康狀態端點 http://localhost:3000/health
+```
+
+### 環境變數設置說明
+
+基本的開發環境只需要配置以下變數（可選）：
+
+- `PORT`: 服務器端口號（預設: 3000）
+- `NODE_ENV`: 環境模式（development/production）
+
+完整的環境變數配置請參考 `.env.example` 文件，其中包含：
+- 資料庫配置 (Supabase)
+- AI 服務配置 (Straico, OpenAI)
+- 第三方整合配置 (AITable, Notion, Capacities)
+- 監控與日誌配置
+
+**重要提示**：
+- `.env` 文件已加入 `.gitignore`，請勿將敏感資訊提交到版本控制
+- 在生產環境中使用環境變數或密鑰管理服務來儲存敏感資訊
+- GitHub Actions 使用 GitHub Secrets 管理機密資料
+
+### 測試
+
+```bash
+# 運行所有測試
+npm test
+
+# 運行測試並監視變化
+npm run test:watch
+
+# 只運行服務器測試
+npm run test:server
 ```
 
 ### 部署到雲端
