@@ -1,24 +1,4 @@
-# Node
-node_modules/
-
-# Build output
-dist/
-coverage/
-
-# Environment variables
 .env
-.env.local
-.env.*.local
-
-# VS Code
-.vscode/
-
-# Logs
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# OS
+*.env.*
+/node_modules
 .DS_Store
-Thumbs.db

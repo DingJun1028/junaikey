@@ -1,47 +1,25 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "commonjs",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "paths": {
+      // 如果有自訂路徑別名，會在這裡設定。
+      // 對於 'react'，它應該直接從 node_modules 解析。
+    }
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.test.ts",
-    "**/*.spec.ts",
-    "**/*.tsx",
-    "**/*.jsx",
-    "src/**/ai/**",
-    "src/**/best-practices/**",
-    "src/**/core/**",
-    "src/**/integration/**",
-    "src/**/intelligent-tagging-system/**",
-    "src/**/mcp/**",
-    "src/**/omni-cosmic-universe/**",
-    "src/**/main.tsx/**",
-    // 臨時排除：大型/合併後含語法錯誤的檔案，便於先讓主流程通過編譯
-    "src/tcg/types/game.ts",
-    "src/tcg/types/partner.ts",
-    "src/tcg/web/stardust-story-generator.ts"
-  ]
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

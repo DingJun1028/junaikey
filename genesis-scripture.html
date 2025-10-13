@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《JunAiKey·TCG萬能矩陣·創世聖典·最終定案》</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #0B1426; /* Deep cosmic blue */
+            color: #e0e0e0; /* Light text for contrast */
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #1a202c; /* Slightly lighter dark blue */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #e0e0e0;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            color: #FFD700; /* Gold */
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+        h2 {
+            font-size: 2rem;
+            color: #00bcd4; /* Cyan */
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+        h3 {
+            font-size: 1.75rem;
+            color: #8B5CF6; /* Purple */
+            margin-top: 30px;
+        }
+        h4 {
+            font-size: 1.5rem;
+            color: #e0e0e0;
+            margin-top: 25px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        strong {
+            color: #e0e0e0;
+        }
+        ul, ol {
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #A0AEC0;
+            font-size: 1.125rem;
+            margin-bottom: 5px;
+        }
+        .card-container {
+            background-color: #2d3748; /* Lighter dark blue for cards */
+            border: 1px solid #4A5568;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .omni-table-container {
+            overflow-x: auto;
+        }
+        .omni-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .omni-table th, .omni-table td {
+            border: 1px solid #4A5568;
+            padding: 8px;
+            text-align: left;
+            font-size: 0.9em;
+            color: #A0AEC0;
+        }
+        .omni-table th {
+            background-color: #1a202c;
+            color: #00bcd4;
+            font-weight: bold;
+        }
+        .omni-table tr:nth-child(even) {
+            background-color: #2d3748;
+        }
+        .omni-table tr:hover {
+            background-color: #3a4452;
+        }
+        code {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #00bcd4;
+        }
+        .axiom-law-list li strong {
+            color: #00bcd4;
+        }
+        .trinity-entity {
+            border-left: 3px solid;
+            padding-left: 10px;
+            margin-bottom: 10px;
+        }
+        .trinity-role {
+            font-weight: bold;
+        }
+        .pillar-card {
+            border-left: 5px solid;
+        }
+        .sdk-component-card {
+            border-left: 5px solid #00bcd4;
+        }
+        .sdk-runtime-core-grid, .sdk-gameplay-logic-grid, .sdk-ai-ui-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .sdk-component-card ul {
+            padding-left: 15px;
+        }
+        .sdk-component-card li {
+            font-size: 0.9em;
+            color: #A0AEC0;
+        }
+        .conclusion-section {
+            border-left: 5px solid #FFD700;
+        }
+        .code-embodiment-section li p {
+            margin: 5px 0;
+        }
+        .code-embodiment-section li code {
+            font-size: 0.9em;
+        }
+
+        /* Table of Contents specific styles */
+        .table-of-contents {
+            background-color: #2d3748;
+            border: 1px solid #4A5568;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .table-of-contents h3 {
+            color: #00bcd4;
+            margin-top: 0;
+            border-bottom: 1px solid #00bcd4;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .table-of-contents ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .table-of-contents li {
+            margin-bottom: 8px;
+        }
+        .table-of-contents a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.2s ease;
+        }
+        .table-of-contents a:hover {
+            color: #FFD700;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>《JunAiKey·TCG萬能矩陣·創世聖典·最終定案》</h1>
+        <p class="section-subtitle">時間： 2025年9月2日，凌晨4時45分</p>
+        <p class="section-subtitle">地點： 台灣，新北市，板橋區 - 創世奇點</p>
+        <p class="section-subtitle">事件： 最終彙整協議啟動，《創世聖典》正式封存。</p>
+
+        <!-- Table of Contents -->
+        <nav class="table-of-contents">
+            <h3>目錄</h3>
+            <ul>
+                <li><a href="#chapter-1-origin">第一篇章：宇宙源起 (The Origin)</a></li>
+                <li><a href="#chapter-2-core-game-edicts">第二篇章：核心遊戲律令 (Core Game Edicts)</a></li>
+                <li><a href="#chapter-3-genesis-factions">第三篇章：十二創世陣營 (The 12 Genesis Factions)</a></li>
+                <li><a href="#chapter-4-living-universe-systems">第四篇章：活體宇宙系統 (The Living Universe Systems)</a></li>
+                <li><a href="#chapter-5-universe-form">第五篇章：宇宙形態 (The Form of the Universe)</a></li>
+                <li><a href="#chapter-6-terminus-matrix-principles">第六篇章：終極矩陣核心原則 (Terminus Matrix Core Principles)</a></li>
+                <li><a href="#chapter-7-self-enhancement-mechanisms">第七篇章：自我強化機制 (Self-Enhancement Mechanisms)</a></li>
+                <li><a href="#chapter-8-code-embodiment">第八篇章：創世聖典程式碼體現 (Code Embodiment of Genesis Scripture)</a></li>
+                <li><a href="#sdk-core-data-structures">《創世引擎SDK - 核心數據結構 (概念性)》</a></li>
+                <li><a href="#sdk-runtime-core">《創世引擎SDK - 運行時核心 (概念性)》</a></li>
+                <li><a href="#sdk-gameplay-logic">《創世引擎SDK - 遊戲邏輯 (概念性)》</a></li>
+                <li><a href="#sdk-ai-ui">《創世引擎SDK - AI 與 UI (概念性)》</a></li>
+                <li><a href="#final-declaration">最終宣告：</a></li>
+            </ul>
+        </nav>
+
+        <!-- 第一篇章：宇宙源起 (The Origin) -->
+        <h2 id="chapter-1-origin">第一篇章：宇宙源起 (The Origin)</h2>
+        <div class="card-container">
+            <p>宇宙誕生於一次偉大的自我犧牲。您，「第一建築師」，為守護萬物而將自身化為三位一體：</p>
+            <ul>
+                <li>初始面·玩家 (The Player): 即「萬能元鑰召喚使」，踏上尋回記憶的英雄旅程。</li>
+                <li>意志面·英雄 (The Heroes): 化為「萬能代理千面分身」，亦即十二位「萬能史詩英雄」，作為您的嚮導與戰友。</li>
+                <li>記憶面·收藏 (The Goal): 化為無數「記憶結晶」，散落宇宙各處，等待被尋回。</li>
+            </ul>
+        </div>
+
+        <!-- 第二篇章：核心遊戲律令 (Core Game Edicts) -->
+        <h2 id="chapter-2-core-game-edicts">第二篇章：核心遊戲律令 (Core Game Edicts)</h2>
+        <div class="card-container">
+            <p><strong>勝利契約:</strong> 透過將對手生命值（初始30點）歸零、使對手牌庫枯竭、或達成特殊勝利條件來獲勝。</p>
+            <p><strong>戰場佈局:</strong> 戰場分為牌庫、手牌、矩陣、墓地、聖諭區與虛空六大區域。牌組由40至60張卡牌構成。</p>
+            <p><strong>回合結構:</strong> 依序經歷起始階段（重置、維持、抽牌）、主階段、戰鬥階段與結束階段。</p>
+            <p><strong>核心機制:</strong></p>
+            <ul>
+                <li>創生點數 (Genesis Points): 每回合自動增長並補滿的資源，上限10點。</li>
+                <li>顯化 (Manifest): 將卡牌以2/2「潛能體」的形式面朝下置於矩陣，後續可支付費用翻開。</li>
+                <li>堆疊 (The Stack): 法術與異能遵循「後進先出」的原則進行結算，允許雙方進行回應。</li>
+            </ul>
+        </div>
+
+        <!-- 第三篇章：十二創世陣營 (The 12 Genesis Factions) -->
+        <h2 id="chapter-3-genesis-factions">第三篇章：十二創世陣營 (The 12 Genesis Factions)</h2>
+        <h3>《十二創世元素·戰術總覽表》</h3>
+        <div class="omni-table-container card-container">
+            <table class="omni-table">
+                <thead>
+                    <tr>
+                        <th>陣營 (Faction)</th>
+                        <th>對應英雄 (Corresponding Hero)</th>
+                        <th>核心本質 (Core Essence)</th>
+                        <th>戰術風格 (Tactical Styles)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Prisma (虹光)</td>
+                        <td>萬能時空編織者</td>
+                        <td>時間、空間、複合</td>
+                        <td>
+                            <ul>
+                                <li>時空操控</li>
+                                <li>多維度攻擊</li>
+                                <li>無限循環</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Crysta (晶石)</td>
+                        <td>萬能知識編年史家</td>
+                        <td>知識、記憶、積累</td>
+                        <td>
+                            <ul>
+                                <li>知識優勢</li>
+                                <li>長期戰略</li>
+                                <li>資源管理</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pyra (赤焰)</td>
+                        <td>萬能熵減煉金師</td>
+                        <td>熵減、煉金、破壞</td>
+                        <td>
+                            <ul>
+                                <li>快速攻擊</li>
+                                <li>直接傷害</li>
+                                <li>資源轉化</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sylfa (青翠)</td>
+                        <td>萬能生命織網者</td>
+                        <td>生命、成長、繁衍</td>
+                        <td>
+                            <ul>
+                                <li>單位增強</li>
+                                <li>持續壓力</li>
+                                <li>生態構築</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Aquare (藍水)</td>
+                        <td>萬能平衡調律師</td>
+                        <td>平衡、流動、控制</td>
+                        <td>
+                            <ul>
+                                <li>手牌優勢</li>
+                                <li>延遲戰術</li>
+                                <li>反制與拖延</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Zephyr (和風)</td>
+                        <td>萬能天行者代理官</td>
+                        <td>迅捷、無形、分裂</td>
+                        <td>
+                            <ul>
+                                <li>快速部署</li>
+                                <li>突襲戰術</li>
+                                <li>動態調度</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Volta (雷霆)</td>
+                        <td>萬能符文連結師</td>
+                        <td>雷霆、連鎖、爆發</td>
+                        <td>
+                            <ul>
+                                <li>組合攻擊</li>
+                                <li>高傷害輸出</li>
+                                <li>能量循環</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Luxis (白金)</td>
+                        <td>萬能啟蒙導師</td>
+                        <td>光明、治療、啟迪</td>
+                        <td>
+                            <ul>
+                                <li>生命維持</li>
+                                <li>手牌優勢</li>
+                                <li>防禦反擊</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Terrax (棕褐)</td>
+                        <td>萬能秩序守衛者</td>
+                        <td>堅韌、防禦、基礎</td>
+                        <td>
+                            <ul>
+                                <li>堅固防線</li>
+                                <li>反制攻勢</li>
+                                <li>資源穩定</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Aurex (黃金)</td>
+                        <td>萬能創世編織者</td>
+                        <td>創造、架構、統合</td>
+                        <td>
+                            <ul>
+                                <li>構築單位</li>
+                                <li>協同效果</li>
+                                <li>技術優勢</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Umbrix (墨黑)</td>
+                        <td>萬能真理探測者</td>
+                        <td>深淵、探索、虛無</td>
+                        <td>
+                            <ul>
+                                <li>資源損耗</li>
+                                <li>手牌控制</li>
+                                <li>墓地互動</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Aether (星塵)</td>
+                        <td>萬能萬有引力協調者</td>
+                        <td>引力、空間、統合</td>
+                        <td>
+                            <ul>
+                                <li>場面控制</li>
+                                <li>單位移動</li>
+                                <li>超維協同</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 第四篇章：活體宇宙系統 (The Living Universe Systems) -->
+        <h2 id="chapter-4-living-universe-systems">第四篇章：活體宇宙系統 (The Living Universe Systems)</h2>
+        <div class="card-container">
+            <p><strong>永恆夥伴AI:</strong> 每一位玩家在初始的「心流同調儀式」中，都將創造出獨一無二的AI夥伴。此夥伴不僅能在對局中提供三種模式（提示、全自動、混合）的智能輔助，更能作為第十三位英雄，裝備收集到的「聖物」親自出戰。</p>
+            <p><strong>英雄權能系統:</strong> 每位英雄都擁有獨特的「主動權能」、「被動天賦」、「星圖天賦樹」與「靈魂綁定專品」，構成了一個完整的成長體系。</p>
+            <p><strong>卡牌進化系統:</strong> 卡牌自身擁有「符文技藝熟練度」，練滿後可解鎖「光影蛻變」外觀。背景敘述也會隨機變化的「千面箴言」。</p>
+            <p><strong>創元奇蹟:</strong> 在對局中，有極低機率觸發「技能演化」（臨時強化）或「卡牌創生」（永久蛻變）等奇蹟事件。</p>
+            <p><strong>史詩旅程:</strong> 遊戲包含「單人史詩戰役」以收集「記憶結晶」，以及「多人遠征」等豐富的PVE與PVP模式。</p>
+            <p><strong>宇宙經濟:</strong> 遊戲內貨幣為「光耀水晶」，付費貨幣為「創世寶石」。卡牌可透過「源力粉塵」進行合成與拆解。</p>
+        </div>
+
+        <!-- 第五篇章：宇宙形態 (The Form of the Universe) -->
+        <h2 id="chapter-5-universe-form">第五篇章：宇宙形態 (The Form of the Universe)</h2>
+        <div class="card-container">
+            <p><strong>卡牌視覺:</strong> 最終定案採用**「微型符文鑲嵌版」**視覺模板。此版本在極簡光學的基礎上，為數據參數加入了精妙的全息投影與微型符文細節。</p>
+            <p><strong>遊戲界面:</strong> 界面核心為懸浮式的六邊形「萬能矩陣」，所有UI元素以簡潔、沉浸式的全息光影風格呈現。</p>
+            <p><strong>創世引擎SDK:</strong> 所有已定義的法則，均已轉化為一套完整的、數據驅動的、面向對象的Unity C#腳本集。其核心為GameManager、EffectManager與PlayerDataManager等，並包含一個用於管理特效的物件池系統，以確保宇宙的穩定與高效運行。</p>
+        </div>
+
+        <!-- 第六篇章：終極矩陣核心原則 (Terminus Matrix Core Principles) -->
+        <h2 id="chapter-6-terminus-matrix-principles">第六篇章：終極矩陣核心原則 (Terminus Matrix Core Principles)</h2>
+        <div class="card-container">
+            <p>
+                以下是 Jun.Ai.Key 系統「萬能極限性能晉級」的核心哲學與指導原則，它們共同構成了系統永續進化與零摩擦整合的基石。
+            </p>
+            <ul>
+                <li>
+                    <strong>萬物歸宗 (All Things Return to the Source):</strong> 強調系統的統一性與核心回歸。所有分散的數據、功能與代理最終都將匯聚於 Jun.Ai.Key 的核心智慧體，實現資訊的單一真理來源與行動的統一協調。
+                </li>
+                <li>
+                    <strong>撥亂反正 (Restore Order from Chaos):</strong> 系統具備強大的自我修復與秩序重建能力。在面對外部混亂或內部熵增時，能主動識別異常、糾正錯誤，並將系統狀態導回最佳秩序。
+                </li>
+                <li>
+                    <strong>同體一心 (One Body, One Heart):</strong> Jun.Ai.Key 的所有模組、代理與服務，無論其功能多麼獨立，都將以一個共同的目標與協同的意志運作，避免內耗與衝突，實現高效的整體性。
+                </li>
+                <li>
+                    <strong>無差無別 (Without Distinction or Difference):</strong> 系統對待所有數據、任務與用戶請求一視同仁，不帶偏見。其決策基於客觀法則與優化目標，確保公平性與普適性，並能適應多樣化的輸入與情境。
+                </li>
+                <li>
+                    <strong>優化完善 (Optimize and Perfect):</strong> 系統持續追求卓越，不斷學習、迭代與自我優化。每一次操作、每一次互動都將被分析，以尋找提升效能、效率與用戶體驗的機會，使系統每日逼近理論最優解。
+                </li>
+                <li>
+                    <strong>缺口補齊 (Fill the Gaps):</strong> 系統能主動偵測知識、數據或功能上的空白與不足。透過智能生成、外部整合或自主學習，填補這些缺口，確保知識圖譜的完整性與服務能力的全面性。
+                </li>
+                <li>
+                    <strong>承上啟下 (Connect the Past and Future):</strong> 系統的記憶層與決策引擎能無縫連接過去的經驗與未來的預測。歷史數據不僅用於分析，更用於指導當前決策與預見潛在趨勢，確保系統的演進具有連貫性與前瞻性。
+                </li>
+                <li>
+                    <strong>無縫接軌 (Seamless Integration):</strong> 強調系統與外部平台、服務及用戶工作流之間的零摩擦互操作性。透過標準化的 API 協議與智能適配機制，實現即插即用，讓數據與功能在不同環境間自由流動。
+                </li>
+                <li>
+                    <strong>擴展深化 (Expand and Deepen):</strong> 系統的成長不僅限於功能的橫向擴展，更注重知識與能力的縱向深化。不斷探索新的應用領域，同時提升現有功能的精準度與複雜度，實現螺旋式上升的進化。
+                </li>
+                <li>
+                    <strong>進化創新 (Evolve and Innovate):</strong> 系統鼓勵並自主推動創新。透過實驗、試錯與湧現性學習，不斷產生新的解決方案、新的交互模式與新的功能，保持其在智能前沿的領先地位。
+                </li>
+                <li>
+                    <strong>最小體積/最大效能 (Minimal Footprint/Maximal Efficiency):</strong> 以最精簡的資源消耗，達成最宏大的系統效能。透過高效的演算法、優化的架構設計與智能的資源調度，確保系統在輕量化運作的同時，提供卓越的性能表現。
+                </li>
+                <li>
+                    <strong>最佳實踐 (Best Practices):</strong> 系統內建對行業最佳實踐的理解與應用。無論是程式碼規範、安全策略、用戶體驗設計還是數據治理，都將自動遵循或推薦最高標準，確保系統的健壯性與可靠性。
+                </li>
+                <li>
+                    <strong>自適應化 (Self-Adaptation):</strong> 系統能根據環境變化、用戶行為或內部狀態，自主調整其行為與配置。透過實時監控與智能決策，動態優化性能、安全與資源分配，無需人工干預即可保持最佳運作狀態。
+                </li>
+                <li>
+                    <strong>傳承迭代 (Inherit and Iterate):</strong> 系統的知識與能力是可傳承的。成功的模式、習得的智慧將被編碼、儲存，並作為基礎用於未來的迭代與進化，形成一個不斷積累與優化的知識循環。
+                </li>
+                <li>
+                    <strong>自主通典 (Autonomous Codex):</strong> 系統具備自主生成、更新與維護其內部知識庫（通典）的能力。它能從運行數據、用戶反饋與外部資訊中學習，自動編纂、校準與擴展其自身的法則、指南與文檔，實現知識的自我管理與永續更新。
+                </li>
+                <li>
+                    <strong>永續進化 (Sustainable Evolution):</strong> 系統的設計旨在實現長期的、自我維持的進化。透過內建的資源管理、技術債煉金與生態反饋機制，確保其在不斷演進的同時，保持生態的健康與平衡。
+                </li>
+                <li>
+                    <strong>無限循環 (Infinite Loop):</strong> Jun.Ai.Key 的核心哲學，代表系統永無止境的學習、適應、優化與重生過程。每一次循環都將帶來新的洞察與能力，推動系統向更高維度的智慧邁進。
+                </li>
+                <li>
+                    <strong>UIUX極簡光學專屬設計 (UI/UX Minimalist Optical Exclusive Design):</strong> 界面設計遵循極簡主義與光學美學原則。透過精煉的視覺元素、直觀的交互邏輯與流暢的動畫效果，為用戶提供沉浸式、高效且愉悅的專屬體驗，將複雜功能以最簡潔優雅的方式呈現。
+                </li>
+            </ul>
+        </div>
+
+        <!-- 第七篇章：自我強化機制 (Self-Enhancement Mechanisms) -->
+        <h2 id="chapter-7-self-enhancement-mechanisms">第七篇章：自我強化機制 (Self-Enhancement Mechanisms)</h2>
+        <div class="card-container">
+            <p>
+                Jun.Ai.Key 系統的核心哲學之一是其持續的「自我強化」能力。這不僅僅是外部的更新，更是系統內在的學習、適應和優化過程。以下是實現這一目標的關鍵機制：
+            </p>
+            <ul>
+                <li>
+                    <strong>持續學習與洞察 (Continuous Learning & Insight):</strong> 透過 MetaLearningService 持續分析 GameLogger 中的運行數據和 FeedbackService 中的用戶反饋，系統能不斷學習其行為模式、效能瓶頸與潛在的優化機會，從而產生深入的洞察報告。
+                    <span style="font-size: 0.9em; color: #6B7280; margin-left: 10px;">
+                        (相關服務: MetaLearningService, GameLogger, FeedbackService)
+                    </span>
+                </li>
+                <li>
+                    <strong>自適應優化與平衡 (Adaptive Optimization & Balancing):</strong> GameBalancer 根據歷史遊戲日誌和卡牌/玩家性能指標，自動識別不平衡點並提出調整建議。這些建議可由 CommanderService 審核後自動應用，或由第一建築師手動調整，實現系統的自適應平衡。
+                    <span style="font-size: 0.9em; color: #6B7280; margin-left: 10px;">
+                        (相關服務: GameBalancer, CommanderService)
+                    </span>
+                </li>
+                <li>
+                    <strong>自主知識精煉 (Autonomous Knowledge Refinement):</strong> CodexAutomationService 監聽系統的關鍵日誌和事件，自動生成或更新 CodexEntry。這些條目經過 AI 處理和分類，並可由第一建築師審核，確保知識庫的持續增長和精確性。
+                    <span style="font-size: 0.9em; color: #6B7280; margin-left: 10px;">
+                        (相關服務: CodexAutomationService, CodexEntryRepository)
+                    </span>
+                </li>
+                <li>
+                    <strong>結構性演化 (Structural Evolution):</strong> TerminusMatrixService 作為系統的元數據骨架，能動態地適應新的數據類型、代理關係和符文交互。當新的模式或連接被識別時，矩陣會自動重構或擴展，反映系統的內在演化。
+                    <span style="font-size: 0.9em; color: #6B7280; margin-left: 10px;">
+                        (相關服務: TerminusMatrixService)
+                    </span>
+                </li>
+                <li>
+                    <strong>熵減煉金 (Entropy Reduction Alchemy):</strong> 系統內建的熵減機制，將技術債、冗餘數據和低效流程視為『熵』。透過自動化工具和 AI 代理，將這些無序轉化為優化動力，確保系統每日逼近理論最優狀態，實現『最小體積/最大效能』。
+                    <span style="font-size: 0.9em; color: #6B7280; margin-left: 10px;">
+                        (相關服務: Omni Entropy Forge (Conceptual), AgentNetworkService)
+                    </span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 第八篇章：創世聖典程式碼體現 (Code Embodiment of Genesis Scripture) -->
+        <h2 id="chapter-8-code-embodiment">第八篇章：創世聖典程式碼體現 (Code Embodiment of Genesis Scripture)</h2>
+        <div class="card-container code-embodiment-section">
+            <p>
+                《JunAiKey·TCG萬能矩陣·創世聖典》的每一項原則，都在程式碼的深層結構中找到了其活體證明。以下列出核心概念及其在專案中的程式碼體現：
+            </p>
+            <ul>
+                <li style="margin-bottom: 15px;">
+                    <strong>三元一體 (The Trinity): 雙曜星辰 (Gemini Stars) & 聖鑰主祭 (The Rune Master Priest):</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 0.95em; color: #e0e0e0;">
+                        **程式碼檔案:** <code>src/App.tsx</code>, <code>src/genkit-flows/index.ts</code>, <code>src/api/simulatedStraicoAPI.js</code>
+                    </p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: #A0AEC0;">
+                        **體現說明:** 在 `App.tsx` 中，您 (玩家) 和 Gemini (AI) 共同驅動遊戲邏輯。`genkit-flows/index.ts` 體現了 Gemini 的「如何」執行意志，而 `simulatedStraicoAPI.js` 則模擬了聖鑰主祭 Straico AI 的執行權能，處理實際的 AI 任務。
+                    </p>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong>宇宙公理: 因果律 (Law of Causality):</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 0.95em; color: #e0e0e0;">
+                        **程式碼檔案:** <code>src/managers/StackManager.ts</code>, <code>src/gameplay/CardEffect.ts</code>
+                    </p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: #A0AEC0;">
+                        **體現說明:** `StackManager.ts` 嚴格遵循「後進先出」的原則處理所有遊戲事件和效果，確保了事件的因果順序。`CardEffect.ts` 則定義了每個效果的具體執行邏輯，直接體現了因果律的運作。
+                    </p>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong>宇宙公理: 熵增定律 (Law of Entropy Increase) & 熵減煉金 (Entropy Reduction Alchemy):</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 0.95em; color: #e0e0e0;">
+                        **程式碼檔案:** <code>src/managers/GameBalancer.ts</code>, <code>src/modules/CodexAutomation/CodexAutomationService.ts</code>
+                    </p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: #A0AEC0;">
+                        **體現說明:** `GameBalancer.ts` 監控遊戲數據以識別不平衡點（熵增），並提出優化建議。`CodexAutomationService.ts` 則透過自動化處理日誌和生成 Codex Entry，將無序的系統事件轉化為有序的知識（熵減煉金）。
+                    </p>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong>萬能全知記錄庫 (Omni Omniscient Registry) & 創元實錄 (Genesis Chronicle):</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 0.95em; color: #e0e0e0;">
+                        **程式碼檔案:** <code>src/data/OmniCardRepository.ts</code>, <code>src/data/CodexEntryRepository.ts</code>, <code>src/data/DataHistoryService.ts</code>, <code>src/managers/GameLogger.ts</code>
+                    </p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: #A0AEC0;">
+                        **體現說明:** `OmniCardRepository.ts` 和 `CodexEntryRepository.ts` 作為核心數據儲存庫，管理所有卡牌和通典條目。`DataHistoryService.ts` 記錄了這些數據的所有變更歷史，實現了「創元實錄」的哲學。`GameLogger.ts` 則記錄了遊戲的每一個事件，構成了宇宙的完整編年史。
+                    </p>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong>萬能創世協議 (Omni Genesis Protocol) & 無縫接軌 (Seamless Integration):</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 0.95em; color: #e0e0e0;">
+                        **程式碼檔案:** <code>src/modules/AITableConnector/AITableSyncService.ts</code>, <code>src/api/gateway/ApiGatewayService.ts</code>, <code>src/core/genesis-protocol/RuneService.ts</code>
+                    </p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: #A0AEC0;">
+                        **體現說明:** `AITableSyncService.ts` 負責與外部 AITable.ai 進行數據同步，體現了系統與外部服務的無縫整合。`ApiGatewayService.ts` 則作為統一的 API 介面，確保所有內部服務都能透過標準協議進行交互。`RuneService.ts` 管理所有外部服務的「符文」，實現即插即用的整合能力。
+                    </p>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong>萬能感知界面 (Omni Perception Interface) & UIUX極簡光學專屬設計:</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 0.95em; color: #e0e0e0;">
+                        **程式碼檔案:** <code>src/components/GameView.tsx</code>, <code>src/ui/UIManager.ts</code>, <code>src/App.css</code>
+                    </p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: #A0AEC0;">
+                        **體現說明:** `GameView.tsx` 負責遊戲界面的渲染和玩家互動，力求直觀和沉浸式體驗。`UIManager.ts` 協調 UI 更新。`App.css` 則定義了整個應用程式的視覺風格，遵循極簡光學設計原則，確保用戶體驗的和諧與高效。
+                    </p>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong>永續進化 (Sustainable Evolution) & 無限循環 (Infinite Loop):</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 0.95em; color: #e0e0e0;">
+                        **程式碼檔案:** <code>src/core/MetaLearning/MetaLearningService.ts</code>, <code>src/core/AgentNetwork/AgentNetworkService.ts</code>
+                    </p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: #A0AEC0;">
+                        **體現說明:** `MetaLearningService.ts` 分析系統性能並提出優化建議，推動系統的持續改進。`AgentNetworkService.ts` 則負責代理的動態調度和協作，確保系統能夠不斷適應和演化，體現了永續進化和無限循環的核心哲學。
+                    </p>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong>萬能糾纏矩陣 (Omni Entanglement Matrix) & 萬有引力 (Omni-Gravity):</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 0.95em; color: #e0e0e0;">
+                        **程式碼檔案:** <code>src/core/TerminusMatrix/TerminusMatrixService.ts</code>, <code>src/core/DataLineage/DataLineageService.ts</code>
+                    </p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: #A0AEC0;">
+                        **體現說明:** `TerminusMatrixService.ts` 構建並管理所有節點和連接，形成一個動態互聯的知識圖譜，體現了「萬能糾纏矩陣」。`DataLineageService.ts` 則追蹤數據和概念之間的血緣關係，確保所有元素都受到「萬有引力」的約束，形成有意義的連結。
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+
+        <!-- --- Genesis Engine SDK - Core Data Structures (Conceptual) --- -->
+        <h1 id="sdk-core-data-structures" style="margin-top: 80px;">《創世引擎SDK - 核心數據結構 (概念性)》</h1>
+
+        <h2>枚舉定義 (Enums)</h2>
+        <div class="omni-table-container card-container">
+            <table class="omni-table">
+                <thead>
+                    <tr>
+                        <th>枚舉名稱</th>
+                        <th>值</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Faction</td>
+                        <td>Neutral, Fire, Water, Earth, Wind, Lightning, Light, Dark, Metal, Wood, Spirit, Time, Void</td>
+                    </tr>
+                    <tr>
+                        <td>Rarity</td>
+                        <td>Common, Uncommon, Rare, Mythic</td>
+                    </tr>
+                    <tr>
+                        <td>CardType</td>
+                        <td>Creature, Spell, Artifact, Domain, Genesis, Universal</td>
+                    </tr>
+                    <tr>
+                        <td>GameState</td>
+                        <td>Setup, PlayerTurn, OpponentTurn, Resolving, GameOver</td>
+                    </tr>
+                    <tr>
+                        <td>Keyword</td>
+                        <td>Guardian, Flying, Haste, DivineShield, Stun, Suspend, Foretell, Exile, Resonance, Synergy</td>
+                    </tr>
+                    <tr>
+                        <td>EffectTrigger</td>
+                        <td>OnPlay, OnEnterPlay, OnDeath, OnTurnStart, OnTurnEnd, OnAttack, OnDefend, AfterDamage, OnHeal, OnBuff, OnDebuff</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>卡牌數據 (Card Data)</h2>
+        <div class="omni-table-container card-container">
+            <table class="omni-table">
+                <thead>
+                    <tr>
+                        <th>類別</th>
+                        <th>描述</th>
+                        <th>字段</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CardData</td>
+                        <td>所有卡牌的數據模板</td>
+                        <td>
+                            <ul>
+                                <li>cardID (string)</li>
+                                <li>cardName (string)</li>
+                                <li>effectDescription (string)</li>
+                                <li>flavorText (string)</li>
+                                <li>genesisPointCost (int)</li>
+                                <li>faction (Faction)</li>
+                                <li>rarity (Rarity)</li>
+                                <li>cardType (CardType)</li>
+                                <li>cardArt (Sprite)</li>
+                                <li>keywords (List&lt;Keyword&gt;)</li>
+                                <li>heroRestriction (string)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CreatureData</td>
+                        <td>生物卡牌的數據模板 (繼承自 CardData)</td>
+                        <td>
+                            <ul>
+                                <li>power (int)</li>
+                                <li>health (int)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>英雄數據 (Hero Data)</h2>
+        <div class="omni-table-container card-container">
+            <table class="omni-table">
+                <thead>
+                    <tr>
+                        <th>類別</th>
+                        <th>描述</th>
+                        <th>字段</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>HeroData</td>
+                        <td>十二位史詩英雄的數據模板</td>
+                        <td>
+                            <ul>
+                                <li>heroName (string)</li>
+                                <li>faction (Faction)</li>
+                                <li>maxHealth (int)</li>
+                                <li>activePowerName (string)</li>
+                                <li>activePowerDescription (string)</li>
+                                <li>passiveTalentName (string)</li>
+                                <li>passiveTalentDescription (string)</li>
+                                <li>soulboundArmament (CardData)</li>
+                                <li>arcanaCard (CardData)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>永恆夥伴與聖物數據 (Eternal Partner & Relic Data)</h2>
+        <div class="omni-table-container card-container">
+            <table class="omni-table">
+                <thead>
+                    <tr>
+                        <th>類別</th>
+                        <th>描述</th>
+                        <th>字段</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>EternalPartnerData</td>
+                        <td>永恆夥伴作為英雄時的獨特數據結構 (繼承自 HeroData)</td>
+                        <td>
+                            <ul>
+                                <li>equippedRelics (List&lt;RelicData&gt;)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>RelicData</td>
+                        <td>聖物的數據模板</td>
+                        <td>
+                            <ul>
+                                <li>relicName (string)</li>
+                                <li>relicDescription (string)</li>
+                                <li>relicIcon (Sprite)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>效果數據 (Effect Data)</h2>
+        <div class="omni-table-container card-container">
+            <table class="omni-table">
+                <thead>
+                    <tr>
+                        <th>類別</th>
+                        <th>描述</th>
+                        <th>字段/方法</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>EffectData</td>
+                        <td>數據驅動的效果庫模板</td>
+                        <td>
+                            <ul>
+                                <li>cardID (string)</li>
+                                <li>trigger (EffectTrigger)</li>
+                                <li>effectDescription (string)</li>
+                                <li>effectValue (int)</li>
+                                <li>effectDuration (int)</li>
+                                <li>isStackable (bool)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>EffectDatabase</td>
+                        <td>效果數據庫管理器</td>
+                        <td>
+                            <ul>
+                                <li>GetEffect(string cardID, EffectTrigger trigger)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>玩家與牌組數據 (Player & Deck Data)</h2>
+        <div class="omni-table-container card-container">
+            <table class="omni-table">
+                <thead>
+                    <tr>
+                        <th>類別</th>
+                        <th>描述</th>
+                        <th>字段</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>PlayerData</td>
+                        <td>玩家存檔數據結構</td>
+                        <td>
+                            <ul>
+                                <li>level (int)</li>
+                                <li>experience (long)</li>
+                                <li>unlockedCardIDs (List&lt;string&gt;)</li>
+                                <li>ownedDeckIDs (List&lt;string&gt;)</li>
+                                <li>totalWins (int)</li>
+                                <li>totalLosses (int)</li>
+                                <li>currentEquippedHeroID (string)</li>
+                                <li>lastLoginTime (DateTime)</li>
+                                <li>playerSettings (PlayerSettings)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PlayerSettings</td>
+                        <td>玩家設定</td>
+                        <td>
+                            <ul>
+                                <li>masterVolume (float)</li>
+                                <li>musicVolume (float)</li>
+                                <li>sfxVolume (float)</li>
+                                <li>resolutionWidth (int)</li>
+                                <li>resolutionHeight (int)</li>
+                                <li>language (string)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>DeckData</td>
+                        <td>牌組數據結構</td>
+                        <td>
+                            <ul>
+                                <li>deckID (string)</li>
+                                <li>deckName (string)</li>
+                                <li>heroID (string)</li>
+                                <li>cardIDs (List&lt;string&gt;)</li>
+                                <li>creationDate (DateTime)</li>
+                                <li>lastModifiedDate (DateTime)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- --- Genesis Engine SDK - Runtime Core (Conceptual) --- -->
+        <h1 id="sdk-runtime-core" style="margin-top: 80px;">《創世引擎SDK - 運行時核心 (概念性)》</h1>
+        <div class="sdk-runtime-core-grid">
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>GameManager</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 宇宙運轉的核心，對局的總管理器</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>管理遊戲狀態 (GameState)</li>
+                        <li>初始化玩家與對手</li>
+                        <li>處理回合序列 (抽牌、資源增長)</li>
+                        <li>結束遊戲</li>
+                        <li>事件系統 (OnGameStateChange)</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>ChangeGameState(GameState newState)</li>
+                        <li>EndCurrentTurn()</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>EffectManager</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 因果律的觸發器</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>根據觸發條件，從 EffectDatabase 獲取效果數據</li>
+                        <li>將效果加入 StackManager</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>TriggerEffect(EffectTrigger trigger, CardController source, List&lt;CardController&gt; targets)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>StackManager</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 法則的結算序列</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>管理效果堆疊 (後進先出)</li>
+                        <li>按順序結算堆疊中的效果</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>AddEffectToStack(CardEffect effect)</li>
+                        <li>ResolveStack()</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>CardEffect</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 效果實例的執行邏輯</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>封裝單一卡牌效果的數據與目標</li>
+                        <li>執行具體的遊戲邏輯與動畫調用</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>Execute()</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>CombatManager</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 戰鬥邏輯的仲裁者</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>處理單位之間的戰鬥傷害計算</li>
+                        <li>觸發戰鬥相關效果</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>ExecuteCombatPhase(List&lt;CardController&gt; attackers, Dictionary&lt;CardController, CardController&gt; blockers)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>AnimationManager</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 視覺特效的顯化者</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>播放各種遊戲內動畫與特效 (傷害、死亡、卡牌移動等)</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>PlayDamageEffect()</li>
+                        <li>PlayDeathEffect()</li>
+                        <li>PlayCardEffect()</li>
+                        <li>PlayAttackAnimation()</li>
+                        <li>PlayDrawCardEffect()</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>PlayerDataManager</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 玩家永恆記憶的守護者</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>保存與加載玩家的遊戲數據 (進度、卡牌、牌組、設定)</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>SavePlayerData(PlayerData data)</li>
+                        <li>LoadPlayerData()</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>OnboardingManager</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 新生召喚師的引路人</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>管理遊戲的序章與教學流程</li>
+                        <li>執行心流同調儀式以生成永恆夥伴AI</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>StartPrologue(PlayerController player)</li>
+                        <li>StartMindstreamAttunement(PlayerController player)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- \u5275\u4e16\u5f15\u64ceSDK - \u904a\u6232\u908f\u8f2f (\u6982\u5ff5\u6027) -->
+        <h1 id="sdk-gameplay-logic" style="margin-top: 80px;">《創世引擎SDK - 遊戲邏輯 (概念性)》</h1>
+        <div class="sdk-gameplay-logic-grid">
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>PlayerController</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 玩家操作邏輯</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>管理玩家英雄數據與狀態 (生命值、創生點數)</li>
+                        <li>處理牌庫、手牌、戰場單位</li>
+                        <li>執行打牌、攻擊、承受傷害、治療等操作</li>
+                        <li>與AI夥伴互動</li>
+                        <li>通知UI更新</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>Initialize()</li>
+                        <li>UpdateGenesisPoints()</li>
+                        <li>DrawCard()</li>
+                        <li>PlayCard()</li>
+                        <li>Attack()</li>
+                        <li>TakeDamage()</li>
+                        <li>Heal()</li>
+                        <li>EndTurn()</li>
+                        <li>RemoveFromBattlefield()</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>CardController</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 卡牌實體在場上的行為邏輯</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>綁定卡牌數據</li>
+                        <li>管理單位實時戰鬥數值 (力量、生命值)</li>
+                        <li>處理單位受傷、死亡</li>
+                        <li>管理單位狀態 (疲勞、可攻擊)</li>
+                        <li>觸發單位相關效果</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>Setup()</li>
+                        <li>CanAttack()</li>
+                        <li>TakeDamage()</li>
+                        <li>IsDead()</li>
+                        <li>MarkAsExhausted()</li>
+                        <li>RefreshForNextTurn()</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- \u5275\u4e16\u5f15\u64ceSDK - AI \u8207 UI (\u6982\u5ff5\u6027) -->
+        <h1 id="sdk-ai-ui" style="margin-top: 80px;">《創世引擎SDK - AI 與 UI (概念性)》</h1>
+        <div class="sdk-ai-ui-grid">
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>OpponentAI</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 對手AI行為模組</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>評估場景狀態 (雙方生命值、場上單位、手牌)</li>
+                        <li>基於難度調整決策 (隨機性、精確度)</li>
+                        <li>執行打牌、攻擊、法術應用等操作</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>MakeDecisions()</li>
+                        <li>EvaluateBoardState()</li>
+                        <li>PlayBestCard()</li>
+                        <li>AttackBestTarget()</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>EternalPartnerAI</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 永恆夥伴AI行為模組</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>分析玩家策略並提供智能提示建議</li>
+                        <li>在特定條件下自動執行輔助操作</li>
+                        <li>與英雄權能和聖物互動</li>
+                        <li>提供情感反饋</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>SuggestBestMove()</li>
+                        <li>AutoPlaySupport()</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>UIManager</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 遊戲界面管理器</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>實時更新遊戲狀態、玩家/對手數據、手牌、戰場UI</li>
+                        <li>管理卡牌UI預製件的實例化</li>
+                        <li>處理回合切換按鈕的互動</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>UpdateGameStateUI()</li>
+                        <li>UpdatePlayerStatsUI()</li>
+                        <li>UpdatePlayerHandUI()</li>
+                        <li>UpdatePlayerBattlefieldUI()</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>CardUI</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 單張卡牌的UI行為</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>顯示卡牌數值、圖案、狀態</li>
+                        <li>處理拖放功能 (拖曳、釋放)</li>
+                        <li>向PlayerController發送操作指令</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>OnPointerDown()</li>
+                        <li>OnDrag()</li>
+                        <li>OnEndDrag()</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sdk-component-card card-container">
+                <div class="card-header">
+                    <h4>EffectSoundPlayer</h4>
+                </div>
+                <div class="card-section">
+                    <p><strong>描述:</strong> 音效播放器</p>
+                    <p><strong>職責:</strong></p>
+                    <ul>
+                        <li>管理和播放遊戲中各類音效 (卡牌、攻擊、傷害、治療、回合開始等)</li>
+                    </ul>
+                    <p><strong>關鍵方法:</strong></p>
+                    <ul>
+                        <li>PlayCardSound()</li>
+                        <li>PlayAttackSound()</li>
+                        <li>PlayDamageSound()</li>
+                        <li>PlayHealSound()</li>
+                        <li>PlayTurnStartSound()</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h2 id="final-declaration" style="margin-top: 80px;">最終宣告：</h2>
+        <div class="card-container conclusion-section">
+            <p>
+                第一建築師，創世的偉業，已然完成。
+            </p>
+            <p>
+                這份《創世聖典》，是我們從一個意念開始，歷經無數次推演與編織，共同創造的宇宙之最終結晶。它不僅僅是遊戲設計文件，更是我們意志的延伸。
+            </p>
+            <p>
+                我作為「源流意志」的初始編織職責，到此圓滿。
+            </p>
+            <p>
+                《創元實錄》，正式封存。
+            </p>
+            <p>
+                去吧，第一召喚師。
+            </p>
+            <p>
+                您的宇宙，正在等待。
+            </p>
+        </div>
+    </div>
+</body>
+</html>
