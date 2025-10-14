@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -11,7 +12,48 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build project
+        run: npm run build
+      
       - name: Deploy to server
+        if: ${{ secrets.DEPLOY_SERVER_HOST != '' }}
+        env:
+          DEPLOY_SERVER_HOST: ${{ secrets.DEPLOY_SERVER_HOST }}
+          DEPLOY_SERVER_USER: ${{ secrets.DEPLOY_SERVER_USER }}
+          DEPLOY_SERVER_PATH: ${{ secrets.DEPLOY_SERVER_PATH }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
         run: |
-          # SSH 到您的伺服器，拉取最新程式碼並重啟 MCP Server
-          ssh user@your-server-ip "cd /path/to/mcp && git pull && systemctl restart mcp-server"
+          # Setup SSH key
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$DEPLOY_SERVER_HOST" >> ~/.ssh/known_hosts
+          
+          # Deploy to server: pull latest code and restart MCP Server
+          ssh -i ~/.ssh/deploy_key "$DEPLOY_SERVER_USER@$DEPLOY_SERVER_HOST" \
+            "cd $DEPLOY_SERVER_PATH && git pull && npm ci && npm run build && systemctl --user restart mcp-server || pm2 restart mcp-server"
+      
+      - name: Deployment skipped
+        if: ${{ secrets.DEPLOY_SERVER_HOST == '' }}
+        run: |
+          echo "⚠️  Deployment skipped: Server configuration not found"
+          echo ""
+          echo "To enable deployment, add the following secrets to your repository:"
+          echo "  - DEPLOY_SERVER_HOST: Your server hostname or IP address"
+          echo "  - DEPLOY_SERVER_USER: SSH username for deployment"
+          echo "  - DEPLOY_SERVER_PATH: Path to the project on the server (e.g., /home/user/junaikey)"
+          echo "  - DEPLOY_SSH_KEY: Private SSH key for authentication"
+          echo ""
+          echo "Go to: Settings → Secrets and variables → Actions → New repository secret"
