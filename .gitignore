@@ -13,3 +13,7 @@
 # Temporary files
 temp_banner.svg
 *.tmp
+
+# Inheritance system generated files
+.junaikey-inherit.json
+junaikey-inheritance-report.md
