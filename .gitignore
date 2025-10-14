@@ -13,3 +13,10 @@
 # Temporary files
 temp_banner.svg
 *.tmp
+
+# Prevent junaikey_ prefixed directories (temporary/backup directories)
+junaikey_*/
+
+# IDE and OS files
+.vscode/
+.idea/
