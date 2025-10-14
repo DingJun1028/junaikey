@@ -1,5 +1,5 @@
 import React from 'react';
-import { CosmicGenerator } from '../omni-cosmic-universe';
+import { CosmicGenerator } from './omni-cosmic-universe';
 
 function App() {
   return (
