@@ -1,0 +1,74 @@
+{
+  "version": "1.0.0",
+  "source": {
+    "repository": "DingJun1028/junaikey",
+    "branch": "main",
+    "modules": [
+      {
+        "name": "sync-matrix",
+        "path": "src/integration/DualDevelopmentManager.ts",
+        "enabled": true,
+        "customization": {
+          "rename": "SyncManager",
+          "namespace": "MyApp.Sync",
+          "targetPath": "src/core/sync"
+        },
+        "dependencies": [
+          "logger",
+          "eventBus"
+        ]
+      },
+      {
+        "name": "ai-integration",
+        "path": "src/integration/JulesAPIIntegration.ts",
+        "enabled": false,
+        "dependencies": [
+          "sync-matrix",
+          "logger"
+        ]
+      },
+      {
+        "name": "best-practices",
+        "path": "JUNAIKEY_BEST_PRACTICES.md",
+        "enabled": true,
+        "customization": {
+          "targetPath": "docs/best-practices"
+        }
+      }
+    ]
+  },
+  "target": {
+    "framework": "react",
+    "typescript": true,
+    "styleGuide": "airbnb",
+    "testFramework": "jest",
+    "packageManager": "npm",
+    "sourcePath": "src"
+  },
+  "inheritance": {
+    "mode": "selective",
+    "conflictResolution": "prompt",
+    "preserveComments": true,
+    "adaptNaming": true,
+    "generateTests": true,
+    "namespacePrefix": "",
+    "createBackup": true
+  },
+  "documentation": {
+    "includeOriginal": true,
+    "generateAdaptationGuide": true,
+    "updateReadme": true,
+    "docPath": "docs/junaikey-inherited"
+  },
+  "validation": {
+    "runBuild": true,
+    "runTests": true,
+    "runLint": true
+  },
+  "hooks": {
+    "beforeInherit": "echo 'Starting inheritance process...'",
+    "afterInherit": "echo 'Inheritance completed!'",
+    "beforeValidation": "npm install",
+    "afterValidation": "echo 'Validation completed!'"
+  }
+}
