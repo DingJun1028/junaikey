@@ -472,6 +472,88 @@ npm run sync
 
 ---
 
+## 🚢 生產環境部署 (Production Deployment)
+
+JunAiKey 支援自動化部署到 Linux 伺服器，實現一鍵從 GitHub 部署到生產環境。
+
+### 📦 部署方式
+
+#### 方式 1: 自動部署到 Linux 伺服器
+
+每次推送到 `main` 分支，GitHub Actions 會自動：
+- 📥 拉取最新代碼
+- 🏗️ 構建項目
+- 🔄 重啟 MCP Server 服務（`systemctl restart mcp-server`）
+
+**快速設置**:
+
+1. 在伺服器上執行一鍵設置腳本：
+   ```bash
+   bash <(curl -s https://raw.githubusercontent.com/DingJun1028/junaikey/main/deployment/setup-server.sh)
+   ```
+
+2. 配置 GitHub Secrets（必需）：
+   - `SSH_PRIVATE_KEY` - SSH 私鑰
+   - `SERVER_IP` - 伺服器 IP
+   - `SERVER_USER` - SSH 用戶名
+   - `SERVER_PATH` - 部署路徑（可選，預設 `/opt/junaikey`）
+
+3. 推送到 `main` 分支即可自動部署！
+
+**詳細文檔**:
+- 📖 [完整部署指南](./deployment/README.md) - 詳細的伺服器設置和部署流程
+- 🔐 [GitHub Secrets 配置](./deployment/SECRETS.md) - 完整的 Secrets 設置教程
+
+**部署腳本**:
+- `deployment/setup-server.sh` - 一鍵伺服器設置
+- `deployment/backup.sh` - 自動備份腳本
+- `deployment/health-check.sh` - 健康檢查
+- `deployment/rollback.sh` - 回滾到舊版本
+- `deployment/mcp-server.service` - systemd 服務配置
+
+#### 方式 2: Docker 部署（即將推出）
+
+```bash
+docker pull junaikey/mcp-server:latest
+docker run -d -p 3000:3000 junaikey/mcp-server
+```
+
+#### 方式 3: Vercel/Supabase 無伺服器部署
+
+```bash
+# 使用提供的部署腳本
+./deploy-vercel-supabase.ps1
+```
+
+### 🔧 部署管理命令
+
+```bash
+# 查看服務狀態
+sudo systemctl status mcp-server
+
+# 查看實時日誌
+sudo journalctl -u mcp-server -f
+
+# 健康檢查
+bash deployment/health-check.sh
+
+# 手動備份
+bash deployment/backup.sh
+
+# 回滾到上一版本
+bash deployment/rollback.sh junaikey_20240101_120000
+```
+
+### 🛡️ 安全特性
+
+- ✅ SSH 金鑰認證（無密碼登入）
+- ✅ 最小權限原則（限制 sudo 命令）
+- ✅ systemd 服務隔離
+- ✅ 自動備份機制
+- ✅ 健康檢查和監控
+
+---
+
 ## 🧠 Favorite JSON 結構範例
 
 ```json
