@@ -378,6 +378,68 @@ describe('JunAiKey MCP Tools', () => {
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [Node.js Documentation](https://nodejs.org/docs/)
 
+## Repository Inheritance (倉庫技術繼承)
+
+JunAiKey provides a comprehensive repository inheritance system that allows you to seamlessly integrate its technologies, architectures, and best practices into your projects.
+
+### Quick Start
+
+```bash
+# Method 1: Add as submodule
+git submodule add https://github.com/DingJun1028/junaikey.git .junaikey
+
+# Method 2: Clone and run inheritance script
+git clone https://github.com/DingJun1028/junaikey.git .junaikey
+node .junaikey/scripts/inherit-repository.js --mode=selective
+
+# Method 3: Copy specific documentation
+mkdir -p docs/junaikey-inherited
+cp .junaikey/JUNAIKEY_BEST_PRACTICES.md docs/junaikey-inherited/
+cp .junaikey/REPOSITORY_INHERITANCE.md docs/junaikey-inherited/
+```
+
+### Inheritance Modes
+
+1. **Full Inheritance** - All modules and documentation
+2. **Selective Inheritance** - Choose specific modules via configuration
+3. **Documentation Only** - Only best practices and guides
+
+### Configuration Example
+
+Create `.junaikey-inherit.json`:
+
+```json
+{
+  "version": "1.0.0",
+  "source": {
+    "repository": "DingJun1028/junaikey",
+    "branch": "main",
+    "modules": [
+      {
+        "name": "best-practices",
+        "path": "JUNAIKEY_BEST_PRACTICES.md",
+        "enabled": true
+      }
+    ]
+  },
+  "target": {
+    "framework": "react",
+    "typescript": true,
+    "packageManager": "npm"
+  },
+  "inheritance": {
+    "mode": "selective",
+    "conflictResolution": "prompt"
+  }
+}
+```
+
+### Comprehensive Documentation
+
+For complete inheritance system documentation, see:
+- [REPOSITORY_INHERITANCE.md](./REPOSITORY_INHERITANCE.md) - Complete inheritance system guide
+- [TECH_SYNC_MANIFEST.md](./TECH_SYNC_MANIFEST.md) - Detailed module catalog
+
 ## License
 
 MIT License - See LICENSE file for details

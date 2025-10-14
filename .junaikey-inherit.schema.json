@@ -1,0 +1,244 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JunAiKey Inheritance Configuration",
+  "description": "配置文件用於指定如何繼承 JunAiKey 技術到目標倉庫",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "配置文件版本",
+      "default": "1.0.0"
+    },
+    "source": {
+      "type": "object",
+      "description": "源倉庫配置",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "description": "源倉庫名稱",
+          "default": "DingJun1028/junaikey"
+        },
+        "branch": {
+          "type": "string",
+          "description": "源分支名稱",
+          "default": "main"
+        },
+        "modules": {
+          "type": "array",
+          "description": "要繼承的模組列表",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "模組名稱",
+                "enum": [
+                  "sync-matrix",
+                  "ai-integration",
+                  "cosmic-universe",
+                  "best-practices",
+                  "architecture-patterns",
+                  "rune-system",
+                  "agent-cluster",
+                  "knowledge-base",
+                  "aitable-service",
+                  "element-spirit"
+                ]
+              },
+              "path": {
+                "type": "string",
+                "description": "模組在源倉庫中的路徑"
+              },
+              "enabled": {
+                "type": "boolean",
+                "description": "是否啟用此模組",
+                "default": true
+              },
+              "customization": {
+                "type": "object",
+                "description": "自定義配置",
+                "properties": {
+                  "rename": {
+                    "type": "string",
+                    "description": "重命名模組"
+                  },
+                  "namespace": {
+                    "type": "string",
+                    "description": "命名空間"
+                  },
+                  "targetPath": {
+                    "type": "string",
+                    "description": "目標路徑"
+                  }
+                }
+              },
+              "dependencies": {
+                "type": "array",
+                "description": "模組依賴",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": ["name", "enabled"]
+          }
+        }
+      },
+      "required": ["repository", "branch", "modules"]
+    },
+    "target": {
+      "type": "object",
+      "description": "目標倉庫配置",
+      "properties": {
+        "framework": {
+          "type": "string",
+          "description": "目標框架",
+          "enum": ["react", "vue", "angular", "svelte", "node", "express", "nextjs", "nuxt", "other"]
+        },
+        "typescript": {
+          "type": "boolean",
+          "description": "是否使用 TypeScript",
+          "default": true
+        },
+        "styleGuide": {
+          "type": "string",
+          "description": "代碼風格指南",
+          "enum": ["airbnb", "standard", "google", "prettier", "custom"],
+          "default": "airbnb"
+        },
+        "testFramework": {
+          "type": "string",
+          "description": "測試框架",
+          "enum": ["jest", "vitest", "mocha", "jasmine", "none"],
+          "default": "jest"
+        },
+        "packageManager": {
+          "type": "string",
+          "description": "包管理器",
+          "enum": ["npm", "yarn", "pnpm", "bun"],
+          "default": "npm"
+        },
+        "sourcePath": {
+          "type": "string",
+          "description": "源代碼路徑",
+          "default": "src"
+        }
+      },
+      "required": ["framework", "typescript"]
+    },
+    "inheritance": {
+      "type": "object",
+      "description": "繼承行為配置",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "繼承模式",
+          "enum": ["full", "selective", "documentation-only"],
+          "default": "selective"
+        },
+        "conflictResolution": {
+          "type": "string",
+          "description": "衝突解決策略",
+          "enum": ["prompt", "skip", "overwrite", "merge", "rename"],
+          "default": "prompt"
+        },
+        "preserveComments": {
+          "type": "boolean",
+          "description": "是否保留註釋",
+          "default": true
+        },
+        "adaptNaming": {
+          "type": "boolean",
+          "description": "是否適配命名風格",
+          "default": true
+        },
+        "generateTests": {
+          "type": "boolean",
+          "description": "是否生成測試",
+          "default": true
+        },
+        "namespacePrefix": {
+          "type": "string",
+          "description": "命名空間前綴",
+          "default": ""
+        },
+        "createBackup": {
+          "type": "boolean",
+          "description": "執行前是否創建備份",
+          "default": true
+        }
+      }
+    },
+    "documentation": {
+      "type": "object",
+      "description": "文檔相關配置",
+      "properties": {
+        "includeOriginal": {
+          "type": "boolean",
+          "description": "是否包含原始文檔",
+          "default": true
+        },
+        "generateAdaptationGuide": {
+          "type": "boolean",
+          "description": "是否生成適配指南",
+          "default": true
+        },
+        "updateReadme": {
+          "type": "boolean",
+          "description": "是否更新 README",
+          "default": true
+        },
+        "docPath": {
+          "type": "string",
+          "description": "文檔路徑",
+          "default": "docs/junaikey-inherited"
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "description": "驗證配置",
+      "properties": {
+        "runBuild": {
+          "type": "boolean",
+          "description": "繼承後是否運行構建",
+          "default": true
+        },
+        "runTests": {
+          "type": "boolean",
+          "description": "繼承後是否運行測試",
+          "default": true
+        },
+        "runLint": {
+          "type": "boolean",
+          "description": "繼承後是否運行 lint",
+          "default": true
+        }
+      }
+    },
+    "hooks": {
+      "type": "object",
+      "description": "鉤子腳本",
+      "properties": {
+        "beforeInherit": {
+          "type": "string",
+          "description": "繼承前執行的命令"
+        },
+        "afterInherit": {
+          "type": "string",
+          "description": "繼承後執行的命令"
+        },
+        "beforeValidation": {
+          "type": "string",
+          "description": "驗證前執行的命令"
+        },
+        "afterValidation": {
+          "type": "string",
+          "description": "驗證後執行的命令"
+        }
+      }
+    }
+  },
+  "required": ["version", "source", "target", "inheritance"]
+}
