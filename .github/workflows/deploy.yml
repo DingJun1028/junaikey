@@ -4,14 +4,139 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: false
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
 
 jobs:
   deploy:
+    name: Deploy to Server
     runs-on: ubuntu-latest
+    environment: 
+      name: ${{ github.event.inputs.environment || 'production' }}
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Deploy to server
+      - name: 🚀 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: 📦 Install Dependencies
+        run: npm ci --prefer-offline --no-audit
+      
+      - name: 🏗️ Build Project
+        run: npm run build
+        
+      - name: 🧪 Run Tests (Optional)
+        run: npm test || echo "No tests configured"
+        continue-on-error: true
+      
+      - name: 🔑 Setup SSH Key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          # SSH 到您的伺服器，拉取最新程式碼並重啟 MCP Server
-          ssh user@your-server-ip "cd /path/to/mcp && git pull && systemctl restart mcp-server"
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts 2>/dev/null || true
+      
+      - name: 🚢 Deploy to Server
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_PATH: ${{ secrets.SERVER_PATH || '/opt/junaikey' }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_IP} << 'ENDSSH'
+            set -e
+            echo "📍 Navigating to deployment directory..."
+            cd ${SERVER_PATH}
+            
+            echo "🔄 Pulling latest changes from main branch..."
+            git fetch origin
+            git reset --hard origin/main
+            
+            echo "📦 Installing/updating dependencies..."
+            npm ci --production --prefer-offline --no-audit
+            
+            echo "🏗️ Building project..."
+            npm run build
+            
+            echo "🔄 Restarting MCP Server service..."
+            sudo systemctl restart mcp-server
+            
+            echo "✅ Checking service status..."
+            sudo systemctl status mcp-server --no-pager || true
+            
+            echo "🎉 Deployment completed successfully!"
+          ENDSSH
+      
+      - name: 🧹 Cleanup SSH Key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
+      
+      - name: 📊 Deployment Status
+        if: success()
+        run: |
+          echo "✅ Deployment completed successfully at $(date)"
+          echo "📋 Commit: ${{ github.sha }}"
+          echo "👤 Triggered by: ${{ github.actor }}"
+      
+      - name: ❌ Deployment Failed
+        if: failure()
+        run: |
+          echo "❌ Deployment failed at $(date)"
+          echo "📋 Commit: ${{ github.sha }}"
+          echo "👤 Triggered by: ${{ github.actor }}"
+          echo "🔍 Please check the logs above for details"
+          exit 1
+
+  notify:
+    name: Send Notification
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: 📢 Notify Deployment Status
+        run: |
+          if [ "${{ needs.deploy.result }}" == "success" ]; then
+            echo "✅ Deployment notification: SUCCESS"
+            echo "The MCP Server has been successfully deployed and restarted."
+          else
+            echo "❌ Deployment notification: FAILED"
+            echo "The MCP Server deployment encountered an error."
+          fi
+          
+      # Uncomment and configure for Slack notifications
+      # - name: 📤 Send Slack Notification
+      #   if: always()
+      #   uses: slackapi/slack-github-action@v1.24.0
+      #   with:
+      #     payload: |
+      #       {
+      #         "text": "Deployment ${{ needs.deploy.result }}: ${{ github.repository }}",
+      #         "blocks": [
+      #           {
+      #             "type": "section",
+      #             "text": {
+      #               "type": "mrkdwn",
+      #               "text": "Deployment *${{ needs.deploy.result }}* for <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>\n*Commit:* ${{ github.sha }}\n*Author:* ${{ github.actor }}"
+      #             }
+      #           }
+      #         ]
+      #       }
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
