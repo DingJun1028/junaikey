@@ -7,6 +7,7 @@
 
 import { useState, useEffect, useReducer, useRef } from 'react';
 import * as d3 from 'd3';
+import { TagPanel } from '../components/TagPanel';
 
 // === 類型定義：符合四大宇宙公理 ===
 type CardType = 'EVENT' | 'PROBLEM' | 'SOLUTION' | 'ARTIFACT' | 'UNIT' | 'PLANESWALKER';
@@ -127,6 +128,11 @@ export const CosmicGenerator: React.FC = () => {
           <ConceptualPane state={state} />
           <ExecutionPane state={state} dispatch={dispatch} />
           <DataPane state={state} />
+        </div>
+        
+        {/* 萬能標籤系統面板 */}
+        <div className="mt-6">
+          <TagPanel serverUrl="http://localhost:3002" />
         </div>
         
         {/* 萬能同心圓可視化 */}
