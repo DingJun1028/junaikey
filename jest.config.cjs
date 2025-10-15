@@ -5,14 +5,15 @@ module.exports = {
   testMatch: [
     '**/__tests__/**/*.ts',
     '**/?(*.)+(spec|test).ts',
-    '**/?(*.)+(spec|test).js'
+    '**/?(*.)+(spec|test).js',
+    '**/?(*.)+(spec|test).cjs'
   ],
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
   collectCoverageFrom: [
     'src/**/*.ts',
-    'server.js',
+    'server.cjs',
     '!src/**/*.d.ts',
     '!src/**/*.test.ts',
     '!src/**/*.spec.ts',
