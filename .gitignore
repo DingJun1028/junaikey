@@ -14,6 +14,10 @@
 temp_banner.svg
 *.tmp
 
+# Database files
+/data/*.db
+/data/*.db-*
+
 # Inheritance system generated files
 .junaikey-inherit.json
 junaikey-inheritance-report.md
