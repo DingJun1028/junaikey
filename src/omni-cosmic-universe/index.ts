@@ -4,6 +4,7 @@
  */
 
 export { OmniCosmicUniverse } from './OmniCosmicUniverse';
+export { CosmicGenerator } from './index.tsx';
 
 // 重新匯出類型定義
 export type {
