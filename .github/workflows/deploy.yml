@@ -16,8 +16,98 @@ on:
           - staging
 
 jobs:
+  validate:
+    name: Validate Before Deploy
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 🚀 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: 🔍 Validate Secrets
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+        run: |
+          echo "🔍 Validating required secrets..."
+          
+          # Check SSH_PRIVATE_KEY
+          if [ -z "$SSH_PRIVATE_KEY" ]; then
+            echo "❌ SSH_PRIVATE_KEY is not set"
+            exit 1
+          fi
+          
+          if ! echo "$SSH_PRIVATE_KEY" | grep -q "BEGIN.*PRIVATE KEY"; then
+            echo "❌ SSH_PRIVATE_KEY format is invalid"
+            exit 1
+          fi
+          
+          # Check SERVER_IP
+          if [ -z "$SERVER_IP" ]; then
+            echo "❌ SERVER_IP is not set"
+            exit 1
+          fi
+          
+          # Check SERVER_USER
+          if [ -z "$SERVER_USER" ]; then
+            echo "❌ SERVER_USER is not set"
+            exit 1
+          fi
+          
+          echo "✅ All required secrets are validated"
+      
+      - name: 📦 Install Dependencies
+        run: npm ci --prefer-offline --no-audit
+      
+      - name: 🔍 Check for Missing Dependencies
+        run: |
+          echo "🔍 Checking for missing dependencies..."
+          
+          # Install depcheck if not already installed
+          if ! command -v depcheck &> /dev/null; then
+            npm install -g depcheck
+          fi
+          
+          # Run depcheck (allow it to fail without stopping the workflow)
+          depcheck --json > depcheck-report.json || true
+          
+          # Check if there are any missing dependencies
+          if [ -f depcheck-report.json ]; then
+            MISSING=$(cat depcheck-report.json | grep -o '"missing":{[^}]*}' || echo "")
+            if [ -n "$MISSING" ] && [ "$MISSING" != '"missing":{}' ]; then
+              echo "⚠️ Warning: Found missing dependencies:"
+              cat depcheck-report.json | grep -A 20 '"missing"'
+            else
+              echo "✅ No missing dependencies found"
+            fi
+          fi
+      
+      - name: 🏗️ Build Project
+        run: npm run build
+      
+      - name: 🧪 Run Tests
+        run: npm test || echo "⚠️ No tests configured or tests failed"
+        continue-on-error: true
+      
+      - name: 📊 Validation Summary
+        run: |
+          echo "✅ Validation completed successfully!"
+          echo "📦 Dependencies installed and checked"
+          echo "🏗️ Build completed without errors"
+          echo "✅ Ready for deployment"
+
   deploy:
     name: Deploy to Server
+    needs: validate
     runs-on: ubuntu-latest
     environment: 
       name: ${{ github.event.inputs.environment || 'production' }}
@@ -39,10 +129,6 @@ jobs:
       
       - name: 🏗️ Build Project
         run: npm run build
-        
-      - name: 🧪 Run Tests (Optional)
-        run: npm test || echo "No tests configured"
-        continue-on-error: true
       
       - name: 🔑 Setup SSH Key
         env:
@@ -53,7 +139,44 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts 2>/dev/null || true
       
+      - name: 🔍 Test SSH Connection
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+        run: |
+          echo "🔍 Testing SSH connection..."
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
+            -o ConnectTimeout=10 \
+            ${SERVER_USER}@${SERVER_IP} "echo '✅ SSH connection successful'"
+      
+      - name: 📦 Create Backup on Server
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_PATH: ${{ secrets.SERVER_PATH || '/opt/junaikey' }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_IP} << 'ENDSSH'
+            set -e
+            
+            # Create backup directory with timestamp
+            BACKUP_DIR="${SERVER_PATH}_backup_$(date +%Y%m%d_%H%M%S)"
+            
+            if [ -d "${SERVER_PATH}" ]; then
+              echo "📦 Creating backup at $BACKUP_DIR"
+              cp -r ${SERVER_PATH} $BACKUP_DIR
+              
+              # Keep only the last 5 backups
+              echo "🧹 Cleaning up old backups..."
+              ls -dt ${SERVER_PATH}_backup_* 2>/dev/null | tail -n +6 | xargs rm -rf || true
+              
+              echo "✅ Backup created successfully"
+            else
+              echo "⚠️ No existing deployment found, skipping backup"
+            fi
+          ENDSSH
+      
       - name: 🚢 Deploy to Server
+        id: deploy
         env:
           SERVER_IP: ${{ secrets.SERVER_IP }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
@@ -77,10 +200,50 @@ jobs:
             echo "🔄 Restarting MCP Server service..."
             sudo systemctl restart mcp-server
             
+            echo "⏳ Waiting for service to start..."
+            sleep 3
+            
             echo "✅ Checking service status..."
-            sudo systemctl status mcp-server --no-pager || true
+            if sudo systemctl is-active --quiet mcp-server; then
+              echo "✅ Service is running"
+              sudo systemctl status mcp-server --no-pager || true
+            else
+              echo "❌ Service failed to start"
+              sudo systemctl status mcp-server --no-pager || true
+              exit 1
+            fi
             
             echo "🎉 Deployment completed successfully!"
+          ENDSSH
+      
+      - name: 🔄 Rollback on Failure
+        if: failure() && steps.deploy.outcome == 'failure'
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_PATH: ${{ secrets.SERVER_PATH || '/opt/junaikey' }}
+        run: |
+          echo "🔄 Deployment failed, attempting rollback..."
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_IP} << 'ENDSSH'
+            # Find the latest backup
+            LATEST_BACKUP=$(ls -dt ${SERVER_PATH}_backup_* 2>/dev/null | head -n 1)
+            
+            if [ -n "$LATEST_BACKUP" ] && [ -d "$LATEST_BACKUP" ]; then
+              echo "🔄 Rolling back to $LATEST_BACKUP"
+              
+              # Remove failed deployment
+              rm -rf ${SERVER_PATH}
+              
+              # Restore from backup
+              cp -r $LATEST_BACKUP ${SERVER_PATH}
+              
+              # Restart service
+              sudo systemctl restart mcp-server
+              
+              echo "✅ Rollback completed"
+            else
+              echo "⚠️ No backup found, cannot rollback"
+            fi
           ENDSSH
       
       - name: 🧹 Cleanup SSH Key
