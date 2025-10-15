@@ -31,6 +31,12 @@
    - 安全最佳實踐
    - 常見問題解答
 
+5. **[部署最佳實踐](DEPLOYMENT_BEST_PRACTICES.md)** 🆕
+   - 防止部署失敗指南
+   - 常見錯誤解決方案
+   - 工作流程優化
+   - 部署前檢查清單
+
 ## 📂 文件結構
 
 ```
@@ -40,6 +46,7 @@ deployment/
 ├── 📖 README.md                     # 詳細部署指南
 ├── 🔐 SECRETS.md                    # GitHub Secrets 配置
 ├── 📋 QUICKREF.md                   # 快速參考卡
+├── 🛡️ DEPLOYMENT_BEST_PRACTICES.md  # 部署最佳實踐（新）
 │
 ├── 🔧 setup-server.sh               # 一鍵伺服器設置腳本
 ├── 💾 backup.sh                     # 備份腳本
@@ -81,9 +88,10 @@ deployment/
 
 ### 首次部署
 
-1. [完整設置指南](COMPLETE_SETUP_GUIDE.md) - 了解整體流程
-2. [GitHub Secrets 配置](SECRETS.md) - 配置認證信息
-3. [快速參考卡](QUICKREF.md) - 保存常用命令
+1. [部署最佳實踐](DEPLOYMENT_BEST_PRACTICES.md) - **先看這個！防止部署失敗**
+2. [完整設置指南](COMPLETE_SETUP_GUIDE.md) - 了解整體流程
+3. [GitHub Secrets 配置](SECRETS.md) - 配置認證信息
+4. [快速參考卡](QUICKREF.md) - 保存常用命令
 
 ### 日常運維
 
@@ -100,12 +108,36 @@ deployment/
 ### 我想...
 
 - **首次部署** → [完整設置指南](COMPLETE_SETUP_GUIDE.md)
+- **防止部署失敗** → [部署最佳實踐](DEPLOYMENT_BEST_PRACTICES.md) ⭐ **推薦**
 - **查看命令** → [快速參考卡](QUICKREF.md)
 - **設置 SSH** → [Secrets 配置](SECRETS.md)
-- **解決錯誤** → [部署指南 - 故障排除](README.md#-故障排除)
+- **解決部署錯誤** → [部署最佳實踐 - 常見失敗原因](DEPLOYMENT_BEST_PRACTICES.md#-常見部署失敗原因)
 - **配置備份** → [部署指南 - 進階配置](README.md#-進階配置)
 - **多環境部署** → [部署指南 - 多環境部署](README.md#6️⃣-多環境部署)
 - **安全加固** → [Secrets 配置 - 安全最佳實踐](SECRETS.md#-安全最佳實踐)
+
+## 🚨 部署失敗？快速診斷
+
+如果您的部署失敗了，按以下順序檢查：
+
+1. **[檢查構建錯誤](DEPLOYMENT_BEST_PRACTICES.md#1-構建失敗-80-的部署失敗)** - 最常見的原因
+   - 缺少依賴項
+   - 導入路徑錯誤
+   - TypeScript 類型錯誤
+
+2. **[檢查 SSH 連接](DEPLOYMENT_BEST_PRACTICES.md#2-ssh-連接失敗-15-的部署失敗)** - 第二常見
+   - SSH 金鑰配置
+   - 伺服器連接問題
+
+3. **[檢查環境變數](DEPLOYMENT_BEST_PRACTICES.md#3-環境變數未設置-3-的部署失敗)** - 配置問題
+   - Secrets 未設置
+   - 環境變數錯誤
+
+4. **[檢查權限](DEPLOYMENT_BEST_PRACTICES.md#4-伺服器權限問題-2-的部署失敗)** - 權限問題
+   - sudo 配置
+   - 文件權限
+
+完整的故障排除指南請參考：[部署最佳實踐指南](DEPLOYMENT_BEST_PRACTICES.md)
 
 ## 🛠️ 部署腳本說明
 
