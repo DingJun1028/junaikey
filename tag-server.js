@@ -368,8 +368,8 @@ function dailyWeightDecay() {
 }
 
 // 每24小時執行一次權重衰減
-const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
-setInterval(dailyWeightDecay, TWENTY_FOUR_HOURS);
+const twentyFourHours = 24 * 60 * 60 * 1000;
+setInterval(dailyWeightDecay, twentyFourHours);
 
 // 服務器啟動時執行一次
 dailyWeightDecay();
