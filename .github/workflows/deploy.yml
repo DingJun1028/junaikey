@@ -77,10 +77,10 @@ jobs:
           
           # Check if there are any missing dependencies
           if [ -f depcheck-report.json ]; then
-            MISSING=$(cat depcheck-report.json | grep -o '"missing":{[^}]*}' || echo "")
-            if [ -n "$MISSING" ] && [ "$MISSING" != '"missing":{}' ]; then
+            MISSING_COUNT=$(jq '.missing | length' depcheck-report.json)
+            if [ "$MISSING_COUNT" -gt 0 ]; then
               echo "⚠️ Warning: Found missing dependencies:"
-              cat depcheck-report.json | grep -A 20 '"missing"'
+              jq '.missing' depcheck-report.json
             else
               echo "✅ No missing dependencies found"
             fi
