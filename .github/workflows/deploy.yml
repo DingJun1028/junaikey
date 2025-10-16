@@ -90,8 +90,7 @@ jobs:
         run: npm run build
       
       - name: 🧪 Run Tests
-        run: npm test || echo "⚠️ No tests configured or tests failed"
-        continue-on-error: true
+        run: npm test
       
       - name: 📊 Validation Summary
         run: |
