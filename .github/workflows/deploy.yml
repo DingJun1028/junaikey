@@ -72,13 +72,8 @@ jobs:
         run: |
           echo "🔍 Checking for missing dependencies..."
           
-          # Install depcheck if not already installed
-          if ! command -v depcheck &> /dev/null; then
-            npm install -g depcheck
-          fi
-          
           # Run depcheck (allow it to fail without stopping the workflow)
-          depcheck --json > depcheck-report.json || true
+          npx depcheck --json > depcheck-report.json || true
           
           # Check if there are any missing dependencies
           if [ -f depcheck-report.json ]; then
