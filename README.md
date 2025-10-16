@@ -124,11 +124,50 @@ cd junaikey
 npm install
 
 # 3. 設置環境變數
-cp .env.example .env.local
-# 編輯 .env.local，填入您的 API 金鑰
+# 複製範例環境變數檔案
+cp .env.example .env
+
+# 編輯 .env 檔案，填入您的配置
+# 基本設置只需配置 PORT（可選，預設為 3000）
+# 若需使用完整功能，請參考 .env.example 中的詳細說明
 
 # 4. 啟動開發服務器
 npm run dev
+
+# 5. 驗證服務器運行
+# 在瀏覽器中訪問 http://localhost:3000
+# 或檢查健康狀態端點 http://localhost:3000/health
+```
+
+### 環境變數設置說明
+
+基本的開發環境只需要配置以下變數（可選）：
+
+- `PORT`: 服務器端口號（預設: 3000）
+- `NODE_ENV`: 環境模式（development/production）
+
+完整的環境變數配置請參考 `.env.example` 文件，其中包含：
+- 資料庫配置 (Supabase)
+- AI 服務配置 (Straico, OpenAI)
+- 第三方整合配置 (AITable, Notion, Capacities)
+- 監控與日誌配置
+
+**重要提示**：
+- `.env` 文件已加入 `.gitignore`，請勿將敏感資訊提交到版本控制
+- 在生產環境中使用環境變數或密鑰管理服務來儲存敏感資訊
+- GitHub Actions 使用 GitHub Secrets 管理機密資料
+
+### 測試
+
+```bash
+# 運行所有測試
+npm test
+
+# 運行測試並監視變化
+npm run test:watch
+
+# 只運行服務器測試
+npm run test:server
 ```
 
 ### 部署到雲端
@@ -284,75 +323,6 @@ npm run receive:guidance
 | 代理協同率 | 87% | > 90% | 🟡 待優化 |
 | 知識提純率 | 94% | > 95% | 🟢 優秀 |
 | 用戶心流指數 | 8.2/10 | > 9.0 | 🟡 待提升 |
-
----
-
-## 🔄 倉庫技術繼承系統
-
-### 承上啟下，無縫接軌的技術傳承
-
-JunAiKey 提供了一個革命性的倉庫技術繼承系統，允許將本倉庫的技術、架構、最佳實踐無縫整合到其他倉庫中。
-
-#### 🚀 快速繼承
-
-```bash
-# 方法一：作為子模組添加
-git submodule add https://github.com/DingJun1028/junaikey.git .junaikey
-node .junaikey/scripts/inherit-repository.cjs --mode=selective
-
-# 方法二：僅繼承文檔
-mkdir -p docs/junaikey-inherited
-cp .junaikey/JUNAIKEY_BEST_PRACTICES.md docs/junaikey-inherited/
-cp .junaikey/REPOSITORY_INHERITANCE.md docs/junaikey-inherited/
-
-# 方法三：完整繼承
-node .junaikey/scripts/inherit-repository.cjs --mode=full
-```
-
-#### 📦 可繼承的技術模組
-
-- **核心架構**: 雙線開發管理器、AI 整合引擎
-- **設計模式**: 無界同心圓架構、符文系統、代理群協同
-- **知識管理**: 雙向同步知識庫、知識編織與合成
-- **最佳實踐**: 完整的開發指南和架構思想
-
-#### 📚 完整文檔
-
-- [倉庫技術繼承系統](./REPOSITORY_INHERITANCE.md) - 完整繼承指南
-- [技術同步清單](./TECH_SYNC_MANIFEST.md) - 詳細模組目錄
-- [集成文檔](./INTEGRATION.md) - 整合方法
-
-#### 🎯 繼承模式
-
-1. **完整繼承** (Full) - 所有模組和文檔
-2. **選擇性繼承** (Selective) - 通過配置選擇特定模組
-3. **僅文檔繼承** (Documentation Only) - 僅最佳實踐和指南
-
-#### ⚙️ 配置示例
-
-創建 `.junaikey-inherit.json`:
-
-```json
-{
-  "version": "1.0.0",
-  "source": {
-    "repository": "DingJun1028/junaikey",
-    "modules": [
-      {
-        "name": "best-practices",
-        "enabled": true
-      }
-    ]
-  },
-  "target": {
-    "framework": "react",
-    "typescript": true
-  },
-  "inheritance": {
-    "mode": "selective"
-  }
-}
-```
 
 ---
 
@@ -538,88 +508,6 @@ npm run sync
 都會自動觸發 **六向同步流程**。
 
 你也可以在 GitHub Actions 頁面 → **Run workflow** 手動執行。
-
----
-
-## 🚢 生產環境部署 (Production Deployment)
-
-JunAiKey 支援自動化部署到 Linux 伺服器，實現一鍵從 GitHub 部署到生產環境。
-
-### 📦 部署方式
-
-#### 方式 1: 自動部署到 Linux 伺服器
-
-每次推送到 `main` 分支，GitHub Actions 會自動：
-- 📥 拉取最新代碼
-- 🏗️ 構建項目
-- 🔄 重啟 MCP Server 服務（`systemctl restart mcp-server`）
-
-**快速設置**:
-
-1. 在伺服器上執行一鍵設置腳本：
-   ```bash
-   bash <(curl -s https://raw.githubusercontent.com/DingJun1028/junaikey/main/deployment/setup-server.sh)
-   ```
-
-2. 配置 GitHub Secrets（必需）：
-   - `SSH_PRIVATE_KEY` - SSH 私鑰
-   - `SERVER_IP` - 伺服器 IP
-   - `SERVER_USER` - SSH 用戶名
-   - `SERVER_PATH` - 部署路徑（可選，預設 `/opt/junaikey`）
-
-3. 推送到 `main` 分支即可自動部署！
-
-**詳細文檔**:
-- 📖 [完整部署指南](./deployment/README.md) - 詳細的伺服器設置和部署流程
-- 🔐 [GitHub Secrets 配置](./deployment/SECRETS.md) - 完整的 Secrets 設置教程
-
-**部署腳本**:
-- `deployment/setup-server.sh` - 一鍵伺服器設置
-- `deployment/backup.sh` - 自動備份腳本
-- `deployment/health-check.sh` - 健康檢查
-- `deployment/rollback.sh` - 回滾到舊版本
-- `deployment/mcp-server.service` - systemd 服務配置
-
-#### 方式 2: Docker 部署（即將推出）
-
-```bash
-docker pull junaikey/mcp-server:latest
-docker run -d -p 3000:3000 junaikey/mcp-server
-```
-
-#### 方式 3: Vercel/Supabase 無伺服器部署
-
-```bash
-# 使用提供的部署腳本
-./deploy-vercel-supabase.ps1
-```
-
-### 🔧 部署管理命令
-
-```bash
-# 查看服務狀態
-sudo systemctl status mcp-server
-
-# 查看實時日誌
-sudo journalctl -u mcp-server -f
-
-# 健康檢查
-bash deployment/health-check.sh
-
-# 手動備份
-bash deployment/backup.sh
-
-# 回滾到上一版本
-bash deployment/rollback.sh junaikey_20240101_120000
-```
-
-### 🛡️ 安全特性
-
-- ✅ SSH 金鑰認證（無密碼登入）
-- ✅ 最小權限原則（限制 sudo 命令）
-- ✅ systemd 服務隔離
-- ✅ 自動備份機制
-- ✅ 健康檢查和監控
 
 ---
 
