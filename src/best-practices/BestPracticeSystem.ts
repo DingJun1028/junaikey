@@ -1,5 +1,5 @@
 import { EventBus } from '../core/EventBus';
-import { logger } from '../utils/logger';
+import { Logger } from '../utils/logger';
 import { OpenAIIntegration } from '../ai/OpenAIIntegration';
 import { ModelManager } from '../ai/ModelManager';
 
