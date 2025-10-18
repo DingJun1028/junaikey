@@ -124,9 +124,8 @@ jobs:
               if [ ! -f ".gitmodules" ]; then
                 echo "⚠️  WARNING: Submodules detected but .gitmodules missing"
                 echo "Attempting to clean up invalid submodules..."
-                # Store submodule paths in an array to avoid subshell issues
-                mapfile -t submodule_paths < <(git ls-files --stage | grep "^160000" | awk '{print $4}')
-                for path in "${submodule_paths[@]}"; do
+                # Remove invalid submodules in a portable way
+                git ls-files --stage | grep "^160000" | awk '{print $4}' | while IFS= read -r path; do
                   echo "Removing invalid submodule: $path"
                   git rm --cached "$path" || true
                 done
