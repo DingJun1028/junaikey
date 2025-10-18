@@ -120,6 +120,10 @@ JunAiKey 的每一次互動都是一次神聖的戰鬥儀式：
 git clone https://github.com/DingJun1028/junaikey.git
 cd junaikey
 
+# 或使用 SSH（推薦，需先設置 SSH 金鑰）
+git clone git@github.com:DingJun1028/junaikey.git
+cd junaikey
+
 # 2. 安裝依賴
 npm install
 
@@ -156,6 +160,13 @@ npm run dev
 - `.env` 文件已加入 `.gitignore`，請勿將敏感資訊提交到版本控制
 - 在生產環境中使用環境變數或密鑰管理服務來儲存敏感資訊
 - GitHub Actions 使用 GitHub Secrets 管理機密資料
+
+### SSH 金鑰設置
+
+如果您想使用 SSH 方式克隆和推送代碼（推薦），請參考：
+- 📱 **iOS/iPhone 用戶**: [SSH 快速設置指南 - iOS 部分](./SSH_SETUP_GUIDE.md#-ios-workingcopy-設置)
+- 💻 **桌面用戶**: [SSH 快速設置指南 - 桌面部分](./SSH_SETUP_GUIDE.md#-桌面設置-macoslinuxwindows)
+- 🔑 **完整 SSH 文檔**: [SSH 金鑰註冊表](./deployment/SSH_KEYS.md)
 
 ### 測試
 
