@@ -448,7 +448,7 @@ npm cache clean --force
 
 ## 📄 授權訊息
 
-MIT License - 詳見 [LICENSE](LICENSE) 文件
+MIT License - 詳見 [LICENSE](../LICENSE) 文件
 
 ## 🙏 致謝
 
