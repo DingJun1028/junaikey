@@ -31,6 +31,12 @@
    - 安全最佳實踐
    - 常見問題解答
 
+5. **[SSH 金鑰註冊表](SSH_KEYS.md)**
+   - 授權的 SSH 金鑰列表
+   - 金鑰指紋記錄
+   - 添加新金鑰流程
+   - 金鑰管理最佳實踐
+
 ## 📂 文件結構
 
 ```
@@ -39,6 +45,7 @@ deployment/
 ├── ⭐ COMPLETE_SETUP_GUIDE.md       # 完整設置指南（推薦）
 ├── 📖 README.md                     # 詳細部署指南
 ├── 🔐 SECRETS.md                    # GitHub Secrets 配置
+├── 🔑 SSH_KEYS.md                   # SSH 金鑰註冊表
 ├── 📋 QUICKREF.md                   # 快速參考卡
 │
 ├── 🔧 setup-server.sh               # 一鍵伺服器設置腳本
@@ -101,7 +108,9 @@ deployment/
 
 - **首次部署** → [完整設置指南](COMPLETE_SETUP_GUIDE.md)
 - **查看命令** → [快速參考卡](QUICKREF.md)
-- **設置 SSH** → [Secrets 配置](SECRETS.md)
+- **設置 SSH** → [Secrets 配置](SECRETS.md) 或 [SSH 快速指南](../SSH_SETUP_GUIDE.md)
+- **管理 SSH 金鑰** → [SSH 金鑰註冊表](SSH_KEYS.md)
+- **iOS 設置 SSH** → [SSH 快速指南 - iOS 部分](../SSH_SETUP_GUIDE.md#-ios-workingcopy-設置)
 - **解決錯誤** → [部署指南 - 故障排除](README.md#-故障排除)
 - **配置備份** → [部署指南 - 進階配置](README.md#-進階配置)
 - **多環境部署** → [部署指南 - 多環境部署](README.md#6️⃣-多環境部署)
