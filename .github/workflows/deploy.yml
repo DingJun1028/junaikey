@@ -28,6 +28,35 @@ jobs:
         with:
           fetch-depth: 0
       
+      - name: 🔍 Verify Repository Structure
+        run: |
+          echo "📋 Repository structure check..."
+          echo "Checking for src/main.tsx..."
+          if [ -f "src/main.tsx" ]; then
+            echo "✅ src/main.tsx exists as a file"
+          elif [ -d "src/main.tsx" ]; then
+            echo "❌ ERROR: src/main.tsx is a directory, not a file!"
+            exit 1
+          else
+            echo "❌ ERROR: src/main.tsx not found!"
+            exit 1
+          fi
+          
+          echo "Checking for invalid submodules..."
+          if git ls-files --stage | grep -q "^160000"; then
+            echo "⚠️  WARNING: Submodules detected:"
+            git ls-files --stage | grep "^160000"
+            if [ -f ".gitmodules" ]; then
+              echo "📄 .gitmodules content:"
+              cat .gitmodules
+            else
+              echo "❌ ERROR: Submodules exist but .gitmodules is missing!"
+              echo "This will cause deployment issues. Please fix the repository."
+            fi
+          else
+            echo "✅ No submodule issues detected"
+          fi
+      
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -35,10 +64,20 @@ jobs:
           cache: 'npm'
       
       - name: 📦 Install Dependencies
-        run: npm ci --prefer-offline --no-audit
+        run: |
+          echo "📦 Installing dependencies..."
+          npm ci --prefer-offline --no-audit
+          echo "✅ Dependencies installed successfully"
+          echo "📊 Dependency summary:"
+          npm list --depth=0 || true
       
       - name: 🏗️ Build Project
-        run: npm run build
+        run: |
+          echo "🏗️ Starting build process..."
+          npm run build
+          echo "✅ Build completed successfully"
+          echo "📦 Build artifacts:"
+          ls -lh dist/ 2>/dev/null || echo "No dist directory found"
         
       - name: 🧪 Run Tests (Optional)
         run: npm test || echo "No tests configured"
@@ -59,29 +98,75 @@ jobs:
           SERVER_USER: ${{ secrets.SERVER_USER }}
           SERVER_PATH: ${{ secrets.SERVER_PATH || '/opt/junaikey' }}
         run: |
+          echo "🚢 Starting deployment to ${SERVER_IP}..."
           ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_IP} << 'ENDSSH'
             set -e
+            
             echo "📍 Navigating to deployment directory..."
+            if [ ! -d "${SERVER_PATH}" ]; then
+              echo "❌ ERROR: Deployment directory ${SERVER_PATH} does not exist!"
+              exit 1
+            fi
             cd ${SERVER_PATH}
             
+            echo "🔍 Current directory: $(pwd)"
+            echo "📊 Current git status:"
+            git status --short || echo "Not a git repository"
+            
             echo "🔄 Pulling latest changes from main branch..."
-            git fetch origin
-            git reset --hard origin/main
+            git fetch origin || {
+              echo "❌ ERROR: Failed to fetch from origin"
+              exit 1
+            }
+            
+            echo "🔄 Checking for submodule issues..."
+            if git ls-files --stage | grep -q "^160000"; then
+              if [ ! -f ".gitmodules" ]; then
+                echo "⚠️  WARNING: Submodules detected but .gitmodules missing"
+                echo "Attempting to clean up invalid submodules..."
+                # Store submodule paths in an array to avoid subshell issues
+                mapfile -t submodule_paths < <(git ls-files --stage | grep "^160000" | awk '{print $4}')
+                for path in "${submodule_paths[@]}"; do
+                  echo "Removing invalid submodule: $path"
+                  git rm --cached "$path" || true
+                done
+              fi
+            fi
+            
+            git reset --hard origin/main || {
+              echo "❌ ERROR: Failed to reset to origin/main"
+              git status
+              exit 1
+            }
             
             echo "📦 Installing/updating dependencies..."
-            npm ci --production --prefer-offline --no-audit
+            npm ci --production --prefer-offline --no-audit || {
+              echo "❌ ERROR: Failed to install dependencies"
+              echo "📊 npm logs:"
+              cat npm-debug.log 2>/dev/null || echo "No npm-debug.log found"
+              exit 1
+            }
             
             echo "🏗️ Building project..."
-            npm run build
+            npm run build || {
+              echo "❌ ERROR: Build failed"
+              echo "📊 Build logs above"
+              exit 1
+            }
             
             echo "🔄 Restarting MCP Server service..."
-            sudo systemctl restart mcp-server
+            sudo systemctl restart mcp-server || {
+              echo "⚠️  WARNING: Failed to restart mcp-server service"
+              echo "Service might not be configured yet"
+            }
             
             echo "✅ Checking service status..."
-            sudo systemctl status mcp-server --no-pager || true
+            sudo systemctl status mcp-server --no-pager || echo "⚠️  Service status check skipped"
             
             echo "🎉 Deployment completed successfully!"
           ENDSSH
+          
+          echo "✅ Remote deployment commands completed successfully"
       
       - name: 🧹 Cleanup SSH Key
         if: always()
