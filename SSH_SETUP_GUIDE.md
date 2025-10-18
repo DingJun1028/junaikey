@@ -21,7 +21,8 @@
 1. 在金鑰詳情頁面，找到 **Public Key** 部分
 2. 點擊 **Copy** 按鈕複製公鑰
 3. 公鑰格式類似：
-   ```
+
+   ```text
    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx WorkingCopy@iPhone
    ```
 
@@ -57,7 +58,7 @@
 2. 嘗試進行一次提交和推送操作
 3. 如果成功推送，說明 SSH 金鑰設置正確
 
----
+***
 
 ## 💻 桌面設置 (macOS/Linux/Windows)
 
@@ -105,13 +106,14 @@ git clone git@github.com:DingJun1028/junaikey.git
 
 然後訪問 [GitHub SSH 設置頁面](https://github.com/settings/keys) 添加公鑰。
 
----
+***
 
 ## 🔍 常見問題
 
 ### Q1: WorkingCopy 顯示 "Authentication failed"
 
 **解決方案**:
+
 1. 確認公鑰已正確添加到 GitHub
 2. 檢查 URL 是否使用 SSH 格式（`git@github.com:...`）而非 HTTPS
 3. 嘗試刪除並重新添加 SSH 金鑰
@@ -119,11 +121,13 @@ git clone git@github.com:DingJun1028/junaikey.git
 ### Q2: 如何查看 SSH 金鑰指紋？
 
 在 WorkingCopy 中：
+
 1. 設置 → SSH Keys
 2. 點擊金鑰
 3. 查看 **Fingerprint** 欄位
 
 在桌面終端中：
+
 ```bash
 ssh-keygen -lf ~/.ssh/junaikey_key.pub
 ```
@@ -131,6 +135,7 @@ ssh-keygen -lf ~/.ssh/junaikey_key.pub
 ### Q3: 可以在多個設備使用同一個 SSH 金鑰嗎？
 
 **不推薦**。建議為每個設備生成獨立的 SSH 金鑰，這樣：
+
 - 更容易追蹤哪個設備進行了操作
 - 如果一個設備遺失，只需撤銷該設備的金鑰
 - 更符合安全最佳實踐
@@ -149,11 +154,12 @@ ssh-keygen -lf ~/.ssh/junaikey_key.pub
 ### Q5: 忘記 SSH 金鑰密碼怎麼辦？
 
 如果設置了密碼但忘記了：
+
 1. 無法恢復密碼
 2. 需要生成新的 SSH 金鑰
 3. 刪除舊金鑰，添加新金鑰到 GitHub
 
----
+***
 
 ## 📚 進階設置
 
@@ -161,7 +167,7 @@ ssh-keygen -lf ~/.ssh/junaikey_key.pub
 
 創建或編輯 `~/.ssh/config` 文件：
 
-```
+```text
 # GitHub 主帳戶
 Host github.com
   HostName github.com
@@ -178,6 +184,7 @@ Host github-work
 ```
 
 使用時：
+
 ```bash
 # 主帳戶
 git clone git@github.com:DingJun1028/junaikey.git
@@ -196,31 +203,33 @@ git clone git@github-work:company/project.git
 
 完整金鑰列表請查看：[deployment/SSH_KEYS.md](./deployment/SSH_KEYS.md)
 
----
+***
 
 ## 🔗 相關資源
 
 ### 官方文檔
+
 - [GitHub SSH 文檔](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
 - [WorkingCopy 幫助](https://workingcopyapp.com/manual)
 
 ### 專案文檔
+
 - [完整 SSH 金鑰註冊表](./deployment/SSH_KEYS.md)
 - [部署指南](./deployment/README.md)
 - [GitHub Secrets 配置](./deployment/SECRETS.md)
 
----
+***
 
 ## 🆘 需要幫助？
 
 如果遇到問題：
 
-1. 查看本指南的[常見問題](#常見問題)部分
+1. 查看本指南的常見問題部分
 2. 檢查 [deployment/SSH_KEYS.md](./deployment/SSH_KEYS.md) 的故障排除章節
 3. 在 [GitHub Issues](https://github.com/DingJun1028/junaikey/issues) 提問
 4. 聯繫專案維護者
 
----
+***
 
 **祝您設置順利！** 🎉
 

@@ -10,7 +10,7 @@
 - [如何驗證金鑰](#如何驗證金鑰)
 - [安全最佳實踐](#安全最佳實踐)
 
----
+***
 
 ## 🎯 概述
 
@@ -21,11 +21,12 @@
 - 自動化工作流程
 
 **重要提示**：
+
 - 此文件僅記錄公鑰指紋，不包含完整的公鑰內容
 - 實際的公鑰應添加到 GitHub 帳戶或伺服器的 `~/.ssh/authorized_keys`
 - 私鑰必須妥善保管，永遠不要提交到版本控制
 
----
+***
 
 ## 🔐 授權的 SSH 金鑰
 
@@ -44,12 +45,13 @@
 此金鑰用於在 iPhone 上使用 WorkingCopy 應用程式進行 Git 操作，包括克隆倉庫、拉取更新和推送變更。
 
 **如何使用**:
+
 1. 在 WorkingCopy 應用中生成 SSH 金鑰（如果尚未生成）
 2. 複製公鑰
 3. 添加到 GitHub 帳戶的 SSH 金鑰設置中
 4. 使用 SSH URL 克隆倉庫：`git@github.com:DingJun1028/junaikey.git`
 
----
+***
 
 ### 2. GitHub Actions Deploy Key
 
@@ -64,7 +66,7 @@
 
 詳細配置請參考：[SECRETS.md](./SECRETS.md)
 
----
+***
 
 ## 📝 如何添加新金鑰
 
@@ -128,13 +130,14 @@ ssh -T git@github.com
 ### 步驟 5: 更新此文件
 
 在此文件中添加新金鑰的記錄，包括：
+
 - 設備/服務名稱
 - 金鑰類型
 - SHA256 指紋
 - 用途說明
 - 添加日期
 
----
+***
 
 ## 🔍 如何驗證金鑰
 
@@ -168,7 +171,7 @@ ssh -vT git@github.com
 ssh -i ~/.ssh/junaikey_key user@server_ip "echo 'Connection successful!'"
 ```
 
----
+***
 
 ## 🔒 安全最佳實踐
 
@@ -181,7 +184,7 @@ ssh -i ~/.ssh/junaikey_key user@server_ip "echo 'Connection successful!'"
 - ❌ 永遠不要共享私鑰
 - ❌ 永遠不要將私鑰提交到版本控制
 
-### 2. 金鑰權限
+### 金鑰權限
 
 ```bash
 # 設置正確的文件權限
@@ -237,7 +240,7 @@ Host junaikey-server
 - 使用 GitHub 的安全日誌功能
 - 啟用雙因素認證 (2FA)
 
----
+***
 
 ## 📚 相關資源
 
@@ -253,7 +256,7 @@ Host junaikey-server
 - [GitHub Secrets 配置](./SECRETS.md)
 - [完整設置指南](./COMPLETE_SETUP_GUIDE.md)
 
----
+***
 
 ## 📞 支援
 
@@ -264,7 +267,7 @@ Host junaikey-server
 3. 在 GitHub Issues 提問
 4. 聯繫團隊管理員
 
----
+***
 
 **最後更新**: 2025-10-18  
 **維護者**: JunAiKey Team
