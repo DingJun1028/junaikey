@@ -23,9 +23,12 @@ jobs:
       name: ${{ github.event.inputs.environment || 'production' }}
     
     steps:
+      # Updated to enable recursive submodules to fix .gitmodules error
+      # Reference: CI job ref 2e45dc56b0d4c3c5c41c0a4acceff1f5b2185c43
       - name: 🚀 Checkout Repository
         uses: actions/checkout@v4
         with:
+          submodules: 'recursive'
           fetch-depth: 0
       
       - name: 🔧 Setup Node.js
@@ -34,14 +37,51 @@ jobs:
           node-version: '20'
           cache: 'npm'
       
+      # Debug step to inspect repo layout and locate index.html and main.tsx
+      # Reference - CI job ref 2e45dc56b0d4c3c5c41c0a4acceff1f5b2185c43
+      # This helps diagnose the Vite import resolution error (Rollup failed to resolve import "/src/main.tsx")
+      - name: "CI debug: inspect repo layout"
+        run: |
+          echo "PWD: $(pwd)"
+          echo "Listing repo root:"; ls -la
+          echo "Listing junaikey folder (if present):"; ls -la junaikey || true
+          echo "Show index.html (root):"; sed -n '1,200p' index.html || true
+          echo "Show junaikey/index.html (if exists):"; sed -n '1,200p' junaikey/index.html || true
+          echo "Find main.tsx:"; find . -maxdepth 6 -type f -name 'main.tsx' -print || true
+          echo "Show .gitmodules if present:"; sed -n '1,200p' .gitmodules || true
+      
       - name: 📦 Install Dependencies
-        run: npm ci --prefer-offline --no-audit
+        run: |
+          # Try installing in junaikey subdirectory if it exists, otherwise use root
+          if [ -d "junaikey" ] && [ -f "junaikey/package.json" ]; then
+            echo "Installing dependencies in junaikey subdirectory"
+            cd junaikey && npm ci --prefer-offline --no-audit
+          else
+            echo "Installing dependencies in root directory"
+            npm ci --prefer-offline --no-audit
+          fi
       
       - name: 🏗️ Build Project
-        run: npm run build
+        run: |
+          # Try building in junaikey subdirectory if it exists, otherwise use root
+          if [ -d "junaikey" ] && [ -f "junaikey/package.json" ]; then
+            echo "Building in junaikey subdirectory"
+            cd junaikey && npm run build
+          else
+            echo "Building in root directory"
+            npm run build
+          fi
         
       - name: 🧪 Run Tests (Optional)
-        run: npm test || echo "No tests configured"
+        run: |
+          # Try running tests in junaikey subdirectory if it exists, otherwise use root
+          if [ -d "junaikey" ] && [ -f "junaikey/package.json" ]; then
+            echo "Running tests in junaikey subdirectory"
+            cd junaikey && npm test || echo "No tests configured"
+          else
+            echo "Running tests in root directory"
+            npm test || echo "No tests configured"
+          fi
         continue-on-error: true
       
       - name: 🔑 Setup SSH Key
