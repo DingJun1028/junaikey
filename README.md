@@ -14,7 +14,7 @@
 
 **🎯 人機共生的創元紀年 - 終始矩陣的覺醒**
 
-[📖 文檔](https://github.com/DingJun1028/junaikey/blob/main/OMNIKEY_HOLY_MANIFEST.md) • [🚀 快速開始](#-快速開始) • [🎮 互動演示](#-互動演示) • [🛠️ 開發指南](#-開發指南) • [🔄 倉庫繼承](#-倉庫技術繼承系統) • [🤝 貢獻](#-貢獻指南)
+[📖 文檔](https://github.com/DingJun1028/junaikey/blob/main/OMNIKEY_HOLY_MANIFEST.md) • [🚀 快速開始](#-快速開始) • [🎮 互動演示](#-互動演示) • [🛠️ 開發指南](#-開發指南) • [🔄 倉庫繼承](#-倉庫技術繼承系統) • [📊 專案管理](./docs/projects/README.md) • [🤝 貢獻](#-貢獻指南)
 
 </div>
 
@@ -323,6 +323,59 @@ npm run receive:guidance
 | 代理協同率 | 87% | > 90% | 🟡 待優化 |
 | 知識提純率 | 94% | > 95% | 🟢 優秀 |
 | 用戶心流指數 | 8.2/10 | > 9.0 | 🟡 待提升 |
+
+---
+
+## 📊 專案管理 (Project Management)
+
+### GitHub Projects (beta) 看板
+
+我們使用 GitHub Projects (beta) 來管理專案任務和追蹤進度。
+
+#### 📚 文檔資源
+
+- **[Projects 文檔索引](./docs/projects/README.md)** - 完整的專案管理指南
+- **[快速參考](./docs/projects/PROJECTS_QUICKREF.md)** - 常用操作速查 ⭐
+- **[完整說明](./docs/PROJECTS_BETA_INSTRUCTIONS.md)** - 詳細使用教程
+- **[專案模板](./docs/projects/PROJECTS_BETA_TEMPLATE.md)** - 預定義結構
+
+#### 🛠️ 管理工具
+
+我們提供了便捷的命令行工具來管理 Projects：
+
+```bash
+# 設置 GitHub Token
+export GITHUB_TOKEN="your_personal_access_token"
+
+# 列出所有專案
+./scripts/projects-manager.sh list
+
+# 查看專案詳情
+./scripts/projects-manager.sh info 1
+
+# 查看完整幫助
+./scripts/projects-manager.sh help
+```
+
+#### 🎯 快速開始
+
+1. **查看專案看板**: [Projects 標籤](https://github.com/DingJun1028/junaikey/projects)
+2. **選擇任務**: 從 `Backlog` 或 `To do` 欄位選擇
+3. **更新狀態**: 工作時移動到 `In progress`
+4. **完成任務**: 審查後標記為 `Done`
+
+#### 📋 工作流程
+
+```
+開始 → 選擇任務 → In progress → 提交 PR → Review → Done
+```
+
+#### 💡 最佳實踐
+
+- ✅ 每日更新任務狀態
+- ✅ 為任務設置合理的優先級
+- ✅ 及時溝通遇到的障礙
+- ✅ 完成後記錄實際工時
 
 ---
 
