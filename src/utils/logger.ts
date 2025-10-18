@@ -304,6 +304,9 @@ export const logger = new JunAiKeyLogger({
   enableFile: false
 });
 
+// Export Logger as an alias for backward compatibility
+export { JunAiKeyLogger as Logger };
+
 // 快捷方法
 export const debug = (category: string, message?: string, metadata?: Record<string, any> | null) => 
   logger.debug(category, message, metadata);
