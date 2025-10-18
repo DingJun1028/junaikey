@@ -6,7 +6,7 @@
 export { OmniCosmicUniverse } from './OmniCosmicUniverse';
 
 // 重新匯出 React 組件
-export { CosmicGenerator } from './index.tsx';
+export { CosmicGenerator } from './CosmicGenerator';
 
 // 重新匯出類型定義
 export type {
