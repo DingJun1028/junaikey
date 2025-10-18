@@ -228,9 +228,13 @@ check_dependencies() {
 # 主函數
 main() {
     check_dependencies
-    check_config
     
     local command=${1:-help}
+    
+    # 幫助命令不需要 token
+    if [ "$command" != "help" ] && [ "$command" != "--help" ] && [ "$command" != "-h" ]; then
+        check_config
+    fi
     
     case $command in
         list)
