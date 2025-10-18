@@ -172,8 +172,8 @@ Interface and interaction theme system.
 ### Deep Dive Learning
 - 📖 [Trinity Architecture](./Trinity-Architecture.md) - Understand the three-dimensional system design
 - 🚀 [Quick Start Guide](./Quick-Start.md) - Get started in 5 minutes
-- 🔧 [API Library](../JUNAIKEY_API_LIBRARY.md) - Explore comprehensive API documentation
-- 🎮 [Six Sacred Arts Cycle](../OMNIKEY_HOLY_MANIFEST.md#six-sacred-arts) - Experience core interaction patterns
+- 🔧 [API Library](../../JUNAIKEY_API_LIBRARY.md) - Explore comprehensive API documentation
+- 🎮 [Six Sacred Arts Cycle](../../OMNIKEY_HOLY_MANIFEST.md#six-sacred-arts) - Experience core interaction patterns
 
 ### Get Involved
 - 🤝 [Contributing Guide](./Contributing.md) - Learn how to contribute

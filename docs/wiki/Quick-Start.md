@@ -308,7 +308,7 @@ npm run build
 ### Deep Learning
 
 - 📖 [System Overview](./System-Overview.md) - Understand JunAiKey architecture
-- 🎮 [Six Sacred Arts Cycle](../OMNIKEY_HOLY_MANIFEST.md#six-sacred-arts) - Master core concepts
+- 🎮 [Six Sacred Arts Cycle](../../OMNIKEY_HOLY_MANIFEST.md#six-sacred-arts) - Master core concepts
 - 🃏 [Element Card System](./Trinity-Architecture.md#element-mastery-system) - Understand element mechanics
 
 ### Feature Exploration
@@ -321,7 +321,7 @@ npm run build
 
 - 🛠️ [Development Guide](../readme.md) - Set up development environment
 - 🤝 [Contributing Guide](./Contributing.md) - Participate in project development
-- 💡 [Best Practices](../JUNAIKEY_BEST_PRACTICES.md) - Coding standards
+- 💡 [Best Practices](../../JUNAIKEY_BEST_PRACTICES.md) - Coding standards
 
 ## 🎓 Tutorials & Examples
 

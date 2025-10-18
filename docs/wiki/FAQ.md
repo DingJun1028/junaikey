@@ -155,7 +155,7 @@ Detailed guide: [Element Card System](./Trinity-Architecture.md#element-mastery-
 | **AITable** | Structured Tables | ↔ |
 | **Upnote** | Static Collection | ← |
 
-Setup guide: [Six-Way Sync System](../README.md#six-way-sync)
+Setup guide: [Six-Way Sync System](../../README.md#six-way-sync)
 
 ### Q: How do I choose a profession major?
 
@@ -235,7 +235,7 @@ Settings → Data Management → Restore Backup → Select Time Point
 4. **Close unnecessary browser extensions**
 5. **Use the latest version of your browser**
 
-Performance optimization: [Performance Optimization Guide](../best-practices-improvement-plan.md)
+Performance optimization: [Performance Optimization Guide](../../best-practices-improvement-plan.md)
 
 ## Development Related
 
