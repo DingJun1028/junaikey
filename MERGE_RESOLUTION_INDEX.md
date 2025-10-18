@@ -38,6 +38,12 @@
 - 現狀分析
 - 初始計劃
 
+#### 6. **學習實例** (15分鐘 | 15 mins)
+👉 閱讀 [**MERGE_CONFLICT_EXAMPLES.md**](./MERGE_CONFLICT_EXAMPLES.md)
+- 真實案例分析
+- 常見場景解決方案
+- 實戰技巧
+
 ---
 
 ## 📚 文檔層次結構 | Document Hierarchy
@@ -64,6 +70,12 @@
 │   ├── 最佳實踐 | Best practices
 │   └── 驗證清單 | Verification checklist
 │
+├── 💡 MERGE_CONFLICT_EXAMPLES.md [EXAMPLES]
+│   ├── 真實案例分析 | Real-world case studies
+│   ├── 常見場景 | Common scenarios
+│   ├── 解決模式 | Resolution patterns
+│   └── 實戰技巧 | Practical tips
+│
 ├── 📊 MERGE_RESOLUTION_IMPLEMENTATION.md [PLANNING]
 │   ├── 實施計劃 | Implementation plan
 │   ├── 優先級順序 | Priority ordering
@@ -84,8 +96,9 @@
 **推薦路徑:**
 ```
 1. MERGE_RESOLUTION_README.md (了解概況)
-2. MERGE_CONFLICT_QUICK_REFERENCE.md (學習基礎)
-3. MERGE_CONFLICT_RESOLUTION_GUIDE.md (跟隨步驟)
+2. MERGE_CONFLICT_EXAMPLES.md (學習實例)
+3. MERGE_CONFLICT_QUICK_REFERENCE.md (學習基礎)
+4. MERGE_CONFLICT_RESOLUTION_GUIDE.md (跟隨步驟)
 ```
 
 ### 場景 2: 經驗豐富的開發者
@@ -122,9 +135,10 @@
 | MERGE_RESOLUTION_README.md | 5.9 KB | ~200 | 項目總覽 |
 | MERGE_CONFLICT_QUICK_REFERENCE.md | 5.5 KB | ~180 | 速查手冊 |
 | MERGE_CONFLICT_RESOLUTION_GUIDE.md | 8.4 KB | ~280 | 詳細指南 |
+| MERGE_CONFLICT_EXAMPLES.md | 10.8 KB | ~350 | 實戰案例 |
 | MERGE_RESOLUTION_IMPLEMENTATION.md | 7.7 KB | ~260 | 實施計劃 |
 | MERGE_RESOLUTION_SUMMARY.md | 4.7 KB | ~160 | 項目摘要 |
-| **總計** | **~39 KB** | **~1,300** | **完整方案** |
+| **總計** | **~50 KB** | **~1,650** | **完整方案** |
 
 ---
 
@@ -132,14 +146,16 @@
 
 ### 開發者 (Developer)
 **主要關注:**
+- 💡 實戰案例 → 學習範例
 - ⚡ 快速參考 → 日常命令
 - 📖 詳細指南 → 具體步驟
 - 📊 實施計劃 → 時間安排
 
 **閱讀順序:**
-1. MERGE_CONFLICT_QUICK_REFERENCE.md
-2. MERGE_CONFLICT_RESOLUTION_GUIDE.md
-3. 實際執行
+1. MERGE_CONFLICT_EXAMPLES.md
+2. MERGE_CONFLICT_QUICK_REFERENCE.md
+3. MERGE_CONFLICT_RESOLUTION_GUIDE.md
+4. 實際執行
 
 ### 團隊領導 (Team Lead)
 **主要關注:**

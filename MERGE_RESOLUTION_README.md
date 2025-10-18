@@ -17,7 +17,16 @@
   - 驗證清單
   - 相關資源鏈接
 
-### 2. 📊 [實施計劃](./MERGE_RESOLUTION_IMPLEMENTATION.md)
+### 2. 💡 [實戰案例集](./MERGE_CONFLICT_EXAMPLES.md)
+- **內容**: 10.8 KB 的實戰案例
+- **包含**:
+  - 6 個真實場景分析
+  - 詳細的解決步驟
+  - 通用解決模式
+  - 實用技巧和建議
+  - 複雜度評估標準
+
+### 3. 📊 [實施計劃](./MERGE_RESOLUTION_IMPLEMENTATION.md)
 - **內容**: 5.4 KB 的實施指南
 - **包含**:
   - 現狀分析
@@ -26,7 +35,7 @@
   - 風險評估
   - 學習要點
 
-### 3. ⚡ [快速參考卡](./MERGE_CONFLICT_QUICK_REFERENCE.md)
+### 4. ⚡ [快速參考卡](./MERGE_CONFLICT_QUICK_REFERENCE.md)
 - **內容**: 4.2 KB 的速查手冊
 - **包含**:
   - 一頁速查卡
@@ -60,11 +69,15 @@ git merge origin/main
    - 快速了解整體流程
    - 掌握基本命令
 
-2. **再讀**: `MERGE_RESOLUTION_IMPLEMENTATION.md` (10 分鐘)
+2. **學習**: `MERGE_CONFLICT_EXAMPLES.md` (15 分鐘)
+   - 查看真實案例
+   - 學習解決模式
+
+3. **再讀**: `MERGE_RESOLUTION_IMPLEMENTATION.md` (10 分鐘)
    - 理解解決策略
    - 了解優先級順序
 
-3. **參考**: `MERGE_CONFLICT_RESOLUTION_GUIDE.md` (按需)
+4. **參考**: `MERGE_CONFLICT_RESOLUTION_GUIDE.md` (按需)
    - 遇到具體 PR 時查閱
    - 詳細的步驟指導
 
@@ -220,6 +233,7 @@ git push --force-with-lease origin <pr-branch>
 
 - 🔗 **詳細指南**: 查看 `MERGE_CONFLICT_RESOLUTION_GUIDE.md`
 - ⚡ **快速參考**: 查看 `MERGE_CONFLICT_QUICK_REFERENCE.md`
+- 💡 **實戰案例**: 查看 `MERGE_CONFLICT_EXAMPLES.md`
 - 📊 **實施計劃**: 查看 `MERGE_RESOLUTION_IMPLEMENTATION.md`
 
 ### 外部資源

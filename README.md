@@ -415,6 +415,28 @@ graph TD
 
 ---
 
+## 📚 合併衝突解決指南 (Merge Conflict Resolution)
+
+為了幫助開發者高效解決合併衝突，我們提供了完整的文檔包：
+
+### 📖 快速開始
+
+- **[總覽文檔](./MERGE_RESOLUTION_README.md)** - 了解整個解決方案
+- **[快速參考](./MERGE_CONFLICT_QUICK_REFERENCE.md)** - 常用命令速查
+- **[實戰案例](./MERGE_CONFLICT_EXAMPLES.md)** ⭐ - 真實場景學習
+- **[詳細指南](./MERGE_CONFLICT_RESOLUTION_GUIDE.md)** - 完整解決步驟
+- **[實施計劃](./MERGE_RESOLUTION_IMPLEMENTATION.md)** - 策略與優先級
+- **[文檔索引](./MERGE_RESOLUTION_INDEX.md)** - 完整導航
+
+### 🎯 特色
+
+- ✅ **6 個真實案例** - 從簡單到複雜的完整演示
+- ✅ **通用解決模式** - 配置、代碼、文檔合併策略
+- ✅ **實用技巧集** - 提高效率的專業建議
+- ✅ **雙語支持** - 中英文完整文檔
+
+---
+
 ## 📄 許可證 (License)
 
 本项目基於 **MIT 許可證** 開源。詳情請參閱 [LICENSE](LICENSE) 文件。

@@ -186,6 +186,7 @@ git push --force-with-lease origin <pr-branch>
 ### 詳細文檔
 - 📖 [完整解決指南](./MERGE_CONFLICT_RESOLUTION_GUIDE.md)
 - 📊 [實施計劃](./MERGE_RESOLUTION_IMPLEMENTATION.md)
+- 💡 [實戰案例](./MERGE_CONFLICT_EXAMPLES.md)
 
 ### 外部資源
 - [Git 官方文檔](https://git-scm.com/docs)

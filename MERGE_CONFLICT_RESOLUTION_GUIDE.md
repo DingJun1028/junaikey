@@ -329,6 +329,12 @@ git merge -X theirs origin/main
 
 ## 📚 相關資源 | Related Resources
 
+### 項目文檔
+- [快速參考卡](./MERGE_CONFLICT_QUICK_REFERENCE.md) - 常用命令和技巧
+- [實施計劃](./MERGE_RESOLUTION_IMPLEMENTATION.md) - 策略和優先級
+- [實戰案例](./MERGE_CONFLICT_EXAMPLES.md) - 真實場景和解決方案
+
+### 外部資源
 - [Git 官方文檔：解決合併衝突](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
 - [GitHub 文檔：解決合併衝突](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts)
 - [視覺化合併衝突解決](https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts)
