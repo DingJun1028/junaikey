@@ -5,6 +5,9 @@
 
 export { OmniCosmicUniverse } from './OmniCosmicUniverse';
 
+// Re-export CosmicGenerator component from index.tsx
+export { CosmicGenerator } from './index.tsx';
+
 // 重新匯出類型定義
 export type {
   AITableConfig,
