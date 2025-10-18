@@ -184,7 +184,7 @@ ssh -i ~/.ssh/junaikey_key user@server_ip "echo 'Connection successful!'"
 - ❌ 永遠不要共享私鑰
 - ❌ 永遠不要將私鑰提交到版本控制
 
-### 金鑰權限
+### 2. 金鑰權限
 
 ```bash
 # 設置正確的文件權限

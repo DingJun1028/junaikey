@@ -224,7 +224,7 @@ git clone git@github-work:company/project.git
 
 如果遇到問題：
 
-1. 查看本指南的常見問題部分
+1. 查看本指南的[常見問題](#-常見問題)部分
 2. 檢查 [deployment/SSH_KEYS.md](./deployment/SSH_KEYS.md) 的故障排除章節
 3. 在 [GitHub Issues](https://github.com/DingJun1028/junaikey/issues) 提問
 4. 聯繫專案維護者
