@@ -40,15 +40,17 @@ jobs:
       # Debug step to inspect repo layout and locate index.html and main.tsx
       # Reference - CI job ref 2e45dc56b0d4c3c5c41c0a4acceff1f5b2185c43
       # This helps diagnose the Vite import resolution error (Rollup failed to resolve import "/src/main.tsx")
+      # TODO: Remove this debug step after verifying CI deployment works correctly
       - name: "CI debug: inspect repo layout"
         run: |
           echo "PWD: $(pwd)"
           echo "Listing repo root:"; ls -la
           echo "Listing junaikey folder (if present):"; ls -la junaikey || true
-          echo "Show index.html (root):"; sed -n '1,200p' index.html || true
-          echo "Show junaikey/index.html (if exists):"; sed -n '1,200p' junaikey/index.html || true
-          echo "Find main.tsx:"; find . -maxdepth 6 -type f -name 'main.tsx' -print || true
-          echo "Show .gitmodules if present:"; sed -n '1,200p' .gitmodules || true
+          echo "Check index.html exists (root):"; test -f index.html && echo "Found at root" || echo "Not found at root"
+          echo "Check junaikey/index.html exists:"; test -f junaikey/index.html && echo "Found in junaikey/" || echo "Not found in junaikey/"
+          echo "Check main.tsx location:"; test -f src/main.tsx && echo "Found at ./src/main.tsx" || echo "Not at ./src/main.tsx"
+          echo "Check junaikey/src/main.tsx:"; test -f junaikey/src/main.tsx && echo "Found at ./junaikey/src/main.tsx" || echo "Not at ./junaikey/src/main.tsx"
+          echo "Show .gitmodules if present:"; cat .gitmodules 2>/dev/null || echo "No .gitmodules file"
       
       - name: 📦 Install Dependencies
         run: |
