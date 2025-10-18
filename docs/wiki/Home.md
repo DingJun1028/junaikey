@@ -85,7 +85,7 @@ Welcome to the complete knowledge base for JunAiKey (君愛心鑰)! This wiki do
 
 ### External Links
 - [GitHub Repository](https://github.com/DingJun1028/junaikey)
-- [Development Board](./../projects/README.md)
+- [Development Board](../projects/README.md)
 - [Issue Tracking](https://github.com/DingJun1028/junaikey/issues)
 - [Pull Requests](https://github.com/DingJun1028/junaikey/pulls)
 
