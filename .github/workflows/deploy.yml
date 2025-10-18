@@ -50,7 +50,7 @@ jobs:
           echo "Check junaikey/index.html exists:"; test -f junaikey/index.html && echo "Found in junaikey/" || echo "Not found in junaikey/"
           echo "Check main.tsx location:"; test -f src/main.tsx && echo "Found at ./src/main.tsx" || echo "Not at ./src/main.tsx"
           echo "Check junaikey/src/main.tsx:"; test -f junaikey/src/main.tsx && echo "Found at ./junaikey/src/main.tsx" || echo "Not at ./junaikey/src/main.tsx"
-          echo "Show .gitmodules if present:"; cat .gitmodules 2>/dev/null || echo "No .gitmodules file"
+          echo "Check .gitmodules:"; test -f .gitmodules && echo "Found .gitmodules file" || echo "No .gitmodules file"
       
       - name: 📦 Install Dependencies
         run: |
