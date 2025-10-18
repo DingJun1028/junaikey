@@ -69,6 +69,7 @@ jobs:
           npm ci --prefer-offline --no-audit
           echo "✅ Dependencies installed successfully"
           echo "📊 Dependency summary:"
+          # Print dependency summary for debugging; ignore errors as this is non-blocking
           npm list --depth=0 || true
       
       - name: 🏗️ Build Project
