@@ -77,7 +77,7 @@ jobs:
           npm run build
           echo "✅ Build completed successfully"
           echo "📦 Build artifacts:"
-          ls -lh dist/ 2>/dev/null || ls -lh build/ 2>/dev/null || echo "No dist/build directory found"
+          ls -lh dist/ 2>/dev/null || echo "No dist directory found"
         
       - name: 🧪 Run Tests (Optional)
         run: npm test || echo "No tests configured"
@@ -124,7 +124,9 @@ jobs:
               if [ ! -f ".gitmodules" ]; then
                 echo "⚠️  WARNING: Submodules detected but .gitmodules missing"
                 echo "Attempting to clean up invalid submodules..."
-                git ls-files --stage | grep "^160000" | while read mode hash stage path; do
+                # Store submodule paths in an array to avoid subshell issues
+                mapfile -t submodule_paths < <(git ls-files --stage | grep "^160000" | awk '{print $4}')
+                for path in "${submodule_paths[@]}"; do
                   echo "Removing invalid submodule: $path"
                   git rm --cached "$path" || true
                 done
