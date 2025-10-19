@@ -38,8 +38,8 @@ Agent Manager 是 JunAiKey 系統中負責管理和協調所有代理（Agents�
 #### 使用示例
 
 ```typescript
-import { AgentCoordinator } from '@junaikey/ai';
-import { EventBus } from '@junaikey/core';
+import { AgentCoordinator } from '../ai/AgentCoordinator';
+import { EventBus } from '../core/EventBus';
 
 const eventBus = new EventBus();
 const coordinator = new AgentCoordinator({ eventBus });
@@ -104,8 +104,8 @@ console.log('驗證通過:', validation.isValid);
 #### 使用示例
 
 ```typescript
-import { BranchManager } from '@junaikey/ai';
-import { EventBus } from '@junaikey/core';
+import { BranchManager } from '../ai/BranchManager';
+import { EventBus } from '../core/EventBus';
 
 const eventBus = new EventBus();
 const branchManager = new BranchManager({ 
@@ -166,8 +166,8 @@ console.log('提交哈希:', result.commit);
 #### 使用示例
 
 ```typescript
-import { AgentManager } from '@junaikey/ai';
-import { EventBus } from '@junaikey/core';
+import { AgentManager } from '../ai/AgentManager';
+import { EventBus } from '../core/EventBus';
 
 const eventBus = new EventBus();
 const agentManager = new AgentManager({
@@ -379,16 +379,19 @@ if (status.tasks.byStatus.failed > 5) {
 ### 添加自定義驗證規則
 
 ```typescript
-// 在 AgentCoordinator 中添加自定義驗證規則
-coordinator.validationRules.set('custom_task', (result) => {
-  return {
-    isValid: result.customCheck === true,
-    correctness: result.customCheck ? 100 : 0,
-    issues: [],
-    suggestions: [],
-    autoFixable: false
-  };
-});
+// 擴展 AgentCoordinator 以添加自定義驗證規則
+class CustomAgentCoordinator extends AgentCoordinator {
+  constructor(config: { eventBus: EventBus }) {
+    super(config);
+    this.setupCustomValidationRules();
+  }
+
+  private setupCustomValidationRules(): void {
+    // 通過 setupDefaultValidationRules 中的 validationRules Map
+    // 可以在子類中添加自定義規則
+    // 注意：需要在構造函數之後調用
+  }
+}
 ```
 
 ### 添加自定義衝突解決策略
