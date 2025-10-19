@@ -304,7 +304,7 @@ export interface AnalyticalCapabilities {
   outlierDetection: number;         // 異常檢測
   optimization: number;             // 優化
   simulation: number;               // 模擬
-  modeling: number;                建模
+  modeling: number;                 // 建模
   prediction: number;               // 預測
   forecasting: number;              // 預測
   benchmarking: number;             // 基準測試
@@ -423,3 +423,77 @@ export interface PartnerEvolution {
   growth: number;                   // 成長值
   potential: number;                // 潛能值
   capacity: number;                 // 容量值
+  milestones: EvolutionMilestone[]; // 里程碑
+  transformations: string[];        // 轉化記錄
+  awakenings: string[];             // 覺醒記錄
+}
+
+// 進化里程碑
+export interface EvolutionMilestone {
+  level: number;
+  name: string;
+  description: string;
+  unlocked: boolean;
+  timestamp?: Date;
+}
+
+// 夥伴記憶
+export interface PartnerMemory {
+  experiences: Experience[];        // 經歷
+  reflections: Reflection[];        // 反思
+  insights: Insight[];              // 洞察
+  wisdom: WisdomFragment[];         // 智慧碎片
+}
+
+// 經歷
+export interface Experience {
+  id: string;
+  type: string;
+  description: string;
+  impact: number;
+  timestamp: Date;
+}
+
+// 反思
+export interface Reflection {
+  id: string;
+  experienceId: string;
+  thought: string;
+  insight: string;
+  timestamp: Date;
+}
+
+// 洞察
+export interface Insight {
+  id: string;
+  category: string;
+  content: string;
+  significance: number;
+  timestamp: Date;
+}
+
+// 智慧碎片
+export interface WisdomFragment {
+  id: string;
+  source: string;
+  wisdom: string;
+  application: string;
+  timestamp: Date;
+}
+
+// 夥伴智慧
+export interface PartnerWisdom {
+  guidance: string[];               // 指引
+  teachings: string[];              // 教導
+  insights: string[];               // 洞察
+  principles: string[];             // 原則
+}
+
+// 夥伴意識
+export interface PartnerConsciousness {
+  awareness: number;                // 覺知
+  presence: number;                 // 臨在
+  mindfulness: number;              // 念力
+  enlightenment: number;            // 悟性
+  transcendence: number;            // 超越
+}
