@@ -279,13 +279,15 @@ sudo tail -f /var/log/auth.log | grep sshd
 
 ### 5. Use Firewall Rules
 
-Restrict SSH access to GitHub Actions IPs if possible:
+Restrict SSH access to specific IP ranges if possible:
 
 ```bash
-# Example: Allow SSH only from specific IPs
-sudo ufw allow from GitHub.Actions.IP.Range to any port 22
+# Note: GitHub Actions uses dynamic IP ranges that vary by region
+# Check current ranges at: https://api.github.com/meta
+# Example for specific trusted IPs:
+sudo ufw allow from YOUR_OFFICE_IP to any port 22
 
-# Or use rate limiting
+# Or use rate limiting to prevent brute force
 sudo ufw limit 22/tcp
 ```
 
