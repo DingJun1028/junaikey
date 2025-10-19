@@ -167,9 +167,9 @@ unset env
 ```text
 > Initializing new SSH agent...
 > succeeded
-> Enter passphrase for /c/Users/YOU/.ssh/id_rsa:
-> Identity added: /c/Users/YOU/.ssh/id_rsa (/c/Users/YOU/.ssh/id_rsa)
-> Welcome to Git (version 1.6.0.2-preview20080923)
+> Enter passphrase for /c/Users/YOU/.ssh/junaikey_key:
+> Identity added: /c/Users/YOU/.ssh/junaikey_key (/c/Users/YOU/.ssh/junaikey_key)
+> Welcome to Git Bash
 >
 > Run 'git help git' to display the help index.
 > Run 'git help <command>' to display help for specific commands.
