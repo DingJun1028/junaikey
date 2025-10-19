@@ -106,6 +106,77 @@ git clone git@github.com:DingJun1028/junaikey.git
 
 然後訪問 [GitHub SSH 設置頁面](https://github.com/settings/keys) 添加公鑰。
 
+#### 關於 SSH 金鑰的密碼
+
+有了 SSH 金鑰，如果有人獲得了您電腦的存取權限，攻擊者就可以存取所有使用該金鑰的系統。
+為了進一步提升安全性，您可以為 SSH 金鑰新增密碼。為了避免每次連線時都輸入密碼，
+您可以將金鑰安全地快取在 SSH 代理中。
+
+#### 新增或更改密碼
+
+您可以輸入以下命令來變更現有私鑰的密碼，而無需重新產生金鑰對：
+
+```bash
+$ ssh-keygen -p -f ~/.ssh/junaikey_key
+> Enter old passphrase: [Type old passphrase]
+> Key has comment 'your_email@example.com'
+> Enter new passphrase (empty for no passphrase): [Type new passphrase]
+> Enter same passphrase again: [Repeat the new passphrase]
+> Your identification has been saved with the new passphrase.
+```
+
+如果您的金鑰已經有密碼，系統會提示您輸入密碼，然後才能變更為新密碼。
+
+#### 在 Windows 上自動啟動 ssh-agent
+
+您可以在開啟 bash 或 Git shell 時自動執行 `ssh-agent`。
+複製以下行並將其貼上到 Git shell 中的 `~/.profile` 或 `~/.bashrc` 檔案中：
+
+```bash
+env=~/.ssh/agent.env
+
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+
+agent_start () {
+    (umask 077; ssh-agent >| "$env")
+    . "$env" >| /dev/null ; }
+
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+    agent_start
+    ssh-add
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+    ssh-add
+fi
+
+unset env
+```
+
+如果您的私鑰未儲存在預設位置（例如 `~/.ssh/id_rsa`），則需要告知 SSH 驗證代理程式
+在哪裡找到它。若要將密鑰新增至 ssh-agent，請輸入 `ssh-add ~/path/to/my_key`。
+
+**提示**: 如果您想 `ssh-agent` 在一段時間後忘記您的密鑰，您可以透過運行 
+`ssh-add -t <seconds>` 來配置它。
+
+現在，當您第一次執行 Git Bash 時，系統會提示您輸入密碼：
+
+```text
+> Initializing new SSH agent...
+> succeeded
+> Enter passphrase for /c/Users/YOU/.ssh/id_rsa:
+> Identity added: /c/Users/YOU/.ssh/id_rsa (/c/Users/YOU/.ssh/id_rsa)
+> Welcome to Git (version 1.6.0.2-preview20080923)
+>
+> Run 'git help git' to display the help index.
+> Run 'git help <command>' to display help for specific commands.
+```
+
+該 `ssh-agent` 進程將繼續運行，直到您登出、關閉電腦或終止該進程。
+
 ***
 
 ## 🔍 常見問題
