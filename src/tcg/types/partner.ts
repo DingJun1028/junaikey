@@ -423,3 +423,114 @@ export interface PartnerEvolution {
   growth: number;                   // 成長值
   potential: number;                // 潛能值
   capacity: number;                 // 容量值
+  stage: number;                    // 階段
+  advancement: number;              // 進階值
+  mastery: number;                  // 精通度
+  specialization: string[];         // 專精領域
+  achievements: string[];           // 成就
+  milestones: string[];             // 里程碑
+}
+
+// 夥伴記憶
+export interface PartnerMemory {
+  shortTerm: MemoryEntry[];         // 短期記憶
+  longTerm: MemoryEntry[];          // 長期記憶
+  episodic: MemoryEntry[];          // 情節記憶
+  semantic: MemoryEntry[];          // 語義記憶
+  procedural: MemoryEntry[];        // 程序記憶
+  emotional: MemoryEntry[];         // 情感記憶
+  capacity: number;                 // 容量
+  retention: number;                // 保留率
+  recall: number;                   // 回憶能力
+}
+
+// 記憶條目
+export interface MemoryEntry {
+  id: string;
+  type: string;
+  content: string;
+  timestamp: Date;
+  importance: number;
+  associations: string[];
+  emotions: string[];
+}
+
+// 夥伴智慧
+export interface PartnerWisdom {
+  insights: Insight[];              // 洞察
+  principles: Principle[];          // 原則
+  strategies: Strategy[];           // 策略
+  lessons: Lesson[];                // 教訓
+  patterns: Pattern[];              // 模式
+  understanding: number;            // 理解度
+  depth: number;                    // 深度
+  breadth: number;                  // 廣度
+}
+
+// 洞察
+export interface Insight {
+  id: string;
+  content: string;
+  context: string;
+  source: string;
+  timestamp: Date;
+  value: number;
+}
+
+// 原則
+export interface Principle {
+  id: string;
+  name: string;
+  description: string;
+  application: string;
+  importance: number;
+}
+
+// 策略
+export interface Strategy {
+  id: string;
+  name: string;
+  description: string;
+  conditions: string[];
+  steps: string[];
+  effectiveness: number;
+}
+
+// 教訓
+export interface Lesson {
+  id: string;
+  content: string;
+  context: string;
+  source: string;
+  impact: number;
+  timestamp: Date;
+}
+
+// 模式
+export interface Pattern {
+  id: string;
+  type: string;
+  description: string;
+  occurrences: number;
+  confidence: number;
+}
+
+// 夥伴意識
+export interface PartnerConsciousness {
+  awareness: number;                // 覺知度
+  presence: number;                 // 臨在感
+  mindfulness: number;              // 正念度
+  clarity: number;                  // 清晰度
+  focus: number;                    // 專注度
+  state: string;                    // 狀態
+  level: number;                    // 層次
+  expansion: number;                // 擴展度
+}
+
+// Re-export all types
+export type { PartnerFrequency, AttunementData, MemoryAnchor, SensoryMemory, LifeWeight, FutureHorizon };
+export type { EternalPartnerAI, PartnerPersonality, PersonalityTrait, PartnerCapabilities };
+export type { TacticalCapabilities, StrategicCapabilities, EmotionalCapabilities, CognitiveCapabilities };
+export type { CreativeCapabilities, AnalyticalCapabilities, IntuitiveCapabilities, LearningCapabilities };
+export type { AdaptiveCapabilities, PredictiveCapabilities, PartnerRelationship, PartnerEvolution };
+export type { PartnerMemory, MemoryEntry, PartnerWisdom, Insight, Principle, Strategy, Lesson, Pattern, PartnerConsciousness };
