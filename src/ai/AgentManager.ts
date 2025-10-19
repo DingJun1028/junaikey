@@ -3,6 +3,8 @@ import { OpenAIIntegration } from './OpenAIIntegration';
 import { ModelManager } from './ModelManager';
 import { EventBus } from '../core/EventBus';
 import { logger } from '../utils/logger';
+import { AgentCoordinator, Task } from './AgentCoordinator';
+import { BranchManager, MergeRequest } from './BranchManager';
 
 export interface Agent {
   id: string;
@@ -47,6 +49,8 @@ export class AgentManager {
   private agents: Map<string, Agent> = new Map();
   private agentBuilder: AgentBuilder;
   private modelManager: ModelManager;
+  private coordinator: AgentCoordinator;
+  private branchManager: BranchManager;
   private eventBus: EventBus;
   private logger;
   private _isRunning: boolean = false;
@@ -55,6 +59,7 @@ export class AgentManager {
     eventBus: EventBus;
     defaultModel: string;
     enableDebug: boolean;
+    mainBranch?: string;
   }) {
     this.eventBus = config.eventBus;
     this.logger = logger;
@@ -68,6 +73,15 @@ export class AgentManager {
       defaultModel: config.defaultModel,
       enableDebug: config.enableDebug,
       eventBus: config.eventBus
+    });
+
+    this.coordinator = new AgentCoordinator({
+      eventBus: config.eventBus
+    });
+
+    this.branchManager = new BranchManager({
+      eventBus: config.eventBus,
+      mainBranch: config.mainBranch
     });
 
     this.setupEventHandlers();
@@ -434,5 +448,279 @@ export class AgentManager {
    */
   public isRunning(): boolean {
     return this._isRunning;
+  }
+
+  /**
+   * 創建任務並分配給代理
+   */
+  public async createAndAssignTask(config: {
+    type: Task['type'];
+    title: string;
+    description: string;
+    priority: Task['priority'];
+    agentId: string;
+    dependencies?: string[];
+    metadata?: Record<string, any>;
+  }): Promise<string | null> {
+    const taskId = this.coordinator.createTask({
+      type: config.type,
+      title: config.title,
+      description: config.description,
+      priority: config.priority,
+      dependencies: config.dependencies,
+      metadata: config.metadata
+    });
+
+    const assigned = this.coordinator.assignTask(taskId, config.agentId);
+    if (!assigned) {
+      this.logger.error('Failed to assign task to agent', { taskId, agentId: config.agentId });
+      return null;
+    }
+
+    return taskId;
+  }
+
+  /**
+   * 執行任務並驗證結果
+   */
+  public async executeTaskWithValidation(
+    taskId: string,
+    agentConfig: AgentRunConfig
+  ): Promise<{
+    taskResult: AgentRunResult;
+    validation: ReturnType<AgentCoordinator['validateTaskResult']>;
+  }> {
+    // Update task status to in progress
+    this.coordinator.updateTaskStatus(taskId, 'in_progress');
+
+    // Run the agent
+    const result = await this.runAgent(agentConfig);
+
+    // Update task with result
+    this.coordinator.updateTaskStatus(
+      taskId,
+      result.success ? 'completed' : 'failed',
+      result
+    );
+
+    // Validate the result
+    const validation = this.coordinator.validateTaskResult(taskId);
+
+    this.logger.info('Task executed and validated', {
+      taskId,
+      success: result.success,
+      isValid: validation.isValid,
+      correctness: validation.correctness
+    });
+
+    return {
+      taskResult: result,
+      validation
+    };
+  }
+
+  /**
+   * 檢測並解決任務衝突
+   */
+  public detectAndResolveTaskConflicts(taskIds: string[]): {
+    conflicts: ReturnType<AgentCoordinator['detectConflicts']>;
+    resolved: number;
+  } {
+    const conflicts = this.coordinator.detectConflicts(taskIds);
+    let resolvedCount = 0;
+
+    conflicts.forEach(conflict => {
+      const resolved = this.coordinator.resolveConflict(conflict);
+      if (resolved) resolvedCount++;
+    });
+
+    this.logger.info('Task conflicts detected and resolved', {
+      totalConflicts: conflicts.length,
+      resolved: resolvedCount
+    });
+
+    return {
+      conflicts,
+      resolved: resolvedCount
+    };
+  }
+
+  /**
+   * 創建分支用於任務
+   */
+  public createTaskBranch(config: {
+    taskId: string;
+    branchName: string;
+    author: string;
+  }): boolean {
+    const task = this.coordinator.getTask(config.taskId);
+    if (!task) {
+      this.logger.error('Task not found', { taskId: config.taskId });
+      return false;
+    }
+
+    const created = this.branchManager.createBranch({
+      name: config.branchName,
+      author: config.author
+    });
+
+    if (created) {
+      this.logger.info('Task branch created', {
+        taskId: config.taskId,
+        branchName: config.branchName
+      });
+    }
+
+    return created;
+  }
+
+  /**
+   * 為任務創建合併請求
+   */
+  public createTaskMergeRequest(config: {
+    taskId: string;
+    sourceBranch: string;
+    targetBranch?: string;
+    title: string;
+    description: string;
+    author: string;
+  }): string | null {
+    const task = this.coordinator.getTask(config.taskId);
+    if (!task) {
+      this.logger.error('Task not found', { taskId: config.taskId });
+      return null;
+    }
+
+    if (task.status !== 'completed') {
+      this.logger.warn('Cannot create merge request for incomplete task', {
+        taskId: config.taskId,
+        status: task.status
+      });
+      return null;
+    }
+
+    // Validate task result before creating merge request
+    const validation = this.coordinator.validateTaskResult(config.taskId);
+    if (!validation.isValid) {
+      this.logger.error('Task validation failed, cannot create merge request', {
+        taskId: config.taskId,
+        correctness: validation.correctness,
+        issues: validation.issues
+      });
+      return null;
+    }
+
+    const mrId = this.branchManager.createMergeRequest({
+      sourceBranch: config.sourceBranch,
+      targetBranch: config.targetBranch,
+      title: config.title,
+      description: config.description,
+      author: config.author
+    });
+
+    if (mrId) {
+      this.logger.info('Merge request created for task', {
+        taskId: config.taskId,
+        mrId
+      });
+    }
+
+    return mrId;
+  }
+
+  /**
+   * 合併任務分支到主線
+   */
+  public async mergeTaskToMain(taskId: string, mrId: string): Promise<{
+    success: boolean;
+    message: string;
+    conflicts?: any[];
+  }> {
+    const task = this.coordinator.getTask(taskId);
+    if (!task) {
+      return {
+        success: false,
+        message: 'Task not found'
+      };
+    }
+
+    // Validate task
+    const validation = this.coordinator.validateTaskResult(taskId);
+    if (!validation.isValid) {
+      return {
+        success: false,
+        message: `Task validation failed: ${validation.issues.map(i => i.message).join(', ')}`
+      };
+    }
+
+    // Get merge request
+    const mr = this.branchManager.getMergeRequest(mrId);
+    if (!mr) {
+      return {
+        success: false,
+        message: 'Merge request not found'
+      };
+    }
+
+    // Check for conflicts
+    if (mr.conflicts && mr.conflicts.length > 0) {
+      const unresolvedConflicts = mr.conflicts.filter(c => !c.resolved);
+      if (unresolvedConflicts.length > 0) {
+        return {
+          success: false,
+          message: 'Unresolved merge conflicts exist',
+          conflicts: unresolvedConflicts
+        };
+      }
+    }
+
+    // Approve if not already approved
+    if (mr.status === 'pending' || mr.status === 'conflicted') {
+      this.branchManager.approveMergeRequest(mrId);
+    }
+
+    // Perform merge
+    const mergeResult = await this.branchManager.merge(mrId);
+
+    if (mergeResult.success) {
+      this.logger.info('Task branch merged to main successfully', {
+        taskId,
+        mrId,
+        commit: mergeResult.commit
+      });
+    }
+
+    return mergeResult;
+  }
+
+  /**
+   * 獲取代理協調器
+   */
+  public getCoordinator(): AgentCoordinator {
+    return this.coordinator;
+  }
+
+  /**
+   * 獲取分支管理器
+   */
+  public getBranchManager(): BranchManager {
+    return this.branchManager;
+  }
+
+  /**
+   * 獲取完整的系統狀態
+   */
+  public getSystemStatus(): {
+    agents: AgentStats;
+    tasks: ReturnType<AgentCoordinator['getTaskStats']>;
+    branches: ReturnType<BranchManager['getBranchStats']>;
+    isRunning: boolean;
+  } {
+    return {
+      agents: this.getAgentStats(),
+      tasks: this.coordinator.getTaskStats(),
+      branches: this.branchManager.getBranchStats(),
+      isRunning: this._isRunning
+    };
   }
 }
