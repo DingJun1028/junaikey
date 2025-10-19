@@ -191,7 +191,7 @@ export const storyExpansionFlow = defineFlow(
     outputSchema: z.object({
       expandedStory: z.string(),
       chapterTitle: z.string(),
-      newElements: z.array(z.string>)
+      newElements: z.array(z.string())
     }),
   },
   async (input) => {

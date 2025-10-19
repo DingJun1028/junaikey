@@ -2,6 +2,15 @@
 
 完整的自動化部署方案，實現一鍵從 GitHub 部署到 Linux 伺服器。
 
+## 📚 快速導航
+
+- **[SSH Key Setup Guide (English)](./SSH_KEY_SETUP_GUIDE.md)** - Complete SSH key setup for GitHub Actions
+- **[Deployment Troubleshooting (English)](./DEPLOYMENT_TROUBLESHOOTING.md)** - Common deployment issues and solutions
+- **[完整設置指南](./COMPLETE_SETUP_GUIDE.md)** - 伺服器完整設置步驟
+- **[機密管理指南](./SECRETS.md)** - GitHub Secrets 配置說明
+
+---
+
 ## 📋 目錄
 
 - [前置需求](#-前置需求)

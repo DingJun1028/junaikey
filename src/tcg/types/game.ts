@@ -42,9 +42,9 @@ export enum GameState {
   READY = 'ready',               // 準備就緒
   SHUFFLING = 'shuffling',       // 洗牌中
   DRAWING = 'drawing',           // 抽牌中
-  MAIN PHASE = 'main_phase',     // 主要階段
-  COMBAT PHASE = 'combat_phase', // 戰鬥階段
-  END PHASE = 'end_phase',       // 結束階段
+  MAIN_PHASE = 'main_phase',     // 主要階段
+  COMBAT_PHASE = 'combat_phase', // 戰鬥階段
+  END_PHASE = 'end_phase',       // 結束階段
   VICTORY = 'victory',           // 勝利
   DEFEAT = 'defeat',             // 失敗
   DRAW = 'draw',                 // 平局
@@ -681,7 +681,7 @@ export interface HotkeySettings {
     custom: Record<string, string>;
 }
 
-    靈敏度設置類型
+// 靈敏度設置類型
 export interface SensitivitySettings {
     mouse: number;
     gamepad: number;
