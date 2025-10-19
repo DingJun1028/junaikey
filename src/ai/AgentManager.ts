@@ -631,11 +631,7 @@ export class AgentManager {
   /**
    * 合併任務分支到主線
    */
-  public async mergeTaskToMain(taskId: string, mrId: string): Promise<{
-    success: boolean;
-    message: string;
-    conflicts?: any[];
-  }> {
+  public async mergeTaskToMain(taskId: string, mrId: string): Promise<MergeResult> {
     const task = this.coordinator.getTask(taskId);
     if (!task) {
       return {
