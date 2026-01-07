@@ -191,7 +191,7 @@ export const storyExpansionFlow = defineFlow(
     outputSchema: z.object({
       expandedStory: z.string(),
       chapterTitle: z.string(),
-      newElements: z.array(z.string>)
+      newElements: z.array(z.string())
     }),
   },
   async (input) => {
@@ -250,3 +250,83 @@ function buildNarrativePrompt(input: any): string {
 }
 
 function buildCardPrompt(input: any): string {
+  const { cardName, cardType, faction, rarity, keywords, power, health } = input;
+  
+  return `作為《JunAiKey》的卡牌設計師，請為以下卡牌創建詳細描述：
+卡牌名稱：${cardName}
+卡牌類型：${cardType}
+所屬陣營：${faction}
+稀有度：${rarity}
+關鍵字：${keywords.join(', ')}
+${power !== undefined ? `攻擊力：${power}` : ''}
+${health !== undefined ? `生命值：${health}` : ''}
+
+請以JSON格式返回以下三個部分：
+1. effectDescription: 卡牌效果的詳細描述
+2. flavorText: 卡牌的風味文字，展現世界觀和故事背景
+3. strategicInsight: 戰略建議，說明如何最佳使用此卡
+
+確保描述符合《JunAiKey》宇宙觀。`;
+}
+
+function buildHeroPrompt(input: any): string {
+  const { heroName, heroTitle, faction, voiceType, context, emotion, intensity } = input;
+  
+  return `作為《JunAiKey》的角色配音導演，請為以下英雄創建台詞：
+英雄名稱：${heroName}
+英雄稱號：${heroTitle}
+所屬陣營：${faction}
+聲音類型：${voiceType}
+情境：${context}
+${emotion ? `情感：${emotion}` : ''}
+${intensity !== undefined ? `強度：${intensity}` : ''}
+
+請以JSON格式返回以下內容：
+1. dialogue: 英雄的台詞（中文，符合角色性格）
+2. emotion: 情感類型（如興奮、憤怒、悲傷、平靜等）
+3. intensity: 情感強度（0-100）
+4. duration: 台詞長度（秒）
+
+確保台詞展現英雄個性，符合《JunAiKey》的世界觀。`;
+}
+
+function buildExpansionPrompt(input: any): string {
+  const { originalStory, expansionType, newCharacters, newLocations, themes } = input;
+  
+  const typeDescriptions = {
+    prequel: '前傳，發生在原故事之前',
+    sequel: '續集，發生在原故事之後',
+    side_story: '外傳，與原故事平行發展',
+    backstory: '背景故事，深入角色或事件的過去'
+  };
+  
+  return `作為《JunAiKey》的故事編劇，請基於以下原始故事創作${typeDescriptions[expansionType]}：
+
+原始故事：
+${originalStory}
+
+${newCharacters && newCharacters.length > 0 ? `新增角色：${newCharacters.join(', ')}` : ''}
+${newLocations && newLocations.length > 0 ? `新增地點：${newLocations.join(', ')}` : ''}
+${themes && themes.length > 0 ? `主題：${themes.join(', ')}` : ''}
+
+請以JSON格式返回以下內容：
+1. expandedStory: 擴展後的完整故事
+2. chapterTitle: 章節標題
+3. newElements: 新增的故事元素列表
+
+確保故事連貫，符合《JunAiKey》宇宙觀，並與原故事保持一致性。`;
+}
+
+// 啟動 Flow 伺服器（僅在直接運行此文件時啟動）
+if (import.meta.url === `file://${process.argv[1]}`) {
+  startFlowsServer();
+}
+
+// 導出所有工作流
+export {
+  storyGeneratorFlow,
+  narrativeGeneratorFlow,
+  cardDescriptionGeneratorFlow,
+  heroDialogueGeneratorFlow,
+  storyExpansionFlow
+};
