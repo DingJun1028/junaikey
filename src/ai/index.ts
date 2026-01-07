@@ -7,6 +7,8 @@ export { OpenAIIntegration } from './OpenAIIntegration';
 export { ModelManager } from './ModelManager';
 export { AgentBuilder } from './AgentBuilder';
 export { AgentManager } from './AgentManager';
+export { AgentCoordinator } from './AgentCoordinator';
+export { BranchManager } from './BranchManager';
 
 // 重新匯出類型定義
 export type {
@@ -40,3 +42,17 @@ export type {
   AgentRunResult,
   AgentStats
 } from './AgentManager';
+
+export type {
+  Task,
+  TaskValidationResult,
+  ValidationIssue,
+  ConflictResolution
+} from './AgentCoordinator';
+
+export type {
+  Branch,
+  MergeRequest,
+  MergeConflict,
+  MergeResult
+} from './BranchManager';
