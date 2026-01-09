@@ -146,7 +146,47 @@ After resolution, verify that:
 ## Timeline
 - **Conflict Detection**: January 9, 2026
 - **Resolution Completed**: January 9, 2026
-- **Status**: Ready to apply
+- **Status**: ✅ Resolution tools ready, awaiting application to PR branch
+
+## How to Apply the Resolution
+
+### Option 1: Using the Automated Script (Recommended)
+
+**On the PR branch** (`copilot/update-junai-key-documents`):
+```bash
+# Get the resolution script from this branch
+git fetch origin copilot/resolve-conflicts-main-branch
+git checkout origin/copilot/resolve-conflicts-main-branch -- CONFLICT_RESOLUTION_SCRIPT.sh
+
+# Run the script
+chmod +x CONFLICT_RESOLUTION_SCRIPT.sh
+./CONFLICT_RESOLUTION_SCRIPT.sh
+
+# Push the resolved state
+git push origin copilot/update-junai-key-documents
+```
+
+### Option 2: Manual Cherry-pick
+
+If you prefer to manually apply the resolution:
+```bash
+git checkout copilot/update-junai-key-documents
+git merge main --allow-unrelated-histories
+
+# Then follow the resolution steps documented above
+# OR use --theirs strategy for all conflicts
+```
+
+### Verification After Application
+```bash
+# Should show no conflicts
+git diff --name-only --diff-filter=U
+
+# Should show clean working tree
+git status
+
+# Check PR on GitHub - should show "Able to merge"
+```
 
 ## Additional Resources
 
