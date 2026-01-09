@@ -1,11 +1,18 @@
+# Environment variables
 .env
 *.env.*
+.env.local
+.env.*.local
+
+# Node
+node_modules/
 /node_modules
-.DS_Store
 
 # Build artifacts
 /dist
 /build
+dist/
+coverage/
 
 # Test coverage
 /coverage
@@ -13,3 +20,24 @@
 # Temporary files
 temp_banner.svg
 *.tmp
+
+# Prevent junaikey_ prefixed directories (temporary/backup directories)
+junaikey_*/
+
+# Inheritance system generated files
+.junaikey-inherit.json
+junaikey-inheritance-report.md
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db

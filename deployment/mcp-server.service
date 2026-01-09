@@ -1,0 +1,32 @@
+[Unit]
+Description=JunAiKey MCP Server
+Documentation=https://github.com/DingJun1028/junaikey
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/junaikey
+ExecStart=/usr/bin/node /opt/junaikey/dist/mcpServer.js
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=mcp-server
+
+# Environment
+Environment=NODE_ENV=production
+Environment=PATH=/usr/bin:/usr/local/bin
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/junaikey
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+
+[Install]
+WantedBy=multi-user.target

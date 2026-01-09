@@ -16,8 +16,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      // 如果有自訂路徑別名，會在這裡設定。
-      // 對於 'react'，它應該直接從 node_modules 解析。
+      // 如果有自訂路徑別名,會在這裡設定。
+      // 對於 'react',它應該直接從 node_modules 解析。
     }
   },
   "include": ["src"],

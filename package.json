@@ -1,14 +1,28 @@
 {
-  "name": "jun-ai-key-ultimate-fusion",
+  "name": "junaikey",
   "private": true,
   "version": "5.0.0",
   "type": "module",
+  "description": "JunAiKey - Omni-Key System",
+  "main": "server.cjs",
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 3000",
+    "dev:server": "node server.cjs",
+    "start": "node server.cjs",
     "build": "vite build",
+    "build:ts": "tsc",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "test:server": "jest server.test.cjs"
   },
+  "keywords": [
+    "junaikey",
+    "omnikey",
+    "development"
+  ],
+  "author": "Junaikey",
+  "license": "MIT",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -20,14 +34,21 @@
     "zod": "^3.21.4",
     "react-spring": "^9.7.1",
     "http-server": "^14.1.1",
-    "react-window": "^1.8.9"
+    "react-window": "^1.8.9",
+    "express": "^4.18.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/uuid": "^9.0.1",
     "@types/react-window": "^1.8.8",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^18.15.0",
+    "@types/supertest": "^6.0.3",
     "@vitejs/plugin-react": "^3.1.0",
-    "vite": "^4.2.0"
+    "vite": "^4.2.0",
+    "jest": "^30.2.0",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.5"
   }
 }
