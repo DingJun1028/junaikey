@@ -21,12 +21,16 @@ coverage/
 temp_banner.svg
 *.tmp
 
+# Prevent junaikey_ prefixed directories (temporary/backup directories)
+junaikey_*/
+
 # Inheritance system generated files
 .junaikey-inherit.json
 junaikey-inheritance-report.md
 
-# VS Code
+# IDE
 .vscode/
+.idea/
 
 # Logs
 npm-debug.log*
