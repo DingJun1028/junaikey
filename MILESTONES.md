@@ -352,7 +352,7 @@
 ### 如何參與里程碑實現
 
 1. **查看當前里程碑任務**
-   - 訪問 [GitHub Projects](https://github.com/DingJun1028/junaikey/projects)
+   - 訪問 [GitHub Projects](https://github.com/DingJun1028/junaikey/projects) <!-- NOTE: If the repository is renamed or moved, update this link accordingly. -->
    - 選擇與當前里程碑相關的任務
 
 2. **選擇適合您的任務**
