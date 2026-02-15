@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JunAiKey Tag System Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #718096;
+            margin-bottom: 2rem;
+        }
+        .demo-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f7fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .demo-section h2 {
+            color: #2d3748;
+            margin-top: 0;
+            font-size: 1.25rem;
+        }
+        .test-controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        button {
+            padding: 0.75rem 1.5rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        button:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        textarea {
+            min-height: 100px;
+            font-family: inherit;
+        }
+        .response {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #edf2f7;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        .success {
+            border-left-color: #48bb78;
+            background: #f0fff4;
+        }
+        .error {
+            border-left-color: #f56565;
+            background: #fff5f5;
+        }
+        .info-box {
+            background: #bee3f8;
+            border: 1px solid #90cdf4;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-online {
+            background: #48bb78;
+            box-shadow: 0 0 8px #48bb78;
+        }
+        .status-offline {
+            background: #f56565;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏷️ JunAiKey Omni-Tag System Demo</h1>
+        <p class="subtitle">Test the intelligent tagging system with bidirectional indexing and self-learning capabilities</p>
+
+        <div class="demo-section">
+            <h2>Server Status</h2>
+            <div id="server-status">
+                <span class="status-indicator status-offline"></span>
+                <span>Checking server...</span>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>1. Ingest Data & Generate Tags</h2>
+            <div class="info-box">
+                💡 <strong>Tip:</strong> Enter some text and the system will automatically generate relevant tags using AI analysis.
+            </div>
+            <input type="text" id="data-id" placeholder="Data ID (e.g., doc_001)" value="demo_001">
+            <textarea id="content" placeholder="Enter your content here...">This is a demonstration of machine learning and artificial intelligence capabilities in the JunAiKey Omni-Tag System. The system can automatically generate semantic tags and maintain bidirectional indexing.</textarea>
+            <div class="test-controls">
+                <button onclick="ingestData()">🚀 Ingest & Tag</button>
+                <button onclick="clearResults()">🗑️ Clear Results</button>
+            </div>
+            <div id="ingest-response"></div>
+        </div>
+
+        <div class="demo-section">
+            <h2>2. Query Data by ID</h2>
+            <div class="info-box">
+                🔍 Retrieve data and view all associated tags
+            </div>
+            <input type="text" id="query-id" placeholder="Data ID to query" value="demo_001">
+            <button onclick="queryData()">🔎 Query Data</button>
+            <div id="query-response"></div>
+        </div>
+
+        <div class="demo-section">
+            <h2>3. Search by Tags</h2>
+            <div class="info-box">
+                🏷️ Find all data items associated with specific tags (bidirectional search)
+            </div>
+            <input type="text" id="search-tags" placeholder="Tags (comma-separated, e.g., machine,learning,ai)" value="machine,learning">
+            <button onclick="searchByTags()">🔍 Search</button>
+            <div id="search-response"></div>
+        </div>
+
+        <div class="demo-section">
+            <h2>4. Submit Feedback</h2>
+            <div class="info-box">
+                💬 Help the system learn by providing feedback on tags
+            </div>
+            <input type="text" id="feedback-id" placeholder="Data ID for feedback" value="demo_001">
+            <select id="feedback-action" style="padding: 0.75rem; border-radius: 6px; border: 1px solid #cbd5e0; margin-bottom: 1rem;">
+                <option value="accept">✅ Accept Tags</option>
+                <option value="reject">❌ Reject Tags</option>
+                <option value="modify">✏️ Modify Tags</option>
+            </select>
+            <button onclick="submitFeedback()">📤 Submit Feedback</button>
+            <div id="feedback-response"></div>
+        </div>
+
+        <div class="demo-section">
+            <h2>5. System Metrics</h2>
+            <button onclick="getMetrics()">📊 View Metrics</button>
+            <div id="metrics-response"></div>
+        </div>
+    </div>
+
+    <script>
+        const SERVER_URL = 'http://localhost:3001';
+
+        async function checkServerStatus() {
+            try {
+                const response = await fetch(`${SERVER_URL}/health`);
+                const data = await response.json();
+                
+                if (response.ok && data.status === 'healthy') {
+                    document.getElementById('server-status').innerHTML = `
+                        <span class="status-indicator status-online"></span>
+                        <span><strong>Server Online</strong> - Uptime: ${Math.floor(data.uptime)}s | Total Items: ${data.metrics.totalDataItems} | Total Tags: ${data.metrics.totalTags}</span>
+                    `;
+                } else {
+                    throw new Error('Server not healthy');
+                }
+            } catch (error) {
+                document.getElementById('server-status').innerHTML = `
+                    <span class="status-indicator status-offline"></span>
+                    <span><strong>Server Offline</strong> - Please start the tag server: <code>node tag-server.cjs</code></span>
+                `;
+            }
+        }
+
+        async function ingestData() {
+            const dataId = document.getElementById('data-id').value;
+            const content = document.getElementById('content').value;
+
+            if (!dataId || !content) {
+                showResponse('ingest-response', 'Please provide both ID and content', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${SERVER_URL}/api/data/ingest`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        id: dataId,
+                        content: content,
+                        type: 'text',
+                        source: 'demo'
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    const tagsHtml = data.data.tags.map(tag => 
+                        `<span style="display: inline-block; padding: 0.25rem 0.75rem; margin: 0.25rem; background: #667eea; color: white; border-radius: 999px; font-size: 0.875rem;">
+                            ${tag.name} (${(tag.confidence * 100).toFixed(0)}%)
+                        </span>`
+                    ).join('');
+
+                    showResponse('ingest-response', `
+                        <strong>✅ Data Ingested Successfully!</strong><br>
+                        <strong>ID:</strong> ${data.data.id}<br>
+                        <strong>Generated Tags:</strong><br>
+                        ${tagsHtml}<br>
+                        <strong>Tagging Time:</strong> ${data.taggingTime}ms
+                    `, 'success');
+                } else {
+                    showResponse('ingest-response', `Error: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                showResponse('ingest-response', `Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function queryData() {
+            const dataId = document.getElementById('query-id').value;
+
+            if (!dataId) {
+                showResponse('query-response', 'Please provide a data ID', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${SERVER_URL}/api/data/${dataId}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    showResponse('query-response', `
+                        <strong>✅ Data Retrieved</strong><br>
+                        <pre>${JSON.stringify(data.data, null, 2)}</pre>
+                    `, 'success');
+                } else {
+                    showResponse('query-response', `Error: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                showResponse('query-response', `Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function searchByTags() {
+            const tags = document.getElementById('search-tags').value;
+
+            if (!tags) {
+                showResponse('search-response', 'Please provide tags', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${SERVER_URL}/api/tags/query?tags=${encodeURIComponent(tags)}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    showResponse('search-response', `
+                        <strong>✅ Found ${data.count} results</strong><br>
+                        <pre>${JSON.stringify(data.data, null, 2)}</pre>
+                    `, 'success');
+                } else {
+                    showResponse('search-response', `Error: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                showResponse('search-response', `Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function submitFeedback() {
+            const dataId = document.getElementById('feedback-id').value;
+            const action = document.getElementById('feedback-action').value;
+
+            if (!dataId) {
+                showResponse('feedback-response', 'Please provide a data ID', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${SERVER_URL}/api/feedback`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        dataId: dataId,
+                        action: action,
+                        reason: 'User feedback from demo'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showResponse('feedback-response', `
+                        <strong>✅ Feedback Submitted</strong><br>
+                        <pre>${JSON.stringify(data.feedback, null, 2)}</pre>
+                    `, 'success');
+                } else {
+                    showResponse('feedback-response', `Error: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                showResponse('feedback-response', `Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function getMetrics() {
+            try {
+                const response = await fetch(`${SERVER_URL}/api/metrics`);
+                const data = await response.json();
+
+                if (data.success) {
+                    showResponse('metrics-response', `
+                        <strong>📊 System Metrics</strong><br>
+                        <pre>${JSON.stringify(data.metrics, null, 2)}</pre>
+                    `, 'success');
+                } else {
+                    showResponse('metrics-response', `Error: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                showResponse('metrics-response', `Network error: ${error.message}`, 'error');
+            }
+        }
+
+        function showResponse(elementId, message, type = 'success') {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<div class="response ${type}">${message}</div>`;
+        }
+
+        function clearResults() {
+            ['ingest-response', 'query-response', 'search-response', 'feedback-response', 'metrics-response'].forEach(id => {
+                document.getElementById(id).innerHTML = '';
+            });
+        }
+
+        // Check server status on load and periodically
+        checkServerStatus();
+        setInterval(checkServerStatus, 5000);
+    </script>
+</body>
+</html>
