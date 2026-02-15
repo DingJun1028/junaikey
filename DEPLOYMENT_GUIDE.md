@@ -88,11 +88,11 @@ npm install
 
 ### 1. Server Setup
 
-The tag server (`tag-server.js`) provides RESTful API endpoints for tag management.
+The tag server (`tag-server.cjs`) provides RESTful API endpoints for tag management.
 
 #### File Location
 ```
-/tag-server.js
+/tag-server.cjs
 ```
 
 #### Environment Variables
@@ -114,7 +114,7 @@ NODE_ENV=production
 #### Development Mode
 
 ```bash
-node tag-server.js
+node tag-server.cjs
 ```
 
 #### Production Mode (with PM2)
@@ -124,7 +124,7 @@ node tag-server.js
 npm install -g pm2
 
 # Start server with PM2
-pm2 start tag-server.js --name "junaikey-tag-server"
+pm2 start tag-server.cjs --name "junaikey-tag-server"
 
 # Enable auto-restart on system boot
 pm2 startup
@@ -146,7 +146,7 @@ User=junaikey
 WorkingDirectory=/opt/junaikey
 Environment=NODE_ENV=production
 Environment=TAG_SERVER_PORT=3001
-ExecStart=/usr/bin/node /opt/junaikey/tag-server.js
+ExecStart=/usr/bin/node /opt/junaikey/tag-server.cjs
 Restart=on-failure
 RestartSec=10
 StandardOutput=journal
@@ -438,7 +438,7 @@ pkill -f tag-server.js
 
 ```bash
 # Terminal 1: Start server
-node tag-server.js
+node tag-server.cjs
 
 # Terminal 2: Test endpoints
 # Ingest data
@@ -499,7 +499,7 @@ npm run build
 ```bash
 # Copy files to server
 scp -r dist/ user@server:/opt/junaikey/
-scp tag-server.js user@server:/opt/junaikey/
+scp tag-server.cjs user@server:/opt/junaikey/
 scp package.json user@server:/opt/junaikey/
 
 # SSH to server
@@ -510,7 +510,7 @@ cd /opt/junaikey
 npm ci --production
 
 # Start services
-pm2 start tag-server.js
+pm2 start tag-server.cjs
 ```
 
 #### Option B: Docker Deployment
@@ -525,12 +525,12 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --production
 
-COPY tag-server.js ./
+COPY tag-server.cjs ./
 COPY dist ./dist
 
 EXPOSE 3001
 
-CMD ["node", "tag-server.js"]
+CMD ["node", "tag-server.cjs"]
 ```
 
 Build and run:
@@ -608,7 +608,7 @@ chmod +x /opt/junaikey/health-check.sh
 Configure logging:
 
 ```javascript
-// In tag-server.js, add logging middleware
+// In tag-server.cjs, add logging middleware
 const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
@@ -662,7 +662,7 @@ DATE=$(date +%Y%m%d_%H%M%S)
 
 mkdir -p $BACKUP_DIR
 tar -czf $BACKUP_DIR/junaikey_$DATE.tar.gz \
-  /opt/junaikey/*.js \
+  /opt/junaikey/*.cjs \
   /opt/junaikey/dist \
   /opt/junaikey/package.json
 
@@ -695,14 +695,14 @@ lsof -i :3001
 kill -9 <PID>
 
 # Or use different port
-TAG_SERVER_PORT=3002 node tag-server.js
+TAG_SERVER_PORT=3002 node tag-server.cjs
 ```
 
 #### Issue 2: CORS errors in browser
 
 **Symptoms**: `Access to fetch blocked by CORS policy`
 
-**Solution**: Enable CORS in tag-server.js (already implemented):
+**Solution**: Enable CORS in tag-server.cjs (already implemented):
 ```javascript
 app.use(cors());
 ```
@@ -740,7 +740,7 @@ app.use(cors({
 Enable debug logging:
 
 ```bash
-DEBUG=* node tag-server.js
+DEBUG=* node tag-server.cjs
 ```
 
 ### Performance Issues
